@@ -21,7 +21,24 @@
             </div>
             <div class="pull-left info">
             	<p>
-            		Sinca ries
+            		<?php echo $user_info['nombre_completo'];?>
+                    <br>
+                    <span class="hidden-xs"><?php 
+                                        switch ($user_info['tipo_persona']) {
+                                        case "ADM" :
+                                            echo 'Administrador';
+                                            break;
+                                        case "CLT" :
+                                            echo 'Cliente';
+                                            break;
+                                        case "ODO" :
+                                            echo 'Odontólogo';
+                                            break;
+                                        case "EMP" :
+                                            echo 'Empleado';
+                                            break;
+		                              }
+                                        ?>
 	          		<?php //echo $user_info['nombre_completo'];
 // 		                $nombre = explode(" ", $user_info['nombre_completo']);
 // 		                echo $nombre[0] . " ";
