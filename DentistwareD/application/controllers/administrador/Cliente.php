@@ -8,7 +8,6 @@ class Cliente extends Admin_Controller {
 		$this->load->model ( 'persona_model' );
         $this->load->model ( 'lugar_model' );
         $this->data['departamentos'] = $this->lugar_model->get_departamentos();
-        $this->data['ciudades'] = $this->lugar_model->get_ciudades(13);
         $this->data['clientes'] = $this->persona_model->get_clientes();
         $this->data['before_closing_body'] = '<script>
                                                 $("#datepicker").datepicker({
@@ -33,6 +32,7 @@ class Cliente extends Admin_Controller {
                                 });
                               });
                             </script>';
+        $this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/cliente_admin.js', true);
 	}
 	
 	public function index(){
@@ -40,7 +40,7 @@ class Cliente extends Admin_Controller {
 		$this->render ( 'admin/admin_cliente_view' );				
 	}
     
-    public function registro(){
+/*    public function registro(){
         if($this->input->post('submit_reg')){
             $this->form_validation->set_rules('nombre', 'Nombre', 'required');
             $this->form_validation->set_rules('email', 'Email', 'required');
@@ -62,6 +62,16 @@ class Cliente extends Admin_Controller {
             $this->form_validation->set_rules('nombreContacto', 'NombreContacto', 'required');
             $this->form_validation->set_rules('telefonoContacto', 'TelefonoContacto', 'required');
         }
+    }*/
         
+    public function listar_ciudades($idDepartamento = 0, $flag = TRUE) {
+		$ciudades = $this->lugar_model->get_ciudades($idDepartamento);
+	
+		if($flag){
+			header('Content-Type: application/json');
+			echo json_encode($ciudades);
+		} else {
+			return $ciudades;
+		}
 	}
 }
