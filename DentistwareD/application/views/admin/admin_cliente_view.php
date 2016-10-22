@@ -22,7 +22,7 @@
                                 <h3 class="modal-title">Agregar cliente</h3>
                               </div>
                               <div class="modal-body">
-                                 <form class="form-horizontal" method="post" action="collect.php">
+                                 <form class="form-horizontal" method="post">
                                         <div class="form-group">
                                           <label for="inputNombre" class="col-sm-2 control-label ">Nombres y apellidos</label>
                                           <div class="col-sm-10">

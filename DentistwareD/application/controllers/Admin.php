@@ -15,7 +15,7 @@ class Admin extends Admin_Controller {
 	}
 	
     public function index(){
-		$this->get_user_menu('main-cliente');
+		$this->get_user_menu('main-perfil');
 		$this->render ( 'admin/admin_index' );				
 	}
     
