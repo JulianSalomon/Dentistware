@@ -39,7 +39,7 @@ $config['menu_CLT'] = array(
 		'logout' => array(
 				'id' => 'main-logout',
 				'title' => '<span class="nav-label">Cerrar Sesión</span>',
-				'link' => 'Login/logout',
+				'link' => base_url('Login/logout'),
 				'icon' => 'fa fa-sign-out',
 		),
 );
@@ -84,7 +84,7 @@ $config['menu_ADM'] = array(
 		'logout' => array(
 				'id' => 'main-logout',
 				'title' => '<span class="nav-label">Cerrar Sesión</span>',
-				'link' => '',
+				'link' => base_url('Login/logout'),
 				'icon' => 'fa fa-sign-out',
 		),
 );
