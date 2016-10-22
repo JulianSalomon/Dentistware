@@ -180,14 +180,12 @@
                             	
                             	if($clientes != NULL){
                             		 		foreach ($clientes as $cliente){
-                            			echo '<tr>';
+                            			    echo '<tr>';
                                             echo '<td>';
-                                                
-                                                
-                                             $tipo = str_split($cliente->t_documento, 1);
+                                            $tipo = str_split($cliente->t_documento, 1);
                                             echo  $tipo[0] . "." . $tipo[1] . ". " . $cliente->documento;
                                             echo '</td>';
-                                                echo '<td>';
+                                            echo '<td>';
                                             echo ucwords($cliente->nombre);
                                             echo '<br>';
                                             echo  "<small> Tel: " .$cliente->telefono . "</small>" ;
