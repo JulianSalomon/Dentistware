@@ -41,8 +41,6 @@
                         </div>
                         <div class="box-body">
                             <div class="col-xs-4 text-right " >
-                            </div>
-                            <div class="col-xs-3 text-left " >
                                 <BR>
                                 <BR>
                                 Nombre(s) y Apellidos:
@@ -65,43 +63,46 @@
                                 <BR>
                                 E-mail:
                                 <BR>
-                                Telefono:
+                                    Telefono:
+                            </div>
+                            <div class="col-xs-3 text-center " >
                                 
                                 
                             </div>
+                                    
                             <div class="col-xs-3 text-left " >
                                 <?php
                                 echo '<BR>';
                                 echo '<BR>';
-                                echo ucwords($odontologo->nombre_persona);
+                                echo ucwords($cliente_info->nombre_persona);
                                 echo '<BR>';
-                                echo  $odontologo->tipo_documento . ' &nbsp &nbsp' . $odontologo->documento_persona;
+                                echo  $cliente_info->tipo_documento . ' &nbsp &nbsp' . $cliente_info->documento_persona;
                                 echo '<BR>';
-                                echo  $odontologo->edad_persona .' '. 'Años';
+                                echo  $cliente_info->edad_persona .' '. 'Años';
                                 echo '<BR>';
-                                echo  $odontologo->fecha_nacimiento;
+                                echo  $cliente_info->fecha_nacimiento;
                                 echo '<BR>';
-                                if ($odontologo->genero_persona == 'M'){
+                                if ($cliente_info->genero_persona == 'M'){
                                   echo 'Masculino';
                                 }else{
                                     echo 'Femenino';
                                 };
                                 echo '<BR>';
-                                if ($odontologo->estado_persona == 'ACT'){
+                                if ($cliente_info->estado_persona == 'ACT'){
                                   echo 'Activo';
                                 }else{
                                     echo 'Retirado';
                                 };
                                 echo '<BR>';
-                                echo $odontologo->eps_persona ;
+                                echo $cliente_info->eps_persona ;
                                 echo '<BR>';
-                                echo  ucfirst(mb_strtolower($odontologo->nombre_ciudad, 'UTF-8'));
+                                echo  ucfirst(mb_strtolower($cliente_info->nombre_ciudad, 'UTF-8'));
                                 echo '<BR>';
-                                echo  ucwords(strtolower($odontologo->direccion_persona));
+                                echo  ucwords(strtolower($cliente_info->direccion_persona));
                                 echo '<BR>';
-                                echo strtolower($odontologo->correo_persona) ;
+                                echo strtolower($cliente_info->correo_persona) ;
                                 echo '<BR>';
-                                echo $odontologo->telefono_persona ;
+                                echo $cliente_info->telefono_persona ;
                                 
                                 ?>
                             </div>
