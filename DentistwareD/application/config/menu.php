@@ -109,11 +109,13 @@ $config['menu_ODO'] = array(
 				'icon' => 'fa fa-book',
                 'items' => array(
                     0 => array(
+                                'id' => 'Informacion_Cliente',
 								'title' => 'Informacion Cliente',
-								'link' => '',
+								'link' => base_url('odontologoController/Cliente_inf') ,
 								'id' => 'citas-agendar',
 						),
 						1 => array(
+                                'id' => 'Historia_Cliente',
 								'title' => 'Historia Cliente',
 								'link' => '',
 								'id' => 'citas-agendadas',
