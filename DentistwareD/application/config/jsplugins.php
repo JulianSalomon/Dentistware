@@ -10,7 +10,6 @@ $_js = array (
 		'app' => 'assets/js/app.min.js',
 		'pace' => 'assets/js/plugins/pace/pace.js',
 		'fastclick' => 'assets/js/plugins/fastclick/fastclick.min.js',
-		
 		'icheck' => 'assets/js/plugins/iCheck/icheck.min.js',
 		'sweetalert' => 'assets/js/plugins/bootstrap-sweetalert/sweetalert.min.js',
 		'validator' => 'assets/js/plugins/bootstrap-validator/validator.min.js',	
@@ -28,7 +27,7 @@ $_css = array (
 		'font-awesome' => 'https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css',
 		'icons' => 'https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css',
 		'pace' => 'assets/js/plugins/pace/pace.min.css',
-		
+		'datepicker3' => 'assets/js/plugins/datepicker/datepicker3.css',
 		'sweetalert' => 'assets/js/plugins/bootstrap-sweetalert/sweetalert.css',
 		'icheck' => 'assets/js/plugins/iCheck/square/blue.css',
 		'datatable' => 'assets/js/plugins/datatables/dataTables.bootstrap.css',

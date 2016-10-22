@@ -1,6 +1,6 @@
 <?php
 
-class Cliente extends Cliente_Controller{
+class Cliente extends Admin_Controller{
     
     function __construct(){
        parent::__construct();
@@ -11,6 +11,7 @@ class Cliente extends Cliente_Controller{
     }
     
     function index(){
+        
     	$this->get_user_menu('main-home');
         $this->render('escritorio_view');
     }    
