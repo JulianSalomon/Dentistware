@@ -3,7 +3,7 @@ $config['menu_CLT'] = array(
 		'inicio' => array(
 				'id' => 'main-home',
 				'title' => '<span>Inicio</span>',
-				'link' => '',
+				'link' => base_url(),
 				'icon' => 'fa fa-home',
 		),
 		'citas' => array(
@@ -27,7 +27,7 @@ $config['menu_CLT'] = array(
 		'multas' => array(
 				'id' => 'main-multas',
 				'title' => '<span>Multas</span>',
-				'link' => '',
+				'link' => base_url('paciente/Multa'),
 				'icon' => 'fa fa-file-text-o',
 		),
 		'notificaciones' => array(
@@ -51,34 +51,40 @@ $config['menu_ADM'] = array(
 				'link' => '',
 				'icon' => 'fa fa-home',
 		),
+        'administrador' => array(
+				'id' => 'main-home',
+				'title' => '<span>Administrador</span>',
+				'link' => base_url('administrador/AdministradorController'),
+				'icon' => 'fa fa-user',
+		),
 		'perfil' => array(
 				'id' => 'main-perfil',
 				'title' => '<span>Perfil</span>',
-				'link' => '',
+				'link' => base_url(''),
 				'icon' => 'fa fa-user',
 		),
 		'cliente' => array(
 				'id' => 'main-cliente',
 				'title' => '<span>Cliente</span>',
-				'link' => '',
+				'link' => base_url('administrador/Cliente') ,
 				'icon' => 'fa fa-user',
 		),
 		'empleado' => array(
 				'id' => 'main-empleado',
 				'title' => '<span>Empleado</span>',
-				'link' => '',
+				'link' => base_url('administrador/Empleado'),
 				'icon' => 'fa fa-user',
 		),
 		'odontologo' => array(
 				'id' => 'main-odontologo',
 				'title' => '<span>Odontologo</span>',
-				'link' => '',
+				'link' => base_url('administrador/Odontologo'),
 				'icon' => 'fa fa-user',
 		),
 		'logout' => array(
 				'id' => 'main-logout',
 				'title' => '<span class="nav-label">Cerrar Sesión</span>',
-				'link' => 'Login/logout',
+				'link' => '',
 				'icon' => 'fa fa-sign-out',
 		),
 );

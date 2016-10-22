@@ -29,6 +29,7 @@
 		echo plugin_js('fastclick');
 		echo plugin_js('app');
 		echo plugin_js('pace');
+        echo plugin_js('datepicker');
 		
 		echo $before_closing_body;		
 	?>
