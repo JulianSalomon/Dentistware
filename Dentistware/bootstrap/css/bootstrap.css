@@ -5,6 +5,37 @@
 float: left
  */
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+
+
+/* New styles */
+
+/*
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: red;
+}*/
+li {
+    float: left;
+}
+
+li a {
+    display: inline-block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+
+
+/*End of new styles*/
+
 html {
   font-family: sans-serif;
   -webkit-text-size-adjust: 100%;
@@ -1416,6 +1447,11 @@ a.bg-danger:focus {
 }
 ul,
 ol {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #0040FF;
   margin-top: 0;
   margin-bottom: 10px;
 }
