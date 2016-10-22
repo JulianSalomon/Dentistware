@@ -10,7 +10,6 @@ class MY_Controller extends CI_Controller{
 		$this->data['page_title_start'] = "Dentistware ";
 		
 		$this->data['user_info'] = $this->session->userdata();
-		//$this->load->library('Auth');
     }
     
     public function is_logged_in() {
