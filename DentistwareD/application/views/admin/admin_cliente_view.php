@@ -23,7 +23,7 @@
                                 <h3 class="modal-title">Agregar cliente</h3>
                               </div>
                               <div class="modal-body">
-                                 <form class="form-horizontal">
+                                 <form class="form-horizontal" method="post" action="collect.php">
                                         <div class="form-group">
                                           <label for="inputNombre" class="col-sm-2 control-label ">Nombres y apellidos</label>
                                           <div class="col-sm-10">
@@ -137,7 +137,7 @@
                                   </form>
                               <div class="modal-footer">
                                 <button type="button" data_dismiss="modal" class="btn btn-default pull-left">Cancelar</button>
-                                <button type="submit" class="btn btn-info pull-right">Agregar</button>
+                                <button type="submit" value="submit" class="btn btn-info pull-right">Agregar</button>
                               </div>
                             </div>
                               
@@ -146,7 +146,7 @@
                     </div>
                     </div>
                     <div class="box-body">
-                        <p>En la siguiente tabla encuentra una lista de todas sus citas agendadas actualmente, si desea cancelar una cita, haga click sobre el espacio en blanco de la columna cancelar de las citas y posteriormente presione Cancelar citas.</p><br>
+                        <p>En la siguiente tabla encuentra una lista de todos los clientes.</p><br>
                     <div class="table-responsive">
                         <table id="tablaCliente" class="table table-bordered table-hover">
                             <thead class="text-center">

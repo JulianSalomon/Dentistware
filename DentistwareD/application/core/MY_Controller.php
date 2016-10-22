@@ -7,8 +7,7 @@ class MY_Controller extends CI_Controller{
 		$this->data ['before_closing_head'] = '';
 		$this->data ['before_closing_body'] = '';
 		$this->data ['page_title_end'] = '';
-		$this->data['page_title_start'] = "Dentistware ";
-		
+		$this->data['page_title_start'] = "Dentistware ";		
 		$this->data['user_info'] = $this->session->userdata();
     }
     
@@ -35,11 +34,14 @@ class MY_Controller extends CI_Controller{
 class Admin_Controller extends MY_Controller{
 	function __construct(){
         parent::__construct();
-        
+        if(!$this->is_logged_in()){
+			redirect('Login');
+		}
         $tipo = $this->session->userdata('tipo_persona');
-        if ($tipo != 'ADM') {
+        if ($tipo != 'ADM'){
        	    redirect ( 'Login', 'refresh' );
-       }            
+        }        
+        $this->load->model('persona_model');
     }
 }
 

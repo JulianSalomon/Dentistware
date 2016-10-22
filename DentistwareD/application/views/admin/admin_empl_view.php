@@ -15,7 +15,7 @@
                         <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-center">Agregar empleado</a>
                     </div>
                     <div class="box-body">
-                        <p>En la siguiente tabla encuentra una lista de todas sus citas agendadas actualmente, si desea cancelar una cita, haga click sobre el espacio en blanco de la columna cancelar de las citas y posteriormente presione Cancelar citas.</p><br>
+                        <p>En la siguiente tabla encuentra una lista de todos los administradores.</p><br>
                     <div class="table-responsive">
                         <table id="tablaCliente" class="table table-bordered table-hover">
                             <thead >
@@ -34,31 +34,31 @@
                             	
                             	<?php 
                             	
-                            	if($clientes != NULL){
-                            		 		foreach ($clientes as $cliente){
+                            	if($empleados != NULL){
+                            		 		foreach ($empleados as $empleado){
                             			echo '<tr>';
                                             echo '<td>';
-                                            echo $cliente->nombre;
+                                            echo $empleado->nombre;
                                             echo '<br>';
-                                            echo $cliente->t_documento . " " . $cliente->documento;
+                                            echo $empleado->t_documento . " " . $empleado->documento;
                                             echo '</td>';
                                             echo '<td>';
-                                            echo $cliente->telefono;
+                                            echo $empleado->telefono;
                                             echo '</td>';
                                             echo '<td>';
-                                            echo $cliente->ciudad . '<br>' . $cliente->direccion;
+                                            echo $empleado->ciudad . '<br>' . $empleado->direccion;
                                             echo '</td>';
                                             echo '<td>';
-                                            echo $cliente->email;
+                                            echo $empleado->email;
                                             echo '</td>';
                                             echo '<td>';
-                                            echo $cliente->estado;
+                                            echo $empleado->estado;
                                             echo '</td>';
                                             echo '<td>';
-                                            echo $cliente->eps;
+                                            echo $empleado->eps;
                                             echo '</td>';
                                             echo '<td>';
-                                            echo $cliente->contacto . '<br>' . $cliente->contacto_tel;
+                                            echo $empleado->contacto . '<br>' . $empleado->contacto_tel;
                                             echo '</td>';
                                             echo '<td><button><i class="fa fa-pencil"></i></button><button><i class="fa fa-trash"></i></button></td>';
                             			echo '</tr>';   
