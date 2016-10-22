@@ -11,7 +11,6 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h1 class="box-title">Ver clientes</h1>
                         <button type="button" class="btn btn-info btn-small pull-right " data-toggle="modal" data-target="#modal_add_client">Agregar cliente</button>
                         <!-- Modal -->
                         <div id="modal_add_client" class="modal fade with-border " role="dialog">
@@ -23,7 +22,7 @@
                                 <h3 class="modal-title">Agregar cliente</h3>
                               </div>
                               <div class="modal-body">
-                                 <form class="form-horizontal">
+                                 <form class="form-horizontal" method="post" action="collect.php">
                                         <div class="form-group">
                                           <label for="inputNombre" class="col-sm-2 control-label ">Nombres y apellidos</label>
                                           <div class="col-sm-10">
@@ -76,17 +75,31 @@
                                          <label class="col-sm-2 control-label">Departamento</label>
                                          <div class="col-sm-4">
                                              <select class="form-control select2 select2-hidden-accessible" tabindex="-1">
-                                                 <option>CUNDINAMARCA</option>
-                                                 <option>ANTIOQUIA</option>
-                                                 <option>BOYACÁ</option>
+                                                 	<?php 
+                            	if($departamentos != NULL){
+                            		 		foreach ($departamentos as $departamento){
+                                            echo '<option>';
+                                            echo ucwords($departamento->nombre_dept);
+                                            echo '</option>';
+                                    
+                            		}
+                            	}                            	
+                            	?>
                                             </select>
                                          </div>
                                          <label  class="col-sm-2 control-label">Ciudad</label>
                                          <div class="col-sm-4">
                                              <select class="form-control select2 select2-hidden-accessible" tabindex="-1">
-                                                 <option>BOGOTÁ DC</option>
-                                                 <option>MEDELLÍN</option>
-                                                 <option>TUNJA</option>
+                                                 <?php 
+                            	if($ciudades != NULL){
+                            		 		foreach ($ciudades as $ciudad){
+                                            echo '<option>';
+                                            echo ucwords($ciudad->nombre_ciudad);
+                                            echo '</option>';
+                                    
+                            		}
+                            	}                            	
+                            	?>
                                             </select>
                                          </div>
                                      </div>
@@ -137,7 +150,7 @@
                                   </form>
                               <div class="modal-footer">
                                 <button type="button" data_dismiss="modal" class="btn btn-default pull-left">Cancelar</button>
-                                <button type="submit" class="btn btn-info pull-right">Agregar</button>
+                                <button type="submit" value="submit" class="btn btn-info pull-right">Agregar</button>
                               </div>
                             </div>
                               
@@ -146,7 +159,7 @@
                     </div>
                     </div>
                     <div class="box-body">
-                        <p>En la siguiente tabla encuentra una lista de todas sus citas agendadas actualmente, si desea cancelar una cita, haga click sobre el espacio en blanco de la columna cancelar de las citas y posteriormente presione Cancelar citas.</p><br>
+                        <p>En la siguiente tabla encuentra una lista de todos los clientes.</p><br>
                     <div class="table-responsive">
                         <table id="tablaCliente" class="table table-bordered table-hover">
                             <thead class="text-center">

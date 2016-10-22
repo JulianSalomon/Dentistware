@@ -51,16 +51,16 @@ $config['menu_ADM'] = array(
 				'link' => '',
 				'icon' => 'fa fa-home',
 		),
-        'administrador' => array(
-				'id' => 'main-home',
-				'title' => '<span>Administrador</span>',
-				'link' => base_url('administrador/AdministradorController'),
-				'icon' => 'fa fa-user',
-		),
 		'perfil' => array(
 				'id' => 'main-perfil',
 				'title' => '<span>Perfil</span>',
 				'link' => base_url(''),
+				'icon' => 'fa fa-user',
+		),
+        'administrador' => array(
+				'id' => 'main-home',
+				'title' => '<span>Administrador</span>',
+				'link' => base_url('administrador/AdministradorController'),
 				'icon' => 'fa fa-user',
 		),
 		'cliente' => array(
