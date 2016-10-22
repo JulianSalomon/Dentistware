@@ -7,7 +7,10 @@ class Cliente extends Admin_Controller {
 		if(!$this->is_logged_in()){
 			redirect('Login');
 		}
-		$this->load->model ( 'persona_model' );        
+		$this->load->model ( 'persona_model' );   
+        $this->load->model ( 'lugar_model' );    
+        $this->data['departamentos'] = $this->lugar_model->get_departamentos();
+        $this->data['ciudades'] = $this->lugar_model->get_ciudades(13);
         $this->data['clientes'] = $this->persona_model->get_clientes();
         $this->data['before_closing_body'] = '<script>$("#datepicker").datepicker({
                                                     language: "es",

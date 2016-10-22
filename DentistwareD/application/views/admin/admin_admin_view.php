@@ -11,7 +11,6 @@
             <div class="col-xs-12">
                 <div class="box">
                     <div class="box-header">
-                        <h3 class="box-title">Ver clientes</h3>
                         <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-center">Agregar administrador</a>
                     </div>
                     <div class="box-body">
@@ -20,13 +19,11 @@
                         <table id="tablaCliente" class="table table-bordered table-hover">
                             <thead >
                                 <tr>
-                                    <th>Nombres, Apellidos y Documento</th>
+                                    <th>Nombre y documento</th>
                                     <th>Teléfono</th>
                                     <th>Ubicación</th>
                                     <th>Correo electrónico</th>
                                     <th>Estado</th>
-                                    <th>EPS</th>
-                                    <th>Contacto</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
@@ -35,10 +32,10 @@
                             	<?php 
                             	
                             	if($clientes != NULL){
-                            		foreach ($clientes as $cliente){
+                            		 		foreach ($clientes as $cliente){
                             			echo '<tr>';
                                             echo '<td>';
-                                            echo $cliente->nombre;
+                                            echo ucwords($cliente->nombre);
                                             echo '<br>';
                                             echo $cliente->t_documento . " " . $cliente->documento;
                                             echo '</td>';
@@ -46,24 +43,28 @@
                                             echo $cliente->telefono;
                                             echo '</td>';
                                             echo '<td>';
-                                            echo $cliente->ciudad . '<br>' . $cliente->direccion;
+                                            echo ucfirst(mb_strtolower($cliente->ciudad, 'UTF-8')) . '<br>' . ucwords(strtolower($cliente->direccion));
                                             echo '</td>';
                                             echo '<td>';
-                                            echo $cliente->email;
+                                            echo strtolower($cliente->email);
                                             echo '</td>';
                                             echo '<td>';
-                                            echo $cliente->estado;
+                                            if($cliente->estado = 'ACT'){
+                                                echo 'Activo';
+                                            } else {
+                                                echo 'Retirado';
+                                            }
                                             echo '</td>';
-                                            echo '<td>';
-                                            echo $cliente->eps;
-                                            echo '</td>';
-                                            echo '<td>';
-                                            echo $cliente->contacto . '<br>' . $cliente->contacto_tel;
-                                            echo '</td>';
+                                            //echo '<td>';
+                                           /* echo ucwords($cliente->eps);
+                                            echo '</td>';*/
+                                           /* echo '<td>';
+                                            echo ucwords($cliente->contacto) . '<br>' . ucwords($cliente->contacto_tel);
+                                            echo '</td>';*/
                                             echo '<td><button><i class="fa fa-pencil"></i></button><button><i class="fa fa-trash"></i></button></td>';
                             			echo '</tr>';   
                             		}
-                            	}                            	
+                            	}                             	
                             	?>
                             </tbody>
                         </table>

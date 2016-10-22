@@ -11,7 +11,6 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <h1 class="box-title">Ver clientes</h1>
                         <button type="button" class="btn btn-info btn-small pull-right " data-toggle="modal" data-target="#modal_add_client">Agregar cliente</button>
                         <!-- Modal -->
                         <div id="modal_add_client" class="modal fade with-border " role="dialog">
@@ -76,17 +75,31 @@
                                          <label class="col-sm-2 control-label">Departamento</label>
                                          <div class="col-sm-4">
                                              <select class="form-control select2 select2-hidden-accessible" tabindex="-1">
-                                                 <option>CUNDINAMARCA</option>
-                                                 <option>ANTIOQUIA</option>
-                                                 <option>BOYACÁ</option>
+                                                 	<?php 
+                            	if($departamentos != NULL){
+                            		 		foreach ($departamentos as $departamento){
+                                            echo '<option>';
+                                            echo ucwords($departamento->nombre_dept);
+                                            echo '</option>';
+                                    
+                            		}
+                            	}                            	
+                            	?>
                                             </select>
                                          </div>
                                          <label  class="col-sm-2 control-label">Ciudad</label>
                                          <div class="col-sm-4">
                                              <select class="form-control select2 select2-hidden-accessible" tabindex="-1">
-                                                 <option>BOGOTÁ DC</option>
-                                                 <option>MEDELLÍN</option>
-                                                 <option>TUNJA</option>
+                                                 <?php 
+                            	if($ciudades != NULL){
+                            		 		foreach ($ciudades as $ciudad){
+                                            echo '<option>';
+                                            echo ucwords($ciudad->nombre_ciudad);
+                                            echo '</option>';
+                                    
+                            		}
+                            	}                            	
+                            	?>
                                             </select>
                                          </div>
                                      </div>
