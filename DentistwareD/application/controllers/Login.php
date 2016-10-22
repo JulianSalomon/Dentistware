@@ -73,7 +73,8 @@ class Login extends MY_Controller {
 				$this->session->set_userdata ( array (
 						'logged_in' => TRUE,
 						'nombre_completo' => $user->nombre_persona,
-						'tipo_persona' => $user->tipo_persona 
+						'tipo_persona' => $user->tipo_persona,
+                        'doc_persona' => $user->documento_persona,
 				) );
 				return 2;
 			} else {
