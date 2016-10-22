@@ -10,11 +10,11 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box">
-                    <div class="box-header">
-                        <a href="javascript:void(0)" class="btn btn-sm btn-info btn-flat pull-center">Agregar administrador</a>
+                    <div class="box-header with-border">
+                        <button type="button" class="btn btn-info btn-small pull-right " data-toggle="modal" data-target="#modal_add_client">Agregar admnistrador</button>
                     </div>
                     <div class="box-body">
-                        <p>En la siguiente tabla encuentra una lista de todos los administradores,y posteriormente presione Cancelar citas.</p><br>
+                        <p>En la siguiente tabla encuentra una lista de todos los administradores.</p><br>
                     <div class="table-responsive">
                         <table id="tablaCliente" class="table table-bordered table-hover">
                             <thead >
@@ -30,37 +30,31 @@
                             <tbody class="text-center">
                             	
                             	<?php 
-                            	
-                            	if($clientes != NULL){
-                            		 		foreach ($clientes as $cliente){
+                            
+                            	if($admins != NULL){
+                            		foreach ($admins as $administrador){
                             			echo '<tr>';
                                             echo '<td>';
-                                            echo ucwords($cliente->nombre);
+                                            echo ucwords($administrador->nombre);
                                             echo '<br>';
-                                            echo $cliente->t_documento . " " . $cliente->documento;
+                                            echo $administrador->t_documento . " " . $administrador->documento;
                                             echo '</td>';
                                             echo '<td>';
-                                            echo $cliente->telefono;
+                                            echo $administrador->telefono;
                                             echo '</td>';
                                             echo '<td>';
-                                            echo ucfirst(mb_strtolower($cliente->ciudad, 'UTF-8')) . '<br>' . ucwords(strtolower($cliente->direccion));
+                                            echo ucfirst(mb_strtolower($administrador->ciudad, 'UTF-8')) . '<br>' . ucwords(strtolower($administrador->direccion));
                                             echo '</td>';
                                             echo '<td>';
-                                            echo strtolower($cliente->email);
+                                            echo strtolower($administrador->email);
                                             echo '</td>';
                                             echo '<td>';
-                                            if($cliente->estado = 'ACT'){
+                                            if($administrador->estado = 'ACT'){
                                                 echo 'Activo';
                                             } else {
                                                 echo 'Retirado';
                                             }
                                             echo '</td>';
-                                            //echo '<td>';
-                                           /* echo ucwords($cliente->eps);
-                                            echo '</td>';*/
-                                           /* echo '<td>';
-                                            echo ucwords($cliente->contacto) . '<br>' . ucwords($cliente->contacto_tel);
-                                            echo '</td>';*/
                                             echo '<td><button><i class="fa fa-pencil"></i></button><button><i class="fa fa-trash"></i></button></td>';
                             			echo '</tr>';   
                             		}

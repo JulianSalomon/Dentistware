@@ -97,7 +97,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="m-t text-center">
                     <strong>&COPY; 
                     	<?php
-                    	// echo date('Y'); 
+                    	echo date('Y'); 
                     	echo anchor('http://projectengeneer.wixsite.com/dentistware', '    Dentistware.', 'target="_blank"');
                     	?>
                     </strong>
