@@ -1,6 +1,6 @@
 <?php
 
-class Odontologo extends Odon_Controller {
+class Odonto extends Odon_Controller {
 	
 	function __construct(){
 		parent::__construct();	

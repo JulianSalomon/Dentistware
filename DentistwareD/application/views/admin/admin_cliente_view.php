@@ -74,32 +74,18 @@
                                      <div class="form-group">
                                          <label class="col-sm-2 control-label">Departamento</label>
                                          <div class="col-sm-4">
-                                             <select class="form-control select2 select2-hidden-accessible" tabindex="-1">
-                                                 	<?php 
-                            	if($departamentos != NULL){
-                            		 		foreach ($departamentos as $departamento){
-                                            echo '<option>';
-                                            echo ucwords($departamento->nombre_dept);
-                                            echo '</option>';
-                                    
-                            		}
-                            	}                            	
-                            	?>
-                                            </select>
+                                            <?php 
+                                                $data_input = array(
+                                                        'id' => 'select_depto',
+                                                        'class' => 'form-control select2 select2-hidden-accessible',
+                                                );
+                                                echo form_dropdown('select_depto', $departamentos, '', $data_input); 	
+                                            ?>
                                          </div>
                                          <label  class="col-sm-2 control-label">Ciudad</label>
                                          <div class="col-sm-4">
-                                             <select class="form-control select2 select2-hidden-accessible" tabindex="-1">
-                                                 <?php 
-                            	if($ciudades != NULL){
-                            		 		foreach ($ciudades as $ciudad){
-                                            echo '<option>';
-                                            echo ucwords($ciudad->nombre_ciudad);
-                                            echo '</option>';
-                                    
-                            		}
-                            	}                            	
-                            	?>
+                                             <select class="form-control select2 select2-hidden-accessible" tabindex="-1" id="select_ciudades" disabled>
+                                                 <option value="-1"> Seleccione un departamento</option>
                                             </select>
                                          </div>
                                      </div>
@@ -226,3 +212,6 @@
     </section>
     <!-- /.content -->
   </div>
+<script>
+	var js_site_url = '<?php echo site_url();?>';
+</script> 
