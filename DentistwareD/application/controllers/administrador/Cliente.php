@@ -7,7 +7,6 @@ class Cliente extends Admin_Controller {
 		$this->load->model ( 'persona_model' );   
         $this->load->model ( 'lugar_model' );    
         $this->data['departamentos'] = $this->lugar_model->get_departamentos();
-        $this->data['ciudades'] = $this->lugar_model->get_ciudades(13);
         $this->data['clientes'] = $this->persona_model->get_clientes();
         $this->data['before_closing_body'] = '<script>
                                                 $("#datepicker").datepicker({
@@ -21,6 +20,7 @@ class Cliente extends Admin_Controller {
                                                 });
                                              </script>';
         
+        $this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/cliente_admin.js', true);
 		
 		
 
@@ -29,5 +29,16 @@ class Cliente extends Admin_Controller {
 	public function index(){
 		$this->get_user_menu('main-cliente');
 		$this->render ( 'admin/admin_cliente_view' );				
+	}
+    
+    public function listar_ciudades($idDepartamento = 0, $flag = TRUE) {
+		$ciudades = $this->lugar_model->get_ciudades($idDepartamento);
+	
+		if($flag){
+			header('Content-Type: application/json');
+			echo json_encode($ciudades);
+		} else {
+			return $ciudades;
+		}
 	}
 }

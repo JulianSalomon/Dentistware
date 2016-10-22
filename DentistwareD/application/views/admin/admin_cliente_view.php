@@ -74,32 +74,18 @@
                                      <div class="form-group">
                                          <label class="col-sm-2 control-label">Departamento</label>
                                          <div class="col-sm-4">
-                                             <select class="form-control select2 select2-hidden-accessible" tabindex="-1">
-                                                 	<?php 
-                            	if($departamentos != NULL){
-                            		 		foreach ($departamentos as $departamento){
-                                            echo '<option>';
-                                            echo ucwords($departamento->nombre_dept);
-                                            echo '</option>';
-                                    
-                            		}
-                            	}                            	
-                            	?>
-                                            </select>
+                                            <?php 
+                                                $data_input = array(
+                                                        'id' => 'select_depto',
+                                                        'class' => 'form-control select2 select2-hidden-accessible',
+                                                );
+                                                echo form_dropdown('select_depto', $departamentos, '', $data_input); 	
+                                            ?>
                                          </div>
                                          <label  class="col-sm-2 control-label">Ciudad</label>
                                          <div class="col-sm-4">
-                                             <select class="form-control select2 select2-hidden-accessible" tabindex="-1">
-                                                 <?php 
-                            	if($ciudades != NULL){
-                            		 		foreach ($ciudades as $ciudad){
-                                            echo '<option>';
-                                            echo ucwords($ciudad->nombre_ciudad);
-                                            echo '</option>';
-                                    
-                            		}
-                            	}                            	
-                            	?>
+                                             <select class="form-control select2 select2-hidden-accessible" tabindex="-1" id="select_ciudades" disabled>
+                                                 <option value="-1"> Seleccione un departamento</option>
                                             </select>
                                          </div>
                                      </div>
@@ -164,8 +150,8 @@
                         <table id="tablaCliente" class="table table-bordered table-hover">
                             <thead class="text-center">
                                 <tr>
-                                    <th>Nombre y documento</th>
-                                    <th>Teléfono</th>
+                                    <th>Documento</th>
+                                    <th>Nombre y teléfono</th>
                                     <th>Ubicación</th>
                                     <th>Correo electrónico</th>
                                     <th>Estado</th>
@@ -182,15 +168,18 @@
                             		 		foreach ($clientes as $cliente){
                             			echo '<tr>';
                                             echo '<td>';
+                                                
+                                                
+                                             $tipo = str_split($cliente->t_documento, 1);
+                                            echo  $tipo[0] . "." . $tipo[1] . ". " . $cliente->documento;
+                                            echo '</td>';
+                                                echo '<td>';
                                             echo ucwords($cliente->nombre);
                                             echo '<br>';
-                                            echo $cliente->t_documento . " " . $cliente->documento;
+                                            echo  "<small> Tel: " .$cliente->telefono . "</small>" ;
                                             echo '</td>';
                                             echo '<td>';
-                                            echo $cliente->telefono;
-                                            echo '</td>';
-                                            echo '<td>';
-                                            echo ucfirst(mb_strtolower($cliente->ciudad, 'UTF-8')) . '<br>' . ucwords(strtolower($cliente->direccion));
+                                            echo ucfirst(mb_strtolower($cliente->depto, 'UTF-8')) . " - " .  ucfirst(mb_strtolower($cliente->ciudad, 'UTF-8')) . '<br>' . ucwords(strtolower($cliente->direccion));
                                             echo '</td>';
                                             echo '<td>';
                                             echo strtolower($cliente->email);
@@ -206,7 +195,7 @@
                                             echo ucwords($cliente->eps);
                                             echo '</td>';
                                             echo '<td>';
-                                            echo ucwords($cliente->contacto) . '<br>' . ucwords($cliente->contacto_tel);
+                                            echo ucwords($cliente->contacto) . '<br>' ."<small> Tel: " .$cliente->contacto_tel . "</small>" ;
                                             echo '</td>';
                                             echo '<td><button><i class="fa fa-pencil"></i></button><button><i class="fa fa-trash"></i></button></td>';
                             			echo '</tr>';   
@@ -223,3 +212,6 @@
     </section>
     <!-- /.content -->
   </div>
+<script>
+	var js_site_url = '<?php echo site_url();?>';
+</script> 

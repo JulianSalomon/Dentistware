@@ -19,13 +19,11 @@
                         <table id="tablaCliente" class="table table-bordered table-hover">
                             <thead >
                                 <tr>
-                                    <th>Nombres y documento</th>
-                                    <th>Teléfono</th>
+                                    <th>Documento</th>
+                                    <th>Nombre y teléfono</th>
                                     <th>Ubicación</th>
                                     <th>Correo electrónico</th>
                                     <th>Estado</th>
-                                    <th>EPS</th>
-                                    <th>Contacto</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
@@ -36,17 +34,18 @@
                             	if($odontologos != NULL){
                             		 		foreach ($odontologos as $odontologo){
                             			echo '<tr>';
+                                            echo '<tr>';
                                             echo '<td>';
-
+                                            $tipo = str_split($odontologo->t_documento, 1);
+                                            echo  $tipo[0] . "." . $tipo[1] . ". " . $odontologo->documento;
+                                            echo '</td>';
+                                            echo '<td>';
                                             echo ucwords($odontologo->nombre);
                                             echo '<br>';
-                                            echo $odontologo->t_documento . " " . $odontologo->documento;
+                                            echo  "<small> Tel: " .$odontologo->telefono . "</small>" ;
                                             echo '</td>';
                                             echo '<td>';
-                                            echo $odontologo->telefono;
-                                            echo '</td>';
-                                            echo '<td>';
-                                            echo ucfirst(mb_strtolower($odontologo->ciudad, 'UTF-8')) . '<br>' . ucwords(strtolower($odontologo->direccion));
+                                            echo ucfirst(mb_strtolower($odontologo->depto, 'UTF-8')) . " - " .  ucfirst(mb_strtolower($odontologo->ciudad, 'UTF-8')) . '<br>' . ucwords(strtolower($odontologo->direccion));
                                             echo '</td>';
                                             echo '<td>';
                                             echo strtolower($odontologo->email);
@@ -58,12 +57,8 @@
                                                 echo 'Retirado';
                                             }
                                             echo '</td>';
-                                            echo '<td>';
-                                            echo ucwords($odontologo->eps);
-                                            echo '</td>';
-                                            echo '<td>';
-                                            echo ucwords($odontologo->contacto) . '<br>' . ucwords($odontologo->contacto_tel);
-                                            echo '</td>';
+                                
+                                        
                                             echo '<td><button><i class="fa fa-pencil"></i></button><button><i class="fa fa-trash"></i></button></td>';
                             			echo '</tr>';   
                             		}
