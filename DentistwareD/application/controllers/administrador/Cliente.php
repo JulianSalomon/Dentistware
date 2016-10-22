@@ -20,7 +20,19 @@ class Cliente extends Admin_Controller {
                                                     var zIndexFecha = $(".datepicker").css("z-index");
                                                     $(".datepicker").css("z-index",zIndexModal+1);
                                                 });
-                                             </script>';
+                                             </script>
+                                             <script>
+                              $(function () {
+                                $("#tablaCliente").DataTable({
+                                  "paging": true,
+                                  "lengthChange": false,
+                                  "searching": false,
+                                  "ordering": true,
+                                  "info": true,
+                                  "autoWidth": false
+                                });
+                              });
+                            </script>';
 	}
 	
 	public function index(){

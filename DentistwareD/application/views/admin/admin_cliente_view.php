@@ -169,7 +169,7 @@
                         <p>En la siguiente tabla encuentra una lista de todos los clientes.</p><br>
                     <div class="table-responsive">
                         <table id="tablaCliente" class="table table-bordered table-hover">
-                            <thead class="text-center">
+                            <thead class="">
                                 <tr>
                                     <th>Nombre y documento</th>
                                     <th>Teléfono</th>
@@ -182,12 +182,10 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                            	
                             	<?php 
-                            	
-                            	if($clientes != NULL){
-                            		 		foreach ($clientes as $cliente){
-                            			echo '<tr>';
+                            		if($clientes != NULL){
+                                        foreach ($clientes as  $cliente){
+                                            echo '<tr>';
                                             echo '<td>';
                                             echo ucwords($cliente->nombre);
                                             echo '<br>';
