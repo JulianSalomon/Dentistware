@@ -58,7 +58,7 @@ class Odon_Controller extends MY_Controller{
 	function __construct(){
         parent::__construct();
         
-        $tipo = $this->session->userdate('tipo_persona');
+        $tipo = $this->session->userdata('tipo_persona');
         if ($tipo != 'ODO') {
        	    redirect ( 'Login', 'refresh' );
        }            

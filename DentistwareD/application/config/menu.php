@@ -88,3 +88,43 @@ $config['menu_ADM'] = array(
 				'icon' => 'fa fa-sign-out',
 		),
 );
+
+$config['menu_ODO'] = array(
+		'inicio' => array(
+				'id' => 'main-home',
+				'title' => '<span>Inicio</span>',
+				'link' => '',
+				'icon' => 'fa fa-home',
+		),
+		'perfil' => array(
+				'id' => 'main-perfil',
+				'title' => '<span>Perfil</span>',
+				'link' => '',
+				'icon' => 'fa fa-user',
+		),
+		'cliente' => array(
+				'id' => 'main-cliente',
+				'title' => '<span>Cliente</span>',
+				'link' => '',
+				'icon' => 'fa fa-book',
+                'items' => array(
+                    0 => array(
+								'title' => 'Informacion Cliente',
+								'link' => '',
+								'id' => 'citas-agendar',
+						),
+						1 => array(
+								'title' => 'Historia Cliente',
+								'link' => '',
+								'id' => 'citas-agendadas',
+						),
+                
+                ),
+		),
+		'logout' => array(
+				'id' => 'main-logout',
+				'title' => '<span class="nav-label">Cerrar Sesión</span>',
+				'link' => 'Login/logout',
+				'icon' => 'fa fa-sign-out',
+		),
+);
