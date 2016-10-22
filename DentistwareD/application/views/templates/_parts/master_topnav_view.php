@@ -26,7 +26,7 @@
                 		);
                 		echo img($data_input);                		                		
                 		?>
-	                  	<span class="hidden-xs">Sinca ries<?php //echo $user_info['nombre_completo'];?></span>
+	                  	<span class="hidden-xs"><?php echo $user_info['nombre_completo'];?></span>
 	                	</a>
 	                	<ul class="dropdown-menu">
 	                  		<li class="user-header">
@@ -46,8 +46,25 @@
 			                  		echo img($data_input);	
 		                  		?>
 			                    <p>
-			                    	Sinca ries
-			                      <?php //echo $user_info['nombre_completo'];?>
+			                    	
+                                    <span class="hidden-xs"><?php echo $user_info['nombre_completo'];?></span>
+			                         <br>
+                                    <span class="hidden-xs"><?php 
+                                        switch ($user_info['tipo_persona']) {
+                                        case "ADM" :
+                                            echo 'Administrador';
+                                            break;
+                                        case "CLT" :
+                                            echo 'Cliente';
+                                            break;
+                                        case "ODO" :
+                                            echo 'Odontólogo';
+                                            break;
+                                        case "EMP" :
+                                            echo 'Empleado';
+                                            break;
+		                              }
+                                        ?>
 			                    </p>
 	                  		</li>
 	                  		<li class="user-footer">
