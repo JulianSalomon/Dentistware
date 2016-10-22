@@ -19,13 +19,11 @@
                         <table id="tablaCliente" class="table table-bordered table-hover">
                             <thead >
                                 <tr>
-                                    <th>Nombres y documento</th>
-                                    <th>Teléfono</th>
+                                    <th>Documento</th>
+                                    <th>Nombre y teléfono</th>
                                     <th>Ubicación</th>
                                     <th>Correo electrónico</th>
                                     <th>Estado</th>
-                                    <th>EPS</th>
-                                    <th>Contacto</th>
                                     <th>Opciones</th>
                                 </tr>
                             </thead>
@@ -35,18 +33,18 @@
                             	
                             	if($empleados != NULL){
                             		 		foreach ($empleados as $empleado){
-                            			echo '<tr>';
+                            			 echo '<tr>';
                                             echo '<td>';
-
+                                            $tipo = str_split($empleado->t_documento, 1);
+                                            echo  $tipo[0] . "." . $tipo[1] . ". " . $empleado->documento;
+                                            echo '</td>';
+                                            echo '<td>';
                                             echo ucwords($empleado->nombre);
                                             echo '<br>';
-                                            echo $empleado->t_documento . " " . $empleado->documento;
+                                            echo  "<small> Tel: " .$empleado->telefono . "</small>" ;
                                             echo '</td>';
                                             echo '<td>';
-                                            echo $empleado->telefono;
-                                            echo '</td>';
-                                            echo '<td>';
-                                            echo ucfirst(mb_strtolower($empleado->ciudad, 'UTF-8')) . '<br>' . ucwords(strtolower($empleado->direccion));
+                                            echo ucfirst(mb_strtolower($empleado->depto, 'UTF-8')) . " - " . ucfirst(mb_strtolower($empleado->ciudad, 'UTF-8')) . '<br>' . ucwords(strtolower($empleado->direccion));
                                             echo '</td>';
                                             echo '<td>';
                                             echo strtolower($empleado->email);
@@ -57,12 +55,6 @@
                                             } else {
                                                 echo 'Retirado';
                                             }
-                                            echo '</td>';
-                                            echo '<td>';
-                                            echo ucwords($empleado->eps);
-                                            echo '</td>';
-                                            echo '<td>';
-                                            echo ucwords($empleado->contacto) . '<br>' . ucwords($empleado->contacto_tel);
                                             echo '</td>';
                                             echo '<td><button><i class="fa fa-pencil"></i></button><button><i class="fa fa-trash"></i></button></td>';
                             			echo '</tr>';   

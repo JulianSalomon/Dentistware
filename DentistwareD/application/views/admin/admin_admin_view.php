@@ -19,10 +19,10 @@
                         <table id="tablaCliente" class="table table-bordered table-hover">
                             <thead >
                                 <tr>
-                                    <th>Nombre y documento</th>
-                                    <th>Teléfono</th>
-                                    <th>Ubicación</th>
+                                    <th>Documento</th>
+                                    <th>Nombre y teléfono</th>
                                     <th>Correo electrónico</th>
+                                    <th>Ubicación</th>
                                     <th>Estado</th>
                                     <th>Opciones</th>
                                 </tr>
@@ -34,19 +34,20 @@
                             	if($admins != NULL){
                             		foreach ($admins as $administrador){
                             			echo '<tr>';
+                                           echo '<td>';
+                                            $tipo = str_split($administrador->t_documento, 1);
+                                            echo  $tipo[0] . "." . $tipo[1] . ". " . $administrador->documento;
+                                            echo '</td>';
                                             echo '<td>';
                                             echo ucwords($administrador->nombre);
                                             echo '<br>';
-                                            echo $administrador->t_documento . " " . $administrador->documento;
-                                            echo '</td>';
-                                            echo '<td>';
-                                            echo $administrador->telefono;
-                                            echo '</td>';
-                                            echo '<td>';
-                                            echo ucfirst(mb_strtolower($administrador->ciudad, 'UTF-8')) . '<br>' . ucwords(strtolower($administrador->direccion));
+                                            echo  "<small> Tel: " .$administrador->telefono . "</small>" ;
                                             echo '</td>';
                                             echo '<td>';
                                             echo strtolower($administrador->email);
+                                            echo '</td>';
+                                            echo '<td>';
+                                            echo ucfirst(mb_strtolower($administrador->depto, 'UTF-8')) . " - " .  ucfirst(mb_strtolower($administrador->ciudad, 'UTF-8')) . '<br>' . ucwords(strtolower($administrador->direccion));
                                             echo '</td>';
                                             echo '<td>';
                                             if($administrador->estado = 'ACT'){
