@@ -1,4 +1,4 @@
-<div class="content-wrapper">
+    <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -16,69 +16,70 @@
                         <div id="modal_add_client" class="modal fade with-border " role="dialog">
                           <div class="modal-dialog">
                             <!-- Modal content-->
+                              <form class="form-horizontal" method="post" action="<?php echo base_url("Administrador/Cliente/registro");?>">
                             <div class="modal-content">
                               <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                                 <h3 class="modal-title">Agregar cliente</h3>
                               </div>
                               <div class="modal-body">
-                                 <form class="form-horizontal" method="post" action="collect.php">
+                                 
                                         <div class="form-group">
                                           <label for="inputNombre" class="col-sm-2 control-label ">Nombres y apellidos</label>
                                           <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputNombre" placeholder="Nombres y apellidos">
+                                            <input type="text" class="form-control" id="inputNombre" placeholder="Nombres y apellidos" name="nombre">
                                           </div>
                                         </div>
                                             <div class="form-group">
                                                 <label for="inputEmail" class="col-sm-2 control-label">Correo electrónico</label>
                                                 <div class="col-sm-10">
-                                                    <input type="email" class="form-control" id="inputEmail" placeholder="Correo electrónico">
+                                                    <input type="email" class="form-control" id="inputEmail" placeholder="Correo electrónico" name="email">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                             <label for="inputPassword" class="col-sm-2 control-label">Contraseña</label>
                                             <div class="col-sm-5">
-                                              <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña">
+                                              <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña" name="password">
                                             </div>
                                             <div class="col-sm-5">
-                                              <input type="password" class="form-control" id="inputPasswordConfirm" placeholder="Confirmar contraseña">
+                                              <input type="password" class="form-control" id="inputPasswordConfirm" placeholder="Confirmar contraseña" name="confirmPassword">
                                             </div>
-                                     </div>
+                                            </div>
                                      <div class="form-group">
                                           <label  class="col-sm-2 control-label">Tipo de Documento</label>
                                             <div class="col-sm-5">
-                                                <select class="form-control select2 select2-hidden-accessible" tabindex="-1">
-                                                    <option>Tarjeta de identidad</option>
-                                                    <option>Cédula de ciudadanía</option>
-                                                    <option>Cédula de extranjería</option>
+                                                <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="tipoId">
+                                                    <option value='TI'>Tarjeta de identidad</option>
+                                                    <option value='CC'>Cédula de ciudadanía</option>
+                                                    <option value='CE'>Cédula de extranjería</option>
                                                 </select>
                                             </div>
                                             <div class="col-sm-5">
-                                                <input type="text" class="form-control" id="inputDocumento" placeholder="Número de documento">
+                                                <input type="text" class="form-control" id="inputDocumento" placeholder="Número de documento" name="id">
                                             </div>
                                      </div>
                                      <div class="form-group">
                                          <label class="col-sm-2 control-label">Fecha de nacimiento</label>
                                          <div class="col-sm-4">
-                                             <input type="text" class="form-control" id="datepicker" placeholder="Fecha de nacimiento">
+                                             <input type="text" class="form-control" id="datepicker" placeholder="Fecha de nacimiento" name="fechaNacimiento">
                                          </div>
                                          <label  class="col-sm-1 control-label">Edad</label>
                                          <div class="col-sm-2">
-                                             <input type="text" class="form-control" id="inputEdad" placeholder="Edad">
+                                             <input type="text" class="form-control" id="inputEdad" placeholder="Edad" name="Edad">
                                          </div>
                                          <label  class="col-sm-1 control-label">Género</label>
                                          <div class="col-sm-2">
-                                             <input type="text" class="form-control" id="inputGenero" placeholder="Género">
+                                             <input type="text" class="form-control" id="inputGenero" placeholder="Género" name="genero">
                                          </div>
                                      </div>
                                      <div class="form-group">
                                          <label class="col-sm-2 control-label">Departamento</label>
                                          <div class="col-sm-4">
-                                             <select class="form-control select2 select2-hidden-accessible" tabindex="-1">
+                                             <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="dept">
                                                  	<?php 
                             	if($departamentos != NULL){
                             		 		foreach ($departamentos as $departamento){
-                                            echo '<option>';
+                                            echo '<option value="'. $departamento . '">';
                                             echo ucwords($departamento->nombre_dept);
                                             echo '</option>';
                                     
@@ -89,11 +90,11 @@
                                          </div>
                                          <label  class="col-sm-2 control-label">Ciudad</label>
                                          <div class="col-sm-4">
-                                             <select class="form-control select2 select2-hidden-accessible" tabindex="-1">
+                                             <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="ciudad">
                                                  <?php 
                             	if($ciudades != NULL){
                             		 		foreach ($ciudades as $ciudad){
-                                            echo '<option>';
+                                            echo '<option value="'. $ciudad . '">';
                                             echo ucwords($ciudad->nombre_ciudad);
                                             echo '</option>';
                                     
@@ -106,33 +107,33 @@
                                      <div class="form-group">
                                          <label class="col-sm-2 control-label">Teléfono</label>
                                          <div class="col-sm-4">
-                                             <input type="text" class="form-control" id="inputTelefono" placeholder="Teléfono">
+                                             <input type="text" class="form-control" id="inputTelefono" placeholder="Teléfono" name="telefono">
                                          </div>
                                          <label  class="col-sm-2 control-label">Dirección de residencia</label>
                                          <div class="col-sm-4">
-                                             <input type="text" class="form-control" id="inputDireccion" placeholder="Dirección de residencia">
+                                             <input type="text" class="form-control" id="inputDireccion" placeholder="Dirección de residencia" name=direccion>
                                          </div>
                                      </div>
                                      <div class="form-group">
                                          <label class="col-sm-2 control-label">Grupo sanguíneo</label>
                                          <div class="col-sm-2">
-                                             <select class="form-control select2 select2-hidden-accessible" tabindex="-1">
-                                                 <option>A</option>
-                                                 <option>B</option>
-                                                 <option>AB</option>
-                                                 <option>O</option>
+                                             <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="gs">
+                                                 <option value="A">A</option>
+                                                 <option value="B">B</option>
+                                                 <option value="AB">AB</option>
+                                                 <option value="O">O</option>
                                             </select>
                                          </div>
                                          <label  class="col-sm-1 control-label">RH</label>
                                          <div class="col-sm-2">
-                                             <select class="form-control select2 select2-hidden-accessible" tabindex="-1">
-                                                 <option>+</option>
-                                                 <option>-</option>
+                                             <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="rh">
+                                                 <option value="+">+</option>
+                                                 <option value="-">-</option>
                                             </select>
                                          </div>
                                          <label class="col-sm-1 control-label">EPS</label>
                                          <div class="col-sm-4">
-                                             <input type="text" class="form-control" id="inputEps" placeholder="Nombre EPS">
+                                             <input type="text" class="form-control" id="inputEps" placeholder="Nombre EPS" name="eps">
                                          </div>
                                      </div>
                                      <hr>
@@ -140,22 +141,28 @@
                                      <div class="form-group">
                                          <label  class="col-sm-2 control-label">Nombres y apellidos</label>
                                          <div class="col-sm-4">
-                                             <input type="text" class="form-control" id="inputNombreContacto" placeholder="Nombres y apellidos">
+                                             <input type="text" class="form-control" id="inputNombreContacto" placeholder="Nombres y apellidos" name="nombreContacto">
                                          </div>
                                          <label class="col-sm-2 control-label">Teléfono</label>
                                          <div class="col-sm-4">
-                                             <input type="text" class="form-control" id="inputTelefono" placeholder="Teléfono">
+                                             <input type="text" class="form-control" id="inputTelefono" placeholder="Teléfono" name="telefonoContacto">
                                          </div>
                                      </div>
-                                  </form>
-                              <div class="modal-footer">
-                                <button type="button" data_dismiss="modal" class="btn btn-default pull-left">Cancelar</button>
-                                <button type="submit" value="submit" class="btn btn-info pull-right">Agregar</button>
-                              </div>
-                            </div>
-                              
-                          </div>
-                        </div>
+                                     
+                                     </div>
+                                     <div class="modal-footer">
+                                  
+                                    <button type="button" data-dismiss="modal" class="btn btn-default pull-left">Cancelar</button>
+
+                                    <button type="submit" name="submit_reg" value="submit" class="btn btn-info pull-right">Agregar</button>
+                                         
+                                </div>
+                                                                
+                                </div>
+                          </form>
+                                
+                          
+                        
                     </div>
                     </div>
                     <div class="box-body">
