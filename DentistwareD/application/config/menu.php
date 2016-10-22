@@ -3,7 +3,7 @@ $config['menu_CLT'] = array(
 		'inicio' => array(
 				'id' => 'main-home',
 				'title' => '<span>Inicio</span>',
-				'link' => '',
+				'link' => base_url(),
 				'icon' => 'fa fa-home',
 		),
 		'citas' => array(
@@ -27,7 +27,7 @@ $config['menu_CLT'] = array(
 		'multas' => array(
 				'id' => 'main-multas',
 				'title' => '<span>Multas</span>',
-				'link' => '',
+				'link' => base_url('paciente/Multa'),
 				'icon' => 'fa fa-file-text-o',
 		),
 		'notificaciones' => array(
@@ -84,7 +84,7 @@ $config['menu_ADM'] = array(
 		'logout' => array(
 				'id' => 'main-logout',
 				'title' => '<span class="nav-label">Cerrar Sesión</span>',
-				'link' => 'Login/logout',
+				'link' => '',
 				'icon' => 'fa fa-sign-out',
 		),
 );
