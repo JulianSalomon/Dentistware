@@ -8,7 +8,7 @@ class Odontologo extends Admin_Controller {
     }
     
     public function index(){
-        $this->get_user_menu('main-odontologo ');
+        $this->get_user_menu('main-odontologo');
 		$this->render ( 'admin/admin_odonto_view' );	 
     }
  

@@ -13,7 +13,8 @@ class Notificacion extends Cliente_Controller {
     }
     
     public function index(){
-        $this->get_user_menu()
+        $this->get_user_menu('main-notificaciones');
+        $this->render ( 'cliente/notificaciones_view' );		
     }
     
     

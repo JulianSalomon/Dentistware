@@ -6,11 +6,17 @@ $config['menu_CLT'] = array(
 				'link' => base_url(),
 				'icon' => 'fa fa-home',
 		),
+        'perfil' => array(
+				'id' => 'main-perfil',
+				'title' => '<span>Perfil</span>',
+				'link' => '',
+				'icon' => 'fa fa-user',
+		),
 		'citas' => array(
 				'id' => 'main-citas',
 				'title' => '<span>Citas</span>',
 				'link' => '',
-				'icon' => 'fa fa-list',
+				'icon' => 'fa fa-calendar',
 				'items' => array(
 						0 => array(
 								'title' => 'Agregar nueva cita',
@@ -28,12 +34,12 @@ $config['menu_CLT'] = array(
 				'id' => 'main-multas',
 				'title' => '<span>Multas</span>',
 				'link' => base_url('paciente/Multa'),
-				'icon' => 'fa fa-file-text-o',
+				'icon' => 'fa fa-list',
 		),
 		'notificaciones' => array(
 				'id' => 'main-notificaciones',
 				'title' => '<span>Notificaciones</span>',
-				'link' => '',
+				'link' => base_url('paciente/Notificacion'),
 				'icon' => 'fa fa-search',
 		),
 		'logout' => array(
@@ -99,7 +105,7 @@ $config['menu_ODO'] = array(
 		'perfil' => array(
 				'id' => 'main-perfil',
 				'title' => '<span>Perfil</span>',
-				'link' => '',
+				'link' => base_url('Odonto'),
 				'icon' => 'fa fa-user',
 		),
 		'cliente' => array(
@@ -111,7 +117,7 @@ $config['menu_ODO'] = array(
                     0 => array(
                                 'id' => 'Informacion_Cliente',
 								'title' => 'Informacion Cliente',
-								'link' => base_url('odontologoController/Cliente_inf') ,
+								'link' => base_url('odontologo/Cliente_inf') ,
 								'id' => 'citas-agendar',
 						),
 						1 => array(
