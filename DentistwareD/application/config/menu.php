@@ -123,7 +123,7 @@ $config['menu_ODO'] = array(
 						1 => array(
                                 'id' => 'Historia_Cliente',
 								'title' => 'Historia Cliente',
-								'link' => '',
+								'link' => base_url('odontologo/Historia_clinica') ,
 								'id' => 'citas-agendadas',
 						),
                 
@@ -132,7 +132,7 @@ $config['menu_ODO'] = array(
 		'logout' => array(
 				'id' => 'main-logout',
 				'title' => '<span class="nav-label">Cerrar Sesión</span>',
-				'link' => 'Login/logout',
+				'link' => base_url('Login/logout'),
 				'icon' => 'fa fa-sign-out',
 		),
 );

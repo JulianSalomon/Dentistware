@@ -17,34 +17,18 @@
                                             <?php
                                             $url = base_url() . '/assets/img/avatar5.png';
                                             echo '<img src="' . $url . '" class="user-image" alt="User Image">';
-                                            /*
-                                        <div class="text-center">
-                                            <BR>
-                                            <BR>
-
-                                            <a class="fa fa-exchange" href="../cliente/multas.html">
-                                                <input type="button" value="Cambiar foto de perfil" >
-                                            </a>
-
-                                            <BR>
-                                            <BR>
-
-                                            <a class="fa fa-trash" href="../cliente/multas.html">
-                                                <input type="button" value="Eliminar foto de perfil"  >
-                                            </a>
-
-                                        </div>
-                                                */
+                                            echo '<BR>';
+                                            echo '<BR>';
+                                            echo '<label> Informacion Personal </lable>';
                                             ?>
                                         </div>
                             
                         </div>
                         <div class="box-body">
-                            <div class="col-xs-4 text-right " >
+                            <div class="col-xs-4 text-right  " >
                             </div>
                             <div class="col-xs-3 text-left " >
-                                <BR>
-                                <BR>
+                                <label>
                                 Nombre(s) y Apellidos:
                                 <BR>
                                 Documento:
@@ -54,6 +38,8 @@
                                 Fecha de Nacimiento:
                                 <BR>
                                 Genero:
+                                <BR>
+                                Tipo de Sandre y RH:
                                 <BR>
                                 Estado:
                                 <BR>
@@ -66,13 +52,12 @@
                                 E-mail:
                                 <BR>
                                 Telefono:
-                                
+                                </label>
                                 
                             </div>
                             <div class="col-xs-3 text-left " >
                                 <?php
-                                echo '<BR>';
-                                echo '<BR>';
+                                
                                 echo ucwords($odontologo->nombre_persona);
                                 echo '<BR>';
                                 echo  $odontologo->tipo_documento . ' &nbsp &nbsp' . $odontologo->documento_persona;
@@ -86,6 +71,8 @@
                                 }else{
                                     echo 'Femenino';
                                 };
+                                echo '<BR>';
+                                echo  $odontologo->tipo_sangre_cliente . ' ' . $odontologo->rh_cliente;
                                 echo '<BR>';
                                 if ($odontologo->estado_persona == 'ACT'){
                                   echo 'Activo';

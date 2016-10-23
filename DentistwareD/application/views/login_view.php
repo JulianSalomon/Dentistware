@@ -99,6 +99,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     	<?php
                     	echo date('Y'); 
                     	echo anchor(base_url(), ' Dentistware');
+
                     	?>
                     </strong>
                 </div>
