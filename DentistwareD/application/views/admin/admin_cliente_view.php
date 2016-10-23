@@ -184,7 +184,7 @@
                         <div class="form-group">
                             <label for="inputEmail" class="control-label">Correo: *</label>
                             <div class="input-group" id="div_inputEmail">
-                                <span class="input-group-addon"><i>@</i></span>                 
+                                <span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>                 
                                 <input type="email" class="form-control" id="inputEmail" placeholder="Correo electrónico" name="inputEmail">
                             </div>
                         </div>                                  
