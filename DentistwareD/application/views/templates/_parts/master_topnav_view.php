@@ -12,32 +12,28 @@
               		<li class="dropdown user user-menu">
                 		<a href="" class="dropdown-toggle" data-toggle="dropdown">
                 		<?php                 		
-                		$url = 'assets/img/avatar.png';
-                		/*
-                		if($user_info['foto'] != NULL){
-                			$url = 'uploads/funcionario/' . $user_info['foto'];
-                		} else {
-                			$url = 'assets/images/foto-default.png';
-                		}*/
-                		$data_input = array(
-                				'id' => '',
-                				'class' => 'user-image',
-                				'src' => base_url($url),
-                		);
-                		echo img($data_input);                		                		
+                            if($user_info['foto_persona'] != NULL){
+                                $url = 'uploads/' . $user_info['foto_persona'];
+                            } else {
+                                $url = 'assets/img/foto-default.png';
+                            }                
+                            $data_input = array(
+                                    'id' => '',
+                                    'class' => 'user-image',
+                                    'src' => base_url($url),
+                            );
+                            echo img($data_input);                		                		
                 		?>
 	                  	<span class="hidden-xs"><?php echo $user_info['nombre_completo'];?></span>
 	                	</a>
 	                	<ul class="dropdown-menu">
 	                  		<li class="user-header">
 		                  		<?php 
-			                  		$url = 'assets/img/avatar.png';
-			                  		/*
-			                  		if($user_info['foto'] != NULL){
-			                  			$url = 'uploads/funcionario/' . $user_info['foto'];
-			                  		} else {
-			                  			$url = 'assets/images/foto-default.png';
-			                  		}*/
+                                    if($user_info['foto_persona'] != NULL){
+                                        $url = 'uploads/' . $user_info['foto_persona'];
+                                    } else {
+                                        $url = 'assets/img/foto-default.png';
+                                    }    
 			                  		$data_input = array(
 			                  				'id' => '',
 			                  				'class' => 'img-circle',
@@ -49,7 +45,8 @@
 			                    	
                                     <span class="hidden-xs"><?php echo $user_info['nombre_completo'];?></span>
 			                         <br>
-                                    <span class="hidden-xs"><?php 
+                                    <span class="hidden-xs">
+                                        <?php 
                                         switch ($user_info['tipo_persona']) {
                                         case "ADM" :
                                             echo 'Administrador';
@@ -65,11 +62,12 @@
                                             break;
 		                              }
                                         ?>
+                                    </span>
 			                    </p>
 	                  		</li>
 	                  		<li class="user-footer">
 			                    <div class="pull-left">
-			                    <?php echo anchor('#', 'Perfil', 'class="btn btn-default btn-flat"');?>
+			                    <?php echo anchor('', 'Perfil', 'class="btn btn-default btn-flat"');?>
 			                    </div>	                      
 			                    <div class="pull-right">
 			                    <?php echo anchor('Login/logout', 'Cerrar Sesión', 'class="btn btn-danger btn-flat"');?>

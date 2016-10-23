@@ -1,4 +1,4 @@
-    <div class="content-wrapper">
+<div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -20,70 +20,83 @@
                     </div>                        
                     <div class="box-body">
                         
-                    <div class="table-responsive">
-                        <table id="tablaCliente" type='tabla' class="table table-bordered table-hover tabla-usuario">
-                            <thead>
-                                <tr>
-                                    <th>Documento</th>
-                                    <th>Nombre y teléfono</th>
-                                    <th>Ubicación</th>
-                                    <th>Correo electrónico</th>
-                                    <th>Estado</th>
-                                    <th>EPS</th>
-                                    <th>Contacto</th>
-                                    <th>Opciones</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-center">
-                            	<?php 
-                            		if($clientes != NULL){
-                                        foreach ($clientes as  $cliente){
-                                            echo '<tr>';
-                                            echo '<td>';
-                                                
-                                                
-                                             $tipo = str_split($cliente->t_documento, 1);
-                                            echo  $tipo[0] . "." . $tipo[1] . ". " . $cliente->documento;
-                                            echo '</td>';
+                        <div class="table-responsive">
+                            <table id="tablaCliente" type='tabla' class="table table-bordered table-hover tabla-usuario">
+                                <thead>
+                                    <tr>
+                                        <th>Documento</th>
+                                        <th>Nombre y teléfono</th>
+                                        <th>Ubicación</th>
+                                        <th>Correo electrónico</th>
+                                        <th>Estado</th>
+                                        <th>EPS</th>
+                                        <th>Contacto</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text">
+                                    <?php 
+                                        if($clientes != NULL){
+                                            foreach ($clientes as  $cliente){
+                                                echo '<tr>';
                                                 echo '<td>';
-                                            echo ucwords($cliente->nombre);
-                                            echo '<br>';
-                                            echo  "<small> Tel: " .$cliente->telefono . "</small>" ;
-                                            echo '</td>';
-                                            echo '<td>';
-                                            echo ucfirst(mb_strtolower($cliente->depto, 'UTF-8')) . " - " .  ucfirst(mb_strtolower($cliente->ciudad, 'UTF-8')) . '<br>' . ucwords(strtolower($cliente->direccion));
-                                            echo '</td>';
-                                            echo '<td>';
-                                            echo strtolower($cliente->email);
-                                            echo '</td>';
-                                            echo '<td>';
-                                            if($cliente->estado = 'ACT'){
-                                                echo 'Activo';
-                                            } else {
-                                                echo 'Retirado';
-                                            }
-                                            echo '</td>';
-                                            echo '<td>';
-                                            echo ucwords($cliente->eps);
-                                            echo '</td>';
-                                            echo '<td>';
-                                            echo ucwords($cliente->contacto) . '<br>' ."<small> Tel: " .$cliente->contacto_tel . "</small>" ;
-                                            echo '</td>';
-                                            echo '<td><button type="button"><i class="fa fa-pencil"></i></button>
-                                            <button class="borrarBtn" documento="' . $cliente->documento . '" type=button id="delete_persona"><i class="fa fa-trash"></i></button></td>';
-                            			echo '</tr>';   
-                            		}
-                            	}                            	
-                            	?>
-                            </tbody>
-                        </table>
+                                                 $tipo = str_split($cliente->t_documento, 1);
+                                                echo  $tipo[0] . "." . $tipo[1] . ". " . $cliente->documento;
+                                                echo '</td>';
+                                                    echo '<td>';
+                                                echo ucwords($cliente->nombre);
+                                                echo '<br>';
+                                                echo  "<small> Tel: " .$cliente->telefono . "</small>" ;
+                                                echo '</td>';
+                                                echo '<td>';
+                                                echo ucfirst(mb_strtolower($cliente->depto, 'UTF-8')) . " - " .  ucfirst(mb_strtolower($cliente->ciudad, 'UTF-8')) . '<br>' . ucwords(strtolower($cliente->direccion));
+                                                echo '</td>';
+                                                echo '<td>';
+                                                echo strtolower($cliente->email);
+                                                echo '</td>';
+                                                echo '<td class="text-center">';
+                                                if($cliente->estado = 'ACT'){
+                                                    echo '<i class="fa fa-check-square-o"></i>';
+                                                } else {
+                                                    
+                                                    echo '<i class="fa fa-square-o"></i>';
+                                                }
+                                                
+                                                echo '</td>';
+                                                echo '<td>';
+                                                echo ucwords($cliente->eps);
+                                                echo '</td>';
+                                                echo '<td>';
+                                                echo ucwords($cliente->contacto) . '<br>' ."<small> Tel: " .$cliente->contacto_tel . "</small>" ;
+                                                echo '</td>';
+                                                echo '<td><button type="button"><i class="fa fa-pencil"></i></button>
+                                                <button class="borrarBtn" doc-cliente="' . $cliente->documento . '" type=button id="delete_persona"><i class="fa fa-trash"></i></button></td>';
+                                            echo '</tr>';   
+                                        }
+                                    }                            	
+                                    ?>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Documento</th>
+                                        <th>Nombre y teléfono</th>
+                                        <th>Ubicación</th>
+                                        <th>Correo electrónico</th>
+                                        <th>Estado</th>
+                                        <th>EPS</th>
+                                        <th>Contacto</th>
+                                        <th>Opciones</th>
+                                    </tr>
+                                </tfoot>                                
+                            </table>
+                        </div>
                     </div>
-                    </div>
+                </div>
             </div>
         </div>
     </section>
     <!-- /.content -->
-  </div>
+</div>
 <!-- Modal -->
     <div class="modal fade" id="modal_add_client" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
@@ -105,7 +118,7 @@
                   <div class="modal-body">
                       <div class="row">
                          <div class="col-lg-6 form-group">
-                              <label  class="control-label">Tipo de Documento</label>
+                              <label  class="control-label">Tipo de Documento: *</label>
                                 <div class="input-group" id="div_selectTipoDoc">
                                     <span class="input-group-addon"><i class="fa fa-credit-card fa-fw"></i></span>
                                     <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="selectTipoDoc" id="selectTipoDoc">
@@ -116,7 +129,7 @@
                                 </div>
                           </div>
                           <div class="col-lg-6 form-group">
-                              <label  class="control-label">N. de Documento</label>
+                              <label  class="control-label">N. de Documento: *</label>
                             <div class="input-group" id="div_inputDocumento">
                                 <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                                 <input type="text" class="form-control" id="inputDocumento" placeholder="Número de documento" name="inputDocumento">
@@ -124,21 +137,21 @@
                         </div>                                                                                                  
                       </div>
                         <div class="form-group">
-                          <label for="inputNombre" class=" control-label ">Nombres y apellidos</label>
+                          <label for="inputNombre" class=" control-label ">Nombre Completo: *</label>
                           <div class="input-group" id="div_inputNombre">
                               <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                             <input type="text" class="form-control" id="inputNombre" placeholder="Nombres y apellidos" name="inputNombre">
                           </div>
                         </div>
                          <div class="form-group">
-                             <label class=" control-label">Teléfono(s)</label>
+                             <label class=" control-label">Teléfono(s): *</label>
                              <div class="input-group" id="div_inputTelefono">
                                  <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
                                  <input type="text" class="form-control" id="inputTelefono" placeholder="Teléfono" name="inputTelefono">
                              </div>
                          </div>                                  
                       <div class="form-group">
-                             <label  class="control-label">Dirección de residencia</label>
+                             <label  class="control-label">Dirección de residencia: *</label>
                              <div class="input-group" id="div_inputDireccion">
                                  <span class="input-group-addon"><i class="fa fa-home fa-fw"></i></span>
                                  <input type="text" class="form-control" id="inputDireccion" placeholder="Dirección de residencia" name="inputDireccion">
@@ -146,7 +159,7 @@
                       </div>                                                                  
                         <div class="row">
                          <div class="col-lg-6 form-group" >
-                             <label class="control-label">Departamento</label>
+                             <label class="control-label">Departamento: *</label>
                              <div class="input-group">
                                  <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>                         
                                  <?php 
@@ -159,7 +172,7 @@
                              </div>
                         </div>
                         <div class="col-lg-6 form-group" >
-                             <label  class="control-label">Ciudad</label>
+                             <label  class="control-label">Ciudad: *</label>
                              <div class="input-group">
                                  <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>                 
                                  <select class="form-control select2 select2-hidden-accessible" tabindex="-1" id="select_ciudades" name="select_ciudades" disabled>
@@ -169,22 +182,22 @@
                          </div>                                                                          
                       </div>  
                         <div class="form-group">
-                            <label for="inputEmail" class="control-label">Correo electrónico</label>
+                            <label for="inputEmail" class="control-label">Correo: *</label>
                             <div class="input-group" id="div_inputEmail">
-                                <span class="input-group-addon"><i>@</i></span>                 
+                                <span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>                 
                                 <input type="email" class="form-control" id="inputEmail" placeholder="Correo electrónico" name="inputEmail">
                             </div>
                         </div>                                  
                     <div class="row">
                         <div class="col-lg-6 form-group">
-                            <label for="inputPassword" class="control-label">Contraseña</label>
+                            <label for="inputPassword" class="control-label">Contraseña: *</label>
                             <div class="input-group" id="div_inputPassword">
                                 <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
                                 <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña" name="inputPassword">
                             </div>
                         </div>
                         <div class="col-lg-6 form-group">
-                            <label for="inputPasswordConfirm" class="control-label">Confirmar Contraseña</label>
+                            <label for="inputPasswordConfirm" class="control-label">Confirmar Contraseña: *</label>
                             <div class="input-group" id="div_inputPasswordConfirm">
                                 <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
                               <input type="password" class="form-control" id="inputPasswordConfirm" placeholder="Confirmar contraseña" name="inputPasswordConfirm">
@@ -193,30 +206,33 @@
                       </div>                                  
                       <div class="row">
                          <div class="col-lg-4 form-group">
-                             <label class="control-label">Fecha de nacimiento</label>
+                             <label class="control-label">Fecha de nacimiento: *</label>
                              <div class="input-group" id="div_inputNacimiento">
                                  <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
                                  <input type="text" class="form-control date-select" id="inputNacimiento" placeholder="MM/DD/YYYY" name="inputNacimiento">
                              </div>
                           </div>
                           <div class="col-lg-4 form-group">
-                             <label  class="control-label">Edad</label>
+                             <label  class="control-label">Edad: *</label>
                              <div class="input-group" id="div_inputEdad">
                                  <span class="input-group-addon"><i class="fa fa-birthday-cake fa-fw"></i></span>
                                  <input type="text" class="form-control" id="inputEdad" placeholder="Edad" name="inputEdad">
                              </div>
                           </div>
                           <div class="col-lg-4 form-group">
-                             <label  class="control-label">Género</label>
+                             <label  class="control-label">Género: *</label>
                              <div class="input-group" id="div_inputGenero">
                                  <span class="input-group-addon"><i class="fa fa-venus-mars fa-fw"></i></span>
-                                 <input type="text" class="form-control" id="inputGenero" placeholder="Género" name="inputGenero">
+                                <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="selectGenero" id="selectGenero">
+                                    <option value='M'>Maculino</option>
+                                    <option value='F'>Femenino</option>                                        
+                                </select>                                                                  
                              </div>
                          </div>                                  
                       </div>
                       <div class="row">
                          <div class="col-lg-4 form-group">
-                             <label class=" control-label">Grupo sanguíneo</label>
+                             <label class=" control-label">Grupo sanguíneo: *</label>
                              <div class="input-group" id="div_selectGrupo">
                                  <span class="input-group-addon"><i class="fa fa-plus-square fa-fw"></i></span>
                                  <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="selectGrupo" id="selectGrupo">
@@ -228,7 +244,7 @@
                              </div>
                           </div>
                           <div class="col-lg-4 form-group">
-                             <label  class=" control-label">RH</label>
+                             <label  class=" control-label">RH: *</label>
                              <div class="input-group" id="div_selectRH">
                                  <span class="input-group-addon"><i class="fa  fa-plus-square fa-fw"></i></span>
                                  <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="selectRH" id="selectRH">
@@ -238,7 +254,7 @@
                              </div>
                           </div>
                           <div class="col-lg-4 form-group">
-                             <label class=" control-label">EPS</label>
+                             <label class=" control-label">EPS: *</label>
                              <div class="input-group" id="div_inputEps">
                                  <span class="input-group-addon"><i class="fa fa-hospital-o fa-fw"></i></span>
                                  <input type="text" class="form-control" id="inputEps" placeholder="Nombre EPS" name="inputEps">
@@ -252,14 +268,14 @@
                       <div class="row">
 
                          <div class="col-lg-6 form-group">
-                             <label  class="control-label">Nombres y apellidos</label>
+                             <label  class="control-label">Nombres y apellidos: *</label>
                              <div class="input-group" id="div_inputNombreContacto">
                                  <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
                                  <input type="text" class="form-control" id="inputNombreContacto" placeholder="Nombres y apellidos" name="inputNombreContacto">
                              </div>
                           </div>
                           <div class="col-lg-6 form-group">
-                             <label class="control-label">Teléfono</label>
+                             <label class="control-label">Teléfono: *</label>
                              <div class="input-group" id="div_inputTelContacto">
                                  <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
                                  <input type="text" class="form-control" id="inputTelContacto" placeholder="Teléfono" name="inputTelContacto">
@@ -270,7 +286,7 @@
                          </div>
                          <div class="modal-footer">
 
-                        <button type="button" data-dismiss="modal" class="btn btn-default pull-left">Cancelar</button>
+                        <button type="button" data-dismiss="modal" class="btn btn-danger pull-left">Cancelar</button>
 
                         <input type="submit" name="submit_reg" class="btn btn-info pull-right" value="Guardar">
 
