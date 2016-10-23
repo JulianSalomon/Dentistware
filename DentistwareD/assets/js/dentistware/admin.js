@@ -1,43 +1,44 @@
 $(function() {
-    $('.borrarBtn').click(function() {
-        var documento = $(this).attr('documento');
+    $('.borrarBtn').click(function(e) {
+        e.preventDefault();
+        var documento = $(this).attr('doc-cliente');       
         swal({
             title: 'Eliminar',
             text: '¿Desea eliminar este cliente?',
             type: 'warning',
-            showCancelButton: true,
-            confirmButtonClass: 'btn-primary',
-            cancelButtonclass: 'btn-danger',
+    		showCancelButton: true,
+			confirmButtonClass: "btn-primary",
+			cancelButtonClass: "btn-danger",
             confirmButtonText: 'Si, eliminar',
             cancelButtonText: 'No, cancelar',
             showLoaderOnConfirm: true,
         },
-        function(isConfirm){
-            if(isConfirm){
+    	function(isConfirm) {
+    		  if (isConfirm) { 
                 $.ajax({
                     type: 'GET',
                     url: js_site_url + 'administrador/Cliente/eliminar_usuario/' + documento,
-                    success: function(message){    
-                        if(message==true){
-                            swal({
-                                title: 'Eliminado',
-                                text: 'El cliente ha sido eliminado',
-                                type: 'sucess',
-                            },
-                            function(){
-                                location.reload();
+                    success: function(msg){   
+                        console.log(msg);
+                        if(msg == true){
+                            swal({   
+                                title: "Eliminado",
+                                text: "El cliente ha sido eliminado",
+                                type: "success",             
+                            }, 
+                            function(){   
+                                location.reload(); 
                             });
                         } else {
-                            swal({
-                                title: 'Error',
-                                text: 'El cliente no puede ser eliminado',
-                                type: 'error',
-                            });
+                            swal("Error", "El cliente no puede ser eliminado", "error");
                         }
+                    },
+                    error: function(){
+                        alert("ADAd");
                     }
                 });
             }
-        });        
+        });       
     });
         
     $('#select_depto').change(function () {
@@ -114,11 +115,11 @@ $(function() {
     });
 
     $(".tabla-usuario").DataTable({
-            "paging": true,
-            "lengthChange": true,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false
-        });
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false
+    });
 });

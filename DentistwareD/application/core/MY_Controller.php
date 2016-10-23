@@ -57,7 +57,7 @@ class Admin_Controller extends MY_Controller{
 		}
 	}
     
-    public function eliminar_usuario($docPersona){
+    public function eliminar_usuario($docPersona){        
         echo $this->persona_model->delete_persona($docPersona);
     }
 }
