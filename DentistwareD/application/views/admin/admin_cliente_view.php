@@ -11,8 +11,9 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
+
                         <button type="button" class="btn btn-info btn-small pull-right " data-toggle="modal" data-target="#modal_add_client">Agregar cliente</button>       
-                                        </div>
+                    </div>
                  <div class="box-body">
                     <p>En la siguiente tabla encuentra una lista de todos los clientes.</p><br>
                     <div class="table-responsive">
@@ -35,12 +36,10 @@
                                         foreach ($clientes as  $cliente){
                                             echo '<tr>';
                                             echo '<td>';
-                                                
-                                                
-                                             $tipo = str_split($cliente->t_documento, 1);
+                                            $tipo = str_split($cliente->t_documento, 1);
                                             echo  $tipo[0] . "." . $tipo[1] . ". " . $cliente->documento;
                                             echo '</td>';
-                                                echo '<td>';
+                                            echo '<td>';
                                             echo ucwords($cliente->nombre);
                                             echo '<br>';
                                             echo  "<small> Tel: " .$cliente->telefono . "</small>" ;
