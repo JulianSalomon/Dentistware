@@ -11,14 +11,18 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-
-                        <button type="button" class="btn btn-info btn-small pull-right " data-toggle="modal" data-target="#modal_add_client">Agregar cliente</button>       
-                    </div>
-                 <div class="box-body">
-                    <p>En la siguiente tabla encuentra una lista de todos los clientes.</p><br>
+                        <div class="col-xs-6">
+                            <h4>En la siguiente tabla encuentra una lista de todos los clientes.</h4>
+                        </div>
+                        <div class="col-xs-6">
+                            <button type="button" class="btn btn-info btn-small pull-right" data-toggle="modal" data-target="#modal_add_client">Agregar cliente</button>
+                        </div>
+                    </div>                        
+                    <div class="box-body">
+                        
                     <div class="table-responsive">
-                        <table id="tablaCliente" class="table table-bordered table-hover">
-                            <thead class="">
+                        <table id="tablaCliente" type='tabla' class="table table-bordered table-hover tabla-usuario">
+                            <thead>
                                 <tr>
                                     <th>Documento</th>
                                     <th>Nombre y teléfono</th>
@@ -36,10 +40,12 @@
                                         foreach ($clientes as  $cliente){
                                             echo '<tr>';
                                             echo '<td>';
-                                            $tipo = str_split($cliente->t_documento, 1);
+                                                
+                                                
+                                             $tipo = str_split($cliente->t_documento, 1);
                                             echo  $tipo[0] . "." . $tipo[1] . ". " . $cliente->documento;
                                             echo '</td>';
-                                            echo '<td>';
+                                                echo '<td>';
                                             echo ucwords($cliente->nombre);
                                             echo '<br>';
                                             echo  "<small> Tel: " .$cliente->telefono . "</small>" ;
@@ -63,7 +69,8 @@
                                             echo '<td>';
                                             echo ucwords($cliente->contacto) . '<br>' ."<small> Tel: " .$cliente->contacto_tel . "</small>" ;
                                             echo '</td>';
-                                            echo '<td><button><i class="fa fa-pencil"></i></button><button><i class="fa fa-trash"></i></button></td>';
+                                            echo '<td><button type="button"><i class="fa fa-pencil"></i></button>
+                                            <button class="borrarBtn" documento="' . $cliente->documento . '" type=button id="delete_persona"><i class="fa fa-trash"></i></button></td>';
                             			echo '</tr>';   
                             		}
                             	}                            	
@@ -74,13 +81,13 @@
                     </div>
             </div>
         </div>
-    </div>
     </section>
     <!-- /.content -->
   </div>
-<div class="modal fade" id="modal_add_client" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-              <div class="modal-dialog" role="document">
-                <!-- Modal content-->
+<!-- Modal -->
+    <div class="modal fade" id="modal_add_client" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <!-- Modal content-->
             <?php 
             $data_input = array(
             		'id' => "nuevo_cliente_form",
@@ -189,7 +196,7 @@
                              <label class="control-label">Fecha de nacimiento</label>
                              <div class="input-group" id="div_inputNacimiento">
                                  <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                                 <input type="text" class="form-control" id="inputNacimiento" placeholder="MM/DD/YYYY" name="inputNacimiento">
+                                 <input type="text" class="form-control date-select" id="inputNacimiento" placeholder="MM/DD/YYYY" name="inputNacimiento">
                              </div>
                           </div>
                           <div class="col-lg-4 form-group">

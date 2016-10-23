@@ -66,7 +66,12 @@ class Persona_model extends MY_Model{
 		return false;
 	}
     
-        public function new_persona($data) {
+    public function delete_persona($documento = ''){
+        $array = array ('documento_persona' => $documento);
+        return $this->eliminar_datos('persona', $array);
+    }
+    
+    public function new_persona($data) {
 		return $this->insertar_nuevo('persona', $data);
 	}
 }

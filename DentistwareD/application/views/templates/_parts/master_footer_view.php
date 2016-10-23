@@ -3,9 +3,8 @@
         	<div class="text-center">
 			<strong>&COPY; 
 			<?php
-				// echo date('Y'); 
+				echo date('Y'); 
 				echo anchor('http://projectengeneer.wixsite.com/dentistware', '    Dentistware.', 'target="_blank"');
-				echo (ENVIRONMENT !== 'production') ? 'Generado en <strong>{elapsed_time}</strong> CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : ''
 			?>
 			</strong>
             </div>

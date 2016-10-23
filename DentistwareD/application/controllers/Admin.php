@@ -3,16 +3,9 @@
 class Admin extends Admin_Controller {
 	
 	function __construct(){
-		parent::__construct();	
-		if(!$this->is_logged_in()){
-			redirect('Login');
-		}
-
+		parent::__construct();
 		$this->load->model ( 'persona_model' );
-		
-		
-
-	}
+    }
 	
     public function index(){
 		$this->get_user_menu('main-perfil');

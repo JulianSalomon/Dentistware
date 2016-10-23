@@ -31,6 +31,8 @@ class MY_Controller extends CI_Controller{
 	}
 }
 
+
+
 class Admin_Controller extends MY_Controller{
 	function __construct(){
         parent::__construct();
@@ -42,6 +44,21 @@ class Admin_Controller extends MY_Controller{
        	    redirect ( 'Login', 'refresh' );
         }        
         $this->load->model('persona_model');
+    }
+    
+    public function listar_ciudades($idDepartamento = 0, $flag = TRUE) {
+		$ciudades = $this->lugar_model->get_ciudades($idDepartamento);
+	
+		if($flag){
+			header('Content-Type: application/json');
+			echo json_encode($ciudades);
+		} else {
+			return $ciudades;
+		}
+	}
+    
+    public function eliminar_usuario($docPersona){
+        echo $this->persona_model->delete_persona($docPersona);
     }
 }
 
