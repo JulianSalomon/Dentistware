@@ -32,6 +32,5 @@ $_css = array (
 		'icheck' => 'assets/js/plugins/iCheck/square/blue.css',
 		'datatable' => 'assets/js/plugins/datatables/dataTables.bootstrap.css',
 		'select' => 'assets/js/plugins/bootstrap-select/bootstrap-select.min.css',
-		'datepicker3' => 'assets/js/plugins/datepicker/datepicker3.css',
-		
+		'datepicker3' => 'assets/js/plugins/datepicker/datepicker3.css',		
 );
