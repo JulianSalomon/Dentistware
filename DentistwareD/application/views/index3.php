@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 2 | Top Navigation</title>
+  <title>Dentistware</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <!-- Bootstrap 3.3.6 -->
@@ -38,7 +38,7 @@
     <nav class="navbar navbar-static-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="index2.html" class="navbar-brand"><b>Dentist</b>ware</a>
+          <a href=" <?php echo base_url() ?>" class="navbar-brand"><b>Dentist</b>ware</a>
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
             <i class="fa fa-bars"></i>
           </button>
@@ -52,14 +52,13 @@
             <li><a href="#ventajas">Ventajas</a></li>
               <li><a href="#servicios">Servicios</a></li>
             <li class="dropdown">
-                
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Desarrolladores <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="#"></a></li>
-                <li><a href="#">Cristian David González Carrillo</a></li>
-                  <li><a href="#">Alex Jose Alberto Barreto</a></li>
-                  <li><a href="#">Julián Esteban Salomón Torres</a></li>
-                  <li><a href="#">Nicolás Restrepo Torres</a></li>
+                  <li><a href="#"><img src="assets/img/avatar.png" class="user-image" alt="User Image" width="15%"> Cristian David González Carrillo &nbsp; &nbsp; &nbsp;</a></li>
+                  <li><a href="#"><img src="assets/img/avatar04.png" class="user-image" alt="User Image" width="15%"> Alex Jose Alberto Barreto           </a></li>
+                  <li><a href="#"><img src="assets/img/user2-160x160.jpg" class="user-image" alt="User Image" width="15%"> Julián Esteban Salomón Torres          </a></li>
+                  <li><a href="#"><img src="assets/img/avatar5.png" class="user-image" alt="User Image" width="15%"> Nicolás Restrepo Torres       </a></li>
                 <!-- <li class="divider"></li>
                 <li><a href="#">Separated link</a></li>
                 <li class="divider"></li>
@@ -68,11 +67,13 @@
               </ul>
             </li>
           </ul>
+            <!-- Un boton
           <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
               <input type="text" class="form-control" id="navbar-search-input" placeholder="Search">
             </div>
           </form>
+-->
         </div>
         <!-- /.navbar-collapse -->
         <!-- Navbar Right Menu -->
@@ -89,7 +90,7 @@
             <!-- User Account Menu -->
             <li class="dropdown user user-menu">
               <!-- Menu Toggle Button -->
-              <a href=" <?php echo base_url('login') ?>" class="dropdown-toggle" data-toggle="dropdown">
+              <a href="<?php echo base_url('login'); ?>">
                 <!-- The user image in the navbar-->
                   <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-key"></i></div>
                 
@@ -208,6 +209,7 @@ Se le permitirá al cliente, ver los tratamientos, planes y financiamientos pres
           <!-- /.box-body -->
         </div>
           
+       
         <!-- /.box -->
       </section>
       <!-- /.content -->
@@ -228,16 +230,16 @@ Se le permitirá al cliente, ver los tratamientos, planes y financiamientos pres
 <!-- ./wrapper -->
 
 <!-- jQuery 2.2.3 -->
-<script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+<script src="assets/js/plugins/jQuery/jquery-2.2.3.min.js"></script>
 <!-- Bootstrap 3.3.6 -->
-<script src="bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
 <!-- SlimScroll -->
-<script src="plugins/slimScroll/jquery.slimscroll.min.js"></script>
+<script src="assets/js/plugins/slimScroll/jquery.slimscroll.min.js"></script>
 <!-- FastClick -->
-<script src="plugins/fastclick/fastclick.js"></script>
+<script src="assets/js/plugins/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="dist/js/app.min.js"></script>
+<script src="assets/js/app.min.js"></script>
 <!-- AdminLTE for demo purposes -->
-<script src="dist/js/demo.js"></script>
+<script src="assets/js/demo.js"></script>
 </body>
 </html>
