@@ -65,4 +65,9 @@ class Persona_model extends MY_Model{
 			return $query->result();
 		return false;
 	}
+    
+    public function delete_persona($documento = ''){
+        $array = array ('documento_persona' => $documento);
+        return $this->eliminar_datos('persona', $array);
+    }
 }

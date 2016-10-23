@@ -11,41 +11,110 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <button type="button" class="btn btn-info btn-small pull-right " data-toggle="modal" data-target="#modal_add_client">Agregar cliente</button>
-                        <!-- Modal -->
-                        <div id="modal_add_client" class="modal fade with-border " role="dialog">
-                          <div class="modal-dialog">
-                            <!-- Modal content-->
-                              <form class="form-horizontal" method="post" action="<?php echo base_url("Administrador/Cliente/registro");?>">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h3 class="modal-title">Agregar cliente</h3>
-                              </div>
-                              <div class="modal-body">
-                                 
-                                        <div class="form-group">
-                                          <label for="inputNombre" class="col-sm-2 control-label ">Nombres y apellidos</label>
-                                          <div class="col-sm-10">
-                                            <input type="text" class="form-control" id="inputNombre" placeholder="Nombres y apellidos" name="nombre">
-                                          </div>
-                                        </div>
-                                            <div class="form-group">
-                                                <label for="inputEmail" class="col-sm-2 control-label">Correo electrónico</label>
-                                                <div class="col-sm-10">
-                                                    <input type="email" class="form-control" id="inputEmail" placeholder="Correo electrónico" name="email">
-                                                </div>
-                                            </div>
-                                            <div class="form-group">
-                                            <label for="inputPassword" class="col-sm-2 control-label">Contraseña</label>
-                                            <div class="col-sm-5">
-                                              <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña" name="password">
-                                            </div>
-                                            <div class="col-sm-5">
-                                              <input type="password" class="form-control" id="inputPasswordConfirm" placeholder="Confirmar contraseña" name="confirmPassword">
-                                            </div>
-                                            </div>
-                                     <div class="form-group">
+                        <div class="col-xs-6">
+                            <h4>En la siguiente tabla encuentra una lista de todos los clientes.</h4>
+                        </div>
+                        <div class="col-xs-6">
+                            <button type="button" class="btn btn-info btn-small pull-right" data-toggle="modal" data-target="#modal_add_client">Agregar cliente</button>
+                        </div>
+                    </div>
+                    <div class="box-body">
+                        
+                    <div class="table-responsive">
+                        <table id="tablaCliente" type='tabla' class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Documento</th>
+                                    <th>Nombre y teléfono</th>
+                                    <th>Ubicación</th>
+                                    <th>Correo electrónico</th>
+                                    <th>Estado</th>
+                                    <th>EPS</th>
+                                    <th>Contacto</th>
+                                    <th>Opciones</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+                            	<?php 
+                            		if($clientes != NULL){
+                                        foreach ($clientes as  $cliente){
+                                            echo '<tr>';
+                                            echo '<td>';
+                                                
+                                                
+                                             $tipo = str_split($cliente->t_documento, 1);
+                                            echo  $tipo[0] . "." . $tipo[1] . ". " . $cliente->documento;
+                                            echo '</td>';
+                                                echo '<td>';
+                                            echo ucwords($cliente->nombre);
+                                            echo '<br>';
+                                            echo  "<small> Tel: " .$cliente->telefono . "</small>" ;
+                                            echo '</td>';
+                                            echo '<td>';
+                                            echo ucfirst(mb_strtolower($cliente->depto, 'UTF-8')) . " - " .  ucfirst(mb_strtolower($cliente->ciudad, 'UTF-8')) . '<br>' . ucwords(strtolower($cliente->direccion));
+                                            echo '</td>';
+                                            echo '<td>';
+                                            echo strtolower($cliente->email);
+                                            echo '</td>';
+                                            echo '<td>';
+                                            if($cliente->estado = 'ACT'){
+                                                echo 'Activo';
+                                            } else {
+                                                echo 'Retirado';
+                                            }
+                                            echo '</td>';
+                                            echo '<td>';
+                                            echo ucwords($cliente->eps);
+                                            echo '</td>';
+                                            echo '<td>';
+                                            echo ucwords($cliente->contacto) . '<br>' ."<small> Tel: " .$cliente->contacto_tel . "</small>" ;
+                                            echo '</td>';
+                                            echo '<td><button type="button"><i class="fa fa-pencil"></i></button>
+                                            <button class="borrarBtn" documento="' . $cliente->documento . '" type=button id="delete_persona"><i class="fa fa-trash"></i></button></td>';
+                            			echo '</tr>';   
+                            		}
+                            	}                            	
+                            	?>
+                            </tbody>
+                        </table>
+                    </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+        <!-- Modal -->
+        <div id="modal_add_client" class="modal fade with-border " role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <form class="form-horizontal" method="post" action="<?php echo base_url("Administrador/Cliente/registro");?>">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h3 class="modal-title">Agregar cliente</h3>                            
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="inputNombre" class="col-sm-2 control-label ">Nombres y apellidos</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputNombre" placeholder="Nombres y apellidos" name="nombre">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail" class="col-sm-2 control-label">Correo electrónico</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="inputEmail" placeholder="Correo electrónico" name="email">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword" class="col-sm-2 control-label">Contraseña</label>
+                                <div class="col-sm-5">
+                                    <input type="password" class="form-control" id="inputPassword" placeholder="Contraseña" name="password">
+                                </div>
+                                <div class="col-sm-5">
+                                    <input type="password" class="form-control" id="inputPasswordConfirm" placeholder="Confirmar contraseña" name="confirmPassword">
+                                </div>
+                            </div>
+                            <div class="form-group">
                                           <label  class="col-sm-2 control-label">Tipo de Documento</label>
                                             <div class="col-sm-5">
                                                 <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="tipoId">
@@ -141,80 +210,12 @@
                                     <button type="button" data-dismiss="modal" class="btn btn-default pull-left">Cancelar</button>
 
                                     <button type="submit" name="submit_reg" value="submit" class="btn btn-info pull-right">Agregar</button>
-                                         
-                                </div>
-                                                                
-                                </div>
-                          </form>
                                 
-                          
-                        
+                                    </div>
+                                  </div>
+                              </form>
+                            </div>
                     </div>
-                    </div>
-                    <div class="box-body">
-                        <p>En la siguiente tabla encuentra una lista de todos los clientes.</p><br>
-                    <div class="table-responsive">
-                        <table id="tablaCliente" class="table table-bordered table-hover">
-                            <thead class="">
-                                <tr>
-                                    <th>Documento</th>
-                                    <th>Nombre y teléfono</th>
-                                    <th>Ubicación</th>
-                                    <th>Correo electrónico</th>
-                                    <th>Estado</th>
-                                    <th>EPS</th>
-                                    <th>Contacto</th>
-                                    <th>Opciones</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-center">
-                            	<?php 
-                            		if($clientes != NULL){
-                                        foreach ($clientes as  $cliente){
-                                            echo '<tr>';
-                                            echo '<td>';
-                                                
-                                                
-                                             $tipo = str_split($cliente->t_documento, 1);
-                                            echo  $tipo[0] . "." . $tipo[1] . ". " . $cliente->documento;
-                                            echo '</td>';
-                                                echo '<td>';
-                                            echo ucwords($cliente->nombre);
-                                            echo '<br>';
-                                            echo  "<small> Tel: " .$cliente->telefono . "</small>" ;
-                                            echo '</td>';
-                                            echo '<td>';
-                                            echo ucfirst(mb_strtolower($cliente->depto, 'UTF-8')) . " - " .  ucfirst(mb_strtolower($cliente->ciudad, 'UTF-8')) . '<br>' . ucwords(strtolower($cliente->direccion));
-                                            echo '</td>';
-                                            echo '<td>';
-                                            echo strtolower($cliente->email);
-                                            echo '</td>';
-                                            echo '<td>';
-                                            if($cliente->estado = 'ACT'){
-                                                echo 'Activo';
-                                            } else {
-                                                echo 'Retirado';
-                                            }
-                                            echo '</td>';
-                                            echo '<td>';
-                                            echo ucwords($cliente->eps);
-                                            echo '</td>';
-                                            echo '<td>';
-                                            echo ucwords($cliente->contacto) . '<br>' ."<small> Tel: " .$cliente->contacto_tel . "</small>" ;
-                                            echo '</td>';
-                                            echo '<td><button><i class="fa fa-pencil"></i></button><button><i class="fa fa-trash"></i></button></td>';
-                            			echo '</tr>';   
-                            		}
-                            	}                            	
-                            	?>
-                            </tbody>
-                        </table>
-                    </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
     </section>
     <!-- /.content -->
   </div>
