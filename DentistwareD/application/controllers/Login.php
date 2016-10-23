@@ -65,9 +65,9 @@ class Login extends MY_Controller {
 	
 		$user = $this->persona_model->get_persona ($document);
 		if ($user != NULL) {
-			// 			if ($user->estado === 'RET') {
-			// 				return 1;
-			// 			}
+			 			if ($user->estado === 'RET') {
+			 				return 1;
+			 			}
 			if (password_verify($password, $user->clave_acceso)) {
 				unset($user->clave_acceso);
 				$this->session->set_userdata ( array (
