@@ -1,14 +1,43 @@
 $(function() {
-    var documento;
-    $(".borrarBtn").click(function() {
-        documento = $(this).attr("documento");
-        $.ajax({
-            type: "GET",
-            url: js_site_url + "administrador/Cliente/eliminar_usuario/" + documento,
-            success: function(message){
-                
-            },
-        });
+    $('.borrarBtn').click(function() {
+        var documento = $(this).attr('documento');
+        swal({
+            title: 'Eliminar',
+            text: '¿Desea eliminar este cliente?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonClass: 'btn-primary',
+            cancelButtonclass: 'btn-danger',
+            confirmButtonText: 'Si, eliminar',
+            cancelButtonText: 'No, cancelar',
+            showLoaderOnConfirm: true,
+        },
+        function(isConfirm){
+            if(isConfirm){
+                $.ajax({
+                    type: 'GET',
+                    url: js_site_url + 'administrador/Cliente/eliminar_usuario/' + documento,
+                    success: function(message){    
+                        if(message==true){
+                            swal({
+                                title: 'Eliminado',
+                                text: 'El cliente ha sido eliminado',
+                                type: 'sucess',
+                            },
+                            function(){
+                                location.reload();
+                            });
+                        } else {
+                            swal({
+                                title: 'Error',
+                                text: 'El cliente no puede ser eliminado',
+                                type: 'error',
+                            });
+                        }
+                    }
+                });
+            }
+        });        
     });
         
     $('#select_depto').change(function () {
