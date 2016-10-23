@@ -65,4 +65,8 @@ class Persona_model extends MY_Model{
 			return $query->result();
 		return false;
 	}
+    
+        public function new_persona($data) {
+		return $this->insertar_nuevo('persona', $data);
+	}
 }

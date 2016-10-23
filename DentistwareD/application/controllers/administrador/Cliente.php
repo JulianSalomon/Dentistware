@@ -10,7 +10,7 @@ class Cliente extends Admin_Controller {
         $this->data['departamentos'] = $this->lugar_model->get_departamentos();
         $this->data['clientes'] = $this->persona_model->get_clientes();
         $this->data['before_closing_body'] = '<script>
-                                                $("#datepicker").datepicker({
+                                                $("#inputNacimiento").datepicker({
                                                     language: "es",
                                                     autoclose: true,
                                                 }).on(
@@ -39,30 +39,6 @@ class Cliente extends Admin_Controller {
 		$this->get_user_menu('main-cliente');
 		$this->render ( 'admin/admin_cliente_view' );				
 	}
-    
-/*    public function registro(){
-        if($this->input->post('submit_reg')){
-            $this->form_validation->set_rules('nombre', 'Nombre', 'required');
-            $this->form_validation->set_rules('email', 'Email', 'required');
-            $this->form_validation->set_rules('password', 'Password', 'required');
-            $this->form_validation->set_rules('confirmPassword', 'cPassword', 'required|matches[password]', array('matches' => 'Las contraseñas no coindicen'));
-            $this->form_validation->set_rules('tipoId', 'TipoId', 'required');
-            $this->form_validation->set_rules('id', 'Id', 'required');
-            $this->form_validation->set_rules('fechaNacimiento', 'FechaNacimiento', 'required');
-            $this->form_validation->set_rules('edad', 'Edad', 'required');
-            $this->form_validation->set_rules('fechaNacimiento', 'FechaNacimiento', 'required');
-            $this->form_validation->set_rules('genero', 'Genero', 'required');
-            $this->form_validation->set_rules('dept', 'Departamento', 'required');
-            $this->form_validation->set_rules('ciudad', 'Ciudad', 'required');
-            $this->form_validation->set_rules('telefono', 'Telefono', 'required');
-            $this->form_validation->set_rules('direccion', 'Direccion', 'required');
-            $this->form_validation->set_rules('gs', 'GrupoSanguineo', 'required');
-            $this->form_validation->set_rules('rh', 'RH', 'required');
-            $this->form_validation->set_rules('eps', 'EPS', 'required');
-            $this->form_validation->set_rules('nombreContacto', 'NombreContacto', 'required');
-            $this->form_validation->set_rules('telefonoContacto', 'TelefonoContacto', 'required');
-        }
-    }*/
         
     public function listar_ciudades($idDepartamento = 0, $flag = TRUE) {
 		$ciudades = $this->lugar_model->get_ciudades($idDepartamento);	
@@ -75,46 +51,51 @@ class Cliente extends Admin_Controller {
 	}
     
     public function nuevo_cliente(){
+        
         $this->load->library ( 'form_validation' );
         
-        $this->form_validation->set_rules ('inputNombre', 'nombre', 'required');                
+        $this->form_validation->set_rules('inputNombre', 'Nombre', 'required');
+        $this->form_validation->set_rules('inputEmail', 'correo', 'required|valid_email');
+        $this->form_validation->set_rules('inputPassword', 'contraseña', 'required');
+        $this->form_validation->set_rules('inputPasswordConfirm', 'confirmar contraseña', 'required|matches[inputPassword]', array('matches' => 'Las contraseñas no coindicen'));
+        $this->form_validation->set_rules('inputDocumento', 'documento', 'required');
+        $this->form_validation->set_rules('inputNacimiento', 'Fecha de Nacimiento', 'required');
+        $this->form_validation->set_rules('inputEdad', 'Edad', 'required');
+        $this->form_validation->set_rules('inputGenero', 'Genero', 'required');
+        $this->form_validation->set_rules('inputTelefono', 'Telefono', 'required');
+        $this->form_validation->set_rules('inputDireccion', 'Direccion', 'required');
+        $this->form_validation->set_rules('inputNombreContacto', 'Nombre del Contacto', 'required');
+        $this->form_validation->set_rules('inputTelContacto', 'Telefono del Contacto', 'required');        
         
-		$this->form_validation->set_rules ( 'inputDocumento', 'documento', 'required|is_unique[persona.documento_persona]', array (
-				'is_unique' => 'Ya se encuentra registrada una persona con el mismo documento'
-		) );	
-		$this->form_validation->set_rules ( 'inputEmail', 'E-mail', 'required|valid_email');
-        $this->form_validation->set_rules ( 'inputPassword', 'contraseña', 'required');
-		$this->form_validation->set_rules('input_conf_password', 'Confirmación de Contraseña', 'trim|matches[input_password]', array (
-				'matches' => 'Las contraseñas no coinciden'
-		) );        
-        $this->form_validation->set_rules ( 'inputPasswordConfirm', 'contraseña', 'required');
-		
-		$this->form_validation->set_rules ( 'select_tipo_documento', 'Tipo de documento', 'required|callback_check_select');
-		$this->form_validation->set_rules ( 'select_tipo_cliente', 'Tipo de cliente', 'required|callback_check_select');			
-		$this->form_validation->set_rules ( 'select_dept_cliente', 'Departamento', 'required|callback_check_select');
-		$this->form_validation->set_rules ( 'select_ciudad_cliente', 'Municipio', 'required|callback_check_select');
-		
-		if ($this->form_validation->run ()) {		
+        
+        if ($this->form_validation->run()) {		
 			
 			$input = array (
-					'documento' => $this->input->post ( 'input_documento' ),
-					'tipoDocumento' => $this->input->post ( 'select_tipo_documento' ),
-					'nombreCompleto' => mb_strtoupper($this->input->post ( 'input_nombre' )),
-					'contacto' => mb_strtoupper($this->input->post ( 'input_contacto' )),
-					'direccion' => $this->input->post ( 'input_direccion' ),
-					'telefonos' => $this->input->post ( 'input_telefono' ),
-					'fidCiudad' => $this->input->post ( 'select_ciudad_cliente' ),
-					'email' => $this->input->post ( 'input_email' ),
-					'tipoTercero' => 'CLT',
-					'estado' => 'ACT',
-					'tipoCliente' => $this->input->post ( 'select_tipo_cliente' ),
-			);
-			$result = $this->terceros_model->new_tercero ( $input );
-			header ( 'Content-Type: application/json' );
+                    'nombre_persona' => $this->input->post ( 'inputNombre' ),
+                    'correo_persona' => $this->input->post ( 'inputEmail' ),
+					'documento_persona' => $this->input->post ( 'inputDocumento' ),
+					'tipo_documento' => $this->input->post ( 'selectTipoDoc' ),
+					'clave_acceso' => password_hash($this->input->post ( 'inputPassword'), PASSWORD_BCRYPT),
+                    'fecha_nacimiento' => $this->input->post ( 'inputNacimiento' ),
+                    'edad_persona' => $this->input->post ( 'inputEdad' ),
+                    'genero_persona' => $this->input->post ( 'inputGenero' ),
+                    'id_ciudad' => $this->input->post ( 'select_ciudades' ),
+					'direccion_persona' => $this->input->post ( 'inputDireccion' ),
+					'telefono_persona' => $this->input->post ( 'inputTelefono' ),
+					'tipo_sangre_cliente' => $this->input->post ( 'selectGrupo' ),					
+					'rh_cliente' => $this->input->post ( 'selectRH' ),
+                    'eps_persona' => $this->input->post ( 'inputEps' ),
+                    'contacto_cliente' => $this->input->post ( 'inputNombreContacto' ),
+                    'telefono_contacto_cliente' => $this->input->post ( 'inputTelContacto' ),
+                    'tipo_persona' => 'CLT',
+                    'estado_persona' => 'ACT',
+			);            
+            $result = $this->persona_model->new_persona($input);
+            header ( 'Content-Type: application/json' );						
 			echo $result;
 		}else {
 			header ( 'Content-Type: application/json' );
 			echo json_encode ( $this->form_validation->error_array () );
-		}
+		}            
     }
 }
