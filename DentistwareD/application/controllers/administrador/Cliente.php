@@ -44,7 +44,7 @@ class Cliente extends Admin_Controller {
 					'clave_acceso' => password_hash($this->input->post ( 'inputPassword'), PASSWORD_BCRYPT),
                     'fecha_nacimiento' => $this->input->post ( 'inputNacimiento' ),
                     'edad_persona' => $this->input->post ( 'inputEdad' ),
-                    'genero_persona' => $this->input->post ( 'inputGenero' ),
+                    'genero_persona' => $this->input->post ( 'selectGenero' ),
                     'id_ciudad' => $this->input->post ( 'select_ciudades' ),
 					'direccion_persona' => $this->input->post ( 'inputDireccion' ),
 					'telefono_persona' => $this->input->post ( 'inputTelefono' ),
