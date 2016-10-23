@@ -74,7 +74,7 @@ class Login extends MY_Controller {
 						'logged_in' => TRUE,
 						'nombre_completo' => $user->nombre_persona,
 						'tipo_persona' => $user->tipo_persona, 
-                        'id_persona' => $user->documento_persona,
+                        'id_persona' => $user->id_persona,
                         'doc_persona' => $user->documento_persona,
                         'foto_persona' => $user->foto_persona
 

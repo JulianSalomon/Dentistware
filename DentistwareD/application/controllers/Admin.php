@@ -9,7 +9,7 @@ class Admin extends Admin_Controller {
 		}
 		$this->load->model ( 'persona_model' );
 		
-		$this->data['persona'] = $this->persona_model->get_persona($this->session->userdata('id_persona'));
+		$this->data['persona'] = $this->persona_model->get_persona($this->session->userdata('doc_persona'));
         
 	}
 	

@@ -11,8 +11,9 @@ class Multa extends Cliente_Controller{
     }
     
     public function index(){
+    	print_r($_SESSION);
         $this->get_user_menu('main-multas');
-        $this->data['multas'] = $this->multa_model->get_multas_cliente($this->session->userdata('doc_persona'));
+        $this->data['multas'] = $this->multa_model->get_multas_cliente($this->session->userdata('id_persona'));
 		$this->render ( 'cliente/multa_view' );		
     }
     

@@ -85,7 +85,7 @@ $config['menu_ADM'] = array(
 				'id' => 'main-odontologo',
 				'title' => '<span>Odontologo</span>',
 				'link' => base_url('administrador/Odontologo'),
-				'icon' => 'fa fa-user',
+				'icon' => 'fa fa-user-md',
 		),
 		'logout' => array(
 				'id' => 'main-logout',
