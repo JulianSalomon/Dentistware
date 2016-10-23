@@ -3,13 +3,13 @@ $config['menu_CLT'] = array(
 		'inicio' => array(
 				'id' => 'main-home',
 				'title' => '<span>Inicio</span>',
-				'link' => base_url(),
+				'link' => base_url('MenuInicio'),
 				'icon' => 'fa fa-home',
 		),
         'perfil' => array(
 				'id' => 'main-perfil',
 				'title' => '<span>Perfil</span>',
-				'link' => '',
+				'link' => base_url('Cliente'),
 				'icon' => 'fa fa-user',
 		),
 		'citas' => array(
@@ -54,17 +54,17 @@ $config['menu_ADM'] = array(
 		'inicio' => array(
 				'id' => 'main-home',
 				'title' => '<span>Inicio</span>',
-				'link' => '',
+				'link' => base_url('MenuInicio'),
 				'icon' => 'fa fa-home',
 		),
 		'perfil' => array(
 				'id' => 'main-perfil',
 				'title' => '<span>Perfil</span>',
-				'link' => base_url(''),
+				'link' => base_url('Admin'),
 				'icon' => 'fa fa-user',
 		),
         'administrador' => array(
-				'id' => 'main-home',
+				'id' => 'main-administrador',
 				'title' => '<span>Administrador</span>',
 				'link' => base_url('administrador/Admin'),
 				'icon' => 'fa fa-user',
@@ -99,7 +99,7 @@ $config['menu_ODO'] = array(
 		'inicio' => array(
 				'id' => 'main-home',
 				'title' => '<span>Inicio</span>',
-				'link' => '',
+				'link' => base_url('MenuInicio'),
 				'icon' => 'fa fa-home',
 		),
 		'perfil' => array(
