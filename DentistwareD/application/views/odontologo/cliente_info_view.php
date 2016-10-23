@@ -2,7 +2,7 @@
                 <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
-            Perfil
+            Informacion Cliente
         </h1>
     </section>
 
@@ -17,88 +17,53 @@
                                             <?php
                                             $url = base_url() . '/assets/img/avatar5.png';
                                             echo '<img src="' . $url . '" class="user-image" alt="User Image">';
-                                            /*
-                                        <div class="text-center">
-                                            <BR>
-                                            <BR>
-
-                                            <a class="fa fa-exchange" href="../cliente/multas.html">
-                                                <input type="button" value="Cambiar foto de perfil" >
-                                            </a>
-
-                                            <BR>
-                                            <BR>
-
-                                            <a class="fa fa-trash" href="../cliente/multas.html">
-                                                <input type="button" value="Eliminar foto de perfil"  >
-                                            </a>
-
-                                        </div>
-                                                */
+                                            echo '<BR>';
+                                            echo '<BR>';
+                                            echo '<label> Informacion Basica </lable>';
                                             ?>
                                         </div>
                             
                         </div>
+                        
                         <div class="box-body">
-                            <div class="col-xs-4 text-right " >
-                                <BR>
-                                <BR>
+                            <div class="col-xs-4 text-center " >
+                                
+                                
+                            </div>
+                            <div class="col-xs-3 text-left " >
+                                <label>
                                 Nombre(s) y Apellidos:
                                 <BR>
                                 Documento:
                                 <BR>
-                                Edad:
+                                Edad:                                
                                 <BR>
-                                Fecha de Nacimiento:
-                                <BR>
-                                Genero:
-                                <BR>
-                                Estado:
+                                Tipo de Sandre y RH:
                                 <BR>
                                 Eps de Usuario:
                                 <BR>
                                 Ciudad:
                                 <BR>
-                                Direccion:
-                                <BR>
                                 E-mail:
                                 <BR>
-                                    Telefono:
+                                Telefono:
+                                </label>
                             </div>
-                            <div class="col-xs-3 text-center " >
-                                
-                                
-                            </div>
+                            
                                     
-                            <div class="col-xs-3 text-left " >
+                            <div class="col-xs-4 text-left " >
                                 <?php
-                                echo '<BR>';
-                                echo '<BR>';
                                 echo ucwords($cliente_info->nombre_persona);
                                 echo '<BR>';
                                 echo  $cliente_info->tipo_documento . ' &nbsp &nbsp' . $cliente_info->documento_persona;
                                 echo '<BR>';
                                 echo  $cliente_info->edad_persona .' '. 'Años';
                                 echo '<BR>';
-                                echo  $cliente_info->fecha_nacimiento;
-                                echo '<BR>';
-                                if ($cliente_info->genero_persona == 'M'){
-                                  echo 'Masculino';
-                                }else{
-                                    echo 'Femenino';
-                                };
-                                echo '<BR>';
-                                if ($cliente_info->estado_persona == 'ACT'){
-                                  echo 'Activo';
-                                }else{
-                                    echo 'Retirado';
-                                };
+                                echo  $cliente_info->tipo_sangre_cliente . ' ' . $cliente_info->rh_cliente;
                                 echo '<BR>';
                                 echo $cliente_info->eps_persona ;
                                 echo '<BR>';
-                                echo  ucfirst(mb_strtolower($cliente_info->nombre_ciudad, 'UTF-8'));
-                                echo '<BR>';
-                                echo  ucwords(strtolower($cliente_info->direccion_persona));
+                                echo  ucfirst(mb_strtolower($cliente_info->nombre_ciudad, 'UTF-8')).' &nbsp &nbsp'.ucwords(strtolower($cliente_info->direccion_persona));
                                 echo '<BR>';
                                 echo strtolower($cliente_info->correo_persona) ;
                                 echo '<BR>';
@@ -112,7 +77,7 @@
                                         <BR>
                                         <BR>
                                             
-                                            <input type="submit" value="Modificar Perfil" name="Modificar_Perfil" class="btn btn-info "/>
+                                            <input type="submit" value="Historia Clinica" name="Historia_clinica" class="btn btn-info "/>
                                             
 
                                         </div>       
