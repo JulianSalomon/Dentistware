@@ -12,9 +12,9 @@
                 <div class="box box-primary">
                     <div class="box-header with-border">
                         <button type="button" class="btn btn-info btn-small pull-right " data-toggle="modal" data-target="#modal_add_client">Agregar cliente</button>       
-                        
-                    <div class="box-body">
-                        <p>En la siguiente tabla encuentra una lista de todos los clientes.</p><br>
+                                        </div>
+                 <div class="box-body">
+                    <p>En la siguiente tabla encuentra una lista de todos los clientes.</p><br>
                     <div class="table-responsive">
                         <table id="tablaCliente" class="table table-bordered table-hover">
                             <thead class="">
@@ -73,7 +73,6 @@
                         </table>
                     </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>

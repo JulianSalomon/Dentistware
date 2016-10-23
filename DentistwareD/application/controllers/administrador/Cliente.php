@@ -41,8 +41,7 @@ class Cliente extends Admin_Controller {
 	}
         
     public function listar_ciudades($idDepartamento = 0, $flag = TRUE) {
-		$ciudades = $this->lugar_model->get_ciudades($idDepartamento);
-	
+		$ciudades = $this->lugar_model->get_ciudades($idDepartamento);	
 		if($flag){
 			header('Content-Type: application/json');
 			echo json_encode($ciudades);
@@ -56,7 +55,7 @@ class Cliente extends Admin_Controller {
         $this->load->library ( 'form_validation' );
         
         $this->form_validation->set_rules('inputNombre', 'Nombre', 'required');
-        $this->form_validation->set_rules('inputEmail', 'correo', 'required');
+        $this->form_validation->set_rules('inputEmail', 'correo', 'required|valid_email');
         $this->form_validation->set_rules('inputPassword', 'contraseña', 'required');
         $this->form_validation->set_rules('inputPasswordConfirm', 'confirmar contraseña', 'required|matches[inputPassword]', array('matches' => 'Las contraseñas no coindicen'));
         $this->form_validation->set_rules('inputDocumento', 'documento', 'required');
