@@ -9,12 +9,12 @@ class Odonto extends Odon_Controller {
 		}
 		$this->load->model ( 'persona_model' );
 		
-		$this->data['odontologo'] = $this->persona_model->get_persona($this->session->userdata('id_persona'));
+		$this->data['persona'] = $this->persona_model->get_persona($this->session->userdata('id_persona'));
         
 	}
 	
 	public function index(){
 		$this->get_user_menu('main-perfil');
-		$this->render ( 'odontologo/odontologo_view' );				
+		$this->render ( 'perfil_view' );				
 	}	
 }
