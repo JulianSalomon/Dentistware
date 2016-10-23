@@ -15,8 +15,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			echo plugin_css('bootstrap');
 			echo plugin_css('adminLTE');
 			echo plugin_css('skins');
+            echo plugin_css('datatables');
 			echo plugin_css('pace');
             echo plugin_css('datepicker3');
+            echo plugin_css('sweetalert');
 			
 			echo $before_closing_head; ?>
 	</head>

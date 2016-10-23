@@ -3,9 +3,8 @@
         	<div class="text-center">
 			<strong>&COPY; 
 			<?php
-				// echo date('Y'); 
+				echo date('Y'); 
 				echo anchor('http://projectengeneer.wixsite.com/dentistware', '    Dentistware.', 'target="_blank"');
-				echo (ENVIRONMENT !== 'production') ? 'Generado en <strong>{elapsed_time}</strong> CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : ''
 			?>
 			</strong>
             </div>
@@ -30,6 +29,8 @@
 		echo plugin_js('app');
 		echo plugin_js('pace');
         echo plugin_js('datepicker');
+        echo plugin_js('datatable');
+        echo plugin_js('sweetalert');
 		
 		echo $before_closing_body;		
 	?>

@@ -9,14 +9,18 @@
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
-                <div class="box">
+                <div class="box box-primary">
                     <div class="box-header with-border">
-                        <button type="button" class="btn btn-info btn-small pull-right " data-toggle="modal" data-target="#modal_add_client">Agregar admnistrador</button>
+                        <div class="col-xs-6">
+                            <h4>En la siguiente tabla encuentra una lista de todos los administradores.</h4>
+                        </div>
+                        <div class="col-xs-6">
+                            <button type="button" class="btn btn-info btn-small pull-right" data-toggle="modal" data-target="#modal_add_admin">Agregar admnistrador</button>
+                        </div>
                     </div>
                     <div class="box-body">
-                        <p>En la siguiente tabla encuentra una lista de todos los administradores.</p><br>
                     <div class="table-responsive">
-                        <table id="tablaCliente" class="table table-bordered table-hover">
+                        <table id="tablaAdmin" class="table table-bordered table-hover">
                             <thead >
                                 <tr>
                                     <th>Documento</th>

@@ -66,7 +66,7 @@ $config['menu_ADM'] = array(
         'administrador' => array(
 				'id' => 'main-home',
 				'title' => '<span>Administrador</span>',
-				'link' => base_url('administrador/AdministradorController'),
+				'link' => base_url('administrador/Admin'),
 				'icon' => 'fa fa-user',
 		),
 		'cliente' => array(
