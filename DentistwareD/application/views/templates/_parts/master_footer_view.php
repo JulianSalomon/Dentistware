@@ -30,6 +30,7 @@
 		echo plugin_js('pace');
         echo plugin_js('datepicker');
         echo plugin_js('datatable');
+        echo plugin_js('sweetalert');
 		
 		echo $before_closing_body;		
 	?>
