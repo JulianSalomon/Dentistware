@@ -27,7 +27,6 @@ class Cliente extends Admin_Controller {
         $this->form_validation->set_rules('inputDocumento', 'documento', 'required');
         $this->form_validation->set_rules('inputNacimiento', 'Fecha de Nacimiento', 'required');
         $this->form_validation->set_rules('inputEdad', 'Edad', 'required');
-        $this->form_validation->set_rules('inputGenero', 'Genero', 'required');
         $this->form_validation->set_rules('inputTelefono', 'Telefono', 'required');
         $this->form_validation->set_rules('inputDireccion', 'Direccion', 'required');
         $this->form_validation->set_rules('inputNombreContacto', 'Nombre del Contacto', 'required');
