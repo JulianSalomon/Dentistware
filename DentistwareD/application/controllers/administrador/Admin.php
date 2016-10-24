@@ -5,6 +5,8 @@ class Admin extends Admin_Controller{
     function __construct(){
         parent::__construct();
         $this->load->library ( 'form_validation' );
+        $this->data ['page_title_end'] = '| Administradores';
+        
         $this->load->model ( 'lugar_model' );
         $this->data['departamentos'] = $this->lugar_model->get_departamentos();
         $this->data['admins'] = $this->persona_model->get_administradores();

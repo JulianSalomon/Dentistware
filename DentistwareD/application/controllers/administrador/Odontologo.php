@@ -4,6 +4,7 @@ class Odontologo extends Admin_Controller {
 	
 	function __construct(){
 		parent::__construct();	
+		$this->data ['page_title_end'] = '| Odontologos';
 		$this->load->library ( 'form_validation' );
         $this->load->model ( 'lugar_model' );
         $this->data['departamentos'] = $this->lugar_model->get_departamentos();

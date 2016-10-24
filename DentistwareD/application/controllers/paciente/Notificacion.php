@@ -4,10 +4,7 @@ class Notificacion extends Cliente_Controller {
     
     public function __construct(){
         parent::__construct();
-        
-        $this->data ['before_closing_head'] = '';
-		$this->data ['before_closing_body'] = '';
-		$this->data ['page_title_end'] = '| Multas';   
+		$this->data ['page_title_end'] = '| Notificaciones';   
         
         $this->load->model('persona_model');
     }

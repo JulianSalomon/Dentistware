@@ -4,6 +4,7 @@ class Cliente extends Admin_Controller {
 	
 	function __construct(){
 		parent::__construct();
+		$this->data ['page_title_end'] = '| Clientes';
         $this->load->library ( 'form_validation' );
         $this->load->model ( 'lugar_model' );
         $this->data['departamentos'] = $this->lugar_model->get_departamentos();
@@ -24,7 +25,9 @@ class Cliente extends Admin_Controller {
         $this->form_validation->set_rules('inputEmail', 'correo', 'required|valid_email');
         $this->form_validation->set_rules('inputPassword', 'contraseña', 'required');
         $this->form_validation->set_rules('inputPasswordConfirm', 'confirmar contraseña', 'required|matches[inputPassword]', array('matches' => 'Las contraseñas no coindicen'));
-        $this->form_validation->set_rules('inputDocumento', 'documento', 'required');
+        $this->form_validation->set_rules('inputDocumento', 'documento', 'required|is_unique[persona.documento_persona]', array (
+				'is_unique' => 'Ya se encuentra registrada una persona con éste documento.'
+		));
         $this->form_validation->set_rules('inputNacimiento', 'Fecha de Nacimiento', 'required');
         $this->form_validation->set_rules('inputEdad', 'Edad', 'required');
         $this->form_validation->set_rules('inputTelefono', 'Telefono', 'required');
