@@ -28,7 +28,6 @@
                                     echo '<td>';
                                         echo $multa->valor_multa;
                                     echo '</td>';
-									echo '<td>';
                                     echo '<td align="center">';                                                                   
                                     echo '<div class="checkbox icheck" data-id = ' /*. $funcionario->idTercero */. '><label>';
                                     $valor = FALSE;
@@ -48,7 +47,7 @@
                                     echo '</label></div>';
                                     echo '</td>';
                                   echo '</div>
-                                		</td>
+   
                            				 </tr>';
                                 }
                             ?>

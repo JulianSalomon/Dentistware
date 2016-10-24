@@ -58,37 +58,37 @@
                             <div class="col-xs-3 text-left " >
                                 <?php
                                 
-                                echo ucwords($odontologo->nombre_persona);
+                                echo ucwords($persona->nombre_persona);
                                 echo '<BR>';
-                                echo  $odontologo->tipo_documento . ' &nbsp &nbsp' . $odontologo->documento_persona;
+                                echo  $persona->tipo_documento . ' &nbsp &nbsp' . $persona->documento_persona;
                                 echo '<BR>';
-                                echo  $odontologo->edad_persona .' '. 'Años';
+                                echo  $persona->edad_persona .' '. 'Años';
                                 echo '<BR>';
-                                echo  $odontologo->fecha_nacimiento;
+                                echo  $persona->fecha_nacimiento;
                                 echo '<BR>';
-                                if ($odontologo->genero_persona == 'M'){
+                                if ($persona->genero_persona == 'M'){
                                   echo 'Masculino';
                                 }else{
                                     echo 'Femenino';
                                 };
                                 echo '<BR>';
-                                echo  $odontologo->tipo_sangre_cliente . ' ' . $odontologo->rh_cliente;
+                                echo  $persona->tipo_sangre_cliente . ' ' . $persona->rh_cliente;
                                 echo '<BR>';
-                                if ($odontologo->estado_persona == 'ACT'){
+                                if ($persona->estado_persona == 'ACT'){
                                   echo 'Activo';
                                 }else{
                                     echo 'Retirado';
                                 };
                                 echo '<BR>';
-                                echo $odontologo->eps_persona ;
+                                echo $persona->eps_persona ;
                                 echo '<BR>';
-                                echo  ucfirst(mb_strtolower($odontologo->nombre_ciudad, 'UTF-8'));
+                                echo  ucfirst(mb_strtolower($persona->nombre_ciudad, 'UTF-8'));
                                 echo '<BR>';
-                                echo  ucwords(strtolower($odontologo->direccion_persona));
+                                echo  ucwords(strtolower($persona->direccion_persona));
                                 echo '<BR>';
-                                echo strtolower($odontologo->correo_persona) ;
+                                echo strtolower($persona->correo_persona) ;
                                 echo '<BR>';
-                                echo $odontologo->telefono_persona ;
+                                echo $persona->telefono_persona ;
                                 
                                 ?>
                             </div>
