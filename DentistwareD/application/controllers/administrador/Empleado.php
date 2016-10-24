@@ -4,6 +4,7 @@ class Empleado extends Admin_Controller {
 	
 	function __construct(){
 		parent::__construct();
+		$this->data ['page_title_end'] = '| Empleados';
         $this->load->library ( 'form_validation' );        
         $this->load->model ( 'lugar_model' );
         $this->data['departamentos'] = $this->lugar_model->get_departamentos();

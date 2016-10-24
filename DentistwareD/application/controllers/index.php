@@ -8,7 +8,7 @@ class Index extends MY_Controller {
 	}
     
     public function index(){
-        $this->load->view('index3');
+        $this->load->view('index_ppal_view');
     }
     
 }

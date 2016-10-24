@@ -1,5 +1,4 @@
 <?php
-$config['app_title'] = 'Dentistware';
 
 // $config['upload_marca_folder'] = 'uploads/marca/';
 // $config['upload_funcionario_folder'] = 'uploads/funcionario/';
