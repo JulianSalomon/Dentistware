@@ -224,7 +224,7 @@
                              <div class="input-group" id="div_inputGenero">
                                  <span class="input-group-addon"><i class="fa fa-venus-mars fa-fw"></i></span>
                                 <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="selectGenero" id="selectGenero">
-                                    <option value='M'>Maculino</option>
+                                    <option value='M'>Masculino</option>
                                     <option value='F'>Femenino</option>                                        
                                 </select>                                                                  
                              </div>
