@@ -236,8 +236,8 @@
                                     <option value='F'>Femenino</option>
                                  </select>
                               </div>
-                         </div>                                  
                       </div>
+                    </div>
                       <div class="row">
                          <div class="col-lg-4 form-group">
                              <label class=" control-label">Grupo sanguíneo: *</label>

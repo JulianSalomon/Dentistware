@@ -4,7 +4,7 @@
 			<strong>&COPY; 
 			<?php
 				echo date('Y'); 
-				echo anchor('http://projectengeneer.wixsite.com/dentistware', '    Dentistware.', 'target="_blank"');
+				echo anchor(base_url(), '    Dentistware.', 'target="_blank"');
 			?>
 			</strong>
             </div>
