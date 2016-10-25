@@ -200,6 +200,30 @@
             </ul>
           </div>
         </div>
+          
+          
+            <div class="box box-primary" id="servicios">
+          <div class="box-header with-border">
+            <h3 class="box-title">Artefactos</h3>
+          </div>
+          <div class="box-body">              
+            <ul>
+              <li><a href="Artifact1.docx" target='_blank' 
+title="Artefacto 1">
+Artefacto 1</a>.</li>
+              <li><a href="Artifact2.docx" target='_blank' 
+title="Artefacto 2">
+Artefacto 2</a>.</li>
+                <li><a href="Artifact3.docx" target='_blank' 
+title="Artefacto 3">
+Artefacto 3</a>.</li>
+                <li><a href="Artifact4.docx" target='_blank' 
+title="Artefacto 4">
+Artefacto 4</a>.</li>
+            </ul>
+          </div>
+        </div>
+          
       </section>
     </div>
   </div>
@@ -240,5 +264,9 @@
         setTimeout(carousel, 4000); // Change image every 2 seconds
     }
 </script>
+    
+    
+    
+
 </body>
 </html>
