@@ -2,8 +2,6 @@ $(function() {
     $('.borrar-btn').click(function(e) {
         e.preventDefault();
         var documento = $(this).attr('doc');
-        console.log(documento);
-        console.log(js_site_url);
         if(documento == "null"){
             swal("Error", "Usted no se puede eliminar", "error");
         } else {
