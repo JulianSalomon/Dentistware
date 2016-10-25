@@ -9,6 +9,7 @@ class Cliente extends Admin_Controller {
         $this->data['departamentos'] = $this->lugar_model->get_departamentos();
         $this->data['clientes'] = $this->persona_model->get_clientes();
         $this->data['before_closing_body'] = plugin_js('assets/js/dentistware/admin.js', true);
+        $this->data['other_js_asset'] = plugin_js('assets/js/dentistware/admin_cliente.js', true);
 	}
 	
 	public function index(){
@@ -24,7 +25,7 @@ class Cliente extends Admin_Controller {
         $this->form_validation->set_rules('inputEmail', 'correo', 'required|valid_email');
         $this->form_validation->set_rules('inputPassword', 'contraseña', 'required');
         $this->form_validation->set_rules('inputPasswordConfirm', 'confirmar contraseña', 'required|matches[inputPassword]', array('matches' => 'Las contraseñas no coindicen'));
-        $this->form_validation->set_rules('inputDocumento', 'documento', 'required');
+        $this->form_validation->set_rules('inputDocumento', 'documento', 'required|is_unique[persona.documento_persona]', array('is_unique' => 'El documento ya se encuentra registrado'));
         $this->form_validation->set_rules('inputNacimiento', 'Fecha de Nacimiento', 'required');
         $this->form_validation->set_rules('inputEdad', 'Edad', 'required');
         $this->form_validation->set_rules('inputTelefono', 'Telefono', 'required');

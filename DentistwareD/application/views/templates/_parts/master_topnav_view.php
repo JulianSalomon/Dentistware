@@ -70,7 +70,7 @@
 			                    <?php echo anchor('', 'Perfil', 'class="btn btn-default btn-flat"');?>
 			                    </div>	                      
 			                    <div class="pull-right">
-			                    <?php echo anchor('Login/logout', 'Cerrar Sesión', 'class="btn btn-danger btn-flat"');?>
+			                    <?php echo anchor('Login/logout', 'Cerrar sesión', 'class="btn btn-danger btn-flat"');?>
 			                    </div>
 	                  		</li>
 	                	</ul>

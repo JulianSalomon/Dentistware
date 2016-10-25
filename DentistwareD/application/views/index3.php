@@ -7,11 +7,10 @@
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <link rel="stylesheet" href="assets/css/font-awesome.min.css">
+  <link rel="stylesheet" href="assets/css/ionicons.min.css">
   <link rel="stylesheet" href="assets/css/AdminLTE.min.css">
   <link rel="stylesheet" href="assets/css/skin-blue-light.min.css">
-    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
     <style>
         .mySlides {display:none;}
     </style>
@@ -38,11 +37,10 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Desarrolladores <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href=""></a></li>
-                  <li><a href=""><img src="assets/img/avatar.png" class="user-image" alt="User Image" width="15%"> Cristian David González Carrillo &nbsp; &nbsp; &nbsp;</a></li>
-                  <li><a href=""><img src="assets/img/avatar04.png" class="user-image" alt="User Image" width="15%"> Alex Jose Alberto Barreto           </a></li>
-                  <li><a href=""><img src="assets/img/user2-160x160.jpg" class="user-image" alt="User Image" width="15%"> Julián Esteban Salomón Torres          </a></li>
-                  <li><a href=""><img src="assets/img/avatar5.png" class="user-image" alt="User Image" width="15%"> Nicolás Restrepo Torres       </a></li>
+                  <li><a href="#"><img src="assets/img/avatar.png" class="user-image" alt="User Image" width="15%"> Cristian David González Carrillo &nbsp; &nbsp; &nbsp;</a></li>
+                  <li><a href="#"><img src="assets/img/avatar04.png" class="user-image" alt="User Image" width="15%"> Alex Jose Alberto Barreto           </a></li>
+                  <li><a href="#"><img src="assets/img/user2-160x160.jpg" class="user-image" alt="User Image" width="15%"> Julián Esteban Salomón Torres          </a></li>
+                  <li><a href="#"><img src="assets/img/avatar5.png" class="user-image" alt="User Image" width="15%"> Nicolás Restrepo Torres       </a></li>
               </ul>
             </li>
           </ul>

@@ -44,7 +44,7 @@ $config['menu_CLT'] = array(
 		),
 		'logout' => array(
 				'id' => 'main-logout',
-				'title' => '<span class="nav-label">Cerrar Sesión</span>',
+				'title' => '<span class="nav-label">Cerrar sesión</span>',
 				'link' => base_url('Login/logout'),
 				'icon' => 'fa fa-sign-out',
 		),
@@ -83,13 +83,13 @@ $config['menu_ADM'] = array(
 		),
 		'odontologo' => array(
 				'id' => 'main-odontologo',
-				'title' => '<span>Odontologo</span>',
+				'title' => '<span>Odontólogo</span>',
 				'link' => base_url('administrador/Odontologo'),
 				'icon' => 'fa fa-user-md',
 		),
 		'logout' => array(
 				'id' => 'main-logout',
-				'title' => '<span class="nav-label">Cerrar Sesión</span>',
+				'title' => '<span class="nav-label">Cerrar sesión</span>',
 				'link' => base_url('Login/logout'),
 				'icon' => 'fa fa-sign-out',
 		),
@@ -116,13 +116,13 @@ $config['menu_ODO'] = array(
                 'items' => array(
                     0 => array(
                                 'id' => 'Informacion_Cliente',
-								'title' => 'Informacion Cliente',
+								'title' => 'Información cliente',
 								'link' => base_url('odontologo/Cliente_inf') ,
 								'id' => 'citas-agendar',
 						),
 						1 => array(
                                 'id' => 'Historia_Cliente',
-								'title' => 'Historia Cliente',
+								'title' => 'Historia cliente',
 								'link' => base_url('odontologo/Historia_clinica') ,
 								'id' => 'citas-agendadas',
 						),
@@ -131,7 +131,7 @@ $config['menu_ODO'] = array(
 		),
 		'logout' => array(
 				'id' => 'main-logout',
-				'title' => '<span class="nav-label">Cerrar Sesión</span>',
+				'title' => '<span class="nav-label">Cerrar sesión</span>',
 				'link' => base_url('Login/logout'),
 				'icon' => 'fa fa-sign-out',
 		),
