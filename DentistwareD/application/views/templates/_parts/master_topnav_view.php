@@ -67,7 +67,7 @@
 	                  		</li>
 	                  		<li class="user-footer">
 			                    <div class="pull-left">
-			                    <?php echo anchor('', 'Perfil', 'class="btn btn-default btn-flat"');?>
+			                    <?php echo anchor('Perfil', 'Perfil', 'class="btn btn-default btn-flat"');?>
 			                    </div>	                      
 			                    <div class="pull-right">
 			                    <?php echo anchor('Login/logout', 'Cerrar sesión', 'class="btn btn-danger btn-flat"');?>

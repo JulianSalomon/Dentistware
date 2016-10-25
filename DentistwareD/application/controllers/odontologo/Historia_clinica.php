@@ -4,9 +4,8 @@ class Historia_clinica extends Odon_Controller {
 	
 	function __construct(){
 		parent::__construct();	
-		if(!$this->is_logged_in()){
-			redirect('Login');
-		}
+		
+		$this->data ['page_title_end'] = '| Historia Cliente';
 		$this->load->model ( 'historia_model' );
 		$id_cliente = '104621433';
 		$this->data['historia_clinica_info'] = $this->historia_model->get_historia_clinica($id_cliente);

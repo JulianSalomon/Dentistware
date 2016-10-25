@@ -3,13 +3,13 @@ $config['menu_CLT'] = array(
 		'inicio' => array(
 				'id' => 'main-home',
 				'title' => '<span>Inicio</span>',
-				'link' => base_url('MenuInicio'),
+				'link' => base_url('Cliente'),
 				'icon' => 'fa fa-home',
 		),
         'perfil' => array(
 				'id' => 'main-perfil',
 				'title' => '<span>Perfil</span>',
-				'link' => base_url('Cliente'),
+				'link' => base_url('Perfil'),
 				'icon' => 'fa fa-user',
 		),
 		'citas' => array(
@@ -54,13 +54,13 @@ $config['menu_ADM'] = array(
 		'inicio' => array(
 				'id' => 'main-home',
 				'title' => '<span>Inicio</span>',
-				'link' => base_url('MenuInicio'),
+				'link' => base_url('Admin'),
 				'icon' => 'fa fa-home',
 		),
 		'perfil' => array(
 				'id' => 'main-perfil',
 				'title' => '<span>Perfil</span>',
-				'link' => base_url('Admin'),
+				'link' => base_url('Perfil'),
 				'icon' => 'fa fa-user',
 		),
         'administrador' => array(
@@ -99,13 +99,13 @@ $config['menu_ODO'] = array(
 		'inicio' => array(
 				'id' => 'main-home',
 				'title' => '<span>Inicio</span>',
-				'link' => base_url('MenuInicio'),
+				'link' => base_url('Odonto'),
 				'icon' => 'fa fa-home',
 		),
 		'perfil' => array(
 				'id' => 'main-perfil',
 				'title' => '<span>Perfil</span>',
-				'link' => base_url('Odonto'),
+				'link' => base_url('Perfil'),
 				'icon' => 'fa fa-user',
 		),
 		'cliente' => array(

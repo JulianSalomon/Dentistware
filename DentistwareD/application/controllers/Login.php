@@ -76,8 +76,7 @@ class Login extends MY_Controller {
 						'tipo_persona' => $user->tipo_persona, 
                         'id_persona' => $user->id_persona,
                         'doc_persona' => $user->documento_persona,
-                        'foto_persona' => $user->foto_persona
-
+                        'foto_persona' => $user->foto_persona,
 				) );
 				return 2;
 			} else {
@@ -92,16 +91,16 @@ class Login extends MY_Controller {
 		$this->tipo_persona = $this->session->userdata('tipo_persona');
 		switch (mb_strtoupper($this->tipo_persona)) {
 			case "ADM" :
-				redirect('MenuInicio');
+				redirect('Admin');
 				break;
 			case "CLT" :
-				redirect('MenuInicio');
+				redirect('Cliente');
 				break;
 			case "ODO" :
-				redirect('MenuInicio');
+				redirect('Odonto');
 				break;
 			case "EMP" :
-				redirect('MenuInicio');
+				redirect('Empleado');
 				break;
 		}
 	}
