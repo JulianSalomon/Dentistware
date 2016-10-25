@@ -47,16 +47,101 @@
             </li>
           </ul>
         </div>
-        <div class="navbar-custom-menu">
+        
+          <div class="navbar-custom-menu">
           <ul class="nav navbar-nav">
             <li class="dropdown user user-menu">
-              <a href="<?php echo base_url('Login'); ?>">
+                
+                
+                <?php if(!$this->session->userdata ( 'logged_in' )) : ?>
+    <a href="<?php echo base_url('Login'); ?>">
                   <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-key"></i></div>
                 <span class="hidden-xs">Iniciar sesión</span>
               </a>
+
+<?php else : ?>
+    <div class="navbar-custom-menu">
+            	<ul class="nav navbar-nav">
+              		<li class="dropdown user user-menu">
+                		<a href="" class="dropdown-toggle" data-toggle="dropdown">
+                		<?php                 		
+                            if($this->session->userdata['foto_persona'] != NULL){
+                                $url = 'uploads/' . $this->session->userdata['foto_persona'];
+                            } else {
+                                $url = 'assets/img/foto-default.png';
+                            }                
+                            $data_input = array(
+                                    'id' => '',
+                                    'class' => 'user-image',
+                                    'src' => base_url($url),
+                            );
+                            echo img($data_input);                		                		
+                		?>
+	                  	<span class="hidden-xs"><?php echo $this->session->userdata['nombre_completo'];?></span>
+	                	</a>
+	                	<ul class="dropdown-menu">
+	                  		<li class="user-header">
+		                  		<?php 
+                                    if($this->session->userdata['foto_persona'] != NULL){
+                                        $url = 'uploads/' . $this->session->userdata['foto_persona'];
+                                    } else {
+                                        $url = 'assets/img/foto-default.png';
+                                    }    
+			                  		$data_input = array(
+			                  				'id' => '',
+			                  				'class' => 'img-circle',
+			                  				'src' => base_url($url),
+			                  		);
+			                  		echo img($data_input);	
+		                  		?>
+			                    <p>
+			                    	
+                                    <span class="hidden-xs"><?php echo $this->session->userdata['nombre_completo'];?></span>
+			                         <br>
+                                    <span class="hidden-xs">
+                                        <?php 
+                                        switch ($this->session->userdata['tipo_persona']) {
+                                        case "ADM" :
+                                            echo 'Administrador';
+                                            break;
+                                        case "CLT" :
+                                            echo 'Cliente';
+                                            break;
+                                        case "ODO" :
+                                            echo 'Odontólogo';
+                                            break;
+                                        case "EMP" :
+                                            echo 'Empleado';
+                                            break;
+		                              }
+                                        ?>
+                                    </span>
+			                    </p>
+	                  		</li>
+	                  		<li class="user-footer">
+			                    <div class="pull-left">
+			                    <?php echo anchor('Perfil', 'Cuenta', 'class="btn btn-default btn-flat"');?>
+			                    </div>	                      
+			                    <div class="pull-right">
+			                    <?php echo anchor('Login/logout', 'Cerrar Sesión', 'class="btn btn-danger btn-flat"');?>
+			                    </div>
+	                  		</li>
+	                	</ul>
+	              	</li>
+            	</ul>
+        	</div>
+<?php endif; ?>
+                
+                
+           
             </li>
           </ul>
         </div>
+          
+          
+          
+         
+          
       </div>
     </nav>
   </header>

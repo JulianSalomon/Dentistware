@@ -136,3 +136,45 @@ $config['menu_ODO'] = array(
 				'icon' => 'fa fa-sign-out',
 		),
 );
+
+$config['menu_EMP'] = array(
+		'inicio' => array(
+				'id' => 'main-home',
+				'title' => '<span>Inicio</span>',
+				'link' => base_url('EMP'),
+				'icon' => 'fa fa-home',
+		),
+		'perfil' => array(
+				'id' => 'main-perfil',
+				'title' => '<span>Perfil</span>',
+				'link' => base_url('Perfil'),
+				'icon' => 'fa fa-user',
+		),
+		'cliente' => array(
+				'id' => 'main-cliente',
+				'title' => '<span>Empleado</span>',
+				'link' => '',
+				'icon' => 'fa fa-book',
+                'items' => array(
+                    0 => array(
+                                'id' => 'Informacion_Empleado',
+								'title' => 'Informacion Emplado',
+								'link' => base_url('empleado/Empleado_inf') ,
+								'id' => 'citas-agendar',
+						),
+						1 => array(
+                                'id' => 'Historia_Empleado',
+								'title' => 'Historia Empleado',
+								'link' => base_url('empleado/Historia_clinica') ,
+								'id' => 'citas-agendadas',
+						),
+                
+                ),
+		),
+		'logout' => array(
+				'id' => 'main-logout',
+				'title' => '<span class="nav-label">Cerrar Sesión</span>',
+				'link' => base_url('Login/logout'),
+				'icon' => 'fa fa-sign-out',
+		),
+);
