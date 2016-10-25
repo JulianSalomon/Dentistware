@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="login-box-body">
             	<?php             
             	$data_input = array(
-            			'src' => base_url() . 'assets/img/avatar.png',
+            			'src' => base_url() . 'assets/img/logo_grande.png',
             			'class' => 'img-responsive img-circle',
             			'style' => 'margin:0 auto',
             	);            	
