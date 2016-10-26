@@ -7,9 +7,8 @@ class Admin extends Admin_Controller{
         $this->data ['page_title_end'] = '| Administradores';
         $this->load->model ( 'lugar_model' );
         $this->data['departamentos'] = $this->lugar_model->get_departamentos();
-        $this->data['admins'] = $this->persona_model->get_administradores();
-        $this->data['before_closing_body'] = plugin_js('assets/js/dentistware/admin.js', true);
-        $this->data['other_js_asset'] = plugin_js('assets/js/dentistware/admin_admin.js', true);
+        $this->data['admins'] = $this->persona_model->get_administradores();     
+        $this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/admin_admin.js', true);
     }
     
     public function index(){

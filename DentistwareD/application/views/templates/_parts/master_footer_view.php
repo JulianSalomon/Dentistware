@@ -30,7 +30,6 @@
         echo plugin_js('datatable-bootstrap');
         echo plugin_js('sweetalert');
         echo $before_closing_body;
-        echo $other_js_asset;
 	?>
 </body>
 </html>

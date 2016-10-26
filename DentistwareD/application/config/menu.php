@@ -36,12 +36,6 @@ $config['menu_CLT'] = array(
 				'link' => base_url('paciente/Multa'),
 				'icon' => 'fa fa-list',
 		),
-		'notificaciones' => array(
-				'id' => 'main-notificaciones',
-				'title' => '<span>Notificaciones</span>',
-				'link' => base_url('paciente/Notificacion'),
-				'icon' => 'fa fa-search',
-		),
 		'logout' => array(
 				'id' => 'main-logout',
 				'title' => '<span class="nav-label">Cerrar sesión</span>',
@@ -158,14 +152,14 @@ $config['menu_EMP'] = array(
                 'items' => array(
                     0 => array(
                                 'id' => 'Informacion_Empleado',
-								'title' => 'Informacion Emplado',
-								'link' => base_url('empleado/Empleado_inf') ,
+								'title' => 'Informacion Empleado',
+								'link' => '' ,
 								'id' => 'citas-agendar',
 						),
 						1 => array(
                                 'id' => 'Historia_Empleado',
 								'title' => 'Historia Empleado',
-								'link' => base_url('empleado/Historia_clinica') ,
+								'link' => '' ,
 								'id' => 'citas-agendadas',
 						),
                 

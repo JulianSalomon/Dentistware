@@ -7,9 +7,8 @@ class Odontologo extends Admin_Controller {
 		$this->data ['page_title_end'] = '| Odontólogos';
         $this->load->model ( 'lugar_model' );
         $this->data['departamentos'] = $this->lugar_model->get_departamentos();
-        $this->data['odontologos'] = $this->persona_model->get_odontologos();
-        $this->data['before_closing_body'] = plugin_js('assets/js/dentistware/admin.js', true);
-        $this->data['other_js_asset'] = plugin_js('assets/js/dentistware/admin_odont.js', true);
+        $this->data['odontologos'] = $this->persona_model->get_odontologos();     
+        $this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/admin_odont.js', true);
     }
     
     public function index(){

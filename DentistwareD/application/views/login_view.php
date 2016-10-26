@@ -5,6 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html>
     <head>
     	<title>Dentistware | Login</title>
+    	<link rel="shortcut icon" type="image/png" href="<?php echo base_url('assets/img/logo.png')?>"/>
 	    <?php
 	    	echo meta('X-UA-Compatible', 'IE=edge', 'equiv');
 	    	echo meta('', 'text/html; charset=utf-8');
@@ -15,7 +16,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			echo plugin_css('bootstrap');
 			echo plugin_css('adminLTE');
 			echo plugin_css('skins');
-			echo plugin_css('icheck');
 	    ?>
     </head>
     <body class="hold-transition login-page">
@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <div class="login-box-body">
             	<?php             
             	$data_input = array(
-            			'src' => base_url() . 'assets/img/logo_grande.png',
+            			'src' => base_url() . 'assets/img/logo_grande2.png',
             			'class' => 'img-responsive img-circle',
             			'style' => 'margin:0 auto',
             	);            	
@@ -69,18 +69,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 echo form_error('password', '<p class="alert alert-warning">','</p>'); 
                 ?>
                 <div class="row text-center">
-                    <div class="col-xs-8">
-                        <div class="checkbox icheck pull-left">
-                       	<?php 
-                       	$data_input = array(
-                       			'type' => "checkbox",
-                       			'name' => "recordame_check",
-                       			'id' => 'recordame_check',
-                       	);                       	                       	
-                       	echo form_label(form_input($data_input) . 'Recordarme')                       	
-                       	?>
-                        </div>
-                    </div>
                     <div class="social-auth-links text-center col-xs-12">
                         <?php
                         $data_input = array(
@@ -108,15 +96,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <?php 
         echo plugin_js();
         echo plugin_js('bootstrap');
-        echo plugin_js('icheck');
-        
         ?>
-        <script>
-            $(function () {
-                $('#recordame_check').iCheck({
-                    checkboxClass: 'icheckbox_square-blue',
-                });
-            });
-        </script>
     </body>
 </html>

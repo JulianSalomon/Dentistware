@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html>
     <head>
 		<title><?php echo $page_title_start . $page_title_end; ?></title>
-        <link rel="icon" type="image/png" href="assets/img/logo.png"/>
+        <link rel="shortcut icon" type="image/png" href="<?php echo base_url('assets/img/logo.png')?>"/>
         <?php
 	    	echo meta('X-UA-Compatible', 'IE=edge', 'equiv');
 	    	echo meta('', 'text/html; charset=utf-8');

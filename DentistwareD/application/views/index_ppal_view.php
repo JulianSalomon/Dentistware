@@ -2,9 +2,12 @@
 <html>
     <head>
         <title>Dentistware</title>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+        <link rel="shortcut icon" type="image/png" href="<?php echo base_url('assets/img/logo.png')?>"/>
+	    <?php
+	    	echo meta('X-UA-Compatible', 'IE=edge', 'equiv');
+	    	echo meta('', 'text/html; charset=utf-8');
+			echo meta('viewport', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no');
+		?>
         <link rel="stylesheet" href="assets/css/w3.css">
         <link rel="stylesheet" href="assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="assets/css/font-awesome.min.css">
@@ -48,7 +51,8 @@
                                     <?php if(!$this->session->userdata ( 'logged_in' )) : ?>
                                     <a href="<?php echo base_url('Login'); ?>">
                                         <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-key"></i></div>
-                                        <span class="hidden-xs">Iniciar sesión</span>
+                                        &nbsp;&nbsp;
+                                        <span class="hidden-xs">INICIAR SESIÓN</span>
                                     </a>
                                     <?php else : ?>
                                     <div class="navbar-custom-menu">
@@ -175,27 +179,6 @@
                                     <li>Optimización de historias clínicas.</li>
                                     <li>Consulta de odontólogos.</li>
                                     <li>Consulta de tratamientos</li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="box box-primary" id="artifacts">
-                            <div class="box-header with-border">
-                                <h3 class="box-title">Artefactos</h3>
-                            </div>
-                            <div class="box-body">
-                                <ul>
-                                    <li><a href="Artifact1.docx" target='_blank' title="Artefacto 1">
-                                        Artefacto 1</a>.
-                                    </li>
-                                    <li><a href="Artifact2.docx" target='_blank' title="Artefacto 2">
-                                        Artefacto 2</a>.
-                                    </li>
-                                    <li><a href="Artifact3.docx" target='_blank' title="Artefacto 3">
-                                        Artefacto 3</a>.
-                                    </li>
-                                    <li><a href="Artifact4.docx" target='_blank' title="Artefacto 4">
-                                        Artefacto 4</a>.
-                                    </li>
                                 </ul>
                             </div>
                         </div>

@@ -19,6 +19,9 @@
                         </div>
                     </div>
                     <div class="box-body">
+						<?php
+							if($admins != NULL){                                    	                                    
+                       	?>	
                         <div class="table-responsive">
                             <table id="tabla_admin" type='tabla' class="table table-bordered table-hover tabla-usuario">
                                 <thead>
@@ -33,13 +36,12 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                    if($admins != NULL){
                                         foreach ($admins as $admin){
                                             if($user_info['doc_persona'] == $admin->documento){
-                                                                $documento = "null";
-                                                            } else {
-                                                                $documento = $admin->documento;
-                                                            }
+                                           		$documento = "null";
+                                           	} else {
+                                            	$documento = $admin->documento;
+                                          	}
                                             echo '<tr>';
                                                echo '<td>';
                                                 $tipo = str_split($admin->t_documento, 1);
@@ -72,8 +74,7 @@
                                                         </button>
                                                       </td>';
                                             echo '</tr>';   
-                                        }
-                                    }                             	
+                                        }                          	
                                     ?>
                                 </tbody>
                                 <tfoot>
@@ -88,6 +89,15 @@
                                 </tfoot>
                             </table>
                         </div>
+                        <?php 
+	                        } else {
+                                echo br(1);
+                                echo '<div class="form-group text-center">
+                                <i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
+                                echo heading('No hay administradores registrados', 3, 'class="text-muted"');
+                                echo '</div>';
+	                        }    
+                        ?>
                     </div>
                 </div>
             </div>

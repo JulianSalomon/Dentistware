@@ -3,10 +3,8 @@ class MY_Controller extends CI_Controller{
     public $data = array();
     function __construct(){
         parent::__construct();
-        $this->data ['page_title'] = 'Dentistware ';
 		$this->data ['before_closing_head'] = '';
 		$this->data ['before_closing_body'] = '';
-        $this->data ['other_js_asset'] = '';
 		$this->data ['page_title_end'] = '';
 		$this->data['page_title_start'] = "Dentistware ";		
 		$this->data['user_info'] = $this->session->userdata();
@@ -45,6 +43,7 @@ class Admin_Controller extends MY_Controller{
        	    redirect ( 'Login', 'refresh' );
         }        
         $this->load->model('persona_model');
+        $this->data['before_closing_body'] = plugin_js('assets/js/dentistware/admin.js', true);
     }
     
     public function listar_ciudades($idDepartamento = 0, $flag = TRUE) {

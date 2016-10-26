@@ -18,6 +18,9 @@
                         </div>
                     </div>
                     <div class="box-body">
+                    <?php 
+                    	if($odontologos != NULL){
+                    ?>
                         <div class="table-responsive">
                             <table id="tabla_odon" type='tabla' class="table table-bordered table-hover tabla-usuario">
                                 <thead>
@@ -32,7 +35,7 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                        if($odontologos != NULL){
+                                        
                             		 		foreach ($odontologos as $odontologo){
                                                 echo '<tr>';
                                                 echo '<td>';
@@ -67,11 +70,6 @@
                                                     </td>';
                                                 echo '</tr>';
                                             }
-                                        } else {
-                                            echo '<tr><td>';
-                                            echo 'No existen odontólogos';
-                                            echo '</td><td></td><td></td><td></td><td></td><td></td></tr>';
-                                        }
                                     ?>
                                 </tbody>
                                 <tfoot>
@@ -86,6 +84,15 @@
                                 </tfoot>
                                 </table>
                         </div>
+                    <?php 
+	                    } else {
+	                    	echo br(1);
+	                    	echo '<div class="form-group text-center">
+		                                <i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
+	                    	echo heading('No hay odontologos registrados', 3, 'class="text-muted"');
+	                    	echo '</div>';
+	                    }                    	
+                    ?>
                     </div>
                 </div>
             </div>

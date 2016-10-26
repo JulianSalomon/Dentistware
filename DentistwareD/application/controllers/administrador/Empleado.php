@@ -8,8 +8,7 @@ class Empleado extends Admin_Controller {
         $this->load->model ( 'lugar_model' );
         $this->data['departamentos'] = $this->lugar_model->get_departamentos();
         $this->data['empleados'] = $this->persona_model->get_empleados();
-        $this->data['before_closing_body'] = plugin_js('assets/js/dentistware/admin.js', true);
-        $this->data['other_js_asset'] = plugin_js('assets/js/dentistware/admin_empl.js', true);
+        $this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/admin_empl.js', true);
 	}
 	
     public function index(){

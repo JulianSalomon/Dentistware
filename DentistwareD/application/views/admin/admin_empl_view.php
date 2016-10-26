@@ -18,7 +18,10 @@
                             <button type="button" class="btn btn-info btn-small pull-right" data-toggle="modal" data-target="#modal_add_empl">Agregar empleado</button>
                         </div>
                     </div>
-                    <div class="box-body">                    
+                    <div class="box-body">
+                    <?php 
+                    	if($empleados != NULL){                    
+                    ?>                    
                         <div class="table-responsive">
                             <table id="tabla_empl" type='tabla' class="table table-bordered table-hover tabla-usuario">
                                 <thead>                                
@@ -33,7 +36,6 @@
                                 </thead>
                                 <tbody>
                                     <?php
-                                        if($empleados != NULL){
                                             foreach ($empleados as $empleado){
                                                 echo '<tr>';
                                                     echo '<td>';
@@ -68,11 +70,6 @@
                                                     </td>';
                                                 echo '</tr>';   
                                             }
-                                        } else {
-                                            echo '<tr><td>';
-                                            echo 'No existen empleados';
-                                            echo '</td><td></td><td></td><td></td><td></td><td></td></tr>';
-                                        }
                                     ?> 
                                 </tbody>
                                 <tfoot>
@@ -87,6 +84,15 @@
                                 </tfoot>
                             </table>
                         </div>
+                    <?php 
+	                    } else {
+	                    	echo br(1);
+	                    	echo '<div class="form-group text-center">
+	                                <i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
+	                    	echo heading('No hay empleados registrados', 3, 'class="text-muted"');
+	                    	echo '</div>';
+	                    }                                        
+                    ?>
                     </div>
                 </div>
             </div>
