@@ -5,7 +5,6 @@
           Clientes
       </h1>
     </section>
-
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
@@ -17,26 +16,27 @@
                         <div class="col-xs-6">
                             <button type="button" class="btn btn-info btn-small pull-right" data-toggle="modal" data-target="#modal_add_client">Agregar cliente</button>
                         </div>
-                    </div>                        
+                    </div>
                     <div class="box-body">
-                        
+                    <?php 
+                    	if($clientes != NULL){                     
+                    ?>
                         <div class="table-responsive">
-                            <table id="tablaCliente" type='tabla' class="table table-bordered table-hover tabla-usuario">
+                            <table id="tabla_cliente" type='tabla' class="table table-bordered table-hover tabla-usuario">
                                 <thead>
                                     <tr>
                                         <th>Documento</th>
                                         <th>Nombre y teléfono</th>
-                                        <th>Ubicación</th>
                                         <th>Correo electrónico</th>
-                                        <th>Estado</th>
+                                        <th>Ubicación</th>
                                         <th>EPS</th>
                                         <th>Contacto</th>
+                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
-                                <tbody class="text">
+                                <tbody>
                                     <?php 
-                                        if($clientes != NULL){
                                             foreach ($clientes as  $cliente){
                                                 echo '<tr>';
                                                 echo '<td>';
@@ -49,47 +49,59 @@
                                                 echo  "<small> Tel: " .$cliente->telefono . "</small>" ;
                                                 echo '</td>';
                                                 echo '<td>';
-                                                echo ucfirst(mb_strtolower($cliente->depto, 'UTF-8')) . " - " .  ucfirst(mb_strtolower($cliente->ciudad, 'UTF-8')) . '<br>' . ucwords(strtolower($cliente->direccion));
-                                                echo '</td>';
-                                                echo '<td>';
                                                 echo strtolower($cliente->email);
                                                 echo '</td>';
-                                                echo '<td class="text-center">';
-                                                if($cliente->estado = 'ACT'){
-                                                    echo '<i class="fa fa-check-square-o"></i>';
-                                                } else {
-                                                    
-                                                    echo '<i class="fa fa-square-o"></i>';
-                                                }
-                                                
+                                                echo '<td>';
+                                                echo ucfirst(mb_strtolower($cliente->depto, 'UTF-8')) . " - " .  ucfirst(mb_strtolower($cliente->ciudad, 'UTF-8')) . '<br>' . ucwords(strtolower($cliente->direccion));
                                                 echo '</td>';
                                                 echo '<td>';
                                                 echo ucwords($cliente->eps);
                                                 echo '</td>';
                                                 echo '<td>';
-                                                echo ucwords($cliente->contacto) . '<br>' ."<small> Tel: " .$cliente->contacto_tel . "</small>" ;
+                                                echo ucwords($cliente->contacto) . '<br>' ."<small> Tel: " . $cliente->contacto_tel . "</small>" ;
                                                 echo '</td>';
-                                                echo '<td><button type="button"><i class="fa fa-pencil"></i></button>
-                                                <button class="borrarBtn" doc-cliente="' . $cliente->documento . '" type=button id="delete_persona"><i class="fa fa-trash"></i></button></td>';
+                                                echo '<td class="text-center">';
+                                                if($cliente->estado = 'ACT'){
+                                                    echo '<i class="fa fa-check-square-o"></i>';
+                                                } else {
+                                                    echo '<i class="fa fa-square-o"></i>';
+                                                }
+                                                echo '</td>';
+                                                echo '<td class="text-center">
+                                                        <button type="button">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </button>
+                                                        <button class="borrar-btn" doc="' . $cliente->documento . '" type=button id="delete_persona">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                      </td>';
                                             echo '</tr>';   
                                         }
-                                    }                            	
                                     ?>
                                 </tbody>
                                 <tfoot>
                                     <tr>
                                         <th>Documento</th>
                                         <th>Nombre y teléfono</th>
-                                        <th>Ubicación</th>
                                         <th>Correo electrónico</th>
-                                        <th>Estado</th>
+                                        <th>Ubicación</th>
                                         <th>EPS</th>
                                         <th>Contacto</th>
+                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </tfoot>                                
                             </table>
                         </div>
+                    <?php 
+	                    } else {
+	                    	echo br(1);
+	                    	echo '<div class="form-group text-center">
+		                                <i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
+	                    	echo heading('No hay clientes registrados', 3, 'class="text-muted"');
+	                    	echo '</div>';
+	                    }                    	
+                    ?>
                     </div>
                 </div>
             </div>
@@ -97,15 +109,17 @@
     </section>
     <!-- /.content -->
 </div>
-<!-- Modal -->
-    <div class="modal fade" id="modal_add_client" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+    <!-- Modal -->
+    <div class="modal fade modal-add" id="modal_add_client" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <!-- Modal content-->
             <?php 
-            $data_input = array(
-            		'id' => "nuevo_cliente_form",
-            );            
-            echo form_open('',$data_input);?>                  
+                $data_input = array(
+                    'id' => "nuevo_cliente_form",
+                );            
+                echo form_open('',$data_input);
+            ?>                  
                 
                 <div class="modal-content box">
                     <div class="overlay hidden" id="div_waiting_new_cliente">
@@ -144,7 +158,7 @@
                           </div>
                         </div>
                          <div class="form-group">
-                             <label class=" control-label">Teléfono(s): *</label>
+                             <label class=" control-label">Teléfono: *</label>
                              <div class="input-group" id="div_inputTelefono">
                                  <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
                                  <input type="text" class="form-control" id="inputTelefono" placeholder="Teléfono" name="inputTelefono">
@@ -224,12 +238,12 @@
                              <div class="input-group" id="div_inputGenero">
                                  <span class="input-group-addon"><i class="fa fa-venus-mars fa-fw"></i></span>
                                 <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="selectGenero" id="selectGenero">
-                                    <option value='M'>Maculino</option>
-                                    <option value='F'>Femenino</option>                                        
-                                </select>                                                                  
-                             </div>
-                         </div>                                  
+                                    <option value='M'>Masculino</option>
+                                    <option value='F'>Femenino</option>
+                                 </select>
+                              </div>
                       </div>
+                    </div>
                       <div class="row">
                          <div class="col-lg-4 form-group">
                              <label class=" control-label">Grupo sanguíneo: *</label>
@@ -294,7 +308,12 @@
                 </div>
               <?php echo form_close(); ?>
         </div>
-</div>
-<script>
-	var js_site_url = '<?php echo site_url();?>';
-</script> 
+    </div>
+
+<?php 
+    $path = "administrador/Cliente/";
+    echo '<script>
+            var js_site_url = "'. site_url($path) . '";
+            var tipo_usuario = "cliente";
+          </script>';
+?>

@@ -6,10 +6,10 @@ class Multa_model extends MY_Model{
         parent::__construct();               
     }
     
-    public function get_multas_cliente($documento_cliente){
+    public function get_multas_cliente($id_cliente){
 		$this->db->select('*');
 		$this->db->from('multa');
-		$this->db->where('id_cliente', $documento_cliente);
+		$this->db->where('id_cliente', $id_cliente);
 		
 		$query = $this->db->get();
 		if ($query->num_rows ())

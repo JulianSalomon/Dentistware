@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic);
+@import url(font-source-sans-pro.css);
 /*!
  *   AdminLTE v2.3.6
  *   Author: Almsaeed Studio
@@ -4919,7 +4919,7 @@ table.text-center th {
     width: 33.3333333%;
   }
   .table-responsive {
-    overflow: auto;
+    overflow-x: initial;
   }
   .table-responsive > .table tr th,
   .table-responsive > .table tr td {

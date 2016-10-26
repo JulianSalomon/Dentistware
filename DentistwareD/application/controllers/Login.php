@@ -100,7 +100,7 @@ class Login extends MY_Controller {
 				redirect('Odonto');
 				break;
 			case "EMP" :
-				redirect('Empleado');
+				redirect('Empl');
 				break;
 		}
 	}
