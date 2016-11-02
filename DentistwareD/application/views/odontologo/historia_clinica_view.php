@@ -56,11 +56,12 @@
                                             
                     
                         <div class="table-responsive">
-                            <table id="tablaRegistro" class="table table-bordered table-hover">
+                            <table id="tablaRegistro" type='tabla' class="table table-bordered table-hover tabla-usuario">
                                 <thead>
                                     <tr>
                                         <th>Fecha</th>
                                         <th>Descripcion</th>
+                                        <th>Seleccionar</th>
                                     </tr>
                                 </thead>
                                 <tbody class="text-center">
@@ -70,25 +71,30 @@
                                     foreach ($registros as $registro){
                                             echo '<tr>';
                                             echo '<td>';
-                                            echo  $registro->fecha;
+                                            echo  substr($registro->fecha_reg, 0, 10);
                                             echo '</td>';
                                             echo '<td>';
                                             echo ucwords($registro->desc_procedimiento);
+                                            echo '<td class="text-center">
+                                                <button class="verRegistro-btn" doc="' . $registro->fecha_reg . '" type=button id="verRegistro">
+                                                    <i class="fa fa-file-text-o"></i>
+                                                </button>
+                                                </td>';
                                             echo '</td>';
                             			echo '</tr>';   
                             		}
                             	}
                             ?>
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Descripcion</th>
+                                    <th>Seleccionar</th>
+                                </tr>
+                            </tfoot>
                         </table>
-                    </div>
-                    
-
-                
-                                            
-                                            
-
-                                            
+                    </div>                  
                         </div>
                     </form>
                             
