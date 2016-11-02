@@ -53,62 +53,48 @@
                                 ?>
                             </div>
                             
-                                      <!--  
-                                        <div class="col-xs-12 text-center">
-                                        <BR>
-                                        <BR>
                                             
-                                            <input type="submit" value="Historia Clinica" name="Historia_clinica" class="btn btn-info "/>
-                                            
-
-                                        </div>  
-                                        -->
-                                            
-
-                                            
-            
-           <!--                                 
-            <div class="box-body">
-                <div class="form-group">
-                  <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
-
-                  <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
-
-                  <div class="col-sm-10">
-                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <div class="col-sm-offset-2 col-sm-10">
-                    <div class="checkbox">
-                      <label>
-                        <input type="checkbox"> Remember me
-                      </label>
-                    </div>
-                  </div>
-                </div>
-              </div>
--->
-              <!-- /.box-body -->
-<!--                                            
-              <div class="box-footer">
-                <button type="submit" class="btn btn-default">Cancel</button>
-                <button type="submit" class="btn btn-info pull-right">Sign in</button>
-              </div>
-              -->
-                                            
-
-
-                
-                                            
-                                            
-
-                                            
+                    
+                        <div class="table-responsive">
+                            <table id="tablaRegistro" type='tabla' class="table table-bordered table-hover tabla-usuario">
+                                <thead>
+                                    <tr>
+                                        <th>Fecha</th>
+                                        <th>Descripcion</th>
+                                        <th>Seleccionar</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center">
+                                    <?php 
+                            	
+                            	if($registros != NULL){
+                                    foreach ($registros as $registro){
+                                            echo '<tr>';
+                                            echo '<td>';
+                                            echo  substr($registro->fecha_reg, 0, 10);
+                                            echo '</td>';
+                                            echo '<td>';
+                                            echo ucwords($registro->desc_procedimiento);
+                                            echo '<td class="text-center">
+                                                <button class="verRegistro-btn" doc="' . $registro->fecha_reg . '" type=button id="verRegistro">
+                                                    <i class="fa fa-file-text-o"></i>
+                                                </button>
+                                                </td>';
+                                            echo '</td>';
+                            			echo '</tr>';   
+                            		}
+                            	}
+                            ?>
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Descripcion</th>
+                                    <th>Seleccionar</th>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>                  
                         </div>
                     </form>
                             
