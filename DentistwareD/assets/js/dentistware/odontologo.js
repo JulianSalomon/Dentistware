@@ -1,12 +1,14 @@
 $(function() {
     $('.verRegistro-btn').click(function(e) {
         e.preventDefault();
+        /*
         var documento = $(this).attr('doc');
         if(documento == "null"){
             swal("Error", "Usted no puede eliminar a este usuario", "error");
         } else {
             swal("Error", "Usted si puede eliminar a este usuario", "error");
-            /*
+            
+            
             swal({
                 title: 'Eliminar',
                 text: '¿Desea eliminar este ' + tipo_usuario + '?',
@@ -39,8 +41,28 @@ $(function() {
                         }
                     });
                 }
-            });     
-            */
+            }); 
+            
+            
         }
+        */
+    });
+    
+    $(".date-select").datepicker({
+        language: "es",
+        autoclose: true,
+    }).on(
+        "show", function() {
+            var zIndexModal = $(".modal-add").css("z-index");
+            var zIndexFecha = $(".datepicker").css("z-index");
+            $(".datepicker").css("z-index",zIndexModal+1);
+    });
+
+    $(".tabla-usuario").DataTable({
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": false,
+        "autoWidth": false,
     });
 });
