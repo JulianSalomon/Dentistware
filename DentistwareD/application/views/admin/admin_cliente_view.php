@@ -23,7 +23,7 @@
 		            		'id' => "cliente_search_form",
 		            		'name' => "cliente_search_form",
 		            );            
-		            echo form_open('administrador/Cliente/', $data_input);
+		            echo form_open('administrador/Cliente/search', $data_input);
 		            ?>            	
 	                <div class="form-group col-xs-12">
 	                	<?php 
@@ -37,7 +37,7 @@
 			                    	'id' => "input_buscar_cliente",
 			                    	'placeholder' => 'Buscar cliente por nombre o identificación...',
 			                    	'required' => '',
-			                    	'value' => $word_search ? $word_search : set_value('input_buscar_cliente'),
+			                    	'value' => $word ? $word : set_value('input_buscar_cliente'),
 			                    );
 	                        	echo form_input($data_input);
 	                        	
@@ -57,7 +57,7 @@
 					<?php                 
 		                echo form_close();
 		             	
-                    	if($clientes != NULL && $word_search != ''){                     
+                    	if($clientes != NULL && $word != ''){                     
                     ?>
                         <div class="table-responsive">
                             <table id="tabla_cliente" type='tabla' class="table table-bordered table-hover tabla-usuario">
@@ -141,7 +141,7 @@
                         </div>
                     <?php 
 	                    } else {
-	                    	if($word_search != ''){
+	                    	if($_SESSION['word_search'] != ''){
 		                    	echo br(1);
 			                	echo '<div class="form-group text-center">
 										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
