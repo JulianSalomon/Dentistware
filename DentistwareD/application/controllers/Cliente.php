@@ -1,5 +1,5 @@
 <?php
-
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Cliente extends Cliente_Controller {
     
     function __construct(){

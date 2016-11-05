@@ -40,7 +40,15 @@ $(function() {
             });       
         }
     });
-        
+    
+	$(".cancel-btn").click(function (e) {
+		$("form")[0].reset();
+        $(".modal").modal('hide');
+        $(".alert").remove();
+        $(".form-group").removeClass('has-error');
+	});
+    
+    
     $('#select_depto').change(function () {
        var idDepartamento = $(this).val();
        $("#select_ciudades > option").remove();
@@ -66,9 +74,23 @@ $(function() {
        }
     });
     
+    $.fn.datepicker.defaults.format = "yyyy/mm/dd";
+	$.fn.datepicker.dates["es"] = {
+		days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
+		daysShort: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
+		daysMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa", "Do"],
+		months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+		monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+		today: "Hoy"
+	};
+	
+    
     $(".date-select").datepicker({
         language: "es",
         autoclose: true,
+        endDate: "0d",
+        todayHighlight: true,
+        daysOfWeekHighlighted: "0",
     }).on(
         "show", function() {
             var zIndexModal = $(".modal-add").css("z-index");
@@ -77,10 +99,14 @@ $(function() {
     });
 
     $(".tabla-usuario").DataTable({
-        "lengthChange": false,
-        "searching": false,
+	    "language":{
+		    "info": "Mostrando un total de _TOTAL_ registros",
+		    "infoThousands": ",",
+		},
+		"paging": false,
+		"info": true,
+		"searching": false,
         "ordering": true,
-        "info": false,
         "autoWidth": false,
     });
 });

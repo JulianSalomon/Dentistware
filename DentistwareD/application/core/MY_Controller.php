@@ -1,4 +1,6 @@
 <?php
+if (!defined('BASEPATH')) exit('No direct script access allowed');
+
 class MY_Controller extends CI_Controller{
     public $data = array();
     function __construct(){
@@ -27,6 +29,17 @@ class MY_Controller extends CI_Controller{
 				'leaf_select' => $leaf_selected,
 		);
 		$this->data['menu_usuario'] = menu_nav($this->config->item('menu_' . $tipo), $menu_config);
+	}
+	
+	public function calculate_age($date){
+		$date = str_replace('-', '/', $date);
+		list($year,$month,$day) = explode('/',$date);
+		$year_dif  = date("Y") - $year;
+		$month_dif = date("m") - $month;
+		$day_dif   = date("d") - $day;
+		if ($day_dif < 0 || $month_dif < 0)
+			$year_dif--;
+		return $year_dif;
 	}
 }
 

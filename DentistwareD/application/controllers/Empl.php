@@ -1,5 +1,5 @@
 <?php
-
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Empl extends Empl_Controller {
 	
 	function __construct(){

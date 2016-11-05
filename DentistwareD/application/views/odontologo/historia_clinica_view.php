@@ -77,7 +77,7 @@
                                             echo '<td>';
                                             echo ucwords($registro->desc_procedimiento);
                                             echo '<td class="text-center">
-                                                <button class="btn verRegistro-btn" data-toggle="modal" data-target="#modal_add_odont" doc="' . $registro->id_historia . '" id="verRegistro">
+                                                <button class="btn verRegistro-btn" type="submit" data-toggle="modal" data-target="#modal_add_odont" name="verRegistro" value="'. $registro->fecha_reg . '" >
                                                     <i class="fa fa-file-text-o"></i>
                                                 </button>
                                                 
@@ -122,9 +122,9 @@
             </div>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <?php
-                echo '<h3 class="modal-title">Informacion registro </h3>';
-                ?>
+                
+                 <h3 class="modal-title">Informacion registro </h3>
+                
             </div>
             <div class="modal-body">
                 
@@ -133,30 +133,28 @@
                    <table style="width:100%" align="center">
                        <?php
                        
-                      echo "<tr>";
-                        echo "<th class= text-right style= width:45% >Fecha:</td>";
-                          echo "<td style= width:10% > </td>";
-                        echo "<td style= width:45% > " . $historia_clinica_info->antecedentes_fam . ' '. doc. " </td>";
-                      echo "</tr>";
+                       foreach ($registros as $registro){
+                           if($registro->fecha_reg == $registro->fecha_reg){
 
-                       echo "<tr>";
-                        echo "<th class= text-right style= width:45% >Odontologo:</td>";
-                          echo "<td style= width:10% > </td>";
-                        echo "<td style= width:45% > " . $historia_clinica_info->enfermedad_actual . "</td>";
-                      echo "</tr>";
-                       
-                        echo "<tr>";
-                        echo "<th class= text-right style= width:45% >Descripcion:</td>";
-                          echo "<td style= width:10% > </td>";
-                        echo "<td style= width:45% > " . substr($registro->fecha_reg, 0, 10) .  "</td>";
-                      echo "</tr>";
+                               echo "<tr>";
+                                echo "<th class= text-right style= width:45% >Odontologo:</td>";
+                                  echo "<td style= width:10% > </td>";
+                                echo "<td style= width:45% > " . ucwords($registro->nombre_persona) . "</td>";
+                              echo "</tr>";
 
-                       echo "<tr>";
-                        echo "<th class= text-right style= width:45% >Observaciones:</th>";
-                          echo "<td style= width:10% > </td>";
-                        echo "<td style= width:45% > " . $historia_clinica_info->observaciones . "</td>";
-                      echo "</tr>";
+                                echo "<tr>";
+                                echo "<th class= text-right style= width:45% >Descripcion:</td>";
+                                  echo "<td style= width:10% > </td>";
+                                echo "<td style= width:45% > " . substr($registro->fecha_reg, 0, 10) .  "</td>";
+                              echo "</tr>";
 
+                               echo "<tr>";
+                                echo "<th class= text-right style= width:45% >Observaciones:</th>";
+                                  echo "<td style= width:10% > </td>";
+                                echo "<td style= width:45% > " . $historia_clinica_info->observaciones . "</td>";
+                              echo "</tr>";
+                            }
+                       }
                        ?>
                     </table>
                 </div>

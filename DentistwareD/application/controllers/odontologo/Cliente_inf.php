@@ -1,12 +1,12 @@
 <?php
-
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Cliente_inf extends Odon_Controller {
 	
 	function __construct(){
 		parent::__construct();	
 		$this->data ['page_title_end'] = '| Información Cliente';
 		$this->load->model ( 'persona_model' );
-		$id_cliente = '56129365';
+		$id_cliente = '1008648639';
 		$this->data['cliente_info'] = $this->persona_model->get_persona($id_cliente);
 	}
 	

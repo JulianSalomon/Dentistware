@@ -51,7 +51,7 @@
                                                     echo strtolower($empleado->email);
                                                     echo '</td>';
                                                     echo '<td>';
-                                                    echo ucfirst(mb_strtolower($empleado->depto, 'UTF-8')) . " - " . ucfirst(mb_strtolower($empleado->ciudad, 'UTF-8')) . '<br>' . ucwords(strtolower($empleado->direccion));
+                                                    echo ucfirst(mb_strtolower($empleado->ciudad, 'UTF-8')) . " - " . ucfirst(mb_strtolower($empleado->depto, 'UTF-8')) . '<br>' . ucwords(strtolower($empleado->direccion));
                                                     echo '</td>';
                                                     echo '<td class="text-center">';
                                                     if($empleado->estado = 'ACT'){
@@ -60,14 +60,18 @@
                                                         echo '<i class="fa fa-square-o"></i>';
                                                     }
                                                     echo '</td>';
-                                                    echo '<td class="text-center">
-                                                                <button type="button">
-                                                                    <i class="fa fa-pencil"></i>
-                                                                </button>
-                                                                <button class="borrar-btn" doc="' . $empleado->documento . '" type=button id="delete_persona">
-                                                                    <i class="fa fa-trash"></i>
-                                                                </button>
-                                                    </td>';
+                                                    echo '<td class="text-center">';
+                                                    $data_input = array(
+                                                    		'type' => 'button',
+                                                    		'class' => 'btn btn-default',
+                                                    		'data-toggle' => 'tooltip',
+                                                    		'title' => 'Editar',
+                                                    );
+                                                    echo anchor('', '<i class="fa fa-pencil"></i>', $data_input);
+                                                    echo '<button class="borrar-btn btn btn-default" doc="' . $empleado->documento . '" type=button id="delete_persona" data-toggle="tooltip" title="Borrar">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                      </td>';                                                    
                                                 echo '</tr>';   
                                             }
                                     ?> 
@@ -99,12 +103,9 @@
         </div>
     </section>
 </div>
-<!-- /.content -->
 
-<!-- Modal -->
 <div class="modal fade modal-add" id="modal_add_empl" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
-        <!-- Modal content-->
         <?php
             $data_input = array(
                 'id' => "nuevo_empl_form",
@@ -126,6 +127,7 @@
                         <div class="input-group" id="div_selectTipoDoc">
                             <span class="input-group-addon"><i class="fa fa-credit-card fa-fw"></i></span>
                             <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="selectTipoDoc" id="selectTipoDoc">
+                                <option value='-1' selected disabled>- Elija un tipo de documento -</option>
                                 <option value='TI'>Tarjeta de identidad</option>
                                 <option value='CC'>Cédula de ciudadanía</option>
                                 <option value='CE'>Cédula de extranjería</option>
@@ -171,6 +173,10 @@
                                     'id' => 'select_depto',
                                     'class' => 'form-control select2 select2-hidden-accessible',
                                 );
+                                unset($departamentos['0']);
+                                $default = array('-1'  => '- Seleccione un departamento -');
+                                //$departamentos=array_map('mb_strtolower', $departamentos);
+                                //$departamentos=array_map('ucwords', $departamentos);
                                 echo form_dropdown('select_depto', $departamentos, '', $data_input);
                             ?>
                         </div>
@@ -209,25 +215,19 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4 form-group">
+                    <div class="col-lg-6 form-group">
                         <label class="control-label">Fecha de nacimiento: *</label>
                         <div class="input-group" id="div_inputNacimiento">
                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                            <input type="text" class="form-control date-select" id="inputNacimiento" placeholder="MM/DD/YYYY" name="inputNacimiento">
+                            <input type="text" class="form-control date-select" id="inputNacimiento" placeholder="YYYY/MM/DD" name="inputNacimiento">
                         </div>
                     </div>
-                    <div class="col-lg-4 form-group">
-                        <label  class="control-label">Edad: *</label>
-                        <div class="input-group" id="div_inputEdad">
-                            <span class="input-group-addon"><i class="fa fa-birthday-cake fa-fw"></i></span>
-                            <input type="text" class="form-control" id="inputEdad" placeholder="Edad" name="inputEdad">
-                        </div>
-                    </div>
-                    <div class="col-lg-4 form-group">
+                    <div class="col-lg-6 form-group">
                         <label  class="control-label">Género: *</label>
                         <div class="input-group" id="div_inputGenero">
                             <span class="input-group-addon"><i class="fa fa-venus-mars fa-fw"></i></span>
                             <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="selectGenero" id="selectGenero">
+                                <option value='-1' selected disabled>- Género -</option>
                                 <option value='M'>Masculino</option>
                                 <option value='F'>Femenino</option>
                             </select>

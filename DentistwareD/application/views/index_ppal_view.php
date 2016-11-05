@@ -1,3 +1,4 @@
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -52,7 +53,7 @@
                                     <a href="<?php echo base_url('Login'); ?>">
                                         <div class="col-md-3 col-sm-4"><i class="fa fa-fw fa-key"></i></div>
                                         &nbsp;&nbsp;
-                                        <span class="hidden-xs">INICIAR SESIÓN</span>
+                                        <span class="hidden-xs">Iniciar sesión</span>
                                     </a>
                                     <?php else : ?>
                                     <div class="navbar-custom-menu">
