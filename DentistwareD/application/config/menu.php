@@ -20,12 +20,12 @@ $config['menu_CLT'] = array(
 				'items' => array(
 						0 => array(
 								'title' => 'Agregar nueva cita',
-								'link' => '',
+								'link' => base_url('paciente/AgendarCita'),
 								'id' => 'citas-agendar',
 						),
 						1 => array(
 								'title' => 'Citas agendadas',
-								'link' => '',
+								'link' => base_url('paciente/VerCita'),
 								'id' => 'citas-agendadas',
 						),
 				)

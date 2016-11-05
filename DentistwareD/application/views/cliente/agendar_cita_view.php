@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-          Clientes
+        A continuación puede buscar las citas disponibles y agendar una.
       </h1>
     </section>
     <section class="content">
@@ -56,50 +56,47 @@
 					<?php                 
 		                echo form_close();
 		             	
-                        if($clientes != NULL){                     
+                        if($cita != NULL){                     
                     
                     ?>
                         <div class="table-responsive">
                             <table id="tabla_cliente" type='tabla' class="table table-bordered table-hover tabla-usuario">
                                 <thead>
                                     <tr>
-                                        <th>Documento</th>
-                                        <th>Nombre y teléfono</th>
-                                        <th>Correo electrónico</th>
-                                        <th>Ubicación</th>
+                                        <th>Fecha</th>
+                                        <th>Hora</th>
+                                        <th>Odontólogo</th>
+                                        <th>Consultorio</th>
                                         <th>EPS</th>
-                                        <th>Contacto</th>
-                                        <th>Estado</th>
-                                        <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php 
-                                            foreach ($clientes as  $cliente){
+                                            foreach ($citas as  $cita){
                                                 echo '<tr>';
                                                 echo '<td>';
-                                                 $tipo = str_split($cliente->t_documento, 1);
-                                                echo  $tipo[0] . "." . $tipo[1] . ". " . $cliente->documento;
+                                                 $tipo = str_split($cita->t_documento, 1);
+                                                echo  $tipo[0] . "." . $tipo[1] . ". " . $cita->documento;
                                                 echo '</td>';
                                                     echo '<td>';
-                                                echo ucwords($cliente->nombre);
+                                                echo ucwords($cita->nombre);
                                                 echo '<br>';
-                                                echo  "<small> Tel: " .$cliente->telefono . "</small>" ;
+                                                echo  "<small> Tel: " .$cita->telefono . "</small>" ;
                                                 echo '</td>';
                                                 echo '<td>';
-                                                echo strtolower($cliente->email);
+                                                echo strtolower($cita->email);
                                                 echo '</td>';
                                                 echo '<td>';
-                                                echo ucfirst(mb_strtolower($cliente->ciudad, 'UTF-8')) . " - " .  ucfirst(mb_strtolower($cliente->depto, 'UTF-8')) . '<br>' . ucwords(strtolower($cliente->direccion));
+                                                echo ucfirst(mb_strtolower($cita->ciudad, 'UTF-8')) . " - " .  ucfirst(mb_strtolower($cita->depto, 'UTF-8')) . '<br>' . ucwords(strtolower($cita->direccion));
                                                 echo '</td>';
                                                 echo '<td>';
-                                                echo ucwords($cliente->eps);
+                                                echo ucwords($cita->eps);
                                                 echo '</td>';
                                                 echo '<td>';
-                                                echo ucwords($cliente->contacto) . '<br>' ."<small> Tel: " . $cliente->contacto_tel . "</small>" ;
+                                                echo ucwords($cita->contacto) . '<br>' ."<small> Tel: " . $cita->contacto_tel . "</small>" ;
                                                 echo '</td>';
                                                 echo '<td class="text-center">';
-                                                if($cliente->estado = 'ACT'){
+                                                if($cita->estado = 'ACT'){
                                                     echo '<i class="fa fa-check-square-o"></i>';
                                                 } else {
                                                     echo '<i class="fa fa-square-o"></i>';
@@ -112,9 +109,9 @@
                                                 		'data-toggle' => 'tooltip',
                                                 		'title' => 'Editar',
                                                 );
-                                                echo anchor(base_url() . 'administrador/Cliente/edit_view/' . $cliente->id_persona, '<i class="fa fa-pencil"></i>', $data_input);
+                                                echo anchor(base_url() . 'administrador/Cliente/edit_view/' . $cita->id_persona, '<i class="fa fa-pencil"></i>', $data_input);
                                                 
-                                                echo '<button class="borrar-btn btn btn-default" doc="' . $cliente->documento . '" type=button id="delete_persona" data-toggle="tooltip" title="Borrar">
+                                                echo '<button class="borrar-btn btn btn-default" doc="' . $cita->documento . '" type=button id="delete_persona" data-toggle="tooltip" title="Borrar">
                                                             <i class="fa fa-trash"></i>
                                                         </button>
                                                       </td>';
