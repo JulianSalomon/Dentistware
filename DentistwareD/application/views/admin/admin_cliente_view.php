@@ -181,6 +181,7 @@
                                 <div class="input-group" id="div_selectTipoDoc">
                                     <span class="input-group-addon"><i class="fa fa-credit-card fa-fw"></i></span>
                                     <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="selectTipoDoc" id="selectTipoDoc">
+                                        <option value='-1' selected disabled>- Elija un tipo de documento -</option>
                                         <option value='TI'>Tarjeta de identidad</option>
                                         <option value='CC'>Cédula de ciudadanía</option>
                                         <option value='CE'>Cédula de extranjería</option>
@@ -226,6 +227,8 @@
                                             'id' => 'select_depto',
                                             'class' => 'form-control select2 select2-hidden-accessible',
                                     );
+                                    unset($departamentos['0']);
+                                    $default = array('-1'  => '- Seleccione un departamento -');
                                     echo form_dropdown('select_depto', $departamentos, '', $data_input); 	
                                 ?>
                              </div>
@@ -278,13 +281,15 @@
                                  <input type="text" class="form-control" id="inputEps" placeholder="Nombre EPS" name="inputEps">
                              </div>
                          </div>
-                    </div>
+
+                  	</div>
                       <div class="row">
                          <div class="col-lg-4 form-group">
                              <label class=" control-label">Grupo sanguíneo: *</label>
                              <div class="input-group" id="div_selectGrupo">
                                  <span class="input-group-addon"><i class="fa fa-plus-square fa-fw"></i></span>
                                  <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="selectGrupo" id="selectGrupo">
+                                    <option value='-1' selected disabled>- Elija una opción -</option>
                                      <option value="A">A</option>
                                      <option value="B">B</option>
                                      <option value="AB">AB</option>
@@ -297,6 +302,7 @@
                              <div class="input-group" id="div_selectRH">
                                  <span class="input-group-addon"><i class="fa  fa-plus-square fa-fw"></i></span>
                                  <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="selectRH" id="selectRH">
+                                     <option value='-1' selected disabled>- Elija una opción -</option>
                                      <option value="+">+</option>
                                      <option value="-">-</option>
                                 </select>

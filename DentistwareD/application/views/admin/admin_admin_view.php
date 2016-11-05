@@ -156,6 +156,7 @@
                         <div class="input-group" id="div_selectTipoDoc">
                             <span class="input-group-addon"><i class="fa fa-credit-card fa-fw"></i></span>
                             <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="selectTipoDoc" id="selectTipoDoc">
+                                <option value='-1' selected disabled>- Elija un tipo de documento -</option>
                                 <option value='TI'>Tarjeta de identidad</option>
                                 <option value='CC'>Cédula de ciudadanía</option>
                                 <option value='CE'>Cédula de extranjería</option>
@@ -201,7 +202,9 @@
                                     'id' => 'select_depto',
                                     'class' => 'form-control select2 select2-hidden-accessible',
                                 );
-                                echo form_dropdown('select_depto', $departamentos, '', $data_input);
+                                unset($departamentos['0']);
+                                $default = array('-1'  => '- Seleccione un departamento -');
+                                echo form_dropdown('select_depto', $default+$departamentos , $default, $data_input);
                             ?>
                         </div>
                     </div>
@@ -251,6 +254,7 @@
                         <div class="input-group" id="div_inputGenero">
                             <span class="input-group-addon"><i class="fa fa-venus-mars fa-fw"></i></span>
                             <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="selectGenero" id="selectGenero">
+                                <option value='-1' selected disabled>- Género -</option>
                                 <option value='M'>Masculino</option>
                                 <option value='F'>Femenino</option>
                             </select>

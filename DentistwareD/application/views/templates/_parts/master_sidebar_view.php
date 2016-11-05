@@ -21,18 +21,9 @@
             	<p>
             		<?php 
  		                $nombre = explode(" ", $user_info['nombre_completo']);
- 		                echo $nombre[0] . " " . $nombre[2]; 		
- 		                echo br(1);
-//                         for($i = 0; $i < count($nombre); $i += 2){
-//                             echo $nombre[$i] . " ";
-//                             if($i + 1 <= count($nombre)){
-//                             	echo $nombre[$i + 1] . " ";
-//                             }
-//                             echo br(1);                            
-//                         }                                      
-                    ?>                    
-                    <small>
-                    <?php 
+                        echo $nombre[0] . " " . $nombre [2];
+                        echo br(1);
+                        echo '<small>';                      
                         switch ($user_info['tipo_persona']) {
                             case "ADM" :
                                 echo 'Administrador';
@@ -47,8 +38,8 @@
                                 echo 'Empleado';
                                 break;
                         }
-                    ?>
-                    </small>
+                        echo '</small>';
+                	?>
                 </p>
             </div>
         </div>
