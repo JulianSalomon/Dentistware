@@ -137,7 +137,7 @@
                     <section class="content-header">
                         <h1>Bienvenido a Dentistware</h1>
                     </section>
-                    <section class="content">
+                    <section class="content">                  
                         <div class="w3-content w3-section" style="max-width:100%">
                             <img class="mySlides w3-animate-fading" src="assets/img/img01.jpg" style="width:100%" >
                             <img class="mySlides w3-animate-fading" src="assets/img/img02.jpg" style="width:100%" >

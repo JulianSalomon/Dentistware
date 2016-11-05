@@ -33,7 +33,7 @@ class Cliente extends Admin_Controller {
     		$config = $this->config->item('config_paginator');
     		$config["total_rows"] = $this->persona_model->count_clientes($_SESSION['word_search']);
     		$config["base_url"] = base_url() . "administrador/Cliente/search/";
-    		$config["per_page"] = 1;
+    		$config["per_page"] = 25;
     		$config["uri_segment"] = 4;
     		$page =  $this->uri->segment(4);
     		$clientes = $this->persona_model->get_clientes('nombre_persona', 'asc', $config["per_page"], $page, $_SESSION['word_search']);
