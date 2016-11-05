@@ -55,7 +55,9 @@ class Admin_Controller extends MY_Controller{
         if ($tipo != 'ADM'){
        	    redirect ( 'Login', 'refresh' );
         }
-        $this->data['user_info']['foto_persona'] = "admin/" . $this->session->userdata('foto_persona');
+        if($this->session->userdata('foto_persona') != NULL){
+            $this->data['user_info']['foto_persona'] = "admin/" . $this->session->userdata('foto_persona');
+        }
         $this->load->model('persona_model');
         $this->data['before_closing_body'] = plugin_js('assets/js/dentistware/admin.js', true);
     }
@@ -86,7 +88,9 @@ class Cliente_Controller extends MY_Controller{
         if ($tipo != 'CLT'){
        	    redirect ( 'Login', 'refresh' );
         }
-        $this->data['user_info']['foto_persona'] = "cliente/" . $this->session->userdata('foto_persona');        
+        if($this->session->userdata('foto_persona') != NULL){
+            $this->data['user_info']['foto_persona'] = "cliente/" . $this->session->userdata('foto_persona');
+        }
         $this->load->model('persona_model');
     }
     
@@ -101,7 +105,9 @@ class Odon_Controller extends MY_Controller{
         if ($tipo != 'ODO') {
        	    redirect ( 'Login', 'refresh' );
         }
-        $this->data['user_info']['foto_persona'] = "odonto/" . $this->session->userdata('foto_persona');
+        if($this->session->userdata('foto_persona') != NULL){
+            $this->data['user_info']['foto_persona'] = "odonto/" . $this->session->userdata('foto_persona');
+        }
     }
 }
 
@@ -113,7 +119,9 @@ class Empl_Controller extends MY_Controller{
         if ($tipo != 'EMP') {
        	    redirect ( 'Login', 'refresh' );
         }
-        $this->data['user_info']['foto_persona'] = "cliente/" . $this->session->userdata('foto_persona');
+        if($this->session->userdata('foto_persona') != NULL){
+            $this->data['user_info']['foto_persona'] = "cliente/" . $this->session->userdata('foto_persona');
+        }
     }
 }
 
