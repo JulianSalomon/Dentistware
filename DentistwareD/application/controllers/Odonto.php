@@ -1,5 +1,5 @@
 <?php
-
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Odonto extends Odon_Controller {
     
     function __construct(){

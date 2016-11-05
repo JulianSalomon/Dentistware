@@ -7,6 +7,20 @@
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 7.0.8
 
+use dentistware_db;
+
+drop table if exists historia_pregunta;
+drop table if exists historia_diente;
+drop table if exists registro_historia;
+drop table if exists multa;
+drop table if exists info_paciente;
+drop table if exists diente;
+drop table if exists historia_clinica;
+drop table if exists cita;
+drop table if exists persona;
+drop table if exists ciudad;
+drop table if exists departamento;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -69,7 +83,6 @@ CREATE TABLE `ciudad` (
 --
 
 INSERT INTO `ciudad` (`id_ciudad`, `id_departamento`, `nombre_ciudad`) VALUES
-(2242, 0, 'Sin asignar'),
 (5001, 5, 'MEDELLÍN'),
 (5002, 5, 'ABEJORRAL'),
 (5004, 5, 'ABRIAQUÍ'),
@@ -1206,7 +1219,6 @@ CREATE TABLE `departamento` (
 --
 
 INSERT INTO `departamento` (`id_departamento`, `nombre_dept`) VALUES
-(0, 'Sin asignar'),
 (5, 'ANTIOQUIA'),
 (8, 'ATLÁNTICO'),
 (11, 'BOGOTÁ D.C'),
@@ -1224,7 +1236,7 @@ INSERT INTO `departamento` (`id_departamento`, `nombre_dept`) VALUES
 (47, 'MAGDALENA'),
 (50, 'META'),
 (52, 'NARIÑO'),
-(54, 'NORTE DE SANTAN'),
+(54, 'NORTE DE SANTANDER'),
 (63, 'QUINDIO'),
 (66, 'RISARALDA'),
 (68, 'SANTANDER'),
@@ -1361,7 +1373,7 @@ CREATE TABLE `persona` (
   `correo_persona` varchar(60) COLLATE utf8_bin DEFAULT NULL,
   `contacto_cliente` varchar(60) COLLATE utf8_bin DEFAULT NULL,
   `telefono_contacto_cliente` varchar(30) COLLATE utf8_bin NOT NULL,
-  `estudios_odont` varchar(3000) COLLATE utf8_bin DEFAULT NULL,
+  `estudios_odont` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
   `tipo_sangre_cliente` varchar(2) COLLATE utf8_bin DEFAULT NULL,
   `rh_cliente` varchar(2) COLLATE utf8_bin DEFAULT NULL,
   `eps_persona` varchar(60) COLLATE utf8_bin DEFAULT NULL
@@ -1374,7 +1386,7 @@ CREATE TABLE `persona` (
 INSERT INTO `persona` (`id_persona`, `id_ciudad`, `documento_persona`, `tipo_documento`, `nombre_persona`, `telefono_persona`, `direccion_persona`, `clave_acceso`, `tipo_persona`, `edad_persona`, `fecha_nacimiento`, `genero_persona`, `estado_persona`, `foto_persona`, `correo_persona`, `contacto_cliente`, `telefono_contacto_cliente`, `estudios_odont`, `tipo_sangre_cliente`, `rh_cliente`, `eps_persona`) VALUES
 (1, 5001, 1049648379, 'CC', 'Ricardo Antonio Perez Manrique', '3152467963', 'Calle 20 #50 - 60', '$2y$10$bgmJGvYgCUa7gbPnkajfP.ErLrCBFtjXs.ZqJbv9In8dOYBQ154ou', 'ADM', 34, '1980-10-21', 'M', 'ACT', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL),
 (2, 5030, 1046214338, 'CC', 'Cristian Julian Torres Barreto', '3142145624', 'Cr 50 #50 - 50', '$2y$10$bgmJGvYgCUa7gbPnkajfP.ErLrCBFtjXs.ZqJbv9In8dOYBQ154ou', 'CLT', 20, '1996-04-27', 'M', 'ACT', NULL, NULL, 'Maria Angelica Torres Barreto', '314788824', NULL, 'AB', '+', 'Sanitas EPS'),
-(3, 2242, 1008648639, 'CC', 'Leidy Johana Benavidez Dorzo', '8563451', 'Trans. 30c # 40 - 23', '$2y$10$bgmJGvYgCUa7gbPnkajfP.ErLrCBFtjXs.ZqJbv9In8dOYBQ154ou', 'CLT', 20, '1996-06-27', 'F', 'ACT', NULL, 'LeidyDorzo@gmail.com', 'Martha lucia Torres', '8563451', NULL, 'A', '+', 'Salud total'),
+(3, 5001, 1008648639, 'CC', 'Leidy Johana Benavidez Dorzo', '8563451', 'Trans. 30c # 40 - 23', '$2y$10$bgmJGvYgCUa7gbPnkajfP.ErLrCBFtjXs.ZqJbv9In8dOYBQ154ou', 'CLT', 20, '1996-06-27', 'F', 'ACT', NULL, 'LeidyDorzo@gmail.com', 'Martha lucia Torres', '8563451', NULL, 'A', '+', 'Salud total'),
 (4, 5001, 79567413, 'CC', 'Alvaro Hernando Cardona', '3193564932', 'Calle 123 # 78 -34', '$2y$10$bgmJGvYgCUa7gbPnkajfP.ErLrCBFtjXs.ZqJbv9In8dOYBQ154ou', 'CLT', 52, '1964-12-30', 'M', 'ACT', NULL, 'Cardona.hernando@hotmail.com', 'Nery Arias', '3256135555', NULL, 'AB', '-', 'Famisanar'),
 (5, 5002, 02010125632, 'TI', 'Mara Alexandra Figueroa', '8464294', 'Carrera 46 J # 18-34', '$2y$10$bgmJGvYgCUa7gbPnkajfP.ErLrCBFtjXs.ZqJbv9In8dOYBQ154ou', 'CLT', 14, '2002-01-04', 'F', 'ACT', NULL, 'mari.2039@hotmail.com', 'Cesar Agusto Bonilla', '3215467894', NULL, 'B', '+', 'vive sano'),
 (6, 5004, 72436235, 'CC', 'Luis Carlos Camargo Medilla', '3132946024', 'Trans. 45 # 23 - 9', '$2y$10$bgmJGvYgCUa7gbPnkajfP.ErLrCBFtjXs.ZqJbv9In8dOYBQ154ou', 'ODO', 67, '1949-09-05', 'M', 'ACT', NULL, 'camargo.medina29@gmail.com', NULL, NULL, 'Soy graduado en Odontologia de la Universidad de la Salle', 'O', '-', NULL),

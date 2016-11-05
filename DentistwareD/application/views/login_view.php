@@ -27,7 +27,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             			'class' => 'img-responsive img-circle',
             			'style' => 'margin:0 auto',
             	);            	
-            	echo anchor('http://projectengeneer.wixsite.com/dentistware', img($data_input), array('target' => '_blank', 'class' => 'margin'));
+            	echo anchor('', img($data_input), array('target' => '_blank', 'class' => 'margin'));
 
                 if ($error) {
                     echo '<p class="alert alert-error text-center">' . $error . '</p>';

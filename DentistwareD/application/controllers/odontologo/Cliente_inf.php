@@ -1,5 +1,5 @@
 <?php
-
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Cliente_inf extends Odon_Controller {
 	
 	function __construct(){
