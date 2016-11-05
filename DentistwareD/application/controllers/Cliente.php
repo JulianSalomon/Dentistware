@@ -2,7 +2,7 @@
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Cliente extends Cliente_Controller {
     
-    function __construct(){
+     function __construct(){
         parent::__construct();
         if(!$this->is_logged_in()){
             redirect('Login', 'refresh');

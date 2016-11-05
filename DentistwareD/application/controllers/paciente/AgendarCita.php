@@ -1,22 +1,33 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
-class Cliente extends Admin_Controller {
-	
-	function __construct(){
-		parent::__construct();
-		$this->data ['page_title_end'] = '| Clientes';
-        $this->load->model ( 'lugar_model' );
-        $this->load->library("pagination");
-        $this->data['departamentos'] = $this->lugar_model->get_departamentos();        
+
+class AgendarCita extends Cliente_Controller{
+    
+    public function __construct(){
+        parent::__construct();
+        $this->data ['page_title_end'] = '| AgendarCita';
+        $this->load->library("pagination");  
         $this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/admin_cliente.js', true);
-        $this->get_user_menu('main-cliente');
-        
-        $this->data['clientes'] = '';
-	}
+        $this->get_user_menu('main-citas','citas-agendar');
+        $this->data['citas'] = $this->persona_model->get_empleados();
+    }
+    
+    public function index(){
+        //$this->data['multas'] = $this->multa_model->get_multas_cliente($this->session->userdata('id_persona'));
+        $this->render('cliente/agendar_cita_view');
+    }
+
+}
+
+
+
+
+
+
 	
 	public function index(){
 		$_SESSION['word_search'] = ''; 
-		$this->render ( 'admin/admin_cliente_view' );
+		$this->render('cliente/agendar_cita_view');
     }
     
     public function search(){

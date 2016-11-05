@@ -79,13 +79,18 @@ class Admin_Controller extends MY_Controller{
 class Cliente_Controller extends MY_Controller{
 	function __construct(){
         parent::__construct();
-        
+        if(!$this->is_logged_in()){
+			redirect('Login');
+		}
         $tipo = $this->session->userdata('tipo_persona');
-        if ($tipo != 'CLT') {
+        if ($tipo != 'CLT'){
        	    redirect ( 'Login', 'refresh' );
         }
-        $this->data['user_info']['foto_persona'] = "cliente/" . $this->session->userdata('foto_persona');
+        $this->data['user_info']['foto_persona'] = "cliente/" . $this->session->userdata('foto_persona');        
+        $this->load->model('persona_model');
     }
+    
+    
 }
 
 class Odon_Controller extends MY_Controller{
@@ -111,3 +116,4 @@ class Empl_Controller extends MY_Controller{
         $this->data['user_info']['foto_persona'] = "cliente/" . $this->session->userdata('foto_persona');
     }
 }
+
