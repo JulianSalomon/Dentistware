@@ -10,37 +10,44 @@ class Cliente extends Admin_Controller {
         $this->data['departamentos'] = $this->lugar_model->get_departamentos();        
         $this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/admin_cliente.js', true);
         $this->get_user_menu('main-cliente');
+        
+        $this->data['clientes'] = '';
 	}
 	
 	public function index(){
-		$this->data['word_search'] = ''; 
-		
-		$this->load->library ( 'form_validation' );
-		$this->form_validation->set_rules ( 'input_buscar_cliente', 'buscar', 'required');
-		if($this->form_validation->run ()){			
-			$post = $this->input->post('input_buscar_cliente');
-			$this->data['word_search'] = $post;
-		}
-		$this->data['clientes'] = '';
-		if($this->data['word_search'] != ''){
-			$config = array();
-			$config = $this->config->item('config_paginator');
-			$config["total_rows"] = $this->persona_model->count_clientes($this->data['word_search']);
-			$config["base_url"] = base_url() . "administrador/Cliente/";
-			$config["per_page"] = 25;
-			$config["uri_segment"] = 3;
-			$page =  $this->uri->segment(3);
-			$clientes = $this->persona_model->get_clientes('nombre_persona', 'asc', $config["per_page"], $page, $this->data['word_search']);
-			if($clientes){
-				$this->pagination->initialize($config);
-			
-				$this->data['clientes'] = $clientes;
-				$this->data["links"] = $this->pagination->create_links();
-			}
-		}
-		
+		$_SESSION['word_search'] = ''; 
 		$this->render ( 'admin/admin_cliente_view' );
     }
+    
+    public function search(){
+
+    	$this->load->library ( 'form_validation' );
+    	$this->form_validation->set_rules ( 'input_buscar_cliente', 'buscar', 'required');
+    	if($this->form_validation->run ()){
+    		$post = $this->input->post('input_buscar_cliente');
+    		$_SESSION['word_search'] = $post;
+    	}
+    	
+    	if($_SESSION['word_search'] != ''){
+    		$config = array();
+    		$config = $this->config->item('config_paginator');
+    		$config["total_rows"] = $this->persona_model->count_clientes($_SESSION['word_search']);
+    		$config["base_url"] = base_url() . "administrador/Cliente/search/";
+    		$config["per_page"] = 25;
+    		$config["uri_segment"] = 4;
+    		$page =  $this->uri->segment(4);
+    		$clientes = $this->persona_model->get_clientes('nombre_persona', 'asc', $config["per_page"], $page, $_SESSION['word_search']);
+    		if($clientes){
+    			$this->pagination->initialize($config);
+    				
+    			$this->data['clientes'] = $clientes;
+    			$this->data["links"] = $this->pagination->create_links();
+    		}
+    	}
+    	
+    	$this->render ( 'admin/admin_cliente_view' );
+    }
+    
     
     public function nuevo_cliente(){        
         $this->load->library ( 'form_validation' );
