@@ -1,7 +1,7 @@
 <?php
 
 // $config['upload_marca_folder'] = 'uploads/marca/';
-// $config['upload_funcionario_folder'] = 'uploads/funcionario/';
+$config['upload_admin_folder'] = 'uploads/admin/';
 
 $pag = array();
 $pag["full_tag_open"] = '<ul class="pagination">';

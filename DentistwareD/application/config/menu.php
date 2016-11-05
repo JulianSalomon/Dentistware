@@ -117,7 +117,7 @@ $config['menu_ODO'] = array(
 						1 => array(
                                 'id' => 'Historia_Cliente',
 								'title' => 'Historia cliente',
-								'link' => base_url('odontologo/Historia_clinica') ,
+								'link' => base_url('odontologo/Historia_clinica'),
 								'id' => 'citas-agendadas',
 						),
                 

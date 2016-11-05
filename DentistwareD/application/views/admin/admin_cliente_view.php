@@ -10,16 +10,54 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <div class="col-xs-6">
-                            <h4>En la siguiente tabla encuentra una lista de todos los clientes.</h4>
-                        </div>
-                        <div class="col-xs-6">
+<!--                         <div class="col-xs-6"> -->
+<!--                             <h4>En la siguiente tabla encuentra una lista de todos los clientes.</h4> -->
+<!--                         </div> -->
+                        <div class="col-xs-12">
                             <button type="button" class="btn btn-info btn-small pull-right" data-toggle="modal" data-target="#modal_add_client">Agregar cliente</button>
                         </div>
                     </div>
                     <div class="box-body">
-                    <?php 
-                    	if($clientes != NULL){                     
+		            <?php 
+		            $data_input = array(
+		            		'id' => "cliente_search_form",
+		            		'name' => "cliente_search_form",
+		            );            
+		            echo form_open('administrador/Cliente/', $data_input);
+		            ?>            	
+	                <div class="form-group col-xs-12">
+	                	<?php 
+	                		echo heading('Buscar cliente:', 2);
+	                		echo '<div class="input-group input-group-lg">';  
+	                			$word = $this->session->userdata('word_search');
+			                    $data_input = array(
+			                    	'type' => 'text',
+			                        'class' => "form-control",
+			                        'name' => "input_buscar_cliente",
+			                    	'id' => "input_buscar_cliente",
+			                    	'placeholder' => 'Buscar cliente por nombre o identificación...',
+			                    	'required' => '',
+			                    	'value' => $word_search ? $word_search : set_value('input_buscar_cliente'),
+			                    );
+	                        	echo form_input($data_input);
+	                        	
+	                        	echo '<span class="input-group-btn">';                        	
+	                        	$data_input = array(
+	                        			'type' => 'submit',
+	                        			'class' => "btn btn-lg btn-primary",
+	                        			'name' => "btn_buscar_cliente",
+	                        			'id' => "btn_buscar_cliente",
+	                        			'value' => 'Buscar'
+	                        	);
+	                        	echo form_submit($data_input);                        	
+	                        	echo '</span>';
+	                        echo '</div>';
+						?>
+	             	</div>
+					<?php                 
+		                echo form_close();
+		             	
+                    	if($clientes != NULL && $word_search != ''){                     
                     ?>
                         <div class="table-responsive">
                             <table id="tabla_cliente" type='tabla' class="table table-bordered table-hover tabla-usuario">
@@ -52,7 +90,7 @@
                                                 echo strtolower($cliente->email);
                                                 echo '</td>';
                                                 echo '<td>';
-                                                echo ucfirst(mb_strtolower($cliente->depto, 'UTF-8')) . " - " .  ucfirst(mb_strtolower($cliente->ciudad, 'UTF-8')) . '<br>' . ucwords(strtolower($cliente->direccion));
+                                                echo ucfirst(mb_strtolower($cliente->ciudad, 'UTF-8')) . " - " .  ucfirst(mb_strtolower($cliente->depto, 'UTF-8')) . '<br>' . ucwords(strtolower($cliente->direccion));
                                                 echo '</td>';
                                                 echo '<td>';
                                                 echo ucwords($cliente->eps);
@@ -66,12 +104,17 @@
                                                 } else {
                                                     echo '<i class="fa fa-square-o"></i>';
                                                 }
-                                                echo '</td>';
-                                                echo '<td class="text-center">
-                                                        <button type="button">
-                                                            <i class="fa fa-pencil"></i>
-                                                        </button>
-                                                        <button class="borrar-btn" doc="' . $cliente->documento . '" type=button id="delete_persona">
+                                                echo '</td>';                                                                                                                                                                                                
+                                                echo '<td class="text-center">';
+                                                        $data_input = array(
+                                                		'type' => 'button',
+                                                        'class' => 'btn btn-default',
+                                                		'data-toggle' => 'tooltip',
+                                                		'title' => 'Editar',
+                                                );
+                                                echo anchor(base_url() . 'administrador/Cliente/edit_view/' . $cliente->id_persona, '<i class="fa fa-pencil"></i>', $data_input);
+                                                
+                                                echo '<button class="borrar-btn btn btn-default" doc="' . $cliente->documento . '" type=button id="delete_persona" data-toggle="tooltip" title="Borrar">
                                                             <i class="fa fa-trash"></i>
                                                         </button>
                                                       </td>';
@@ -92,14 +135,19 @@
                                     </tr>
                                 </tfoot>                                
                             </table>
+                    	<div class="text-center"> 
+                    		<?php echo $links;?>
+                    	</div>                            
                         </div>
                     <?php 
 	                    } else {
-	                    	echo br(1);
-	                    	echo '<div class="form-group text-center">
-		                                <i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
-	                    	echo heading('No hay clientes registrados', 3, 'class="text-muted"');
-	                    	echo '</div>';
+	                    	if($word_search != ''){
+		                    	echo br(1);
+			                	echo '<div class="form-group text-center">
+										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
+			                   	echo heading('No se encontraron resultados.<br>Intente con otra opción.', 3, 'class="text-muted"');
+			                   	echo '</div>';
+	                    	}
 	                    }                    	
                     ?>
                     </div>
@@ -107,11 +155,9 @@
             </div>
         </div>
     </section>
-    <!-- /.content -->
 </div>
 
-    <!-- Modal -->
-    <div class="modal fade modal-add" id="modal_add_client" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade modal-add" id="modal_add_client" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
             <!-- Modal content-->
             <?php 
@@ -119,14 +165,13 @@
                     'id' => "nuevo_cliente_form",
                 );            
                 echo form_open('',$data_input);
-            ?>                  
-                
+            ?>                                  
                 <div class="modal-content box">
                     <div class="overlay hidden" id="div_waiting_new_cliente">
                         <i class="fa fa-refresh fa-spin" id="i_refresh"></i>  
                     </div>                                 
                   <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <button type="button" class="close cancel-btn" data-dismiss="modal">&times;</button>
                     <h3 class="modal-title">Agregar cliente</h3>
                   </div>
                   <div class="modal-body">
@@ -226,23 +271,13 @@
                                  <input type="text" class="form-control date-select" id="inputNacimiento" placeholder="MM/DD/YYYY" name="inputNacimiento">
                              </div>
                           </div>
-                          <div class="col-lg-4 form-group">
-                             <label  class="control-label">Edad: *</label>
-                             <div class="input-group" id="div_inputEdad">
-                                 <span class="input-group-addon"><i class="fa fa-birthday-cake fa-fw"></i></span>
-                                 <input type="text" class="form-control" id="inputEdad" placeholder="Edad" name="inputEdad">
+                          <div class="col-lg-8 form-group">
+                             <label class=" control-label">EPS:</label>
+                             <div class="input-group" id="div_inputEps">
+                                 <span class="input-group-addon"><i class="fa fa-hospital-o fa-fw"></i></span>
+                                 <input type="text" class="form-control" id="inputEps" placeholder="Nombre EPS" name="inputEps">
                              </div>
-                          </div>
-                          <div class="col-lg-4 form-group">
-                             <label  class="control-label">Género: *</label>
-                             <div class="input-group" id="div_inputGenero">
-                                 <span class="input-group-addon"><i class="fa fa-venus-mars fa-fw"></i></span>
-                                <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="selectGenero" id="selectGenero">
-                                    <option value='M'>Masculino</option>
-                                    <option value='F'>Femenino</option>
-                                 </select>
-                              </div>
-                      </div>
+                         </div>
                     </div>
                       <div class="row">
                          <div class="col-lg-4 form-group">
@@ -268,17 +303,18 @@
                              </div>
                           </div>
                           <div class="col-lg-4 form-group">
-                             <label class=" control-label">EPS: *</label>
-                             <div class="input-group" id="div_inputEps">
-                                 <span class="input-group-addon"><i class="fa fa-hospital-o fa-fw"></i></span>
-                                 <input type="text" class="form-control" id="inputEps" placeholder="Nombre EPS" name="inputEps">
-                             </div>
-                         </div>                                  
-
-
+                             <label  class="control-label">Género: *</label>
+                             <div class="input-group" id="div_inputGenero">
+                                 <span class="input-group-addon"><i class="fa fa-venus-mars fa-fw"></i></span>
+                                <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="selectGenero" id="selectGenero">
+                                    <option value='M'>Masculino</option>
+                                    <option value='F'>Femenino</option>
+                                 </select>
+                              </div>
+                      		</div>                                                            
                       </div>
                      <hr>
-                     <h4>Información de contacto</h4>
+                     <h4>Información de Contacto:</h4>
                       <div class="row">
 
                          <div class="col-lg-6 form-group">
@@ -300,7 +336,7 @@
                          </div>
                          <div class="modal-footer">
 
-                        <button type="button" data-dismiss="modal" class="btn btn-danger pull-left">Cancelar</button>
+                        <button type="button" data-dismiss="modal" class="btn btn-danger pull-left cancel-btn">Cancelar</button>
 
                         <input type="submit" name="submit_reg" class="btn btn-info pull-right" value="Guardar">
 

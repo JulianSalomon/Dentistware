@@ -1,5 +1,4 @@
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
         <h1>
           Odontólogos
@@ -8,7 +7,7 @@
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
-                <div class="box box-primarty">
+                <div class="box box-primary">
                     <div class="box-header with-border">
                         <div class="col-xs-6">
                             <h4>En la siguiente tabla encuentra una lista de todos los odontólogos.</h4>
@@ -51,7 +50,7 @@
                                                 echo strtolower($odontologo->email);
                                                 echo '</td>';
                                                 echo '<td>';
-                                                echo ucfirst(mb_strtolower($odontologo->depto, 'UTF-8')) . " - " .  ucfirst(mb_strtolower($odontologo->ciudad, 'UTF-8')) . '<br>' . ucwords(strtolower($odontologo->direccion));
+                                                echo ucfirst(mb_strtolower($odontologo->ciudad, 'UTF-8')) . " - " .  ucfirst(mb_strtolower($odontologo->depto, 'UTF-8')) . '<br>' . ucwords(strtolower($odontologo->direccion));
                                                 echo '</td>';
                                                 echo '<td class="text-center">';
                                                 if($odontologo->estado = 'ACT'){
@@ -60,14 +59,18 @@
                                                     echo '<i class="fa fa-square-o"></i>';
                                                 }
                                                 echo '</td>';
-                                                echo '<td class="text-center">
-                                                                <button type="button">
-                                                                    <i class="fa fa-pencil"></i>
-                                                                </button>
-                                                                <button class="borrar-btn" doc="' . $odontologo->documento . '" type=button id="delete_persona">
-                                                                    <i class="fa fa-trash"></i>
-                                                                </button>
-                                                    </td>';
+                                                echo '<td class="text-center">';
+                                                $data_input = array(
+                                                		'type' => 'button',
+                                                		'class' => 'btn btn-default',
+                                                		'data-toggle' => 'tooltip',
+                                                		'title' => 'Editar',
+                                                );
+                                                echo anchor('', '<i class="fa fa-pencil"></i>', $data_input);
+                                                echo '<button class="borrar-btn btn btn-default" doc="' . $odontologo->documento . '" type=button id="delete_persona" data-toggle="tooltip" title="Borrar">
+                                                            <i class="fa fa-trash"></i>
+                                                        </button>
+                                                      </td>';                                                
                                                 echo '</tr>';
                                             }
                                     ?>
@@ -98,10 +101,8 @@
             </div>
         </div>
     </section>
-    <!-- /.content -->
 </div>
 
-<!-- Modal -->
 <div class="modal fade modal-add" id="modal_add_odont" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <!-- Modal content-->
@@ -209,21 +210,14 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4 form-group">
+                    <div class="col-lg-6 form-group">
                         <label class="control-label">Fecha de nacimiento: *</label>
                         <div class="input-group" id="div_inputNacimiento">
                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                            <input type="text" class="form-control date-select" id="inputNacimiento" placeholder="MM/DD/YYYY" name="inputNacimiento">
+                            <input type="text" class="form-control date-select" id="inputNacimiento" placeholder="YYYY/MM/DD" name="inputNacimiento">
                         </div>
                     </div>
-                    <div class="col-lg-4 form-group">
-                        <label  class="control-label">Edad: *</label>
-                        <div class="input-group" id="div_inputEdad">
-                            <span class="input-group-addon"><i class="fa fa-birthday-cake fa-fw"></i></span>
-                            <input type="text" class="form-control" id="inputEdad" placeholder="Edad" name="inputEdad">
-                        </div>
-                    </div>
-                    <div class="col-lg-4 form-group">
+                    <div class="col-lg-6 form-group">
                         <label  class="control-label">Género: *</label>
                         <div class="input-group" id="div_inputGenero">
                             <span class="input-group-addon"><i class="fa fa-venus-mars fa-fw"></i></span>
@@ -233,6 +227,21 @@
                             </select>
                         </div>
                     </div>
+                </div>
+                <hr>
+                <h4>Información profesional:</h4>
+                <div class="form-group" id="div_inputEstudios">             	
+                	<?php 
+                	$data_input = array(
+                			'type' => "text",
+                			'class' => "form-control",
+                			'id' => "inputEstudios",
+                			'name' => "inputEstudios",
+                			'rows' => "5",
+                			"maxlength" => "1000",
+                	);
+                	echo form_textarea($data_input);	                	
+                	?>                	
                 </div>
             </div>
             <div class="modal-footer">

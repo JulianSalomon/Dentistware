@@ -1,18 +1,19 @@
 <?php
-
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Admin extends Admin_Controller{
 	
     function __construct(){
         parent::__construct();
-        $this->data ['page_title_end'] = '| Administradores';
         $this->load->model ( 'lugar_model' );
+        
+        $this->data ['page_title_end'] = '| Administradores';        
         $this->data['departamentos'] = $this->lugar_model->get_departamentos();
         $this->data['admins'] = $this->persona_model->get_administradores();     
         $this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/admin_admin.js', true);
+        $this->get_user_menu('main-administrador');
     }
     
     public function index(){
-        $this->get_user_menu('main-administrador');
 		$this->render ( 'admin/admin_admin_view' );	 
     }
     
@@ -25,11 +26,13 @@ class Admin extends Admin_Controller{
         $this->form_validation->set_rules('inputPasswordConfirm', 'confirmar contraseña', 'required|matches[inputPassword]', array('matches' => 'Las contraseñas no coindicen'));
         $this->form_validation->set_rules('inputDocumento', 'documento', 'required|is_unique[persona.documento_persona]', array('is_unique' => 'El documento ya se encuentra registrado'));
         $this->form_validation->set_rules('inputNacimiento', 'Fecha de Nacimiento', 'required');
-        $this->form_validation->set_rules('inputEdad', 'Edad', 'required');
         $this->form_validation->set_rules('inputTelefono', 'Telefono', 'required');
         $this->form_validation->set_rules('inputDireccion', 'Direccion', 'required');
                 
         if ($this->form_validation->run()) {
+        	
+        	$url_foto = $this->image_process('inputFoto');
+        	
             $input = array (
                     'nombre_persona' => $this->input->post ( 'inputNombre' ),
                     'correo_persona' => $this->input->post ( 'inputEmail' ),
@@ -44,7 +47,11 @@ class Admin extends Admin_Controller{
 					'telefono_persona' => $this->input->post ( 'inputTelefono' ),
                     'tipo_persona' => 'ADM',
                     'estado_persona' => 'ACT',
-			);            
+            		'foto_persona' => $url_foto,
+			);
+            
+            $input['edad_persona'] = $this->calculate_age($input['fecha_nacimiento']);
+            
             $result = $this->persona_model->new_persona($input);
             header ( 'Content-Type: application/json' );
 			echo $result;
@@ -52,5 +59,38 @@ class Admin extends Admin_Controller{
             header ( 'Content-Type: application/json' );
             echo json_encode ( $this->form_validation->error_array () );
         }
+    }
+    
+    private function image_process($input_file_name){
+    	$this->load->library ( 'upload' );
+    	$config ['upload_path'] = $this->config->item ( 'upload_admin_folder' );
+    	$config ['allowed_types'] = 'jpg|png';
+    	$config ['max_size'] = 1024;
+    	$config ['max_width'] = 256;
+    	$config ['max_height'] = 256;
+    		
+    	$url_foto = NULL;
+    	$result_upload = array ();
+    		
+    	if ($_FILES [$input_file_name] ['name'] != '') {
+    		$config ['file_name'] = $this->rename_file ( $_FILES [$input_file_name] ['name'] );
+    		$this->upload->initialize ( $config );
+    
+    		if (! $this->upload->do_upload ($input_file_name)) {
+    			$result_upload = array ('error' => $this->upload->display_errors () );
+    		} else {
+    			$result_upload = array ('upload_data' => $this->upload->data ());
+    			$url_foto = $result_upload ['upload_data'] ['file_name'];
+    		}
+    	}
+    	return $url_foto;
+    }
+    
+    private function rename_file($filename = null){
+    	$new_temp_ext = explode(".", $filename);
+    	$extension = end($new_temp_ext);
+    	$new_filename = "admin-" . rand(10, 99) . rand(10, 99) . "." . $extension;
+    
+    	return $new_filename;
     }
 }

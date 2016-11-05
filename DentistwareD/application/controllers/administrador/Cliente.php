@@ -1,23 +1,48 @@
 <?php
-
+if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Cliente extends Admin_Controller {
 	
 	function __construct(){
 		parent::__construct();
 		$this->data ['page_title_end'] = '| Clientes';
         $this->load->model ( 'lugar_model' );
-        $this->data['departamentos'] = $this->lugar_model->get_departamentos();
-        $this->data['clientes'] = $this->persona_model->get_clientes();
+        $this->load->library("pagination");
+        $this->data['departamentos'] = $this->lugar_model->get_departamentos();        
         $this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/admin_cliente.js', true);
+        $this->get_user_menu('main-cliente');
 	}
 	
 	public function index(){
-		$this->get_user_menu('main-cliente');
+		$this->data['word_search'] = ''; 
+		
+		$this->load->library ( 'form_validation' );
+		$this->form_validation->set_rules ( 'input_buscar_cliente', 'buscar', 'required');
+		if($this->form_validation->run ()){			
+			$post = $this->input->post('input_buscar_cliente');
+			$this->data['word_search'] = $post;
+		}
+		$this->data['clientes'] = '';
+		if($this->data['word_search'] != ''){
+			$config = array();
+			$config = $this->config->item('config_paginator');
+			$config["total_rows"] = $this->persona_model->count_clientes($this->data['word_search']);
+			$config["base_url"] = base_url() . "administrador/Cliente/";
+			$config["per_page"] = 25;
+			$config["uri_segment"] = 3;
+			$page =  $this->uri->segment(3);
+			$clientes = $this->persona_model->get_clientes('nombre_persona', 'asc', $config["per_page"], $page, $this->data['word_search']);
+			if($clientes){
+				$this->pagination->initialize($config);
+			
+				$this->data['clientes'] = $clientes;
+				$this->data["links"] = $this->pagination->create_links();
+			}
+		}
+		
 		$this->render ( 'admin/admin_cliente_view' );
     }
     
-    public function nuevo_cliente(){
-        
+    public function nuevo_cliente(){        
         $this->load->library ( 'form_validation' );
         
         $this->form_validation->set_rules('inputNombre', 'Nombre', 'required');
@@ -26,15 +51,12 @@ class Cliente extends Admin_Controller {
         $this->form_validation->set_rules('inputPasswordConfirm', 'confirmar contraseña', 'required|matches[inputPassword]', array('matches' => 'Las contraseñas no coindicen'));
         $this->form_validation->set_rules('inputDocumento', 'documento', 'required|is_unique[persona.documento_persona]', array('is_unique' => 'El documento ya se encuentra registrado'));
         $this->form_validation->set_rules('inputNacimiento', 'Fecha de Nacimiento', 'required');
-        $this->form_validation->set_rules('inputEdad', 'Edad', 'required');
         $this->form_validation->set_rules('inputTelefono', 'Telefono', 'required');
         $this->form_validation->set_rules('inputDireccion', 'Direccion', 'required');
         $this->form_validation->set_rules('inputNombreContacto', 'Nombre del Contacto', 'required');
         $this->form_validation->set_rules('inputTelContacto', 'Telefono del Contacto', 'required');        
         
-        
-        if ($this->form_validation->run()) {		
-			
+        if ($this->form_validation->run()) {					
 			$input = array (
                     'nombre_persona' => $this->input->post ( 'inputNombre' ),
                     'correo_persona' => $this->input->post ( 'inputEmail' ),
@@ -42,7 +64,6 @@ class Cliente extends Admin_Controller {
 					'tipo_documento' => $this->input->post ( 'selectTipoDoc' ),
 					'clave_acceso' => password_hash($this->input->post ( 'inputPassword'), PASSWORD_BCRYPT),
                     'fecha_nacimiento' => $this->input->post ( 'inputNacimiento' ),
-                    'edad_persona' => $this->input->post ( 'inputEdad' ),
                     'genero_persona' => $this->input->post ( 'selectGenero' ),
                     'id_ciudad' => $this->input->post ( 'select_ciudades' ),
 					'direccion_persona' => $this->input->post ( 'inputDireccion' ),
@@ -54,7 +75,10 @@ class Cliente extends Admin_Controller {
                     'telefono_contacto_cliente' => $this->input->post ( 'inputTelContacto' ),
                     'tipo_persona' => 'CLT',
                     'estado_persona' => 'ACT',
-			);            
+			);    
+			
+			$input['edad_persona'] = $this->calculate_age($input['fecha_nacimiento']);
+			
             $result = $this->persona_model->new_persona($input);
             header ( 'Content-Type: application/json' );						
 			echo $result;
@@ -63,4 +87,58 @@ class Cliente extends Admin_Controller {
 			echo json_encode ( $this->form_validation->error_array () );
 		}            
     }
+
+    public function edit_view($id){
+    	$query = $this->persona_model->get_persona('', $id);
+    	$this->data['cliente_info'] = $query;
+    	$this->data['departamentos'] = $this->lugar_model->get_departamentos();
+    	$this->data['ciudades'] = $this->lugar_model->get_ciudades($query->id_departamento);
+    	
+    	$this->render('admin/admin_cliente_edit_view');
+    }
+    
+    public function edit_cliente(){
+    	$this->load->library ( 'form_validation' );
+    	
+    	$this->form_validation->set_rules('inputNombre', 'Nombre', 'required');
+    	$this->form_validation->set_rules('inputEmail', 'correo', 'required|valid_email');
+    	//$this->form_validation->set_rules('inputDocumento', 'documento', 'required|is_unique[persona.documento_persona]', array('is_unique' => 'El documento ya se encuentra registrado'));
+    	$this->form_validation->set_rules('inputNacimiento', 'Fecha de Nacimiento', 'required');
+    	$this->form_validation->set_rules('inputTelefono', 'Telefono', 'required');
+    	$this->form_validation->set_rules('inputDireccion', 'Direccion', 'required');
+    	$this->form_validation->set_rules('inputNombreContacto', 'Nombre del Contacto', 'required');
+    	$this->form_validation->set_rules('inputTelContacto', 'Telefono del Contacto', 'required');
+    	
+    	if ($this->form_validation->run()) {
+    		
+    		$id = $this->input->post('idCliente');
+    		
+    		$input = array (
+    				'nombre_persona' => $this->input->post ( 'inputNombre' ),
+    				'correo_persona' => $this->input->post ( 'inputEmail' ),
+    				'documento_persona' => $this->input->post ( 'inputDocumento' ),
+    				'tipo_documento' => $this->input->post ( 'selectTipoDoc' ),
+    				'fecha_nacimiento' => $this->input->post ( 'inputNacimiento' ),
+    				'genero_persona' => $this->input->post ( 'selectGenero' ),
+    				'id_ciudad' => $this->input->post ( 'select_ciudades' ),
+    				'direccion_persona' => $this->input->post ( 'inputDireccion' ),
+    				'telefono_persona' => $this->input->post ( 'inputTelefono' ),
+    				'tipo_sangre_cliente' => $this->input->post ( 'selectGrupo' ),
+    				'rh_cliente' => $this->input->post ( 'selectRH' ),
+    				'eps_persona' => $this->input->post ( 'inputEps' ),
+    				'contacto_cliente' => $this->input->post ( 'inputNombreContacto' ),
+    				'telefono_contacto_cliente' => $this->input->post ( 'inputTelContacto' ),
+    		);
+    			
+    		$input['edad_persona'] = $this->calculate_age($input['fecha_nacimiento']);
+    			
+    		$result = $this->persona_model->update_persona($id, $input);
+    		header ( 'Content-Type: application/json' );
+    		echo $result;
+    	}else {
+    		header ( 'Content-Type: application/json' );
+    		echo json_encode ( $this->form_validation->error_array () );
+    	}    	
+    }
+
 }

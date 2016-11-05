@@ -5,7 +5,6 @@
           Administradores
       </h1>
     </section>
-
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
@@ -56,7 +55,7 @@
                                                 echo strtolower($admin->email);
                                                 echo '</td>';
                                                 echo '<td>';
-                                                echo ucfirst(mb_strtolower($admin->depto, 'UTF-8')) . " - " .  ucfirst(mb_strtolower($admin->ciudad, 'UTF-8')) . '<br>' . ucwords(strtolower($admin->direccion));
+                                                echo ucfirst(mb_strtolower($admin->ciudad, 'UTF-8')) . " - " .  ucfirst(mb_strtolower($admin->depto, 'UTF-8')) . '<br>' . ucwords(strtolower($admin->direccion));
                                                 echo '</td>';
                                                 echo '<td class="text-center">';
                                                 if($admin->estado = 'ACT'){
@@ -65,11 +64,15 @@
                                                     echo '<i class="fa fa-square-o"></i>';
                                                 }
                                                 echo '</td>';
-                                                echo '<td class="text-center">
-                                                        <button type="button">
-                                                            <i class="fa fa-pencil"></i>
-                                                        </button>
-                                                        <button class="borrar-btn" doc="' . $documento . '" type=button id="delete_persona">
+                                                echo '<td class="text-center">';
+                                                        $data_input = array(
+                                                		'type' => 'button',
+                                                        'class' => 'btn btn-default',
+                                                		'data-toggle' => 'tooltip',
+                                                		'title' => 'Editar',
+                                                );
+                                                echo anchor('', '<i class="fa fa-pencil"></i>', $data_input);
+                                                echo '<button class="borrar-btn btn btn-default" doc="' . $documento . '" type=button id="delete_persona" data-toggle="tooltip" title="Borrar">
                                                             <i class="fa fa-trash"></i>
                                                         </button>
                                                       </td>';
@@ -114,17 +117,39 @@
             $data_input = array(
                 'id' => "nuevo_admin_form",
             );
-            echo form_open('',$data_input);
+            echo form_open_multipart('',$data_input);
         ?>
         <div class="modal-content box">
             <div class="overlay hidden" id="div_waiting_new_admin">
                 <i class="fa fa-refresh fa-spin" id="i_refresh"></i>
             </div>
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <button type="button" class="close cancel-btn" data-dismiss="modal">&times;</button>
                 <h3 class="modal-title">Agregar administrador</h3>
             </div>
             <div class="modal-body">
+                    <div class="form-group text-center">
+		                <i id="i_foto" class="fa fa-image fa-5x"></i>
+		                <?php 
+		                $data_input = array(
+		                		'id' => 'foto_img',
+		                		'class' => 'center-block hidden',
+		                		'height ' => '200',
+		                		'width' => '200',		                		 
+		                );
+		                echo img($data_input);		
+		                
+		                //echo heading($img_upload_recom, 4, 'class="text-muted"');
+		                echo br(1);
+
+                        $data_input = array(
+                        		'id' => "inputFoto",
+                        		'name' => "inputFoto",
+                        		'class' => "inputFoto"
+                        );
+                        echo form_upload($data_input);
+                        ?>
+                    </div>            
                 <div class="row">
                     <div class="col-lg-6 form-group">
                         <label  class="control-label">Tipo de Documento: *</label>
@@ -214,21 +239,14 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-4 form-group">
+                    <div class="col-lg-6 form-group">
                         <label class="control-label">Fecha de nacimiento: *</label>
                         <div class="input-group" id="div_inputNacimiento">
                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                            <input type="text" class="form-control date-select" id="inputNacimiento" placeholder="MM/DD/YYYY" name="inputNacimiento">
+                            <input type="text" class="form-control date-select" id="inputNacimiento" placeholder="YYYY/MM/DD" name="inputNacimiento">
                         </div>
                     </div>
-                    <div class="col-lg-4 form-group">
-                        <label  class="control-label">Edad: *</label>
-                        <div class="input-group" id="div_inputEdad">
-                            <span class="input-group-addon"><i class="fa fa-birthday-cake fa-fw"></i></span>
-                            <input type="text" class="form-control" id="inputEdad" placeholder="Edad" name="inputEdad">
-                        </div>
-                    </div>
-                    <div class="col-lg-4 form-group">
+                    <div class="col-lg-6 form-group">
                         <label  class="control-label">Género: *</label>
                         <div class="input-group" id="div_inputGenero">
                             <span class="input-group-addon"><i class="fa fa-venus-mars fa-fw"></i></span>
@@ -241,7 +259,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" data-dismiss="modal" class="btn btn-danger pull-left">Cancelar</button>
+                <button type="button" data-dismiss="modal" class="btn btn-danger pull-left cancel-btn">Cancelar</button>
                 <input type="submit" name="submit_reg" class="btn btn-info pull-right" value="Guardar">
             </div>
         </div>
