@@ -27,11 +27,11 @@ class Cliente extends Admin_Controller {
 			$config = $this->config->item('config_paginator');
 			$config["total_rows"] = $this->persona_model->count_clientes($this->data['word_search']);
 			$config["base_url"] = base_url() . "administrador/Cliente/";
-			$config["per_page"] = 25;
+			$config["per_page"] = 1;
 			$config["uri_segment"] = 3;
 			$page =  $this->uri->segment(3);
 			$clientes = $this->persona_model->get_clientes('nombre_persona', 'asc', $config["per_page"], $page, $this->data['word_search']);
-			if($clientes){
+			if(1==1){
 				$this->pagination->initialize($config);
 			
 				$this->data['clientes'] = $clientes;

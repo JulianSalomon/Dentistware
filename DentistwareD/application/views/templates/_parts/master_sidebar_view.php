@@ -20,8 +20,8 @@
             <div class="pull-left info">
             	<p>
             		<?php 
- 		                $nombre = explode(" ", $user_info['nombre_completo']);
-                        echo $nombre[0] . " " . $nombre [2];
+ 		                $nombre = explode(" ", $user_info['nombre _completo']);
+                        echo $nombre[0] . " " . $nombre[2];
                         echo br(1);
                         echo '<small>';                      
                         switch ($user_info['tipo_persona']) {
