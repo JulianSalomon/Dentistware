@@ -29,18 +29,18 @@ class Admin extends Admin_Controller{
         $this->form_validation->set_rules('inputNacimiento', 'fecha de nacimiento', 'required');
         $this->form_validation->set_rules('inputTelefono', 'teléfono', 'required');
         $this->form_validation->set_rules('inputDireccion', 'dirección', 'required');
-        //$this->form_validation->set_rules('selectDepto', 'departamento', 'required', array('required' => 'Seleccione un departamento.'));
-//          $this->form_validation->set_rules('select_ciudades', 'ciudad', 'required', array('required' => 'Seleccione una ciudad.'));
-//         $this->form_validation->set_rules('selectGenero', 'género', 'required', array('required' => 'Seleccione un género.'));
+        //$this->form_validation->set_rules('select_depto', 'departamento', 'required', array('required' => 'Seleccione un departamento.'));
+        //$this->form_validation->set_rules('select_ciudades', 'ciudad', 'required', array('required' => 'Seleccione una ciudad.'));
+        //$this->form_validation->set_rules('selectGenero', 'género', 'required', array('required' => 'Seleccione un género.'));
                 
         if ($this->form_validation->run()) {
-        	
-        	$url_foto = $this->image_process('inputFoto');
+        	$doc = $this->input->post ( 'inputDocumento' );
+        	$url_foto = $this->image_process('inputFoto', $doc);
         	
             $input = array (
                     'nombre_persona' => $this->input->post ( 'inputNombre' ),
                     'correo_persona' => $this->input->post ( 'inputEmail' ),
-					'documento_persona' => $this->input->post ( 'inputDocumento' ),
+					'documento_persona' => $doc,
 					'tipo_documento' => $this->input->post ( 'selectTipoDoc' ),
 					'clave_acceso' => password_hash($this->input->post ( 'inputPassword'), PASSWORD_BCRYPT),
                     'fecha_nacimiento' => $this->input->post ( 'inputNacimiento' ),
@@ -64,19 +64,20 @@ class Admin extends Admin_Controller{
         }
     }
     
-    private function image_process($input_file_name){
+    private function image_process($input_file_name, $documento){
     	$this->load->library ( 'upload' );
-    	$config ['upload_path'] = $this->config->item ( 'upload_admin_folder' );
+                
+    	$config ['upload_path'] = "uploads/admin/";
     	$config ['allowed_types'] = 'jpg|png';
-    	$config ['max_size'] = 1024;
-    	$config ['max_width'] = 256;
-    	$config ['max_height'] = 256;
+        $config ['max_size'] = 20480;
+        $config ['overwrite'] = TRUE;
     		
-    	$url_foto = NULL;
+        
+        $url_foto = NULL;
     	$result_upload = array ();
     		
     	if ($_FILES [$input_file_name] ['name'] != '') {
-    		$config ['file_name'] = $this->rename_file ( $_FILES [$input_file_name] ['name'] );
+            $config ['file_name'] = $documento;
     		$this->upload->initialize ( $config );
     
     		if (! $this->upload->do_upload ($input_file_name)) {
@@ -86,14 +87,16 @@ class Admin extends Admin_Controller{
     			$url_foto = $result_upload ['upload_data'] ['file_name'];
     		}
     	}
+        $this->load->library('image_lib');
+        
+        $config['image_library'] = 'gd2';
+        $config['source_image'] = "uploads/admin/" . $url_foto;
+        $config['maintain_ratio'] = TRUE;
+        $config['height']       = 265;
+
+        $this->image_lib->clear();
+        $this->image_lib->initialize($config);
+        $this->image_lib->resize();
     	return $url_foto;
-    }
-    
-    private function rename_file($filename = null){
-    	$new_temp_ext = explode(".", $filename);
-    	$extension = end($new_temp_ext);
-    	$new_filename = "admin-" . rand(10, 99) . rand(10, 99) . "." . $extension;
-    
-    	return $new_filename;
     }
 }

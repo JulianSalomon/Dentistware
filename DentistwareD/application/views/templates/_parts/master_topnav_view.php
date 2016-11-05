@@ -43,25 +43,27 @@
 		                  		?>
 			                    <p>
 			                    	
-                                    <span class="hidden-xs"><?php echo $user_info['nombre_completo'];?></span>
+                                    <span><?php echo $user_info['nombre_completo'];?></span>
 			                         <br>
-                                    <span class="hidden-xs">
-                                        <?php 
-                                        switch ($user_info['tipo_persona']) {
-                                        case "ADM" :
-                                            echo 'Administrador';
-                                            break;
-                                        case "CLT" :
-                                            echo 'Cliente';
-                                            break;
-                                        case "ODO" :
-                                            echo 'Odontólogo';
-                                            break;
-                                        case "EMP" :
-                                            echo 'Empleado';
-                                            break;
-		                              }
-                                        ?>
+                                    <span>
+                                        <small>
+                                            <?php 
+                                            switch ($user_info['tipo_persona']) {
+                                            case "ADM" :
+                                                echo 'Administrador';
+                                                break;
+                                            case "CLT" :
+                                                echo 'Cliente';
+                                                break;
+                                            case "ODO" :
+                                                echo 'Odontólogo';
+                                                break;
+                                            case "EMP" :
+                                                echo 'Empleado';
+                                                break;
+                                          }
+                                            ?>
+                                        </small>
                                     </span>
 			                    </p>
 	                  		</li>

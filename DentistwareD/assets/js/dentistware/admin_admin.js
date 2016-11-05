@@ -16,15 +16,14 @@ $(function() {
 				$(photoIcon).removeClass("hidden");
 	            return false;
 	        }
-
-	        if (parseFloat(photoFile.size / 1024).toFixed(2) > 1024) {
-	        	swal('','La imagen seleccionada tiene un tamaño mayor a 1 MB', 'error');
+            if (parseFloat(photoFile.size / 20480).toFixed(2) > 20480) {
+	        	swal('','La imagen seleccionada tiene un tamaño mayor a 20 MB', 'error');
 	        	$('#inputFoto').val('');	
 				$(photoPreview).addClass("hidden");
 				$(photoIcon).removeClass("hidden");
 	            return false;
 	        }
-	        reader.onload = (function (aImg) {
+            reader.onload = (function (aImg) {
 	            return function (e) {
 	                aImg.src = e.target.result;
 	            };
@@ -32,17 +31,9 @@ $(function() {
 	        reader.readAsDataURL(photoFile);
 	        
 	        preload.onload = function () {
-	            if (this.width > 256 || this.height > 256) {
-	            	swal('','La imagen seleccionada excede dimensiones de 256x256 píxeles', 'error');
-					$(photoPreview).addClass("hidden");
-					$(photoIcon).removeClass("hidden");
-					$('#inputFoto').val('');		
-	                return false;
-	            } else {
-	            	$(photoPreview).attr('src', this.src);
-					$(photoPreview).removeClass("hidden");
-					$(photoIcon).addClass("hidden");
-	            }
+	            $(photoPreview).attr('src', this.src);
+				$(photoPreview).removeClass("hidden");
+				$(photoIcon).addClass("hidden");
 	        };
 		} else {
 			$(photoPreview).addClass("hidden");
