@@ -20,18 +20,10 @@
             <div class="pull-left info">
             	<p>
             		<?php 
- 		                /*$nombre = explode(" ", $user_info['nombre_completo']);
-                        
-                        for($i = 0; $i < count($nombre); $i += 2){
-                            echo $nombre[$i] . " ";
-                            echo $nombre[$i + 1] . " ";
-                            echo br(1);                            
-                        } */                
-                    
-                    echo $user_info['nombre_completo'];
+ 		                $nombre = explode(" ", $user_info['nombre_completo']);
+                        echo $nombre[0] . " " . $nombre [2];
                     ?>
-                    <br>
-                    <span class="hidden-xs">
+                    <br><small>
                     <?php 
                         switch ($user_info['tipo_persona']) {
                             case "ADM" :
@@ -47,8 +39,7 @@
                                 echo 'Empleado';
                                 break;
                         }
-                    ?>
-                    </span>
+                    ?></small>
                 </p>
             </div>
         </div>

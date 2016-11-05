@@ -7,6 +7,20 @@
 -- Versión del servidor: 10.1.13-MariaDB
 -- Versión de PHP: 7.0.8
 
+use dentistware_db;
+
+drop table if exists historia_pregunta;
+drop table if exists historia_diente;
+drop table if exists registro_historia;
+drop table if exists multa;
+drop table if exists info_paciente;
+drop table if exists diente;
+drop table if exists historia_clinica;
+drop table if exists cita;
+drop table if exists persona;
+drop table if exists ciudad;
+drop table if exists departamento;
+
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
@@ -1224,7 +1238,7 @@ INSERT INTO `departamento` (`id_departamento`, `nombre_dept`) VALUES
 (47, 'MAGDALENA'),
 (50, 'META'),
 (52, 'NARIÑO'),
-(54, 'NORTE DE SANTAN'),
+(54, 'NORTE DE SANTANDER'),
 (63, 'QUINDIO'),
 (66, 'RISARALDA'),
 (68, 'SANTANDER'),

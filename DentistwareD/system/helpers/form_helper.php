@@ -395,8 +395,8 @@ if ( ! function_exists('form_dropdown'))
 
 				foreach ($val as $optgroup_key => $optgroup_val)
 				{
-					$sel = in_array($optgroup_key, $selected) ? ' selected="selected"' : '';
-					$form .= '<option value="'.html_escape($optgroup_key).'"'.$sel.'>'
+					$sel = in_array($optgroup_key, $selected) | array_key_exists($optgroup_val, $selected) ? ' selected disabled' : '';
+					$form .= '<option value="'.$optgroup_key.'"'.$sel.'>'
 						.(string) $optgroup_val."</option>\n";
 				}
 
@@ -405,7 +405,7 @@ if ( ! function_exists('form_dropdown'))
 			else
 			{
 				$form .= '<option value="'.html_escape($key).'"'
-					.(in_array($key, $selected) ? ' selected="selected"' : '').'>'
+					.(in_array($key, $selected) | array_key_exists($key, $selected) ? ' selected disabled' : '').'>'
 					.(string) $val."</option>\n";
 			}
 		}

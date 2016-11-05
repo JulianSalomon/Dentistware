@@ -13,7 +13,7 @@ class Lugar_model extends MY_Model{
         $this->db->order_by("nombre_dept", "asc");
 		$query = $this->db->get()->result();
         
-        $departamentos_array = array('-1' => '- Departamento -');
+        $departamentos_array = array();
         foreach ($query as $arreglo) {
             $departamentos_array[$arreglo->id_departamento] = $arreglo->nombre_dept;
         }
