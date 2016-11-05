@@ -18,6 +18,7 @@ class Historia_model extends MY_Model{
 		$this->db->select('*');
 		$this->db->from('registro_historia');
         $this->db->join('historia_clinica', 'historia_clinica.id_historia = registro_historia.id_historia');
+        $this->db->join('persona', 'persona.id_persona = registro_historia.id_odon');
 		$this->db->where('id_cliente', $id_historia);
 		$query = $this->db->get()->result();
         return $query;	

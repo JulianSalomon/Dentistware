@@ -17,7 +17,7 @@ class Historia_clinica extends Odon_Controller {
         //echo '<pre>';
         //print_r ($this->data['registros']);
         //echo '</pre>';
-        $this->data['before_closing_body'] = plugin_js('assets/js/dentistware/admin.js', true);
+        $this->data['before_closing_body'] = plugin_js('assets/js/dentistware/odontologo.js', true);
 	}
 
     
