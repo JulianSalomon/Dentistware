@@ -20,10 +20,10 @@
             	<p>
             		<?php 
  		                $nombre = explode(" ", $user_info['nombre_completo']);
-                        echo $nombre[0];
+                        echo ucwords($nombre[0]);
                         if($length = count($nombre) > 1){
                             $pos = ceil($length/2);
-                            echo " " . $nombre[$pos];
+                            echo " " . ucwords($nombre[$pos]);
                         }
                         echo br(1);
                         echo '<small>';                      
