@@ -130,6 +130,7 @@ class Cliente_Controller extends MY_Controller{
             $this->data['user_info']['foto_persona'] = "cliente/" . $this->session->userdata('foto_persona');
         }
         $this->load->model('persona_model');
+       // $this->data['before_closing_body'] = plugin_js('assets/js/dentistware/cliente.js', true);
     }
     
     

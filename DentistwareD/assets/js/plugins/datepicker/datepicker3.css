@@ -120,7 +120,7 @@
 .datepicker table tr td.disabled,
 .datepicker table tr td.disabled:hover {
   background: none;
-  color: #444;
+  color: darkgray;
   cursor: default;
 }
 .datepicker table tr td.today,

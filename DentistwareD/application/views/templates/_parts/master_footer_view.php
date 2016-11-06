@@ -26,6 +26,7 @@
 		echo plugin_js('app');
 		echo plugin_js('pace');
         echo plugin_js('datepicker');
+        echo plugin_js('timepicker');
         echo plugin_js('datatable');
         echo plugin_js('datatable-bootstrap');
         echo plugin_js('sweetalert');

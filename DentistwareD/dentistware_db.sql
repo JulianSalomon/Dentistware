@@ -64,7 +64,17 @@ INSERT INTO `cita` (`id_cita`, `fecha_cita`, `hora_cita`, `estado_cita`, `id_cli
 (7, '2015-03-08', '15:28:00', 1, 4, 10, '604'),
 (8, '2014-07-30', '14:15:00', 1, 5, 6, '403'),
 (9, '2016-10-12', '10:30:00', 1, 11, 7, '5'),
-(10, '2016-11-16', '14:45:00', 1, 12, 10, '502');
+(10, '2016-10-16', '14:45:00', NULL, 12, 10, '502'),
+(11, '2016-09-12', '16:00:00', NULL, 3, 6, '302'),
+(12, '2016-12-16', '08:17:00', NULL, 4, 7, '1'),
+(13, '2015-04-08', '11:55:00', NULL, 5, 10, '201'),
+(14, '2014-07-25', '17:55:00', NULL, 11, 6, '46'),
+(15, '2016-10-25', '10:18:00', NULL, 12, 7, '174'),
+(16, '2016-11-01', '09:45:00', NULL, 3, 10, '10'),
+(17, '2015-03-15', '15:28:00', NULL, 4, 10, '604'),
+(18, '2014-07-21', '14:15:00', NULL, 5, 6, '403'),
+(19, '2016-10-16', '10:30:00', NULL, 11, 7, '5'),
+(20, '2016-11-21', '14:45:00', NULL, 12, 10, '502');
 
 -- --------------------------------------------------------
 
@@ -1535,10 +1545,10 @@ ALTER TABLE `persona`
 --
 -- Restricciones para tablas volcadas
 --
-
 --
 -- Filtros para la tabla `cita`
 --
+select * from cita join persona where persona.id_persona is null;
 ALTER TABLE `cita`
   ADD CONSTRAINT `fk_cliente_cita` FOREIGN KEY (`id_cliente`) REFERENCES `persona` (`id_persona`),
   ADD CONSTRAINT `fk_odont_cita` FOREIGN KEY (`id_odonto`) REFERENCES `persona` (`id_persona`);
