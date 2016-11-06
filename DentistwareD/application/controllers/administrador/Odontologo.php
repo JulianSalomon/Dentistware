@@ -6,16 +6,43 @@ class Odontologo extends Admin_Controller {
 		parent::__construct();	
 		$this->data ['page_title_end'] = '| Odontólogos';
         $this->load->model ( 'lugar_model' );
-        $this->data['departamentos'] = $this->lugar_model->get_departamentos();
-        $this->data['odontologos'] = $this->persona_model->get_odontologos();     
+        $this->load->library("pagination");
+        $this->data['departamentos'] = $this->lugar_model->get_departamentos();   
         $this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/admin_odont.js', true);
+        $this->get_user_menu('main-odontologo');        
+        $this->data['odontologos'] = '';
     }
     
     public function index(){
-        $this->get_user_menu('main-odontologo');
-		$this->render('admin/admin_odonto_view');
+        $_SESSION['word_search'] = '';
+		$post = $this->input->post('input_buscar_odontologo');
+        $_SESSION['word_search'] = mb_strtolower($post);
+        $config = array();
+        $config = $this->config->item('config_paginator');
+        $config["total_rows"] = $this->persona_model->count_personas($_SESSION['word_search'], 'ODO');
+        $config["base_url"] = base_url() . "administrador/Odontologo/index/";
+        $config["per_page"] = 25;
+        $config["uri_segment"] = 4;
+        $page =  $this->uri->segment(4);
+        if($_SESSION['word_search'] != ''){
+            $odontologos = $this->persona_model->get_odontologos('nombre_persona', 'asc', $config["per_page"], $page, $_SESSION['word_search']);
+        }
+        else{
+            $odontologos = $this->persona_model->get_odontologos('nombre_persona', 'asc', $config["per_page"], $page);
+        }
+        if($odontologos){
+            $this->pagination->initialize($config);
+
+            $this->data['odontologos'] = $odontologos;
+            $this->data["links"] = $this->pagination->create_links();
+        }
+    	
+    	
+    	$this->render ( 'admin/admin_odonto_view' );
     }
+    
  
+    
     public function nuevo_odontologo(){
         $this->load->library ( 'form_validation' );
         

@@ -2,16 +2,18 @@ $(function() {
     $('#nuevo_cliente_form').submit(function (event) {
         event.preventDefault();
         $('.ac_p_error').fadeOut('slow').remove();
-        var postData = $(this).serializeArray();    
+        var postData = new FormData(this); 
         $.ajax({
             type: 'POST',
             url: js_site_url + 'nuevo_cliente/',
             data: postData,
+            processData: false,
+            contentType: false,
             beforeSend:function(){
             	$('#div_waiting_new_cliente').removeClass("hidden");            	
             },
             success: function (msg) {
-                
+               
                 if (isNaN(msg)) {
                 	$('#div_waiting_new_cliente').addClass("hidden");  
                     $.each(msg, function (i, item) {
@@ -40,15 +42,18 @@ $(function() {
 	$('orm').submit(function (event) {
         event.preventDefault();
         $('.ac_p_error').fadeOut('slow').remove();
-        var postData = $(this).serializeArray();
+        var postData = new FormData(this); 
         $.ajax({
             type: 'POST',
             url: js_site_url + 'edit_cliente/',
             data: postData,
+            processData: false,
+            contentType: false,
             beforeSend:function(){
             	$('#div_waiting_edit_cliente').removeClass("hidden");            	
             },
             success: function (msg) { 
+            	console.log(msg)
                 if (isNaN(msg)) {
                 	$('#div_waiting_edit_cliente').addClass("hidden");   
                     $.each(msg, function (i, item) {
@@ -72,5 +77,9 @@ $(function() {
                 }
             }
         });
+    });
+	
+    $("#chkEliminarFoto").iCheck({
+		"checkboxClass": "icheckbox_square-blue",
     });
 });

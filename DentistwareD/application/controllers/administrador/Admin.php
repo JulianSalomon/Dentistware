@@ -4,17 +4,39 @@ class Admin extends Admin_Controller{
 	
     function __construct(){
         parent::__construct();
+        $this->data ['page_title_end'] = '| Administradores';
         $this->load->model ( 'lugar_model' );
-        
-        $this->data ['page_title_end'] = '| Administradores';        
-        $this->data['departamentos'] = $this->lugar_model->get_departamentos();
-        $this->data['admins'] = $this->persona_model->get_administradores();     
+        $this->load->library("pagination");
+        $this->data['departamentos'] = $this->lugar_model->get_departamentos();  
         $this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/admin_admin.js', true);
         $this->get_user_menu('main-administrador');
+        $this->data['admins'] = '';
     }
     
     public function index(){
-		$this->render ( 'admin/admin_admin_view' );	 
+        $_SESSION['word_search'] = '';        
+        $post = $this->input->post('input_buscar_administrador');
+        $_SESSION['word_search'] = mb_strtolower($post);
+        $config = array();
+        $config = $this->config->item('config_paginator');
+        $config["total_rows"] = $this->persona_model->count_personas($_SESSION['word_search'], 'ADM');
+        $config["base_url"] = base_url() . "administrador/Admin/index/";
+        $config["per_page"] = 25;
+        $config["uri_segment"] = 4;
+        $page =  $this->uri->segment(4);
+        if($_SESSION['word_search'] != ''){
+            $admins = $this->persona_model->get_administradores('nombre_persona', 'asc', $config["per_page"], $page, $_SESSION['word_search']);
+        }
+        else{
+            $admins = $this->persona_model->get_administradores('nombre_persona', 'asc', $config["per_page"], $page);
+        }
+        if($admins){
+            $this->pagination->initialize($config);
+
+            $this->data['admins'] = $admins;
+            $this->data["links"] = $this->pagination->create_links();
+        }
+    	$this->render ( 'admin/admin_admin_view' );
     }
     
     public function nuevo_admin(){
@@ -35,11 +57,11 @@ class Admin extends Admin_Controller{
                 
         if ($this->form_validation->run()) {
         	$doc = $this->input->post ( 'inputDocumento' );
-        	$url_foto = $this->image_process('inputFoto', $doc);
+        	$url_foto = $this->image_process('inputFoto', $doc, "admin");
         	
             $input = array (
-                    'nombre_persona' => $this->input->post ( 'inputNombre' ),
-                    'correo_persona' => $this->input->post ( 'inputEmail' ),
+                    'nombre_persona' => mb_strtolower($this->input->post ( 'inputNombre' )),
+    				'correo_persona' => mb_strtolower($this->input->post ( 'inputEmail' )),
 					'documento_persona' => $doc,
 					'tipo_documento' => $this->input->post ( 'selectTipoDoc' ),
 					'clave_acceso' => password_hash($this->input->post ( 'inputPassword'), PASSWORD_BCRYPT),
@@ -62,41 +84,5 @@ class Admin extends Admin_Controller{
             header ( 'Content-Type: application/json' );
             echo json_encode ( $this->form_validation->error_array () );
         }
-    }
-    
-    private function image_process($input_file_name, $documento){
-    	$this->load->library ( 'upload' );
-                
-    	$config ['upload_path'] = "uploads/admin/";
-    	$config ['allowed_types'] = 'jpg|png';
-        $config ['max_size'] = 20480;
-        $config ['overwrite'] = TRUE;
-    		
-        
-        $url_foto = NULL;
-    	$result_upload = array ();
-    		
-    	if ($_FILES [$input_file_name] ['name'] != '') {
-            $config ['file_name'] = $documento;
-    		$this->upload->initialize ( $config );
-    
-    		if (! $this->upload->do_upload ($input_file_name)) {
-    			$result_upload = array ('error' => $this->upload->display_errors () );
-    		} else {
-    			$result_upload = array ('upload_data' => $this->upload->data ());
-    			$url_foto = $result_upload ['upload_data'] ['file_name'];
-    		}
-    	}
-        $this->load->library('image_lib');
-        
-        $config['image_library'] = 'gd2';
-        $config['source_image'] = "uploads/admin/" . $url_foto;
-        $config['maintain_ratio'] = TRUE;
-        $config['height']       = 265;
-
-        $this->image_lib->clear();
-        $this->image_lib->initialize($config);
-        $this->image_lib->resize();
-    	return $url_foto;
     }
 }

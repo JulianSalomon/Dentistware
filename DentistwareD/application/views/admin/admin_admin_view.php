@@ -10,17 +10,61 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <div class="col-xs-6">
+<!--                        <div class="col-xs-6">
                             <h4>En la siguiente tabla encuentra una lista de todos los administradores.</h4>
                         </div>
-                        <div class="col-xs-6">
+-->
+                        <div class="col-xs-12">
                             <button type="button" class="btn btn-info btn-small pull-right" data-toggle="modal" data-target="#modal_add_admin">Agregar admnistrador</button>
                         </div>
                     </div>
                     <div class="box-body">
-						<?php
-							if($admins != NULL){                                    	                                    
-                       	?>	
+                        
+                        
+                             
+                    <?php 
+		            $data_input = array(
+		            		'id' => "administrador_search_form",
+		            		'name' => "administrador_search_form",
+		            );            
+		            echo form_open('administrador/Admin/index', $data_input);
+		            ?>            	
+	                <div class="form-group col-xs-12">
+	                	<?php 
+	                		echo heading('Buscar administrador:', 2);
+	                		echo '<div class="input-group input-group-lg">';  
+	                			$word = $this->session->userdata('word_search');
+			                    $data_input = array(
+			                    	'type' => 'text',
+			                        'class' => "form-control",
+			                        'name' => "input_buscar_administrador",
+			                    	'id' => "input_buscar_administrador",
+			                    	'placeholder' => 'Buscar administrador por nombre o identificación...',
+			                    	'value' => $word ? $word : set_value('input_buscar_administrador'),
+			                    );
+	                        	echo form_input($data_input);
+	                        	
+	                        	echo '<span class="input-group-btn">';                        	
+	                        	$data_input = array(
+	                        			'type' => 'submit',
+	                        			'class' => "btn btn-lg btn-primary",
+	                        			'name' => "btn_buscar_administrador",
+	                        			'id' => "btn_buscar_administrador",
+	                        			'value' => 'Buscar'
+	                        	);
+	                        	echo form_submit($data_input);                        	
+	                        	echo '</span>';
+	                        echo '</div>';
+						?>
+	             	</div> 
+                        
+                    <?php 
+                        echo form_close();
+                    	if($admins != NULL){  
+                    ?>  
+                        
+                        
+                        
                         <div class="table-responsive">
                             <table id="tabla_admin" type='tabla' class="table table-bordered table-hover tabla-usuario">
                                 <thead>
@@ -91,16 +135,22 @@
                                     </tr>
                                 </tfoot>
                             </table>
+                        <div class="text-center"> 
+                    		<?php echo $links;?>
+                    	</div>                            
                         </div>
-                        <?php 
-	                        } else {
-                                echo br(1);
-                                echo '<div class="form-group text-center">
-                                <i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
-                                echo heading('No hay administradores registrados', 3, 'class="text-muted"');
-                                echo '</div>';
-	                        }    
-                        ?>
+                    <?php 
+	                    } else {
+	                    	if($_SESSION['word_search'] != ''){
+		                    	echo br(1);
+			                	echo '<div class="form-group text-center">
+										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
+			                   	echo heading('No se encontraron resultados.<br>Intente con otra opción.', 3, 'class="text-muted"');
+			                   	echo '</div>';
+			                   	echo '</div>';
+	                    	}
+	                    }                    	
+                    ?>
                     </div>
                 </div>
             </div>
@@ -138,8 +188,6 @@
 		                		'width' => '200',		                		 
 		                );
 		                echo img($data_input);		
-		                
-		                //echo heading($img_upload_recom, 4, 'class="text-muted"');
 		                echo br(1);
 
                         $data_input = array(

@@ -161,8 +161,7 @@ $config['menu_EMP'] = array(
 								'title' => 'Historia Empleado',
 								'link' => '' ,
 								'id' => 'citas-agendadas',
-						),
-                
+						),                
                 ),
 		),
 		'logout' => array(

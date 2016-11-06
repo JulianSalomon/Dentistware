@@ -76,6 +76,44 @@ class Admin_Controller extends MY_Controller{
     public function eliminar_usuario($docPersona){        
         echo $this->persona_model->delete_persona($docPersona);
     }
+    
+    protected function image_process($input_file_name, $documento, $tipo_folder){
+    	$this->load->library ( 'upload' );
+    
+    	$config ['upload_path'] = "uploads/" . $tipo_folder . "/";
+    	$config ['allowed_types'] = 'jpg|png';
+    	$config ['max_size'] = 20480;
+    	$config ['overwrite'] = TRUE;
+    
+    
+    	$url_foto = NULL;
+    	$result_upload = array ();
+    
+    	if ($_FILES [$input_file_name] ['name'] != '') {
+    		$config ['file_name'] = $documento;
+    		$this->upload->initialize ( $config );
+    
+    		if (! $this->upload->do_upload ($input_file_name)) {
+    			$result_upload = array ('error' => $this->upload->display_errors () );
+    		} else {
+    			$result_upload = array ('upload_data' => $this->upload->data ());
+    			$url_foto = $result_upload ['upload_data'] ['file_name'];
+    		}
+    	} else {
+    		return $url_foto;
+    	}
+    	$this->load->library('image_lib');
+    
+    	$config['image_library'] = 'gd2';
+    	$config['source_image'] = "uploads/" . $tipo_folder . "/" . $url_foto;
+    	$config['maintain_ratio'] = TRUE;
+    	$config['height'] = 265;
+    
+    	$this->image_lib->clear();
+    	$this->image_lib->initialize($config);
+    	$this->image_lib->resize();
+    	return $url_foto;
+    }
 }
 
 class Cliente_Controller extends MY_Controller{

@@ -9,39 +9,79 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <div class="col-xs-6">
-                            <h4>En la siguiente tabla encuentra una lista de todos los odontólogos.</h4>
-                        </div>
-                        <div class="col-xs-6">
+<!--                        <div class="col-xs-6"> -->
+<!--                            <h4>En la siguiente tabla encuentra una lista de todos los odontólogos.</h4> -->
+<!--                        </div> -->
+                        <div class="col-xs-12">
                             <button type="button" class="btn btn-info btn-small pull-right" data-toggle="modal" data-target="#modal_add_odont">Agregar odontólogo</button>
                         </div>
                     </div>
                     <div class="box-body">
+                        
                     <?php 
+		            $data_input = array(
+		            		'id' => "odontologo_search_form",
+		            		'name' => "odontologo_search_form",
+		            );            
+		            echo form_open('administrador/Odontologo/index', $data_input);
+		            ?>            	
+	                <div class="form-group col-xs-12">
+	                	<?php 
+	                		echo heading('Buscar odontologo:', 2);
+	                		echo '<div class="input-group input-group-lg">';  
+	                			$word = $this->session->userdata('word_search');
+			                    $data_input = array(
+			                    	'type' => 'text',
+			                        'class' => "form-control",
+			                        'name' => "input_buscar_odontologo",
+			                    	'id' => "input_buscar_odontologo",
+			                    	'placeholder' => 'Buscar odontologo por nombre o identificación...',
+			                    	'value' => $word ? $word : set_value('input_buscar_odontologo'),
+			                    );
+	                        	echo form_input($data_input);
+	                        	
+	                        	echo '<span class="input-group-btn">';                        	
+	                        	$data_input = array(
+	                        			'type' => 'submit',
+	                        			'class' => "btn btn-lg btn-primary",
+	                        			'name' => "btn_buscar_odontologo",
+	                        			'id' => "btn_buscar_odontologo",
+	                        			'value' => 'Buscar'
+	                        	);
+	                        	echo form_submit($data_input);                        	
+	                        	echo '</span>';
+	                        echo '</div>';
+						?>
+	             	</div> 
+                        
+                    <?php 
+                        echo form_close();
                     	if($odontologos != NULL){
                     ?>
+                          
+                        
                         <div class="table-responsive">
-                            <table id="tabla_odon" type='tabla' class="table table-bordered table-hover tabla-usuario">
+                            <table id="tabla_odontologo" type='tabla' class="table table-bordered table-hover tabla-usuario">
                                 <thead>
                                     <tr>
                                         <th>Documento</th>
                                         <th>Nombre y teléfono</th>
                                         <th>Correo electrónico</th>
                                         <th>Ubicación</th>
+                                        <th>Estudios</th>
                                         <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php
-                                        
-                            		 		foreach ($odontologos as $odontologo){
+                                    <?php 
+                                            foreach ($odontologos as  $odontologo){
                                                 echo '<tr>';
                                                 echo '<td>';
-                                                $tipo = str_split($odontologo->t_documento, 1);
+                                                 $tipo = str_split($odontologo->t_documento, 1);
                                                 echo  $tipo[0] . "." . $tipo[1] . ". " . $odontologo->documento;
                                                 echo '</td>';
-                                                echo '<td>';
+                                                    echo '<td>';
                                                 echo ucwords($odontologo->nombre);
                                                 echo '<br>';
                                                 echo  "<small> Tel: " .$odontologo->telefono . "</small>" ;
@@ -52,27 +92,33 @@
                                                 echo '<td>';
                                                 echo ucfirst(mb_strtolower($odontologo->ciudad, 'UTF-8')) . " - " .  ucfirst(mb_strtolower($odontologo->depto, 'UTF-8')) . '<br>' . ucwords(strtolower($odontologo->direccion));
                                                 echo '</td>';
+                                                echo '<td>';
+                                                
+                                                echo $odontologo->estudios;
+                                                
+                                                echo '</td>';
                                                 echo '<td class="text-center">';
                                                 if($odontologo->estado = 'ACT'){
                                                     echo '<i class="fa fa-check-square-o"></i>';
                                                 } else {
                                                     echo '<i class="fa fa-square-o"></i>';
                                                 }
-                                                echo '</td>';
+                                                echo '</td>'; 
+                                                
                                                 echo '<td class="text-center">';
-                                                $data_input = array(
+                                                        $data_input = array(
                                                 		'type' => 'button',
-                                                		'class' => 'btn btn-default',
+                                                        'class' => 'btn btn-default',
                                                 		'data-toggle' => 'tooltip',
                                                 		'title' => 'Editar',
                                                 );
-                                                echo anchor('', '<i class="fa fa-pencil"></i>', $data_input);
+                                                echo anchor('', '<i class="fa fa-pencil"></i>', $data_input);                      
                                                 echo '<button class="borrar-btn btn btn-default" doc="' . $odontologo->documento . '" type=button id="delete_persona" data-toggle="tooltip" title="Borrar">
                                                             <i class="fa fa-trash"></i>
                                                         </button>
-                                                      </td>';                                                
-                                                echo '</tr>';
-                                            }
+                                                      </td>';
+                                            echo '</tr>';   
+                                        }
                                     ?>
                                 </tbody>
                                 <tfoot>
@@ -81,19 +127,25 @@
                                         <th>Nombre y teléfono</th>
                                         <th>Correo electrónico</th>
                                         <th>Ubicación</th>
+                                        <th>Estudios</th>
                                         <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
-                                </tfoot>
-                                </table>
+                                </tfoot>                                
+                            </table>
+                    	<div class="text-center"> 
+                    		<?php echo $links;?>
+                    	</div>                            
                         </div>
                     <?php 
 	                    } else {
-	                    	echo br(1);
-	                    	echo '<div class="form-group text-center">
-		                                <i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
-	                    	echo heading('No hay odontologos registrados', 3, 'class="text-muted"');
-	                    	echo '</div>';
+	                    	if($_SESSION['word_search'] != ''){
+		                    	echo br(1);
+			                	echo '<div class="form-group text-center">
+										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
+			                   	echo heading('No se encontraron resultados.<br>Intente con otra opción.', 3, 'class="text-muted"');
+			                   	echo '</div>';
+	                    	}
 	                    }                    	
                     ?>
                     </div>
