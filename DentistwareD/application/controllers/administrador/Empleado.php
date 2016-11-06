@@ -6,16 +6,42 @@ class Empleado extends Admin_Controller {
 		parent::__construct();
 		$this->data ['page_title_end'] = '| Empleados';
         $this->load->model ( 'lugar_model' );
+        $this->load->library("pagination");
         $this->data['departamentos'] = $this->lugar_model->get_departamentos();
-        $this->data['empleados'] = $this->persona_model->get_empleados();
         $this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/admin_empl.js', true);
         $this->get_user_menu('main-empleado');
+        $this->data['empleados'] = '';
 	}
 	
     public function index(){
-        
-		$this->render ( 'admin/admin_empl_view' );	 
+        $_SESSION['word_search'] = '';
+        $post = $this->input->post('input_buscar_empleado');
+        $_SESSION['word_search'] = mb_strtolower($post);
+        $config = array();
+        $config = $this->config->item('config_paginator');
+        $config["total_rows"] = $this->persona_model->count_personas($_SESSION['word_search'], 'EMP');
+        $config["base_url"] = base_url() . "administrador/Empleado/index/";
+        $config["per_page"] = 25;
+        $config["uri_segment"] = 4;
+        $page =  $this->uri->segment(4);
+        if($_SESSION['word_search'] != ''){
+            $empleados = $this->persona_model->get_empleados('nombre_persona', 'asc', $config["per_page"], $page, $_SESSION['word_search']);
+        }
+        else{
+            $empleados = $this->persona_model->get_empleados('nombre_persona', 'asc', $config["per_page"], $page);
+        }
+        if($empleados){
+            $this->pagination->initialize($config);
+
+            $this->data['empleados'] = $empleados;
+            $this->data["links"] = $this->pagination->create_links();
+        }
+    	
+    	
+    	$this->render ( 'admin/admin_empl_view' );
     }
+    
+    
     
     public function nuevo_empleado(){
         $this->load->library ( 'form_validation' );

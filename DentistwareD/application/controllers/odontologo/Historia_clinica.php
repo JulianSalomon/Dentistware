@@ -8,9 +8,9 @@ class Historia_clinica extends Odon_Controller {
 		$this->load->model ( 'historia_model' );
 		$id_cliente = '2';
 		$this->data['historia_clinica_info'] = $this->historia_model->get_historia_clinica($id_cliente);
-        echo '<pre>';
-        print_r ($this->data['historia_clinica_info']);
-        echo '</pre>';
+        // echo '<pre>';
+        // print_r ($this->data['historia_clinica_info']);
+        // echo '</pre>';
         $this->data['registros'] = $this->historia_model->get_registro_historia($this->data['historia_clinica_info']->id_persona);
         //echo '<pre>';
         //print_r ($this->data['registros']);

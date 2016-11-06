@@ -4,17 +4,39 @@ class Admin extends Admin_Controller{
 	
     function __construct(){
         parent::__construct();
+        $this->data ['page_title_end'] = '| Administradores';
         $this->load->model ( 'lugar_model' );
-        
-        $this->data ['page_title_end'] = '| Administradores';        
-        $this->data['departamentos'] = $this->lugar_model->get_departamentos();
-        $this->data['admins'] = $this->persona_model->get_administradores();     
+        $this->load->library("pagination");
+        $this->data['departamentos'] = $this->lugar_model->get_departamentos();  
         $this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/admin_admin.js', true);
         $this->get_user_menu('main-administrador');
+        $this->data['admins'] = '';
     }
     
     public function index(){
-		$this->render ( 'admin/admin_admin_view' );	 
+        $_SESSION['word_search'] = '';        
+        $post = $this->input->post('input_buscar_administrador');
+        $_SESSION['word_search'] = mb_strtolower($post);
+        $config = array();
+        $config = $this->config->item('config_paginator');
+        $config["total_rows"] = $this->persona_model->count_personas($_SESSION['word_search'], 'ADM');
+        $config["base_url"] = base_url() . "administrador/Admin/index/";
+        $config["per_page"] = 25;
+        $config["uri_segment"] = 4;
+        $page =  $this->uri->segment(4);
+        if($_SESSION['word_search'] != ''){
+            $admins = $this->persona_model->get_administradores('nombre_persona', 'asc', $config["per_page"], $page, $_SESSION['word_search']);
+        }
+        else{
+            $admins = $this->persona_model->get_administradores('nombre_persona', 'asc', $config["per_page"], $page);
+        }
+        if($admins){
+            $this->pagination->initialize($config);
+
+            $this->data['admins'] = $admins;
+            $this->data["links"] = $this->pagination->create_links();
+        }
+    	$this->render ( 'admin/admin_admin_view' );
     }
     
     public function nuevo_admin(){
