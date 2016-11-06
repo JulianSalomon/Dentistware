@@ -37,7 +37,7 @@ $(function() {
         });
     });
     
-	$('#edit_cliente_form').submit(function (event) {
+	$('orm').submit(function (event) {
         event.preventDefault();
         $('.ac_p_error').fadeOut('slow').remove();
         var postData = $(this).serializeArray();

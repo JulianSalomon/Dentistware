@@ -20,6 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			echo plugin_css('pace');
             echo plugin_css('datepicker3');
             echo plugin_css('sweetalert');
+              echo plugin_css('timepicker');
 			
 			echo $before_closing_head; ?>
 	</head>

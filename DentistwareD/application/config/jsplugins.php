@@ -16,6 +16,8 @@ $_js = array (
 		'datatable-bootstrap' => 'assets/js/plugins/datatables/dataTables.bootstrap.min.js',
 		'select' => 'assets/js/plugins/bootstrap-select/bootstrap-select.min.js',
 		'datepicker' => 'assets/js/plugins/datepicker/bootstrap-datepicker.js',
+        'timepicker' => 'assets/js/plugins/timepicker/bootstrap-timepicker.min.js'
+
 );
 
 $_css = array (
@@ -29,5 +31,6 @@ $_css = array (
 		'icheck' => 'assets/js/plugins/iCheck/square/blue.css',
 		'datatables' => 'assets/js/plugins/datatables/dataTables.bootstrap.css',
 		'select' => 'assets/js/plugins/bootstrap-select/bootstrap-select.min.css',
-		'datepicker3' => 'assets/js/plugins/datepicker/datepicker3.css',		
+		'datepicker3' => 'assets/js/plugins/datepicker/datepicker3.css',
+        'timepicker' => 'assets/js/plugins/timepicker/bootstrap-timepicker.min.css'		
 );

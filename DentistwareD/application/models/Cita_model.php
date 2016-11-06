@@ -15,22 +15,26 @@ class Cita_model extends MY_Model{
 		return $query;		
 	}
 	
-	public function get_citas($order_by = 'id_persona', $order = 'asc', $limit = 0, $offset = 0, $word_like = '') {
-		$array_termino = array('nombre_persona' => $word_like, 'documento_persona' => $word_like);
+	public function get_citas($order_by = 'id_cita', $order = 'asc', $limit = 0, $offset = 0) {
+
 	
-		$this->db->select('id_cita, fecha_cita as fecha, hora_cita as hora, estado_cita as estado, id_cliente as cliente, id_odonto as odontologo, consultorio');
+		$this->db->select('id_cita, fecha_cita as fecha, hora_cita as hora, estado_cita as estado, odonto.nombre_persona  as odontologo, consultorio');
 		$this->db->from('cita');
+        $this->db->join('persona as odonto', 'odonto.id_persona = cita.id_odonto');
+        $this->db->where('cita.id_cliente is NULL', NULL, FALSE);
 		
 		$this->db->order_by ( $order_by, $order );
 		if ($limit) {
 			$this->db->limit ( $limit, $offset );
 		}
-		$this->db->group_start();
-		$this->db->or_like($array_termino);
-		$this->db->group_end();
-		$this->db->where('tipo_persona', 'CLT');
-		$query = $this->db->get ();
-		if ($query->num_rows())
+        
+        $query = $this->db->get ();
+		if ($query)
 			return $query->result();
 		return false;
 	}
+    
+    public function agendar_cita($id_cita, $data =''){
+		return $this->actualizar_datos('cita', $data, array('id_cita' => $id_cita));
+	}
+}
