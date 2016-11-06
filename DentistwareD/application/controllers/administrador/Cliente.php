@@ -1,6 +1,10 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Cliente extends Admin_Controller {
+    
+    
+   
+    
 	
 	function __construct(){
 		parent::__construct();
@@ -12,30 +16,32 @@ class Cliente extends Admin_Controller {
         $this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/admin_cliente.js', true);
         $this->data['before_closing_body'] .= plugin_js('icheck');
         $this->get_user_menu('main-cliente');
-        
         $this->data['clientes'] = '';
 	}
 	
+    
+    
 	public function index(){
 		$_SESSION['word_search'] = ''; 
 		$this->render ( 'admin/admin_cliente_view' );
     }
-    
-    public function search(){
+    public function search(){    	
     		$post = $this->input->post('input_buscar_cliente');
-    		$_SESSION['word_search'] = strtolower($post);
+    		$_SESSION['word_search'] = mb_strtolower($post);
     		$config = array();
     		$config = $this->config->item('config_paginator');
-    		$config["total_rows"] = $this->persona_model->count_clientes($_SESSION['word_search']);
+    		$config["total_rows"] = $this->persona_model->count_personas($_SESSION['word_search'], 'CLT');
     		$config["base_url"] = base_url() . "administrador/Cliente/search/";
     		$config["per_page"] = 25;
     		$config["uri_segment"] = 4;
     		$page =  $this->uri->segment(4);
     		if($_SESSION['word_search'] != ''){
-    			$clientes = $this->persona_model->get_clientes('nombre_persona', 'asc', $config["per_page"], $page, $_SESSION['word_search']);
-    		}else{
-    			$clientes = $this->persona_model->get_clientes('nombre_persona', 'asc', $config["per_page"], $page);
-    		}
+                $clientes = $this->persona_model->get_clientes('nombre_persona', 'asc', $config["per_page"], $page, $_SESSION['word_search']);
+            }
+            else{
+                $clientes = $this->persona_model->get_clientes('nombre_persona', 'asc', $config["per_page"], $page);
+            }
+            
     		if($clientes){
     			$this->pagination->initialize($config);
     				
@@ -45,7 +51,7 @@ class Cliente extends Admin_Controller {
     	
     	
     	$this->render ( 'admin/admin_cliente_view' );
-    }
+    } 
     
     
     public function nuevo_cliente(){        

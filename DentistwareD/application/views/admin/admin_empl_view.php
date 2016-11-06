@@ -11,17 +11,58 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                        <div class="col-xs-6">
+<!--                        <div class="col-xs-6">
                             <h4>En la siguiente tabla encuentra una lista de todos los empleados.</h4>
-                        </div>
-                        <div class="col-xs-6">
+                        </div> 
+-->
+                        <div class="col-xs-12">
                             <button type="button" class="btn btn-info btn-small pull-right" data-toggle="modal" data-target="#modal_add_empl">Agregar empleado</button>
                         </div>
                     </div>
                     <div class="box-body">
+                        
+                        
                     <?php 
-                    	if($empleados != NULL){                    
-                    ?>                    
+		            $data_input = array(
+		            		'id' => "empleado_search_form",
+		            		'name' => "empleado_search_form",
+		            );            
+		            echo form_open('administrador/Empleado/index', $data_input);
+		            ?>            	
+	                <div class="form-group col-xs-12">
+	                	<?php 
+	                		echo heading('Buscar empleado:', 2);
+	                		echo '<div class="input-group input-group-lg">';  
+	                			$word = $this->session->userdata('word_search');
+			                    $data_input = array(
+			                    	'type' => 'text',
+			                        'class' => "form-control",
+			                        'name' => "input_buscar_empleado",
+			                    	'id' => "input_buscar_empleado",
+			                    	'placeholder' => 'Buscar empleado por nombre o identificación...',
+			                    	'value' => $word ? $word : set_value('input_buscar_empleado'),
+			                    );
+	                        	echo form_input($data_input);
+	                        	
+	                        	echo '<span class="input-group-btn">';                        	
+	                        	$data_input = array(
+	                        			'type' => 'submit',
+	                        			'class' => "btn btn-lg btn-primary",
+	                        			'name' => "btn_buscar_empleado",
+	                        			'id' => "btn_buscar_empleado",
+	                        			'value' => 'Buscar'
+	                        	);
+	                        	echo form_submit($data_input);                        	
+	                        	echo '</span>';
+	                        echo '</div>';
+						?>
+	             	</div> 
+                        
+                    <?php 
+                        echo form_close();
+                    	if($empleados != NULL){
+                    ?>  
+                        
                         <div class="table-responsive">
                             <table id="tabla_empl" type='tabla' class="table table-bordered table-hover tabla-usuario">
                                 <thead>                                
@@ -87,15 +128,21 @@
                                     </tr>
                                 </tfoot>
                             </table>
+                        <div class="text-center"> 
+                    		<?php echo $links;?>
+                    	</div>                            
                         </div>
                     <?php 
 	                    } else {
-	                    	echo br(1);
-	                    	echo '<div class="form-group text-center">
-	                                <i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
-	                    	echo heading('No hay empleados registrados', 3, 'class="text-muted"');
-	                    	echo '</div>';
-	                    }                                        
+	                    	if($_SESSION['word_search'] != ''){
+		                    	echo br(1);
+			                	echo '<div class="form-group text-center">
+										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
+			                   	echo heading('No se encontraron resultados.<br>Intente con otra opción.', 3, 'class="text-muted"');
+			                   	echo '</div>';
+			                   	echo '</div>';
+	                    	}
+	                    }                    	
                     ?>
                     </div>
                 </div>
