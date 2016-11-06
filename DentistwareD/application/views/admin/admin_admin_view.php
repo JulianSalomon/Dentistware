@@ -138,8 +138,6 @@
 		                		'width' => '200',		                		 
 		                );
 		                echo img($data_input);		
-		                
-		                //echo heading($img_upload_recom, 4, 'class="text-muted"');
 		                echo br(1);
 
                         $data_input = array(

@@ -42,12 +42,56 @@ $(function() {
     });
     
 	$(".cancel-btn").click(function (e) {
+		$("#foto_img").addClass("hidden");
+		$("#i_foto").removeClass("hidden");
 		$("form")[0].reset();
         $(".modal").modal('hide');
         $(".alert").remove();
         $(".form-group").removeClass('has-error');
+        
 	});
     
+	$("#inputFoto").change(function () {
+		var photoFile = document.getElementById("inputFoto").files[0];
+		var photoPreview = document.getElementById("foto_img");
+		var photoIcon = document.getElementById("i_foto");
+		var imageType = /image.*/;
+		
+		if(photoFile){
+			var preload = new Image();
+			var reader = new FileReader();
+			
+	        if (!photoFile.type.match(imageType)) {
+	        	swal('','El archivo selecionado no es un archivo de imagen valido.', 'error');
+	        	$('#inputFoto').val('');	
+				$(photoPreview).addClass("hidden");
+				$(photoIcon).removeClass("hidden");
+	            return false;
+	        }
+            if (parseFloat(photoFile.size / 20480).toFixed(2) > 20480) {
+	        	swal('','La imagen seleccionada tiene un tamaño mayor a 20 MB', 'error');
+	        	$('#inputFoto').val('');	
+				$(photoPreview).addClass("hidden");
+				$(photoIcon).removeClass("hidden");
+	            return false;
+	        }
+            reader.onload = (function (aImg) {
+	            return function (e) {
+	                aImg.src = e.target.result;
+	            };
+	        })(preload);
+	        reader.readAsDataURL(photoFile);
+	        
+	        preload.onload = function () {
+	            $(photoPreview).attr('src', this.src);
+				$(photoPreview).removeClass("hidden");
+				$(photoIcon).addClass("hidden");
+	        };
+		} else {
+			$(photoPreview).addClass("hidden");
+			$(photoIcon).removeClass("hidden");
+		}
+	});
     
     $('#select_depto').change(function () {
        var idDepartamento = $(this).val();

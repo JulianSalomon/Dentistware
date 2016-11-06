@@ -175,6 +175,26 @@
                     <h3 class="modal-title">Agregar cliente</h3>
                   </div>
                   <div class="modal-body">
+                    <div class="form-group text-center">
+		                <i id="i_foto" class="fa fa-image fa-5x"></i>
+		                <?php 
+		                $data_input = array(
+		                		'id' => 'foto_img',
+		                		'class' => 'center-block hidden',
+		                		'height ' => '200',
+		                		'width' => '200',		                		 
+		                );
+		                echo img($data_input);		
+		                echo br(1);
+
+                        $data_input = array(
+                        		'id' => "inputFoto",
+                        		'name' => "inputFoto",
+                        		'class' => "inputFoto"
+                        );
+                        echo form_upload($data_input);
+                        ?>
+                    </div>                  
                       <div class="row">
                          <div class="col-lg-6 form-group">
                               <label  class="control-label">Tipo de Documento: *</label>
@@ -228,8 +248,8 @@
                                             'class' => 'form-control select2 select2-hidden-accessible',
                                     );
                                     unset($departamentos['0']);
-                                    $default = array('-1'  => '- Seleccione un departamento -');
-                                    echo form_dropdown('select_depto', $departamentos, '', $data_input); 	
+                                    $default = array('-1" disabled="disabled'  => '- Seleccione un departamento -');
+                                    echo form_dropdown('select_depto', $default + $departamentos, '-1', $data_input); 	
                                 ?>
                              </div>
                         </div>

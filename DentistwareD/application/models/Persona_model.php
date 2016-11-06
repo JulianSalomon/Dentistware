@@ -37,7 +37,7 @@ class Persona_model extends MY_Model{
 		$this->db->group_end();
 		$this->db->where('tipo_persona', 'CLT');
 		$query = $this->db->get ();
-		if ($query->num_rows())
+		if ($query)
 			return $query->result();
 		return false;
 	}	

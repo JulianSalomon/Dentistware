@@ -22,6 +22,40 @@
 		        echo form_input($data_input);
 		   	?>
          	<div class="box-body">
+                    <div class="form-group text-center">
+		                <?php 
+						if($cliente_info->foto_persona){
+							echo '<img id="foto_img" class="center-block" height="240" width="240" src="'.base_url() . "uploads/cliente/" . $cliente_info->foto_persona . '">';
+							echo '<i id="i_foto" class="fa fa-image fa-5x hidden"></i>';
+							
+						} else {
+							echo '<i id="i_foto" class="fa fa-image fa-5x"></i>';
+							echo '<img id="foto_img" class="center-block hidden" height="240" width="240">';
+						}
+						
+						echo br(1);
+						echo '<label>Seleccione una imagen para el cliente.</label>';
+						if($cliente_info->foto_persona){
+							echo form_label('Eliminar foto: ', '', array('class' => 'control-label'));
+							echo '&lrm; &lrm;&lrm; &lrm;&lrm; &lrm;&lrm;';
+							$data = array(
+									'name'          => 'chkEliminarFoto',
+									'id'            => 'chkEliminarFoto',
+									'value'         => 'on',
+									'checked'       => FALSE,
+							);
+							echo form_checkbox($data);
+						}
+						echo br(1);
+
+                        $data_input = array(
+                        		'id' => "inputFoto",
+                        		'name' => "inputFoto",
+                        		'value' => $cliente_info->foto_persona,
+                        );
+                        echo form_upload($data_input); 
+                        ?>
+                    </div>         	
             	<div class="row">
 					<div class="col-lg-6 form-group">
                     	<label  class="control-label">Tipo de Documento: *</label>
@@ -29,17 +63,20 @@
                         	<span class="input-group-addon"><i class="fa fa-credit-card fa-fw"></i></span>
 		                    <?php   
 		                    	$tipos_docs = array(
-		                    			'TI' => 'Tarjeta de Identidad',
-		                    			'CC' => 'Cédula de Ciudadania',
-		                    			'CE' => 'Cédula de Extranjería',
+										-1 => '- Seleccionar -',
+						    			'CC' => 'Cédula de Ciudadania',
+						    			'TI' => 'Tarjeta de Identidad',
+						    			'CE' => 'Cedula de Extranjeria',
+								);
+		                    	
+		                    	$data_input = array(
+		                    			'id' => 'selectTipoDoc',
+		                    			'class' => 'form-control',
 		                    	);
-		                    
-				                $data_input = array(
-				                		'id' => 'selectTipoDoc',
-				                		'class' => 'form-control',
-				                		'tabindex' => "-1",
-				                );
-				                echo form_dropdown('selectTipoDoc', $tipos_docs, $cliente_info->tipo_documento, $data_input);
+		                    	
+		                    	$selected = $cliente_info->tipo_documento;
+		                    	
+		                    	echo form_dropdown('selectTipoDoc', $tipos_docs, $selected, $data_input);
 	                        ?>                          	
 						</div>
 					</div>
@@ -81,7 +118,6 @@
                                     $data_input = array(
                                             'id' => 'select_depto',
                                             'class' => 'form-control select2 select2-hidden-accessible',
-                                    		'tabindex' => "-1",
                                     );
                                     echo form_dropdown('select_depto', $departamentos, $cliente_info->id_departamento, $data_input); 	
                                 ?>
@@ -95,7 +131,6 @@
                                     $data_input = array(
                                             'id' => 'select_ciudades',
                                             'class' => 'form-control select2 select2-hidden-accessible',
-                                    		'tabindex' => "-1",
                                     );
                                     echo form_dropdown('select_ciudades', $ciudades, $cliente_info->id_ciudad, $data_input); 	
                                 ?>                            
@@ -131,7 +166,7 @@
                     	<label  class="control-label">Género: *</label>
                         <div class="input-group" id="div_inputGenero">
                         	<span class="input-group-addon"><i class="fa fa-venus-mars fa-fw"></i></span>
-                            <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="selectGenero" id="selectGenero" value="<?php echo $cliente_info->genero_persona;?>">
+                            <select class="form-control select2 select2-hidden-accessible" name="selectGenero" id="selectGenero" value="<?php echo $cliente_info->genero_persona;?>">
                             	<option value='M'>Masculino</option>
                                 <option value='F'>Femenino</option>
 							</select>
@@ -151,8 +186,7 @@
 		                    
 				                $data_input = array(
 				                		'id' => 'selectGrupo',
-				                		'class' => 'form-control select2 select2-hidden-accessible',
-				                		'tabindex' => "-1",
+				                		'class' => 'form-control',
 				                );
 				                echo form_dropdown('selectGrupo', $tipos_sangre, $cliente_info->tipo_sangre_cliente, $data_input);
 	                        ?>                          	

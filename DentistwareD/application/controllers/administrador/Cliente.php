@@ -7,8 +7,10 @@ class Cliente extends Admin_Controller {
 		$this->data ['page_title_end'] = '| Clientes';
         $this->load->model ( 'lugar_model' );
         $this->load->library("pagination");
-        $this->data['departamentos'] = $this->lugar_model->get_departamentos();        
+        $this->data['departamentos'] = $this->lugar_model->get_departamentos();      
+        $this->data['before_closing_head'] .= plugin_css('icheck');
         $this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/admin_cliente.js', true);
+        $this->data['before_closing_body'] .= plugin_js('icheck');
         $this->get_user_menu('main-cliente');
         
         $this->data['clientes'] = '';
@@ -20,9 +22,6 @@ class Cliente extends Admin_Controller {
     }
     
     public function search(){
-
-
-    	
     		$post = $this->input->post('input_buscar_cliente');
     		$_SESSION['word_search'] = strtolower($post);
     		$config = array();
@@ -32,8 +31,11 @@ class Cliente extends Admin_Controller {
     		$config["per_page"] = 25;
     		$config["uri_segment"] = 4;
     		$page =  $this->uri->segment(4);
-    		if($_SESSION['word_search'] != ''){$clientes = $this->persona_model->get_clientes('nombre_persona', 'asc', $config["per_page"], $page, $_SESSION['word_search']);}
-            else{$clientes = $this->persona_model->get_clientes('nombre_persona');}
+    		if($_SESSION['word_search'] != ''){
+    			$clientes = $this->persona_model->get_clientes('nombre_persona', 'asc', $config["per_page"], $page, $_SESSION['word_search']);
+    		}else{
+    			$clientes = $this->persona_model->get_clientes('nombre_persona', 'asc', $config["per_page"], $page);
+    		}
     		if($clientes){
     			$this->pagination->initialize($config);
     				
@@ -60,11 +62,15 @@ class Cliente extends Admin_Controller {
         $this->form_validation->set_rules('inputNombreContacto', 'Nombre del Contacto', 'required');
         $this->form_validation->set_rules('inputTelContacto', 'Telefono del Contacto', 'required');        
         
-        if ($this->form_validation->run()) {					
+        if ($this->form_validation->run()) {	
+        	
+        	$doc = $this->input->post ( 'inputDocumento' );
+        	$url_foto = $this->image_process('inputFoto', $doc, "cliente");
+        	
 			$input = array (
                     'nombre_persona' => mb_strtolower($this->input->post ( 'inputNombre' )),
                     'correo_persona' => mb_strtolower($this->input->post ( 'inputEmail' )),
-					'documento_persona' => $this->input->post ( 'inputDocumento' ),
+					'documento_persona' => $doc,
 					'tipo_documento' => $this->input->post ( 'selectTipoDoc' ),
 					'clave_acceso' => password_hash($this->input->post ( 'inputPassword'), PASSWORD_BCRYPT),
                     'fecha_nacimiento' => $this->input->post ( 'inputNacimiento' ),
@@ -79,6 +85,7 @@ class Cliente extends Admin_Controller {
                     'telefono_contacto_cliente' => $this->input->post ( 'inputTelContacto' ),
                     'tipo_persona' => 'CLT',
                     'estado_persona' => 'ACT',
+					'foto_persona' => $url_foto,
 			);    
 			
 			$input['edad_persona'] = $this->calculate_age($input['fecha_nacimiento']);
@@ -86,7 +93,7 @@ class Cliente extends Admin_Controller {
             $result = $this->persona_model->new_persona($input);
             header ( 'Content-Type: application/json' );						
 			echo $result;
-		}else {
+		} else {
 			header ( 'Content-Type: application/json' );
 			echo json_encode ( $this->form_validation->error_array () );
 		}            
@@ -116,11 +123,12 @@ class Cliente extends Admin_Controller {
     	if ($this->form_validation->run()) {
     		
     		$id = $this->input->post('idCliente');
+    		$doc = $this->input->post ( 'inputDocumento' );
     		
     		$input = array (
-    				'nombre_persona' => mb_strtolower($this->input->post ( 'inputNombre' )),
-    				'correo_persona' => mb_strtolower($this->input->post ( 'inputEmail' )),
-    				'documento_persona' => $this->input->post ( 'inputDocumento' ),
+    				'nombre_persona' => ($this->input->post ( 'inputNombre' )),
+    				'correo_persona' => ($this->input->post ( 'inputEmail' )),
+    				'documento_persona' => $doc,
     				'tipo_documento' => $this->input->post ( 'selectTipoDoc' ),
     				'fecha_nacimiento' => $this->input->post ( 'inputNacimiento' ),
     				'genero_persona' => $this->input->post ( 'selectGenero' ),
@@ -133,9 +141,19 @@ class Cliente extends Admin_Controller {
     				'contacto_cliente' => $this->input->post ( 'inputNombreContacto' ),
     				'telefono_contacto_cliente' => $this->input->post ( 'inputTelContacto' ),
     		);
+    		
+    		$nombre_foto = $this->image_process('inputFoto', $doc, "cliente");
+    		
+    		if($nombre_foto == NULL) {
+    			if($this->input->post ('chkEliminarFoto')){
+    				$input['foto_persona'] = NULL;
+    			}
+    		} else {
+    			$input['foto_persona'] = $nombre_foto;
+    		}
     			
-    		$input['edad_persona'] = $this->calculate_age($input['fecha_nacimiento']);
-    			
+    		$input['edad_persona'] = $this->calculate_age($input['fecha_nacimiento']);    		    		
+    		
     		$result = $this->persona_model->update_persona($id, $input);
     		header ( 'Content-Type: application/json' );
     		echo $result;
@@ -144,5 +162,4 @@ class Cliente extends Admin_Controller {
     		echo json_encode ( $this->form_validation->error_array () );
     	}    	
     }
-
 }
