@@ -2,16 +2,17 @@ $(function() {
     $('#nuevo_empl_form').submit(function (event) {
         event.preventDefault();
         $('.ac_p_error').fadeOut('slow').remove();
-        var postData = $(this).serializeArray();    
+        var postData = new FormData(this);     
         $.ajax({
             type: 'POST',
             url: js_site_url + 'nuevo_empleado/',
             data: postData,
+            processData: false,
+            contentType: false,            
             beforeSend:function(){
             	$('#div_waiting_new_empl').removeClass("hidden");            	
             },
             success: function (msg) {
-                
                 if (isNaN(msg)) {
                 	$('#div_waiting_new_empl').addClass("hidden");  
                     $.each(msg, function (i, item) {

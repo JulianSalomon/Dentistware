@@ -1,11 +1,6 @@
 <?php
 if (!defined('BASEPATH')) exit('No direct script access allowed');
 class Cliente extends Admin_Controller {
-    
-    
-   
-    
-	
 	function __construct(){
 		parent::__construct();
 		$this->data ['page_title_end'] = '| Clientes';
@@ -19,8 +14,6 @@ class Cliente extends Admin_Controller {
         $this->data['clientes'] = '';
 	}
 	
-    
-    
 	public function index(){
 		$_SESSION['word_search'] = ''; 
 		$this->render ( 'admin/admin_cliente_view' );
@@ -48,15 +41,13 @@ class Cliente extends Admin_Controller {
     			$this->data['clientes'] = $clientes;
     			$this->data["links"] = $this->pagination->create_links();
     		}
-    	
-    	
     	$this->render ( 'admin/admin_cliente_view' );
     } 
-    
     
     public function nuevo_cliente(){        
         $this->load->library ( 'form_validation' );
         
+        $this->form_validation->set_rules('selectTipoDoc', 'tipo documento', 'required', array('required' => 'Seleccione un tipo de documento.'));
         $this->form_validation->set_rules('inputNombre', 'Nombre', 'required');
         $this->form_validation->set_rules('inputEmail', 'correo', 'required|valid_email');
         $this->form_validation->set_rules('inputPassword', 'contraseña', 'required');
@@ -66,7 +57,11 @@ class Cliente extends Admin_Controller {
         $this->form_validation->set_rules('inputTelefono', 'Telefono', 'required');
         $this->form_validation->set_rules('inputDireccion', 'Direccion', 'required');
         $this->form_validation->set_rules('inputNombreContacto', 'Nombre del Contacto', 'required');
-        $this->form_validation->set_rules('inputTelContacto', 'Telefono del Contacto', 'required');        
+        $this->form_validation->set_rules('inputTelContacto', 'Telefono del Contacto', 'required'); 
+        $this->form_validation->set_rules('select_ciudades', 'ciudad', 'required', array('required' => 'Seleccione una ubicación.'));
+        $this->form_validation->set_rules('selectGenero', 'género', 'required', array('required' => 'Seleccione un género.'));
+        $this->form_validation->set_rules('selectGrupo', 'grupo', 'required', array('required' => 'Seleccione un tipo de sangre.'));
+        $this->form_validation->set_rules('selectRH', 'RH', 'required', array('required' => 'Seleccione el RH'));
         
         if ($this->form_validation->run()) {	
         	
@@ -117,9 +112,9 @@ class Cliente extends Admin_Controller {
     public function edit_cliente(){
     	$this->load->library ( 'form_validation' );
     	
-    	$this->form_validation->set_rules('inputNombre', 'Nombre', 'required');
+    	$this->form_validation->set_rules('inputNombre', 'nombre', 'required');
     	$this->form_validation->set_rules('inputEmail', 'correo', 'required|valid_email');
-    	//$this->form_validation->set_rules('inputDocumento', 'documento', 'required|is_unique[persona.documento_persona]', array('is_unique' => 'El documento ya se encuentra registrado'));
+    	$this->form_validation->set_rules('inputDocumento', 'documento', 'required');
     	$this->form_validation->set_rules('inputNacimiento', 'Fecha de Nacimiento', 'required');
     	$this->form_validation->set_rules('inputTelefono', 'Telefono', 'required');
     	$this->form_validation->set_rules('inputDireccion', 'Direccion', 'required');
@@ -132,8 +127,8 @@ class Cliente extends Admin_Controller {
     		$doc = $this->input->post ( 'inputDocumento' );
     		
     		$input = array (
-    				'nombre_persona' => ($this->input->post ( 'inputNombre' )),
-    				'correo_persona' => ($this->input->post ( 'inputEmail' )),
+                    'nombre_persona' => mb_strtolower($this->input->post ( 'inputNombre' )),
+                    'correo_persona' => mb_strtolower($this->input->post ( 'inputEmail' )),
     				'documento_persona' => $doc,
     				'tipo_documento' => $this->input->post ( 'selectTipoDoc' ),
     				'fecha_nacimiento' => $this->input->post ( 'inputNacimiento' ),

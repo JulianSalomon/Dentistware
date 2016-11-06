@@ -11,7 +11,7 @@
 		        $data_input = array(
 		        		'id' => "edit_cliente_form",
 		        );        
-		        echo form_open('', $data_input);	
+		        echo form_open_multipart('', $data_input);	
 		        
 		        $data_input = array(
 		        		'id' => "idCliente",
@@ -62,8 +62,8 @@
                         <div class="input-group" id="div_selectTipoDoc">
                         	<span class="input-group-addon"><i class="fa fa-credit-card fa-fw"></i></span>
 		                    <?php   
-		                    	$tipos_docs = array(
-										-1 => '- Seleccionar -',
+		                    	$generos = array(
+										'-1' => '- Elija un tipo de documento -',
 						    			'CC' => 'Cédula de Ciudadania',
 						    			'TI' => 'Tarjeta de Identidad',
 						    			'CE' => 'Cedula de Extranjeria',
@@ -74,9 +74,8 @@
 		                    			'class' => 'form-control',
 		                    	);
 		                    	
-		                    	$selected = $cliente_info->tipo_documento;
-		                    	
-		                    	echo form_dropdown('selectTipoDoc', $tipos_docs, $selected, $data_input);
+		                    	$selected = $cliente_info->tipo_documento;		                    	
+		                    	echo form_dropdown('selectTipoDoc', $generos, $selected, $data_input);
 	                        ?>                          	
 						</div>
 					</div>
@@ -109,7 +108,7 @@
                         <input type="text" class="form-control" id="inputDireccion" placeholder="Dirección de residencia" name="inputDireccion" value="<?php echo $cliente_info->direccion_persona;?>">
                 	</div>
 				</div>   
-				<div class="row">
+				<div class="row" id="div_select_ciudades">
                 	<div class="col-lg-6 form-group" >
                     	<label class="control-label">Departamento: *</label>
                         <div class="input-group">
@@ -117,7 +116,7 @@
                                  <?php 
                                     $data_input = array(
                                             'id' => 'select_depto',
-                                            'class' => 'form-control select2 select2-hidden-accessible',
+                                            'class' => 'form-control',
                                     );
                                     echo form_dropdown('select_depto', $departamentos, $cliente_info->id_departamento, $data_input); 	
                                 ?>
@@ -164,12 +163,23 @@
                	<div class="row">    
                     <div class="col-lg-4 form-group">
                     	<label  class="control-label">Género: *</label>
-                        <div class="input-group" id="div_inputGenero">
+                        <div class="input-group" id="div_selectGenero">
                         	<span class="input-group-addon"><i class="fa fa-venus-mars fa-fw"></i></span>
-                            <select class="form-control select2 select2-hidden-accessible" name="selectGenero" id="selectGenero" value="<?php echo $cliente_info->genero_persona;?>">
-                            	<option value='M'>Masculino</option>
-                                <option value='F'>Femenino</option>
-							</select>
+		                    <?php   
+		                    	$generos = array(
+										'-1' => '- Género -',
+						    			'M' => 'Masculino',
+						    			'F' => 'Femenino',						    			
+								);
+		                    	
+		                    	$data_input = array(
+		                    			'id' => 'selectGenero',
+		                    			'class' => 'form-control',
+		                    	);
+		                    	
+		                    	$selected = $cliente_info->genero_persona;		                    	
+		                    	echo form_dropdown('selectGenero', $generos, $selected, $data_input);
+	                        ?>                         	
 						</div>
 					</div>
 					<div class="col-lg-4 form-group">
@@ -178,6 +188,7 @@
                         	<span class="input-group-addon"><i class="fa fa-plus-square fa-fw"></i></span>
 		                    <?php 
 		                    	$tipos_sangre = array(
+		                    			'-1' => "- Elija una opción -",
 		                    			'A' => 'A',
 		                    			'B' => 'B',
 		                    			'AB' => 'AB',
@@ -198,14 +209,14 @@
                         	<span class="input-group-addon"><i class="fa  fa-plus-square fa-fw"></i></span>
 		                    <?php 
 		                    	$tipos_rh = array(
+		                    			'-1' => "- Elija una opción -",
 		                    			'+' => '+',
 		                    			'-' => '-',
 		                    	);
 		                    
 				                $data_input = array(
 				                		'id' => 'selectRH',
-				                		'class' => 'form-control select2 select2-hidden-accessible',
-				                		'tabindex' => "-1",
+				                		'class' => 'form-control',
 				                );
 				                echo form_dropdown('selectRH', $tipos_rh, $cliente_info->rh_cliente, $data_input);
 	                        ?>                         	

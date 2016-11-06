@@ -50,10 +50,9 @@ class Admin extends Admin_Controller{
         $this->form_validation->set_rules('inputPasswordConfirm', 'confirmar contraseña', 'required|matches[inputPassword]', array('matches' => 'Las contraseñas no coindicen'));
         $this->form_validation->set_rules('inputNacimiento', 'fecha de nacimiento', 'required');
         $this->form_validation->set_rules('inputTelefono', 'teléfono', 'required');
-        $this->form_validation->set_rules('inputDireccion', 'dirección', 'required');
-        //$this->form_validation->set_rules('select_depto', 'departamento', 'required', array('required' => 'Seleccione un departamento.'));
-        //$this->form_validation->set_rules('select_ciudades', 'ciudad', 'required', array('required' => 'Seleccione una ciudad.'));
-        //$this->form_validation->set_rules('selectGenero', 'género', 'required', array('required' => 'Seleccione un género.'));
+        $this->form_validation->set_rules('inputDireccion', 'dirección', 'required');       
+        $this->form_validation->set_rules('select_ciudades', 'ciudad', 'required', array('required' => 'Seleccione una ubicación.'));
+        $this->form_validation->set_rules('selectGenero', 'género', 'required', array('required' => 'Seleccione un género.'));
                 
         if ($this->form_validation->run()) {
         	$doc = $this->input->post ( 'inputDocumento' );

@@ -1,5 +1,4 @@
 <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
           Clientes
@@ -10,9 +9,6 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-<!--                         <div class="col-xs-6"> -->
-<!--                             <h4>En la siguiente tabla encuentra una lista de todos los clientes.</h4> -->
-<!--                         </div> -->
                         <div class="col-xs-12">
                             <button type="button" class="btn btn-info btn-small pull-right" data-toggle="modal" data-target="#modal_add_client">Agregar cliente</button>
                         </div>
@@ -141,7 +137,7 @@
                         </div>
                     <?php 
 	                    } else {
-	                    	if($_SESSION['word_search'] != ''){
+	                    	if($word != ''){
 		                    	echo br(1);
 			                	echo '<div class="form-group text-center">
 										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
@@ -157,14 +153,13 @@
     </section>
 </div>
 
-<div class="modal fade modal-add" id="modal_add_client" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade modal-add" id="modal_add_client" role="dialog" aria-labelledby="myModalLabel">
         <div class="modal-dialog" role="document">
-            <!-- Modal content-->
             <?php 
                 $data_input = array(
                     'id' => "nuevo_cliente_form",
                 );            
-                echo form_open('',$data_input);
+                echo form_open_multipart('',$data_input);
             ?>                                  
                 <div class="modal-content box">
                     <div class="overlay hidden" id="div_waiting_new_cliente">
@@ -200,7 +195,7 @@
                               <label  class="control-label">Tipo de Documento: *</label>
                                 <div class="input-group" id="div_selectTipoDoc">
                                     <span class="input-group-addon"><i class="fa fa-credit-card fa-fw"></i></span>
-                                    <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="selectTipoDoc" id="selectTipoDoc">
+                                    <select class="form-control select2 select2-hidden-accessible" name="selectTipoDoc" id="selectTipoDoc">
                                         <option value='-1' selected disabled>- Elija un tipo de documento -</option>
                                         <option value='TI'>Tarjeta de identidad</option>
                                         <option value='CC'>Cédula de ciudadanía</option>
@@ -237,7 +232,7 @@
                                  <input type="text" class="form-control" id="inputDireccion" placeholder="Dirección de residencia" name="inputDireccion">
                              </div>                                  
                       </div>                                                                  
-                        <div class="row">
+                        <div class="row" id="div_select_ciudades">
                          <div class="col-lg-6 form-group" >
                              <label class="control-label">Departamento: *</label>
                              <div class="input-group">
@@ -245,10 +240,10 @@
                                  <?php 
                                     $data_input = array(
                                             'id' => 'select_depto',
-                                            'class' => 'form-control select2 select2-hidden-accessible',
+                                            'class' => 'form-control',
                                     );
                                     unset($departamentos['0']);
-                                    $default = array('-1" disabled="disabled'  => '- Seleccione un departamento -');
+                                    $default = array('-1'  => '- Seleccione un departamento -');
                                     echo form_dropdown('select_depto', $default + $departamentos, '-1', $data_input); 	
                                 ?>
                              </div>
@@ -257,7 +252,7 @@
                              <label  class="control-label">Ciudad: *</label>
                              <div class="input-group">
                                  <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>                 
-                                 <select class="form-control select2 select2-hidden-accessible" tabindex="-1" id="select_ciudades" name="select_ciudades" disabled>
+                                 <select class="form-control" tabindex="-1" id="select_ciudades" name="select_ciudades" disabled>
                                      <option value="-1"> Seleccione un Departamento</option>
                                  </select>
                              </div>
@@ -308,7 +303,7 @@
                              <label class=" control-label">Grupo sanguíneo: *</label>
                              <div class="input-group" id="div_selectGrupo">
                                  <span class="input-group-addon"><i class="fa fa-plus-square fa-fw"></i></span>
-                                 <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="selectGrupo" id="selectGrupo">
+                                 <select class="form-control" name="selectGrupo" id="selectGrupo">
                                     <option value='-1' selected disabled>- Elija una opción -</option>
                                      <option value="A">A</option>
                                      <option value="B">B</option>
@@ -321,7 +316,7 @@
                              <label  class=" control-label">RH: *</label>
                              <div class="input-group" id="div_selectRH">
                                  <span class="input-group-addon"><i class="fa  fa-plus-square fa-fw"></i></span>
-                                 <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="selectRH" id="selectRH">
+                                 <select class="form-control"name="selectRH" id="selectRH">
                                      <option value='-1' selected disabled>- Elija una opción -</option>
                                      <option value="+">+</option>
                                      <option value="-">-</option>
@@ -330,9 +325,10 @@
                           </div>
                           <div class="col-lg-4 form-group">
                              <label  class="control-label">Género: *</label>
-                             <div class="input-group" id="div_inputGenero">
+                             <div class="input-group" id="div_selectGenero">
                                  <span class="input-group-addon"><i class="fa fa-venus-mars fa-fw"></i></span>
-                                <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="selectGenero" id="selectGenero">
+                                <select class="form-control" name="selectGenero" id="selectGenero">
+                                <option value='-1' selected disabled>- Género -</option>
                                     <option value='M'>Masculino</option>
                                     <option value='F'>Femenino</option>
                                  </select>
