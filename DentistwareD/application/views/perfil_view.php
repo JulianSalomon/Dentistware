@@ -88,13 +88,13 @@
                                     echo "<td style= width:45% > " . ucwords(strtolower($persona->direccion_persona)) . "</td>";
                                   echo "</tr>";
 
-                                   if($persona->tipo_persona != 'ADM'){
+                                   
                                        echo "<tr>";
                                         echo "<th class= text-right style= width:45% >E-mail:</th>";
                                           echo "<td style= width:10% > </td>";
                                         echo "<td> " . strtolower($persona->correo_persona) . "</td>";
                                       echo "</tr>";
-                                   };
+                                   
                                        
                                    echo "<tr>";
                                     echo "<th class= text-right style= width:45% >Telefono:</th>";

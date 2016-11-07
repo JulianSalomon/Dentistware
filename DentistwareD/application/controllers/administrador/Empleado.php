@@ -97,8 +97,9 @@ class Empleado extends Admin_Controller {
     }
     
     public function edit_empleado(){
-    	$this->load->library ( 'form_validation' );
-    	
+        $this->load->model ( 'lugar_model' );
+        
+    	$this->load->library ( 'form_validation' );    	
     	$this->form_validation->set_rules('inputNombre', 'nombre', 'required');
     	$this->form_validation->set_rules('inputEmail', 'correo', 'required|valid_email');
     	$this->form_validation->set_rules('inputDocumento', 'documento', 'required');
@@ -126,7 +127,7 @@ class Empleado extends Admin_Controller {
     				
     		);
     		
-    		$nombre_foto = $this->image_process('inputFoto', $doc, "cliente");
+    		$nombre_foto = $this->image_process('inputFoto', $doc, "empleado");
     		
     		if($nombre_foto == NULL) {
     			if($this->input->post ('chkEliminarFoto')){
