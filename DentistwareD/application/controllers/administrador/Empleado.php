@@ -36,16 +36,14 @@ class Empleado extends Admin_Controller {
             $this->data['empleados'] = $empleados;
             $this->data["links"] = $this->pagination->create_links();
         }
-    	
-    	
+
     	$this->render ( 'admin/admin_empl_view' );
     }
-    
-    
     
     public function nuevo_empleado(){
         $this->load->library ( 'form_validation' );
         
+        $this->form_validation->set_rules('selectTipoDoc', 'tipo documento', 'required', array('required' => 'Seleccione un tipo de documento.'));
         $this->form_validation->set_rules('inputNombre', 'Nombre', 'required');
         $this->form_validation->set_rules('inputEmail', 'correo', 'required|valid_email');
         $this->form_validation->set_rules('inputPassword', 'contraseña', 'required');
@@ -54,12 +52,18 @@ class Empleado extends Admin_Controller {
         $this->form_validation->set_rules('inputNacimiento', 'Fecha de Nacimiento', 'required');
         $this->form_validation->set_rules('inputTelefono', 'Telefono', 'required');
         $this->form_validation->set_rules('inputDireccion', 'Direccion', 'required');
+        $this->form_validation->set_rules('select_ciudades', 'ciudad', 'required', array('required' => 'Seleccione una ubicación.'));
+        $this->form_validation->set_rules('selectGenero', 'género', 'required', array('required' => 'Seleccione un género.'));
                 
         if ($this->form_validation->run()) {		
+        	
+        	$doc = $this->input->post ( 'inputDocumento' );
+        	$url_foto = $this->image_process('inputFoto', $doc, "empleado");
+        	
 			$input = array (
-                'nombre_persona' => $this->input->post ( 'inputNombre' ),
-                'correo_persona' => $this->input->post ( 'inputEmail' ),
-				'documento_persona' => $this->input->post ( 'inputDocumento' ),
+                'nombre_persona' => mb_strtolower($this->input->post ( 'inputNombre' )),
+    			'correo_persona' => mb_strtolower($this->input->post ( 'inputEmail' )),
+				'documento_persona' => $doc,
 				'tipo_documento' => $this->input->post ( 'selectTipoDoc' ),
 				'clave_acceso' => password_hash($this->input->post ( 'inputPassword'), PASSWORD_BCRYPT),
                 'fecha_nacimiento' => $this->input->post ( 'inputNacimiento' ),
@@ -69,8 +73,9 @@ class Empleado extends Admin_Controller {
 				'telefono_persona' => $this->input->post ( 'inputTelefono' ),
                 'tipo_persona' => 'EMP',
                 'estado_persona' => 'ACT',
+				'foto_persona' => $url_foto,
 			);
-			
+						
 			$input['edad_persona'] = $this->calculate_age($input['fecha_nacimiento']);
 			
             $result = $this->persona_model->new_persona($input);

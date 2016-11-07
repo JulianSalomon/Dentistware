@@ -9,57 +9,50 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-<!--                        <div class="col-xs-6"> -->
-<!--                            <h4>En la siguiente tabla encuentra una lista de todos los odontólogos.</h4> -->
-<!--                        </div> -->
                         <div class="col-xs-12">
                             <button type="button" class="btn btn-info btn-small pull-right" data-toggle="modal" data-target="#modal_add_odont">Agregar odontólogo</button>
                         </div>
                     </div>
-                    <div class="box-body">
-                        
+                    <div class="box-body">                        
                     <?php 
-		            $data_input = array(
-		            		'id' => "odontologo_search_form",
-		            		'name' => "odontologo_search_form",
-		            );            
-		            echo form_open('administrador/Odontologo/index', $data_input);
-		            ?>            	
-	                <div class="form-group col-xs-12">
-	                	<?php 
-	                		echo heading('Buscar odontologo:', 2);
-	                		echo '<div class="input-group input-group-lg">';  
-	                			$word = $this->session->userdata('word_search');
-			                    $data_input = array(
-			                    	'type' => 'text',
-			                        'class' => "form-control",
-			                        'name' => "input_buscar_odontologo",
-			                    	'id' => "input_buscar_odontologo",
-			                    	'placeholder' => 'Buscar odontologo por nombre o identificación...',
-			                    	'value' => $word ? $word : set_value('input_buscar_odontologo'),
-			                    );
-	                        	echo form_input($data_input);
-	                        	
-	                        	echo '<span class="input-group-btn">';                        	
-	                        	$data_input = array(
-	                        			'type' => 'submit',
-	                        			'class' => "btn btn-lg btn-primary",
-	                        			'name' => "btn_buscar_odontologo",
-	                        			'id' => "btn_buscar_odontologo",
-	                        			'value' => 'Buscar'
-	                        	);
-	                        	echo form_submit($data_input);                        	
-	                        	echo '</span>';
-	                        echo '</div>';
-						?>
-	             	</div> 
-                        
-                    <?php 
-                        echo form_close();
+			            $data_input = array(
+			            		'id' => "odontologo_search_form",
+			            		'name' => "odontologo_search_form",
+			            );            
+			            echo form_open('administrador/Odontologo/index', $data_input);
+			                        	
+		                echo '<div class="form-group col-xs-12">';
+	                	 
+                		echo heading('Buscar odontologo:', 2);
+                		echo '<div class="input-group input-group-lg">';  
+                		$word = $this->session->userdata('word_search');
+		                $data_input = array(
+		                    'type' => 'text',
+		                    'class' => "form-control",
+		                    'name' => "input_buscar_odontologo",
+		                    'id' => "input_buscar_odontologo",
+		                    'placeholder' => 'Buscar odontologo por nombre o identificación...',
+		                	'value' => $word ? $word : set_value('input_buscar_odontologo'),
+		                );
+                        echo form_input($data_input);
+                        	
+                        echo '<span class="input-group-btn">';                        	
+                        $data_input = array(
+                        			'type' => 'submit',
+                        			'class' => "btn btn-lg btn-primary",
+                        			'name' => "btn_buscar_odontologo",
+                        			'id' => "btn_buscar_odontologo",
+                        			'value' => 'Buscar'
+                        );
+                        echo form_submit($data_input);                        	
+                        echo '</span>';
+	                    echo '</div>';
+						
+	             		echo '</div>'; 
+                                             
+                   		echo form_close();
                     	if($odontologos != NULL){
                     ?>
-                          
-                        
                         <div class="table-responsive">
                             <table id="tabla_odontologo" type='tabla' class="table table-bordered table-hover tabla-usuario">
                                 <thead>
@@ -139,7 +132,7 @@
                         </div>
                     <?php 
 	                    } else {
-	                    	if($_SESSION['word_search'] != ''){
+	                    	if($word != ''){
 		                    	echo br(1);
 			                	echo '<div class="form-group text-center">
 										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
@@ -155,14 +148,13 @@
     </section>
 </div>
 
-<div class="modal fade modal-add" id="modal_add_odont" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade modal-add" id="modal_add_odont" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
-        <!-- Modal content-->
         <?php
             $data_input = array(
                 'id' => "nuevo_odont_form",
             );
-            echo form_open('',$data_input);
+            echo form_open_multipart('',$data_input);
         ?>
         <div class="modal-content box">
             <div class="overlay hidden" id="div_waiting_new_odont">
@@ -173,12 +165,32 @@
                 <h3 class="modal-title">Agregar odontólogo</h3>
             </div>
             <div class="modal-body">
-                <div class="row">
+                    <div class="form-group text-center">
+		                <i id="i_foto" class="fa fa-image fa-5x"></i>
+		                <?php 
+		                $data_input = array(
+		                		'id' => 'foto_img',
+		                		'class' => 'center-block hidden',
+		                		'height ' => '200',
+		                		'width' => '200',		                		 
+		                );
+		                echo img($data_input);		
+		                echo br(1);
+
+                        $data_input = array(
+                        		'id' => "inputFoto",
+                        		'name' => "inputFoto",
+                        		'class' => "inputFoto"
+                        );
+                        echo form_upload($data_input);
+                        ?>
+                    </div>             
+                <div class="row">                
                     <div class="col-lg-6 form-group">
                         <label  class="control-label">Tipo de Documento: *</label>
                         <div class="input-group" id="div_selectTipoDoc">
                             <span class="input-group-addon"><i class="fa fa-credit-card fa-fw"></i></span>
-                            <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="selectTipoDoc" id="selectTipoDoc">
+                            <select class="form-control" name="selectTipoDoc" id="selectTipoDoc">
                                 <option value='-1' selected disabled>- Elija un tipo de documento -</option>
                                 <option value='TI'>Tarjeta de identidad</option>
                                 <option value='CC'>Cédula de ciudadanía</option>
@@ -215,7 +227,7 @@
                         <input type="text" class="form-control" id="inputDireccion" placeholder="Dirección de residencia" name="inputDireccion">
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" id="div_select_ciudades">
                     <div class="col-lg-6 form-group">
                         <label class="control-label">Departamento: *</label>
                         <div class="input-group">
@@ -223,12 +235,10 @@
                             <?php
                                 $data_input = array(
                                     'id' => 'select_depto',
-                                    'class' => 'form-control select2 select2-hidden-accessible',
+                                    'class' => 'form-control',
                                 );
                                 unset($departamentos['0']);
                                 $default = array('-1'  => '- Seleccione un departamento -');
-                                //$departamentos=array_map('mb_strtolower', $departamentos);
-                                //$departamentos=array_map('ucwords', $departamentos);
                                 echo form_dropdown('select_depto', $departamentos, '', $data_input);
                             ?>
                         </div>
@@ -237,8 +247,8 @@
                         <label  class="control-label">Ciudad: *</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
-                            <select class="form-control select2 select2-hidden-accessible" tabindex="-1" id="select_ciudades" name="select_ciudades" disabled>
-                                <option value="-1"> Seleccione un Departamento</option>
+                            <select class="form-control" tabindex="-1" id="select_ciudades" name="select_ciudades" disabled>
+                                <option value="-1">- Seleccione un Departamento -</option>
                             </select>
                         </div>
                     </div>
@@ -276,9 +286,9 @@
                     </div>
                     <div class="col-lg-6 form-group">
                         <label  class="control-label">Género: *</label>
-                        <div class="input-group" id="div_inputGenero">
+                        <div class="input-group" id="div_selectGenero">
                             <span class="input-group-addon"><i class="fa fa-venus-mars fa-fw"></i></span>
-                            <select class="form-control select2 select2-hidden-accessible" tabindex="-1" name="selectGenero" id="selectGenero">
+                            <select class="form-control" name="selectGenero" id="selectGenero">
                                 <option value='-1' selected disabled>- Género -</option>
                                 <option value='M'>Masculino</option>
                                 <option value='F'>Femenino</option>

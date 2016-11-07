@@ -40,12 +40,11 @@ class Odontologo extends Admin_Controller {
     	
     	$this->render ( 'admin/admin_odonto_view' );
     }
-    
- 
-    
+
     public function nuevo_odontologo(){
         $this->load->library ( 'form_validation' );
         
+        $this->form_validation->set_rules('selectTipoDoc', 'tipo documento', 'required', array('required' => 'Seleccione un tipo de documento.'));
         $this->form_validation->set_rules('inputNombre', 'Nombre', 'required');
         $this->form_validation->set_rules('inputEmail', 'correo', 'required|valid_email');
         $this->form_validation->set_rules('inputPassword', 'contraseña', 'required');
@@ -55,23 +54,31 @@ class Odontologo extends Admin_Controller {
         $this->form_validation->set_rules('inputTelefono', 'Telefono', 'required');
         $this->form_validation->set_rules('inputDireccion', 'Direccion', 'required');
         $this->form_validation->set_rules('inputEstudios', 'estudios', 'required');
+        $this->form_validation->set_rules('select_ciudades', 'ciudad', 'required', array('required' => 'Seleccione una ubicación.'));
+        $this->form_validation->set_rules('selectGenero', 'género', 'required', array('required' => 'Seleccione un género.'));
                 
-        if ($this->form_validation->run()) {		
+        if ($this->form_validation->run()) {
+        	
+        	$doc = $this->input->post ( 'inputDocumento' );
+        	$url_foto = $this->image_process('inputFoto', $doc, "odonto");
+        	
 			$input = array (
-                'nombre_persona' => $this->input->post ( 'inputNombre' ),
-                'correo_persona' => $this->input->post ( 'inputEmail' ),
-				'documento_persona' => $this->input->post ( 'inputDocumento' ),
-				'tipo_documento' => $this->input->post ( 'selectTipoDoc' ),
-				'clave_acceso' => password_hash($this->input->post ( 'inputPassword'), PASSWORD_BCRYPT),
-                'fecha_nacimiento' => $this->input->post ( 'inputNacimiento' ),                
-                'genero_persona' => $this->input->post ( 'selectGenero' ),
-                'id_ciudad' => $this->input->post ( 'select_ciudades' ),
-				'direccion_persona' => $this->input->post ( 'inputDireccion' ),
-				'telefono_persona' => $this->input->post ( 'inputTelefono' ),
-				'estudios_odont' => $this->input->post ( 'inputEstudios' ),
-                'tipo_persona' => 'ODO',
-                'estado_persona' => 'ACT',
+                    'nombre_persona' => mb_strtolower($this->input->post ( 'inputNombre' )),
+    				'correo_persona' => mb_strtolower($this->input->post ( 'inputEmail' )),
+					'documento_persona' => $doc,
+					'tipo_documento' => $this->input->post ( 'selectTipoDoc' ),
+					'clave_acceso' => password_hash($this->input->post ( 'inputPassword'), PASSWORD_BCRYPT),
+	                'fecha_nacimiento' => $this->input->post ( 'inputNacimiento' ),                
+	                'genero_persona' => $this->input->post ( 'selectGenero' ),
+	                'id_ciudad' => $this->input->post ( 'select_ciudades' ),
+					'direccion_persona' => $this->input->post ( 'inputDireccion' ),
+					'telefono_persona' => $this->input->post ( 'inputTelefono' ),
+					'estudios_odont' => $this->input->post ( 'inputEstudios' ),
+	                'tipo_persona' => 'ODO',
+	                'estado_persona' => 'ACT',
+					'foto_persona' => $url_foto,
 			);
+			
 			$input['edad_persona'] = $this->calculate_age($input['fecha_nacimiento']);
             $result = $this->persona_model->new_persona($input);
             header ( 'Content-Type: application/json' );

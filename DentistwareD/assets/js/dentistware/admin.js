@@ -42,6 +42,7 @@ $(function() {
     });
     
 	$(".cancel-btn").click(function (e) {
+		$("#foto_img").removeAttr('src');
 		$("#foto_img").addClass("hidden");
 		$("#i_foto").removeClass("hidden");
 		$("form")[0].reset();

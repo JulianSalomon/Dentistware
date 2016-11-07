@@ -24,7 +24,7 @@
                             );
                             echo img($data_input);                		                		
                 		?>
-	                  	<span class="hidden-xs"><?php echo $user_info['nombre_completo'];?></span>
+	                  	<span class="hidden-xs"><?php echo ucwords($user_info['nombre_completo']);?></span>
 	                	</a>
 	                	<ul class="dropdown-menu">
 	                  		<li class="user-header">
@@ -41,9 +41,8 @@
 			                  		);
 			                  		echo img($data_input);	
 		                  		?>
-			                    <p>
-			                    	
-                                    <span><?php echo $user_info['nombre_completo'];?></span>
+			                    <p>			                    	
+                                    <span><?php echo ucwords($user_info['nombre_completo']);?></span>
 			                         <br>
                                     <span>
                                         <small>
