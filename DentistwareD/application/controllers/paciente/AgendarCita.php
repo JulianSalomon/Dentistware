@@ -33,5 +33,28 @@ class AgendarCita extends Cliente_Controller{
         echo $this->cita_model->agendar_cita($cita, $data);        
     }
     
+       public function filtrar(){
+            $fecha = $this->input->post ( 'inputFecha' );
+            $hora =  $this->input->post ( 'inputHora' );
+            $odontologo =  $this->input->post ( 'inputOdontologo' );
+            echo $fecha = str_replace("/","-",$fecha);
+            $hora = str_replace(" AM","",$hora);
+            $hora = str_replace(" PM","",$hora);
+           echo $hora;
+           echo $odontologo;
+            $adontos_array = array();
+            $adontos_array['-1'] = '- Seleccione un Odontólogo -';
+            $query = $this->persona_model->get_odontologos();
+              foreach ($query as $arreglo) {
+                    $adontos_array[$arreglo->id_persona] = ucwords($arreglo->nombre);
+                };
+            $this->data['odontologos'] = $adontos_array;
+           $this->data['citas'] = $this->cita_model->get_citas('id_cita', 'asc', 0, 0, $fecha, $hora, $odontologo);
+             $this->render('cliente/agendar_cita_view');          
+           
+    }
+    
+    
+    
    
 }

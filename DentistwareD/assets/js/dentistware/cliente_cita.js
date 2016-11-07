@@ -1,5 +1,5 @@
 $(function() {
-    
+
     $.fn.datepicker.defaults.format = "yyyy/mm/dd";
 	$.fn.datepicker.dates["es"] = {
 		days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
@@ -18,9 +18,11 @@ $(function() {
         todayHighlight: true,
         daysOfWeekHighlighted: "0",
     })
-        $(".timepicker").timepicker({
-      showInputs: false,
-            minuteStep: 30
+    
+    $(".timepicker").timepicker({
+        showInputs: false,
+        minuteStep: 30,
+        defaultTime: false
             
     });
     
