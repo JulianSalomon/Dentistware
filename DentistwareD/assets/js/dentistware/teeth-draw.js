@@ -7,7 +7,7 @@ preload = function() {
 }
 
 setup = function() {
-    var canvas = createCanvas(400, 588);
+    var canvas = createCanvas(windowWidth / 5, windowHeight/ 2);
     ratio = width / 40;
     canvas.parent('teeth-diagram');
     myTeeth = new Teeth();
@@ -15,6 +15,7 @@ setup = function() {
 
 windowResized = function() {
     resizeCanvas(windowWidth / 3, windowHeight);
+    myTeeth = new Teeth();
 }
 
 draw = function() {

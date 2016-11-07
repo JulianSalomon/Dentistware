@@ -129,8 +129,10 @@
                             </div>
                             <div class="col-xs-12 text-center">
                                 <BR></BR>
-                                <BR></BR>                                            
-                                <input type="submit" value="Modificar Perfil" name="Modificar_Perfil" class="btn btn-info "/>
+                                <BR></BR>
+                                
+                                     <a href="<?php echo base_url("Perfil/edit_view/")?>"> <i type="button"  class="btn btn-info">Modificar Perfil</i> </a>
+                                
                             </div>        
                                             
                                             
