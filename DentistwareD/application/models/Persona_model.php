@@ -11,6 +11,7 @@ class Persona_model extends MY_Model{
 		$this->db->select('*');
 		$this->db->from('persona');
         $this->db->join('ciudad', 'ciudad.id_ciudad = persona.id_ciudad');
+        $this->db->join('departamento', 'departamento.id_departamento = ciudad.id_departamento');        
         if($documento)
 			$this->db->where('documento_persona', $documento);
         else
