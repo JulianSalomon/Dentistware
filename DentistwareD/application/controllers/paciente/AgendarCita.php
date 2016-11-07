@@ -28,7 +28,7 @@ class AgendarCita extends Cliente_Controller{
         $this->render('cliente/agendar_cita_view');
     }
     public function agendar_cita($cita){
-        $doc = $this->session->userdata['doc_persona'];
+        $doc = $this->session->userdata['id_persona'];
         $data = array("id_cliente" => $doc);
         echo $this->cita_model->agendar_cita($cita, $data);        
     }

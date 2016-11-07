@@ -50,7 +50,34 @@ class Cita_model extends MY_Model{
 		return false;
 	}
     
+    
+    public function get_citas_cliente($order_by = 'id_cita', $order = 'asc', $limit = 0, $offset = 0, $idCliente = '') {
+
+	
+      
+    
+		$this->db->select('id_cita, fecha_cita as fecha, hora_cita as hora, estado_cita as estado, odonto.nombre_persona  as odontologo, consultorio');
+		$this->db->from('cita');
+        $this->db->join('persona as odonto', 'odonto.id_persona = cita.id_odonto');
+        
+       if($idCliente != '') $this->db->where('id_cliente', $idCliente);
+  
+		if ($limit) {
+			$this->db->limit ( $limit, $offset );
+		}
+        
+        $query = $this->db->get ();
+		if ($query)
+			return $query->result();
+		return false;
+	}
+    
+    
     public function agendar_cita($id_cita, $data =''){
+		return $this->actualizar_datos('cita', $data, array('id_cita' => $id_cita));
+	}
+    
+    public function cancelar_cita($id_cita, $data =''){
 		return $this->actualizar_datos('cita', $data, array('id_cita' => $id_cita));
 	}
 }
