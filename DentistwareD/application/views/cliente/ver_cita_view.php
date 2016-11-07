@@ -38,8 +38,8 @@
 	                                    echo ucwords($cita->odontologo);
 	                                    echo '</td>';
 										echo '<td class="text-center">';
-	                                    echo '<button class="asignar-btn btn btn-danger" cita="' . $cita->id_cita . '" odonto="' . ucwords($cita->odontologo) . '" type=button id="delete_persona" data-toggle="tooltip"  title="Asignar">
-	                                    		<i class="fa fa-times-o"></i></button>';
+	                                    echo '<button class="asignar-btn btn btn-danger" cita="' . $cita->id_cita . '" type=button id="delete_persona" data-toggle="tooltip"  title="Cancelar">
+	                                    		<i class="fa fa-times"></i></button>';
 	                                    echo '</td>';                                                
 										echo '</tr>';   
 									}
