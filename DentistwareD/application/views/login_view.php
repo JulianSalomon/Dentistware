@@ -85,9 +85,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="m-t text-center">
                     <strong>&COPY; 
                     	<?php
-                    	echo date('Y'); 
-                    	echo anchor(base_url(), ' Dentistware');
-
+                            echo date('Y'); 
+                            echo anchor(base_url(), ' Dentistware');
                     	?>
                     </strong>
                 </div>

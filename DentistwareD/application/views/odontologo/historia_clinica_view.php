@@ -17,10 +17,9 @@
                             <div class="col-xs-12 text-center ">
                                 <?php
                                 echo '<label>' . ucwords($historia_clinica_info->nombre_persona) . '</label>';
-                                echo '<BR>';
+                                echo br(1);
                                 echo '<label> Fecha de apertura ' . ' &nbsp &nbsp' . substr($historia_clinica_info->fecha_apertura, 0, 10) . '</label>';
-                                echo '<BR>';
-                                echo '<BR>';
+                                echo br(2);
                                 ?>
                             </div>
                             
@@ -134,8 +133,7 @@
                        <?php
                        
                        foreach ($registros as $registro){
-                           if($registro->fecha_reg == $registro->fecha_reg){
-
+                           if($registro->fecha_reg == $fecha){
                                echo "<tr>";
                                 echo "<th class= text-right style= width:45% >Odontologo:</td>";
                                   echo "<td style= width:10% > </td>";

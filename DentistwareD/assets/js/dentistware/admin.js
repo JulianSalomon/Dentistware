@@ -48,8 +48,7 @@ $(function() {
 		$("form")[0].reset();
         $(".modal").modal('hide');
         $(".alert").remove();
-        $(".form-group").removeClass('has-error');
-        
+        $(".form-group").removeClass('has-error');        
 	});
     
 	$("#inputFoto").change(function () {
