@@ -14,38 +14,40 @@
                     </div>
                     <div class="box-body">
                         <!-- Dropdowns -->
-                         <?php 
-		        $data_input = array(
-		        		'id' => "edit_cliente_form",
-		        );        
-		        echo form_open('', $data_input);
+                        <?php 
+                            $data_input = array(
+                                    'id' => "edit_cliente_form",
+                            );        
+                            echo form_open('paciente/AgendarCita/filtrar', $data_input);
                         ?>
-                        <div class="col-lg-4 form-group">
-                             <label class="control-label">Filtrar por fecha: </label>
-                             <div class="input-group" id="div_inputFecha">
-                                 <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                                 <input type="text" class="form-control date-select" id="inputFecha" placeholder="YYYY/MM/DD" name="inputFecha">
-                             </div>
-                          </div>
-                        <div class="col-lg-4 form-group">
-                             
-                                      <div class="bootstrap-timepicker">
-                <div class="form-group">
-                  <label>Filtrar por hora:</label>
+                        <div class="row">
+                                               <div class="col-lg-4 form-group">
+                                         <label class="control-label">Filtrar por fecha: </label>
+                                         <div class="input-group" id="div_inputFecha">
+                                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                                             <input type="text" class="form-control date-select" id="inputFecha" placeholder="<?php echo date("Y-m-d")?>" name="inputFecha">
+                                         </div>
+                                      </div>
+                                    <div class="col-lg-4 form-group">
 
-                  <div class="input-group">
-                      <div class="input-group-addon">
-                      <i class="fa fa-clock-o"></i>
-                    </div>
-                    <input type="text" class="form-control timepicker">
+                                                  <div class="bootstrap-timepicker">
+                            <div class="form-group">
+                              <label>Filtrar por hora:</label>
 
-                    
-                  </div>
-                  <!-- /.input group -->
-                </div>
-                <!-- /.form group -->
+                              <div class="input-group">
+                                  <div class="input-group-addon">
+                                  <i class="fa fa-clock-o"></i>
+                                </div>
+                                <input type="text" class="form-control timepicker" id="inputHora" name= "inputHora">
+
+
+                              </div>
+                              <!-- /.input group -->
                             </div>
-                          </div>
+                            <!-- /.form group -->
+                                        </div>
+                                      </div>
+                        </div>
                         
                         					<div class="col-lg-6 form-group">
                     	<label  class="control-label">Seleccione un odontólogo</label>
@@ -54,15 +56,15 @@
 		                    <?php   
 		                   
 				                $data_input = array(
-				                		'id' => 'selectOdontologo',
+				                		'id' => 'inputOdontologo',
 				                		'class' => 'form-control',
 				                		'tabindex' => "-1",
 				                );
-				                echo form_dropdown('selectOdontologo', $odontologos, '-1', $data_input);
+				                echo form_dropdown('inputOdontologo', $odontologos, '-1', $data_input);
 	                        ?>                          	
 						</div>
 					</div>
-                        
+                         
 					<?php  
                         
                             	$data_input = array(
@@ -90,7 +92,10 @@
                                 </thead>
                                 <tbody>
                                     <?php 
+
                                             foreach ($citas as  $cita){
+                                                
+
                                                 echo '<tr>';
                                                 echo '<td>';
                                                 echo ucwords($cita->fecha);

@@ -7,23 +7,39 @@ class Cita_model extends MY_Model{
 		parent::__construct();
 	}
 	
-	public function get_cita($documento = '', $id = ''){
-		$this->db->select('*');
+	public function get_cita($documento = '', $id = '' ){
+		
+     
+        $this->db->select('*');
 		$this->db->from('cita');
 			$this->db->where('id_cita', $id);
+        
 		$query = $this->db->get()->row();
 		return $query;		
 	}
 	
-	public function get_citas($order_by = 'id_cita', $order = 'asc', $limit = 0, $offset = 0) {
+	public function get_citas($order_by = 'id_cita', $order = 'asc', $limit = 0, $offset = 0, $fechaActual = '', $horaActual = '', $odontologoActual = '' ) {
 
-	
+	   if($fechaActual == ''){
+           
+        $fechaActual = date("Y-m-d");
+       }
+      
+    
 		$this->db->select('id_cita, fecha_cita as fecha, hora_cita as hora, estado_cita as estado, odonto.nombre_persona  as odontologo, consultorio');
 		$this->db->from('cita');
         $this->db->join('persona as odonto', 'odonto.id_persona = cita.id_odonto');
+        
         $this->db->where('cita.id_cliente is NULL', NULL, FALSE);
-		
-		$this->db->order_by ( $order_by, $order );
+        $this->db->group_start();
+        $this->db->where('fecha_cita', $fechaActual);
+            if($horaActual != ''){
+                $this->db->where('hora_cita', $horaActual);
+            }
+               if($odontologoActual != '' && $odontologoActual != '-1') {
+                   $this->db->where('id_odonto', $odontologoActual);
+               }
+        $this->db->group_end();
 		if ($limit) {
 			$this->db->limit ( $limit, $offset );
 		}
