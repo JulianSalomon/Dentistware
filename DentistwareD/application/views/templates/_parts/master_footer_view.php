@@ -3,7 +3,7 @@
         	<div class="text-center">
 			<strong>&COPY; 
 			<?php
-				//echo date('Y'); 
+				echo date('Y'); 
 				echo anchor(base_url(), '    Dentistware.', 'target="_blank"');
 			?>
 			</strong>

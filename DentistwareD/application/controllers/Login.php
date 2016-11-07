@@ -9,8 +9,7 @@ class Login extends MY_Controller {
 		$this->load->model('persona_model');
 	}
 	
-	public function index(){
-		
+	public function index(){		
 	    if ($this->is_logged_in()) {
         	$this->redirect_user();    
         } else {
