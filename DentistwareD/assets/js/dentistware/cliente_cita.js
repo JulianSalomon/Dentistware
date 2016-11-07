@@ -80,4 +80,46 @@ $(function() {
             });       
         
     });
+    
+      $('.cancelar-btn').click(function(e) {
+        e.preventDefault();
+        var cita = $(this).attr('cita');
+         var odonto = $(this).attr('odonto');
+            swal({
+                title: 'Cancelar',
+                text: '¿Desea cancelar su cita con ' + odonto + '?',
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonClass: "btn-primary",
+                cancelButtonClass: "btn-danger",
+                confirmButtonText: 'Sí, cancelar cita',
+                cancelButtonText: 'No, mantener cita',
+                showLoaderOnConfirm: true,
+            },
+            function(isConfirm) {
+                  if (isConfirm) {
+                      $.ajax({
+                        type: 'GET',
+                        url: js_site_url + 'cancelar_cita/' + cita,
+                        success: function(msg){
+
+                            if(msg){
+                                swal({   
+                                    title: "Cita cancelada",
+                                    text: "La cita con " + odonto + " ha sido cancelada.",
+                                    type: "success",
+                                }, 
+                                function(){   
+                                    location.reload(); 
+                                });
+                            } else {
+                                swal("Error", "La cita con " + odonto + " no puede ser cancelada, consulte con Dentistware.", "error");
+                            }
+                        }
+                    });
+                }
+            });       
+        
+    });
+    
 });

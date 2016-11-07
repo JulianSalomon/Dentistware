@@ -1,13 +1,13 @@
 <div class="content-wrapper">
     <section class="content-header">
-      <h1>Citas</h1>
+      <h1>Citas agendadas</h1>
     </section>
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                         <h4>asdas</h4>
+                         <h4>A continación puede ver una lista de sus listas agendadas, puede cancelar alguna en caso de no poder asistir a la misma, recuerde que la cita no debe ser en menos de cinco horas</h4>
                     </div>
                     <div class="box-body">                        
 						<?php  
@@ -38,7 +38,7 @@
 	                                    echo ucwords($cita->odontologo);
 	                                    echo '</td>';
 										echo '<td class="text-center">';
-	                                    echo '<button class="asignar-btn btn btn-danger" cita="' . $cita->id_cita . '" type=button id="delete_persona" data-toggle="tooltip"  title="Cancelar">
+	                                    echo '<button class="cancelar-btn btn btn-danger" cita="' . $cita->id_cita . '" odonto="' . ucwords($cita->odontologo) .  '" type=button id="delete_persona" data-toggle="tooltip"  title="Cancelar">
 	                                    		<i class="fa fa-times"></i></button>';
 	                                    echo '</td>';                                                
 										echo '</tr>';   
@@ -72,7 +72,7 @@
 </div>
 
 <?php 
-    $path = "paciente/AgendarCita/";
+    $path = "paciente/VerCita/";
     echo '<script>
             var js_site_url = "'. site_url($path) . '";
           </script>';
