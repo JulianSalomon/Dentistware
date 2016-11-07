@@ -230,7 +230,7 @@
                 <div class="row" id="div_select_ciudades">
                     <div class="col-lg-6 form-group">
                         <label class="control-label">Departamento: *</label>
-                        <div class="input-group">
+                        <div class="input-group" id="div_select_depto">
                             <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
                             <?php
                                 $data_input = array(
@@ -239,7 +239,7 @@
                                 );
                                 unset($departamentos['0']);
                                 $default = array('-1'  => '- Seleccione un departamento -');
-                                echo form_dropdown('select_depto', $departamentos, '', $data_input);
+                                echo form_dropdown('select_depto', $default + $departamentos, $default, $data_input);
                             ?>
                         </div>
                     </div>
@@ -248,7 +248,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-map-marker fa-fw"></i></span>
                             <select class="form-control" tabindex="-1" id="select_ciudades" name="select_ciudades" disabled>
-                                <option value="-1">- Seleccione un Departamento -</option>
+                                <option value="-1" selected disabled>- Seleccione un departamento -</option>
                             </select>
                         </div>
                     </div>

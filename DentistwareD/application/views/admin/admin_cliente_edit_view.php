@@ -31,10 +31,11 @@
 						} else {
 							echo '<i id="i_foto" class="fa fa-image fa-5x"></i>';
 							echo '<img id="foto_img" class="center-block hidden" height="240" width="240">';
+                            echo br(1);
+                            echo '<label>Seleccione una imagen para el cliente.</label>';
 						}
 						
 						echo br(1);
-						echo '<label>Seleccione una imagen para el cliente.</label>';
 						if($cliente_info->foto_persona){
 							echo form_label('Eliminar foto: ', '', array('class' => 'control-label'));
 							echo '&lrm; &lrm;&lrm; &lrm;&lrm; &lrm;&lrm;';
