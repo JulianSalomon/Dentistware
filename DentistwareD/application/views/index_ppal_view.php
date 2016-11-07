@@ -73,7 +73,7 @@
                                                     );
                                                     echo img($data_input);
                                                     ?>
-                                                    <span class="hidden-xs"><?php echo $this->session->userdata['nombre_completo'];?></span>
+                                                    <span class="hidden-xs"><?php echo ucwords($this->session->userdata['nombre_completo']);?></span>
                                                 </a>
                                                 <ul class="dropdown-menu">
                                                     <li class="user-header">
@@ -91,7 +91,7 @@
                                                         echo img($data_input);
                                                         ?>
                                                         <p>
-                                                            <span class="hidden-xs"><?php echo $this->session->userdata['nombre_completo'];?></span>
+                                                            <span class="hidden-xs"><?php echo ucwords($this->session->userdata['nombre_completo']);?></span>
                                                             <br>
                                                             <span class="hidden-xs">
                                                                 <?php
