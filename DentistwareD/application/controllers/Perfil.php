@@ -36,6 +36,7 @@ class Perfil extends MY_Controller {
     	$this->form_validation->set_rules('inputNacimiento', 'Fecha de Nacimiento', 'required');
     	$this->form_validation->set_rules('inputTelefono', 'Telefono', 'required');
     	$this->form_validation->set_rules('inputDireccion', 'Direccion', 'required');
+        $this->form_validation->set_rules('inputEmail', 'correo', 'required|valid_email');
 
     	
     	if ($this->form_validation->run()) {

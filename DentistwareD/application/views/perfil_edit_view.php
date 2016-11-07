@@ -235,13 +235,7 @@
                                 </div>
                             </div>                                  
                             
-                            <?php
-                                if($persona_info->tipo_persona != 'ADM'){
-                                    $valueADM = '';
-                                } else 
-                                    $valueADM = 'hidden';
-                            ?>
-                            <div class="col-lg-4 form-group" <?php echo $valueADM?> >  
+                            <div class="col-lg-4 form-group" >  
                                 <label for="inputEmail" class="control-label">Correo: *</label>
                                 <div class="input-group" id="div_inputEmail">
                                     <span class="input-group-addon"><i class="fa fa-envelope fa-fw"></i></span>                 

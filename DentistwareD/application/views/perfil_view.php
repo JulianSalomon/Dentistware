@@ -9,8 +9,6 @@
                 	<div class="box-body">
                  		<div class="col-xs-12 text-center ">
 							<?php							
-								
-								
 								$tipo = $persona->tipo_persona;
 								$route = '';
 								switch ($tipo) {
@@ -108,6 +106,7 @@
 	                                   	echo "</tr>";
                                    }
                                    
+
                                    echo "<tr>";
                                    echo "<th class= text-right style= width:45% >E-mail:</th>";
                                    echo "<td style= width:10% > </td>";
