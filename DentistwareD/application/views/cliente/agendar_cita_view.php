@@ -10,7 +10,7 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                         <h4>A continuación puede buscar las citas disponibles y agendar una, recuerde que al agendar una cita y no poder asistir a la misma tendrá una multa y será inhabilitado de los servicios, no agende dos citas en el mismo horario, verifique sus citas antes de agendar una.</h4>
+                         <h4>A continuación puede buscar las citas disponibles y agendar una, recuerde que al agendar una cita y no poder asistir a la misma tendrá una multa y será inhabilitado de los servicios, no agende dos citas en el mismo horario y verifique sus citas antes de agendar una, el horario predeterminado en que se muestran las citas es del día actual.</h4>
                     </div>
                     <div class="box-body">
                         <!-- Dropdowns -->

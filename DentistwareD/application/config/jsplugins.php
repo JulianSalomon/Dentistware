@@ -16,14 +16,15 @@ $_js = array (
 		'datatable-bootstrap' => 'assets/js/plugins/datatables/dataTables.bootstrap.min.js',
 		'select' => 'assets/js/plugins/bootstrap-select/bootstrap-select.min.js',
 		'datepicker' => 'assets/js/plugins/datepicker/bootstrap-datepicker.js',
-        'timepicker' => 'assets/js/plugins/timepicker/bootstrap-timepicker.min.js'
-
+        'timepicker' => 'assets/js/plugins/timepicker/bootstrap-timepicker.min.js',
+        'teeth-drawer' => 'assets/js/dentistware/teeth-draw.js',
+        'p5' => 'assets/js/p5.js'
 );
 
 $_css = array (
 		'bootstrap' => 'assets/css/bootstrap.min.css',
 		'adminLTE' => 'assets/css/AdminLTE.css',
-		'skins' => 'assets/css/skin-blue-light.min.css',
+		'skin' => 'assets/css/skin-blue-light.min.css',
         'font-awesome' => 'assets/css/font-awesome.min.css',
         'icons' => 'assets/css/ionicons.min.css',
 		'pace' => 'assets/js/plugins/pace/pace.min.css',

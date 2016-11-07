@@ -5,20 +5,27 @@ class VerCita extends Cliente_Controller{
     
     public function __construct(){
         parent::__construct();
-        $this->data ['page_title_end'] = '| Citas';
-        $this->load->model('cita_model');
-        $this->data['citas'] = $this->cita_model->get_citas();
+
+        $this->data ['page_title_end'] = '| Ver Cita';
+        $this->load->library("pagination"); 
+        $this->load->model ( 'cita_model' );  
+        $this->load->model ( 'persona_model' ); 
         $this->get_user_menu('main-citas','citas-agendadas');
-        
-        $this->load->model ( 'cita_model' );
-        $this->load->model ( 'persona_model' );
         $this->data['citas'] = $this->cita_model->get_citas($this->session->userdata['id_persona']);
-        
         $this->data['before_closing_body'] =  plugin_js('assets/js/dentistware/cliente_cita.js', true);
     }
     
     public function index(){
-        $this->render('cliente/ver_cita_view');   
+
+        $adontos_array = array();
+        $adontos_array['-1'] = '- Seleccione un Odontólogo -';
+        $query = $this->persona_model->get_odontologos();
+          foreach ($query as $arreglo) {
+                $adontos_array[$arreglo->id_persona] = ucwords($arreglo->nombre);
+            };
+        $this->data['odontologos'] = $adontos_array;
+        $this->render('cliente/ver_cita_view');
+
     }
 
     public function agendar_cita($cita){

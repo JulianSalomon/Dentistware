@@ -9,6 +9,7 @@ class Perfil extends MY_Controller {
         }
         
         $this->load->model('persona_model');
+        $this->load->model ('lugar_model');
         $this->data['persona'] = $this->persona_model->get_persona($this->session->userdata('doc_persona'));
         $this->data['before_closing_head'] .= plugin_css('icheck');
         $this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/perfil.js', true);
@@ -21,7 +22,7 @@ class Perfil extends MY_Controller {
     }
     
     public function edit_view(){
-        $this->load->model('lugar_model');
+
         $query = $this->data['persona_info'] = $this->persona_model->get_persona($this->session->userdata('doc_persona'));
     	$this->data['departamentos'] = $this->lugar_model->get_departamentos();    	
         $this->data['ciudades'] = $this->lugar_model->get_ciudades($query->id_departamento);
@@ -57,7 +58,7 @@ class Perfil extends MY_Controller {
             
             $folder = 'cliente';
             $doc = $this->session->userdata('doc_persona');
-            /*switch ($this->session->userdata('tipo_persona')) {
+            switch ($this->session->userdata('tipo_persona')) {
                 case "ADM":
                     $folder = 'admin';
                     break;
@@ -65,29 +66,28 @@ class Perfil extends MY_Controller {
                     $folder =  'cliente';
                     break;
                 case "ODO":
-                    $folder =  'empleado';
-                    break;
-                case "EMP":
                     $folder =  'odonto';
                     break;
-            }*/
+                case "EMP":
+                    $folder =  'empleado';
+                    break;
+            }
             
-    		$nombre_foto = $this->image_process('inputFoto', $doc , "cliente");
-    		
-            /*
+    		$nombre_foto = $this->image_process('inputFoto', $doc , $folder);
+    		            
     		if($nombre_foto == NULL) {
     			if($this->input->post ('chkEliminarFoto')){
     				$input['foto_persona'] = NULL;
     			}
     		} else {
     			$input['foto_persona'] = $nombre_foto;
-    		}*/
-    			
-            
-    		//$input['edad_persona'] = $this->calculate_age($input['fecha_nacimiento']);   		    		
-    		echo json_encode($input);
-    		//$result = $this->persona_model->update_persona($this->session->userdata('id_persona'), $input);
+    		}
+    			            
+    		$input['edad_persona'] = $this->calculate_age($input['fecha_nacimiento']);   		    		
+    		
+    		$result = $this->persona_model->update_persona($this->session->userdata('id_persona'), $input);
     		header ( 'Content-Type: application/json' );
+    		echo $result;
     	}else {
     		header ( 'Content-Type: application/json' );
     		echo json_encode ( $this->form_validation->error_array () );

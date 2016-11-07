@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			echo plugin_css('icons');
 			echo plugin_css('bootstrap');
 			echo plugin_css('adminLTE');
-			echo plugin_css('skins');
+			echo plugin_css('skin');
 	    ?>
     </head>
     <body class="hold-transition login-page">
@@ -85,9 +85,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <div class="m-t text-center">
                     <strong>&COPY; 
                     	<?php
-                    	echo date('Y'); 
-                    	echo anchor(base_url(), ' Dentistware');
-
+                            echo date('Y'); 
+                            echo anchor(base_url(), ' Dentistware');
                     	?>
                     </strong>
                 </div>

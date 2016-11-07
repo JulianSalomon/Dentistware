@@ -29,32 +29,34 @@
 		                <?php 
 						if($persona_info->foto_persona){
                             
-                            $route = $persona_info->tipo_persona;
-                            
-                            switch ($route) {
+                            $tipo = $persona_info->tipo_persona;
+                            $route = '';
+                            switch ($tipo) {
                                 case "ADM":
-                                    echo '<img id="foto_img" class="center-block" height="240" width="240" src="'.base_url() . "uploads/admin/" . $persona_info->foto_persona . '">';
+                                    $route = 'admin';
                                     break;
                                 case "CLT":
-                                    echo '<img id="foto_img" class="center-block" height="240" width="240" src="'.base_url() . "uploads/cliente/" . $persona_info->foto_persona . '">';
+                                    $route = 'cliente';
                                     break;
                                 case "ODO":
-                                    echo '<img id="foto_img" class="center-block" height="240" width="240" src="'.base_url() . "uploads/odonto/" . $persona_info->foto_persona . '">';
+                                    $route = 'odonto';
                                     break;
                                 case "EMP":
-                                    echo '<img id="foto_img" class="center-block" height="240" width="240" src="'.base_url() . "uploads/empleado/" . $persona_info->foto_persona . '">';
+                                	$route = 'empleado';
                                     break;
                             }
                             
+                            echo '<img id="foto_img" class="center-block" height="240" width="240" src="'.base_url() . "uploads/" . $route . '/'  . $persona_info->foto_persona . '">';
 							echo '<i id="i_foto" class="fa fa-image fa-5x hidden"></i>';
 							
 						} else {
 							echo '<i id="i_foto" class="fa fa-image fa-5x"></i>';
 							echo '<img id="foto_img" class="center-block hidden" height="240" width="240">';
+							echo br(1);
+							echo '<label>Seleccione una imagen para el perfil.</label>';
 						}
 						
-						echo br(1);
-						echo '<label>Seleccione una imagen para el perfil.</label>';
+						echo br(1);						
 						if($persona_info->foto_persona){
 							echo form_label('Eliminar foto: ', '', array('class' => 'control-label'));
 							echo '&lrm; &lrm;&lrm; &lrm;&lrm; &lrm;&lrm;';
@@ -75,15 +77,13 @@
                         );
                         echo form_upload($data_input); 
                         ?>
-                    </div>     
-                        
-                    <hr>
-                        
+                    </div>                             
+                    <hr>                        
                     <div class="row">
                         <div class="col-lg-5 form-group">
                             <label  class="control-label">Nombre(s) y Apellidos:</label>
                                 <?php  
-                                    echo "<BR>";
+                                    echo br(1);
                                     echo "<p> " . ucwords($persona_info->nombre_persona) . "</p>";
                                 ?>
                         </div>
