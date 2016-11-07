@@ -104,7 +104,7 @@
                                                 		'data-toggle' => 'tooltip',
                                                 		'title' => 'Editar',
                                                 );
-                                                echo anchor('', '<i class="fa fa-pencil"></i>', $data_input);
+                                                echo anchor(base_url() . 'administrador/Admin/edit_view/' . $admin->id_persona, '<i class="fa fa-pencil"></i>', $data_input);
                                                 echo '<button class="borrar-btn btn btn-default" doc="' . $documento . '" type=button id="delete_persona" data-toggle="tooltip" title="Borrar">
                                                             <i class="fa fa-trash"></i>
                                                         </button>
