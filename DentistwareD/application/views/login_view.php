@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			echo plugin_css('icons');
 			echo plugin_css('bootstrap');
 			echo plugin_css('adminLTE');
-			echo plugin_css('skins');
+			echo plugin_css('skin');
 	    ?>
     </head>
     <body class="hold-transition login-page">
