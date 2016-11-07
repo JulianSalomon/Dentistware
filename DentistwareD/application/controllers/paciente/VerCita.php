@@ -9,7 +9,7 @@ class VerCita extends Cliente_Controller{
         $this->load->library("pagination"); 
         $this->load->model ( 'cita_model' );  
         $this->load->model ( 'persona_model' ); 
-        $this->get_user_menu('main-citas','citas-agendar');
+        $this->get_user_menu('main-citas','citas-ver');
         $this->data['citas'] = $this->cita_model->get_citas($this->session->userdata['id_persona']);
         
         $this->data['before_closing_body'] =  plugin_js('assets/js/dentistware/cliente_cita.js', true);
@@ -25,7 +25,7 @@ class VerCita extends Cliente_Controller{
             };
         $this->data['odontologos'] = $adontos_array;
         
-        $this->render('cliente/agendar_cita_view');
+        $this->render('cliente/ver_cita_view');
     }
     public function agendar_cita($cita){
         $doc = $this->session->userdata['doc_persona'];
