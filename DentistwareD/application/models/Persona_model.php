@@ -59,6 +59,18 @@ class Persona_model extends MY_Model {
 		return count($query->result());
 	}
 	
+	public function get_list_odontologos(){
+		$this->db->select('id_persona, nombre_persona as nombre');
+		$this->db->from('persona');
+		$this->db->where('estado_persona', 'ACT');
+		$this->db->where('tipo_persona', 'ODO');
+		
+		$query = $this->db->get();
+		if ($query->num_rows())
+			return $query->result();
+		return false;
+	}
+	
 	public function get_odontologos($order_by = 'id_persona', $order = 'asc', $limit = 0, $offset = 0, $word_like = '') {
 		$array_termino = array(
 			'nombre_persona' => $word_like,
