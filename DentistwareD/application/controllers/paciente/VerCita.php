@@ -33,9 +33,4 @@ class VerCita extends Cliente_Controller{
         echo $this->cita_model->cancelar_cita($cita, $data);        
     }
     
-      
-    
-    
-    
-   
 }
