@@ -95,13 +95,36 @@
                         <input type="text" class="form-control" id="inputNombre" placeholder="Nombres y apellidos" name="inputNombre" value="<?php echo $odontologo_info->nombre_persona;?>">
 					</div>
 				</div>
-               	<div class="form-group">
-                   	<label class=" control-label">Teléfono: *</label>
-                    <div class="input-group" id="div_inputTelefono">
-                    	<span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                        <input type="text" class="form-control" id="inputTelefono" placeholder="Teléfono" name="inputTelefono" value="<?php echo $odontologo_info->telefono_persona;?>">
+                <div class="row">
+                    <div class="col-lg-6 form-group">
+                        <label class=" control-label">Teléfono: *</label>
+                        <div class="input-group" id="div_inputTelefono">
+                            <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
+                            <input type="text" class="form-control" id="inputTelefono" placeholder="Teléfono" name="inputTelefono" value="<?php echo $odontologo_info->telefono_persona;?>">
+                        </div>
+                    </div> 
+                    <div class="col-lg-6 form-group">
+                    	<label  class="control-label">Estado: *</label>
+                        <div class="input-group" id="div_selectEstado">
+                        	<span class="input-group-addon"><i class="fa fa-check-square-o"></i></span>
+		                    <?php   
+		                    	$estados = array(
+										'-1' => '- Estado -',
+						    			'ACT' => 'Activo',
+						    			'DST' => 'Desactivado',						    			
+								);
+		                    	
+		                    	$data_input = array(
+		                    			'id' => 'selectEstado',
+		                    			'class' => 'form-control',
+		                    	);
+		                    	
+		                    	$selected = $odontologo_info->estado_persona;		                    	
+		                    	echo form_dropdown('selectEstado', $estados, $selected, $data_input);
+	                        ?>                         	
+						</div>
 					</div>
-	 			</div>                                  
+                </div>
         		<div class="form-group">
                   	<label  class="control-label">Dirección de residencia: *</label>
                     <div class="input-group" id="div_inputDireccion">
