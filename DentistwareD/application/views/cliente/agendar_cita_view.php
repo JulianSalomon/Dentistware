@@ -94,8 +94,6 @@
                                     <?php 
 
                                             foreach ($citas as  $cita){
-                                                
-
                                                 echo '<tr>';
                                                 echo '<td>';
                                                 echo ucwords($cita->fecha);

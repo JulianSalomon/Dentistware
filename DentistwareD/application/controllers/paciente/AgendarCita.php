@@ -11,7 +11,6 @@ class AgendarCita extends Cliente_Controller{
         $this->load->model ( 'persona_model' ); 
         $this->get_user_menu('main-citas','citas-agendar');
         $this->data['citas'] = $this->cita_model->get_citas();
-        
         $this->data['before_closing_body'] =  plugin_js('assets/js/dentistware/cliente_cita.js', true);
         
     }
@@ -28,9 +27,22 @@ class AgendarCita extends Cliente_Controller{
         $this->render('cliente/agendar_cita_view');
     }
     public function agendar_cita($cita){
+        
+        /* Intentando enviar un email
+      /*  $this->load->library('email');
+
+        $this->email->from('your@example.com', 'Your Name');
+        $this->email->to('nrestrepot@unal.edu.co');
+        //$this->email->cc('another@another-example.com');
+        //$this->email->bcc('them@their-example.com');
+
+        $this->email->subject('Email Test');
+        $this->email->message('Testing the email class.');
+
+        $this->email->send();*/
         $doc = $this->session->userdata['id_persona'];
         $data = array("id_cliente" => $doc);
-        echo $this->cita_model->agendar_cita($cita, $data);        
+        echo $this->cita_model->agendar_cita($cita, $data);
     }
     
        public function filtrar(){
@@ -40,8 +52,6 @@ class AgendarCita extends Cliente_Controller{
             echo $fecha = str_replace("/","-",$fecha);
             $hora = str_replace(" AM","",$hora);
             $hora = str_replace(" PM","",$hora);
-           echo $hora;
-           echo $odontologo;
             $adontos_array = array();
             $adontos_array['-1'] = '- Seleccione un Odontólogo -';
             $query = $this->persona_model->get_odontologos();
@@ -49,7 +59,7 @@ class AgendarCita extends Cliente_Controller{
                     $adontos_array[$arreglo->id_persona] = ucwords($arreglo->nombre);
                 };
             $this->data['odontologos'] = $adontos_array;
-           $this->data['citas'] = $this->cita_model->get_citas('id_cita', 'asc', 0, 0, $fecha, $hora, $odontologo);
+           $this->data['citas'] = $this->cita_model->get_citas('hora_cita', 'asc', 0, 0, $fecha, $hora, $odontologo);
              $this->render('cliente/agendar_cita_view');          
            
     }
