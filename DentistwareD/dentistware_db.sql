@@ -126,8 +126,7 @@ select * from cita;
 --
 -- Estructura de tabla para la tabla `ciudad`
 --
-INSERT INTO `cita` (`id_cita`, `fecha_cita`, `hora_cita`, `estado_cita`, `id_cliente`, `id_odonto`, `consultorio`) VALUES
-(145, '2016-11-08', '16:00:00', 1, NULL, 6, '302');
+
 CREATE TABLE `ciudad` (
   `id_ciudad` int(11) NOT NULL,
   `id_departamento` int(11) NOT NULL,
