@@ -109,13 +109,11 @@ $config['menu_ODO'] = array(
 				'icon' => 'fa fa-book',
                 'items' => array(
                     0 => array(
-                                'id' => 'Informacion_Cliente',
 								'title' => 'Información cliente',
 								'link' => base_url('odontologo/Cliente_inf') ,
 								'id' => 'citas-agendar',
 						),
 						1 => array(
-                                'id' => 'Historia_Cliente',
 								'title' => 'Historia cliente',
 								'link' => base_url('odontologo/Historia_clinica'),
 								'id' => 'citas-agendadas',
@@ -146,23 +144,28 @@ $config['menu_EMP'] = array(
 		),
 		'cliente' => array(
 				'id' => 'main-cliente',
-				'title' => '<span>Empleado</span>',
+				'title' => '<span>Cliente</span>',
+				'link' => base_url('empleado/Empl_Cliente') ,
+				'icon' => 'fa fa-user',
+		),
+		'cita' => array(
+				'id' => 'main-cita',
+				'title' => '<span>Cita</span>',
 				'link' => '',
-				'icon' => 'fa fa-book',
-                'items' => array(
-                    0 => array(
-                                'id' => 'Informacion_Empleado',
-								'title' => 'Informacion Empleado',
-								'link' => '' ,
+				'icon' => 'fa fa-calendar',
+				'items' => array(
+						0 => array(
+								'title' => 'Agendar Cita',
+								'link' => '',
 								'id' => 'citas-agendar',
 						),
-						1 => array(
-                                'id' => 'Historia_Empleado',
-								'title' => 'Historia Empleado',
-								'link' => '' ,
-								'id' => 'citas-agendadas',
-						),                
-                ),
+						1 => array(								
+								'title' => 'Agregar Citas',
+								'link' => '',
+								'id' => 'citas-agregar',
+						),
+				
+				),				
 		),
 		'logout' => array(
 				'id' => 'main-logout',

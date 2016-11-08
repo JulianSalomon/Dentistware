@@ -26,6 +26,12 @@
 	                            <tbody>
 	                            	<?php 
 	                                foreach ($citas as  $cita){
+                                        
+                                        $hora_cita = date_create($cita->fecha . " " . $cita->hora);
+                                        $hora_actual = date_create(date('Y-m-d H:i:s'));
+                                        $interval = date_diff($hora_cita, $hora_actual);
+                                        $dias_para_la_cita = intval($interval->format('%a'));
+                                        $horas_para_la_cita = intval($interval->format('%h'));
 	                                	echo '<tr>';
 	                                    echo '<td>';
 	                                    echo $cita->fecha;
@@ -38,7 +44,12 @@
 	                                    echo ucwords($cita->odontologo);
 	                                    echo '</td>';
 										echo '<td class="text-center">';
-	                                    echo '<button class="cancelar-btn btn btn-danger" cita="' . $cita->id_cita . '" odonto="' . ucwords($cita->odontologo) .  '" type=button id="delete_persona" data-toggle="tooltip"  title="Cancelar">
+                                        $habilitar = "";
+                                        if($dias_para_la_cita <= 0) { 
+                                            if($horas_para_la_cita <=5){
+                                                $habilitar = 'disabled= "true"';
+                                            }}
+	                                    echo '<button class="cancelar-btn btn btn-danger" ' .  $habilitar . ' cita="' . $cita->id_cita . '" odonto="' . ucwords($cita->odontologo) .'" fecha="' . $cita->fecha .'" hora="' . $cita->hora.  '" type=button id="delete_persona" data-toggle="tooltip"  title="Cancelar">
 	                                    		<i class="fa fa-times"></i></button>';
 	                                    echo '</td>';                                                
 										echo '</tr>';   
