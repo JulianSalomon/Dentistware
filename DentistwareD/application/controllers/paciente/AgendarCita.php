@@ -10,12 +10,14 @@ class AgendarCita extends Cliente_Controller{
         $this->load->model ( 'cita_model' );  
         $this->load->model ( 'persona_model' ); 
         $this->get_user_menu('main-citas','citas-agendar');
-        $this->data['citas'] = $this->cita_model->get_citas();
+        
         $this->data['before_closing_body'] =  plugin_js('assets/js/dentistware/cliente_cita.js', true);
         
     }
     
     public function index(){
+    	$this->data['citas'] = $this->cita_model->get_citas();
+    	
         $adontos_array = array();
         $adontos_array['-1'] = '- Seleccione un Odontólogo -';
         $query = $this->persona_model->get_odontologos();
@@ -45,22 +47,27 @@ class AgendarCita extends Cliente_Controller{
         echo $this->cita_model->agendar_cita($cita, $data);
     }
     
-       public function filtrar(){
-            $fecha = $this->input->post ( 'inputFecha' );
-            $hora =  $this->input->post ( 'inputHora' );
-            $odontologo =  $this->input->post ( 'inputOdontologo' );
-            echo $fecha = str_replace("/","-",$fecha);
-            $hora = str_replace(" AM","",$hora);
-            $hora = str_replace(" PM","",$hora);
-            $adontos_array = array();
-            $adontos_array['-1'] = '- Seleccione un Odontólogo -';
-            $query = $this->persona_model->get_odontologos();
-              foreach ($query as $arreglo) {
-                    $adontos_array[$arreglo->id_persona] = ucwords($arreglo->nombre);
-                };
-            $this->data['odontologos'] = $adontos_array;
-           $this->data['citas'] = $this->cita_model->get_citas('hora_cita', 'asc', 0, 0, $fecha, $hora, $odontologo);
-             $this->render('cliente/agendar_cita_view');          
+	public function filtrar(){
+     	$fecha = $this->input->post ( 'inputFecha' );
+        $hora =  $this->input->post ( 'inputHora' );
+        $odontologo =  $this->input->post ( 'inputOdontologo' );
+        
+        $fecha = str_replace("/", "-", $fecha);
+        $hora = str_replace(" AM", "", $hora);
+       	$hora = str_replace(" PM", "", $hora);
+        
+       	$odontos_array = array();
+        $odontos_array['-1'] = '- Seleccione un Odontólogo -';
+        $query = $this->persona_model->get_odontologos();
+        
+        foreach ($query as $arreglo) {
+        	$odontos_array[$arreglo->id_persona] = ucwords($arreglo->nombre);
+		};
+        
+		$this->data['odontologos'] = $odontos_array;
+   		$this->data['citas'] = $this->cita_model->get_citas('hora_cita', 'asc', 0, 0, $fecha, $hora, $odontologo);
+        
+   		$this->render('cliente/agendar_cita_view');          
            
     }
     
