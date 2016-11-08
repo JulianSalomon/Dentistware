@@ -1,19 +1,19 @@
 <?php
-if (!defined('BASEPATH')) exit('No direct script access allowed');
+if (!defined('BASEPATH'))
+	exit('No direct script access allowed');
 
-class Multa_model extends MY_Model{
-    
-    public function __construct(){
-        parent::__construct();               
-    }
-    
-    public function get_multas_cliente($id_cliente){
+class Multa_model extends MY_Model {
+	
+	public function __construct() {
+		parent::__construct();
+	}
+	
+	public function get_multas_cliente($id_cliente) {
 		$this->db->select('*');
 		$this->db->from('multa');
 		$this->db->where('id_cliente', $id_cliente);
-		
-		$query = $this->db->get();
-		if ($query->num_rows ())
+        $query = $this->db->get();
+		if ($query->num_rows())
 			return $query->result();
 		return false;
 	}

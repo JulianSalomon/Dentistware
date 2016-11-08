@@ -13,15 +13,14 @@ setup = function() {
     myTeeth = new Teeth();
 }
 
+draw = function() {
+    background(bg);
+    myTeeth.draw();
+}
+
 windowResized = function() {
     resizeCanvas(windowWidth / 3, windowHeight);
     myTeeth = new Teeth();
-}
-
-draw = function() {
-    background(bg);
-
-    myTeeth.draw();
 }
 
 mouseClicked = function() {
