@@ -16,18 +16,12 @@ class VerCita extends Cliente_Controller{
     }
     
     public function index(){
-    $datetime1 = date_create('2009-10-11 08:00:00');
-    $datetime2 = date_create('2009-10-13 08:00:00');
-    $interval = date_diff($datetime1, $datetime2);
-    echo $interval->format('%R%a días');
-    $this->render('cliente/ver_cita_view');
-
+    	$this->render('cliente/ver_cita_view');
     }
 
     public function cancelar_cita($cita){
         $data = array("id_cliente" => null);
         echo $this->cita_model->cancelar_cita($cita, $data); 
-        
     }
     
     public function calcular_horas($cita){
@@ -40,10 +34,5 @@ class VerCita extends Cliente_Controller{
         //echo $interval->format('%a Day and %h hours');
         return $interval->format('%h');
         
-    }
-      
-    
-    
-    
-   
+    }      
 }
