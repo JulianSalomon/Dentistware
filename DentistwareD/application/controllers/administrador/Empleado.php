@@ -8,7 +8,9 @@ class Empleado extends Admin_Controller {
         $this->load->model ( 'lugar_model' );
         $this->load->library("pagination");
         $this->data['departamentos'] = $this->lugar_model->get_departamentos();
+        $this->data['before_closing_head'] .= plugin_css('icheck');
         $this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/admin_empl.js', true);
+        $this->data['before_closing_body'] .= plugin_js('icheck');
         $this->get_user_menu('main-empleado');
         $this->data['empleados'] = '';
 	}
@@ -109,7 +111,7 @@ class Empleado extends Admin_Controller {
     	
     	if ($this->form_validation->run()) {
     		
-    		$id = $this->input->post('idCliente');
+    		$id = $this->input->post('idEmpleado');
     		$doc = $this->input->post ( 'inputDocumento' );
     		
     		$input = array (

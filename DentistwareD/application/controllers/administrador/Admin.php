@@ -84,4 +84,62 @@ class Admin extends Admin_Controller{
             echo json_encode ( $this->form_validation->error_array () );
         }
     }
+    public function edit_view($id){
+    	$query = $this->persona_model->get_persona('', $id);
+    	$this->data['administrador_info'] = $query;
+    	$this->data['departamentos'] = $this->lugar_model->get_departamentos();
+    	$this->data['ciudades'] = $this->lugar_model->get_ciudades($query->id_departamento);
+    	
+    	$this->render('admin/admin_admin_edit_view');
+    }
+    
+    public function edit_administrador(){
+        $this->load->model ( 'lugar_model' );
+        
+    	$this->load->library ( 'form_validation' );
+    	$this->form_validation->set_rules('inputNombre', 'nombre', 'required');
+    	$this->form_validation->set_rules('inputEmail', 'correo', 'required|valid_email');
+    	$this->form_validation->set_rules('inputDocumento', 'documento', 'required');
+    	$this->form_validation->set_rules('inputNacimiento', 'Fecha de Nacimiento', 'required');
+    	$this->form_validation->set_rules('inputTelefono', 'Telefono', 'required');
+    	$this->form_validation->set_rules('inputDireccion', 'Direccion', 'required');
+    	
+    	if ($this->form_validation->run()) {
+    		
+    		$id = $this->input->post('idAdministrador');
+    		$doc = $this->input->post ( 'inputDocumento' );
+    		
+    		$input = array (
+                    'nombre_persona' => mb_strtolower($this->input->post ( 'inputNombre' )),
+                    'correo_persona' => mb_strtolower($this->input->post ( 'inputEmail' )),
+    				'documento_persona' => $doc,
+    				'tipo_documento' => $this->input->post ( 'selectTipoDoc' ),
+    				'fecha_nacimiento' => $this->input->post ( 'inputNacimiento' ),
+    				'genero_persona' => $this->input->post ( 'selectGenero' ),
+    				'id_ciudad' => $this->input->post ( 'select_ciudades' ),
+    				'direccion_persona' => $this->input->post ( 'inputDireccion' ),
+    				'telefono_persona' => $this->input->post ( 'inputTelefono' ),
+    				
+    		);
+    		
+    		$nombre_foto = $this->image_process('inputFoto', $doc, "admin");
+    		
+    		if($nombre_foto == NULL) {
+    			if($this->input->post ('chkEliminarFoto')){
+    				$input['foto_persona'] = NULL;
+    			}
+    		} else {
+    			$input['foto_persona'] = $nombre_foto;
+    		}
+    			
+    		$input['edad_persona'] = $this->calculate_age($input['fecha_nacimiento']);    		    		
+    		
+    		$result = $this->persona_model->update_persona($id, $input);
+    		header ( 'Content-Type: application/json' );
+    		echo $result;
+    	}else {
+    		header ( 'Content-Type: application/json' );
+    		echo json_encode ( $this->form_validation->error_array () );
+    	}    	
+    }
 }

@@ -37,4 +37,48 @@ $(function() {
             }
         });
     });
+    
+    
+    $('#edit_administrador_form').submit(function (event) {
+        event.preventDefault();
+        $('.ac_p_error').fadeOut('slow').remove();
+        var postData = new FormData(this); 
+        $.ajax({
+            type: 'POST',
+            url: js_site_url + 'edit_administrador/',
+            data: postData,
+            processData: false,
+            contentType: false,
+            beforeSend:function(){
+            	$('#div_waiting_edit_administrador').removeClass("hidden");            	
+            },
+            success: function (msg) { 
+                if (isNaN(msg)) {
+                	$('#div_waiting_edit_administrador').addClass("hidden");   
+                    $.each(msg, function (i, item) {
+                        $('#div_' + i).after('<p class="alert alert-danger text-center ac_p_error">' + item + '</p>');
+                    });
+                    $("#error-doc").fadeOut('slow').remove();
+                } else {
+                    if (msg == 1) {    
+                    	swal({   
+                    		title: "Editado",   
+                    		text: "Se actualizó correctamente el administrador!",   
+                    		type: "success"                 
+                    	}, 
+                    	function(){
+                    		location.href = js_site_url; 
+                    	});              
+                    } else {
+                    	$('#div_waiting_edit_administrador').addClass("hidden");
+                    	swal("Error", "Se ha presentado un error al editar éste administrador!", "error");
+                    }
+                }
+            }
+        });
+    });
+	
+    $("#chkEliminarFoto").iCheck({
+		"checkboxClass": "icheckbox_square-blue",
+    });
 });

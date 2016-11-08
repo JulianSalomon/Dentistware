@@ -69,7 +69,7 @@ $(function() {
                     		location.href = js_site_url; 
                     	});              
                     } else {
-                    	$('#div_waiting_edit_cliente').addClass("hidden");
+                    	$('#div_waiting_edit_empleado').addClass("hidden");
                     	swal("Error", "Se ha presentado un error al editar éste empleado!", "error");
                     }
                 }
