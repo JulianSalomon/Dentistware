@@ -64,7 +64,6 @@
                         	<span class="input-group-addon"><i class="fa fa-credit-card fa-fw"></i></span>
 		                    <?php   
 		                    	$generos = array(
-										'-1' => '- Elija un tipo de documento -',
 						    			'CC' => 'Cédula de Ciudadania',
 						    			'TI' => 'Tarjeta de Identidad',
 						    			'CE' => 'Cedula de Extranjeria',
@@ -109,7 +108,6 @@
                         	<span class="input-group-addon"><i class="fa fa-check-square-o"></i></span>
 		                    <?php   
 		                    	$estados = array(
-										'-1' => '- Estado -',
 						    			'ACT' => 'Activo',
 						    			'DST' => 'Desactivado',						    			
 								);
@@ -182,7 +180,6 @@
                         	<span class="input-group-addon"><i class="fa fa-venus-mars fa-fw"></i></span>
 		                    <?php   
 		                    	$generos = array(
-										'-1' => '- Género -',
 						    			'M' => 'Masculino',
 						    			'F' => 'Femenino',						    			
 								);
@@ -205,7 +202,6 @@
                         	<span class="input-group-addon"><i class="fa fa-plus-square fa-fw"></i></span>
 		                    <?php 
 		                    	$tipos_sangre = array(
-		                    			'-1' => "- Elija una opción -",
 		                    			'A' => 'A',
 		                    			'B' => 'B',
 		                    			'AB' => 'AB',
@@ -226,7 +222,6 @@
                         	<span class="input-group-addon"><i class="fa  fa-plus-square fa-fw"></i></span>
 		                    <?php 
 		                    	$tipos_rh = array(
-		                    			'-1' => "- Elija una opción -",
 		                    			'+' => '+',
 		                    			'-' => '-',
 		                    	);

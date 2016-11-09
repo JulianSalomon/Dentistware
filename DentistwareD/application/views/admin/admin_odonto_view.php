@@ -91,7 +91,7 @@
                                                 
                                                 echo '</td>';
                                                 echo '<td class="text-center">';
-                                                if($odontologo->estado = 'ACT'){
+                                                if($odontologo->estado == 'ACT'){
                                                     echo '<i class="fa fa-check-square-o"></i>';
                                                 } else {
                                                     echo '<i class="fa fa-square-o"></i>';

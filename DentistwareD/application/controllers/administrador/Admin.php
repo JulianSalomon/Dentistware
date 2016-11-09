@@ -119,6 +119,7 @@ class Admin extends Admin_Controller{
     				'id_ciudad' => $this->input->post ( 'select_ciudades' ),
     				'direccion_persona' => $this->input->post ( 'inputDireccion' ),
     				'telefono_persona' => $this->input->post ( 'inputTelefono' ),
+                    'estado_persona' => $this->input->post ( 'selectEstado' ),
     				
     		);
     		

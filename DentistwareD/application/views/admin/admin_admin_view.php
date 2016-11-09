@@ -91,7 +91,7 @@
                                                 echo ucfirst(mb_strtolower($admin->ciudad, 'UTF-8')) . " - " .  ucfirst(mb_strtolower($admin->depto, 'UTF-8')) . '<br>' . ucwords(strtolower($admin->direccion));
                                                 echo '</td>';
                                                 echo '<td class="text-center">';
-                                                if($admin->estado = 'ACT'){
+                                                if($admin->estado == 'ACT'){
                                                     echo '<i class="fa fa-check-square-o"></i>';
                                                 } else {
                                                     echo '<i class="fa fa-square-o"></i>';

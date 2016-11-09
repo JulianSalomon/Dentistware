@@ -125,6 +125,7 @@ class Odontologo extends Admin_Controller {
     				'id_ciudad' => $this->input->post ( 'select_ciudades' ),
     				'direccion_persona' => $this->input->post ( 'inputDireccion' ),
     				'telefono_persona' => $this->input->post ( 'inputTelefono' ),
+                    'estado_persona' => $this->input->post ( 'selectEstado' ),
     				'tipo_sangre_cliente' => $this->input->post ( 'selectGrupo' ),
     				'rh_cliente' => $this->input->post ( 'selectRH' ),
     				'estudios_odont' => $this->input->post ( 'inputTitulosOdontologo' ),
