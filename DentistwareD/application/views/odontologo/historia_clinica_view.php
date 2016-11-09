@@ -76,8 +76,11 @@
                                             echo '<td>';
                                             echo ucwords($registro->desc_procedimiento);
                                             echo '<td class="text-center">
-                                                <button class="btn verRegistro-btn" type="submit" data-toggle="modal" data-target="#modal_add_odont" name="verRegistro" value="'. $registro->fecha_reg . '" >
+                                                <button class="btn verRegistro-btn" type="submit" data-toggle="modal" data-target="#modal_verRegistro" name="verRegistro" value="'. $registro->fecha_reg . '" >
                                                     <i class="fa fa-file-text-o"></i>
+                                                </button>
+                                                <button class="btn verDiente-btn" type="submit" name="verDiente" value="'. $registro->id_cliente . '" >
+                                                    <i class="fa fa-motorcycle"></i>
                                                 </button>
                                                 
                                                 </td>';
@@ -131,28 +134,21 @@
                 <div class="text-align:center;">
                    <table style="width:100%" align="center">
                        <?php
-                       
-                       foreach ($registros as $registro){
-                           if($registro->fecha_reg == $fecha){
-                               echo "<tr>";
-                                echo "<th class= text-right style= width:45% >Odontologo:</td>";
-                                  echo "<td style= width:10% > </td>";
-                                echo "<td style= width:45% > " . ucwords($registro->nombre_persona) . "</td>";
-                              echo "</tr>";
-
-                                echo "<tr>";
-                                echo "<th class= text-right style= width:45% >Descripcion:</td>";
-                                  echo "<td style= width:10% > </td>";
-                                echo "<td style= width:45% > " . substr($registro->fecha_reg, 0, 10) .  "</td>";
-                              echo "</tr>";
-
-                               echo "<tr>";
-                                echo "<th class= text-right style= width:45% >Observaciones:</th>";
-                                  echo "<td style= width:10% > </td>";
-                                echo "<td style= width:45% > " . $historia_clinica_info->observaciones . "</td>";
-                              echo "</tr>";
-                            }
-                       }
+                           echo "<tr>";
+                           echo "<th class= text-right style= width:45% >Odontologo:</td>";
+                           echo "<td style= width:10% > </td>";
+                           echo "<td style= width:45% > " . ucwords($registro->nombre_persona) . "</td>";
+                           echo "</tr>";
+                           echo "<tr>";
+                           echo "<th class= text-right style= width:45% >Descripcion:</td>";
+                           echo "<td style= width:10% > </td>";
+                           echo "<td style= width:45% > " . substr($registro->fecha_reg, 0, 10) .  "</td>";
+                           echo "</tr>";
+                           echo "<tr>";
+                           echo "<th class= text-right style= width:45% >Observaciones:</th>";
+                           echo "<td style= width:10% > </td>";
+                           echo "<td style= width:45% > " . $historia_clinica_info->observaciones . "</td>";
+                           echo "</tr>";
                        ?>
                     </table>
                 </div>
@@ -163,3 +159,10 @@
         <?php echo form_close(); ?>
     </div>
 </div>
+
+<?php 
+    $path = "odontologo/";
+    echo '<script>
+            var js_site_url = "'. site_url($path) . '";
+          </script>';
+?>

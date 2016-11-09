@@ -10,6 +10,7 @@ class Historia_clinica extends Odon_Controller {
 		$id_cliente = '2';
 		$this->data['historia_clinica_info'] = $this->historia_model->get_historia_clinica($id_cliente);
 		$this->data['registros'] = $this->historia_model->get_registro_historia($this->data['historia_clinica_info']->id_persona);
+        $this->data['reg'] = '';
 		$this->data['before_closing_body'] = plugin_js('assets/js/dentistware/odontologo.js', true);
 	}
 	
@@ -17,4 +18,9 @@ class Historia_clinica extends Odon_Controller {
 		$this->get_user_menu('Historia_Cliente');
 		$this->render('odontologo/historia_clinica_view');
 	}
+    
+    public function seleccionarHistoria($id_reg) {
+        $reg = get_registro_historia($id_reg);
+        return $reg;
+    }
 }

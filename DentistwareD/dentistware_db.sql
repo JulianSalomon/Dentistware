@@ -1,13 +1,4 @@
--- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
---
--- Servidor: 127.0.0.1
--- Tiempo de generación: 26-10-2016 a las 04:08:38
--- Versión del servidor: 10.1.13-MariaDB
--- Versión de PHP: 7.0.8
-
-use dentistware_db;
+﻿-- use dentistware_db;
 
 drop table if exists historia_pregunta;
 drop table if exists historia_diente;
@@ -53,7 +44,6 @@ CREATE TABLE `cita` (
 --
 -- Volcado de datos para la tabla `cita`
 --
-select * from cita where fecha_cita = '2016-11-07';
 INSERT INTO `cita` (`id_cita`, `fecha_cita`, `hora_cita`, `estado_cita`, `id_cliente`, `id_odonto`, `consultorio`) VALUES
 (1, '2016-10-12', '16:00:00',  NULL,  NULL, 6, '302'),
 (2, '2016-11-16', '08:00:00',  NULL,  NULL, 7, '1'),
@@ -1317,7 +1307,6 @@ INSERT INTO `departamento` (`id_departamento`, `nombre_dept`) VALUES
 CREATE TABLE `diente` (
   `id_diente` int(11) NOT NULL,
   `num_diente` int(11) NOT NULL,
-  `nombre_diente` varchar(60) COLLATE utf8_bin NOT NULL,
   `ausente` tinyint(1) NOT NULL,
   `extraer` tinyint(1) NOT NULL,
   `carie` tinyint(1) NOT NULL,
@@ -1325,6 +1314,15 @@ CREATE TABLE `diente` (
   `corona` tinyint(1) NOT NULL,
   `tramo` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+INSERT INTO `diente` (`id_diente`, `num_diente`, `ausente`, `extraer`, `carie`, `obturacion`, `corona`, `tramo`) VALUES 
+('1', '1', '1', '0', '1', '0', '1', '0'),
+('2', '2', '0', '1', '0', '1', '0', '1'),
+('3', '3', '0', '0', '0', '0', '0', '0'),
+('4', '4', '1', '1', '1', '1', '1', '1'),
+('5', '5', '1', '0', '0', '0', '0', '1'),
+('6', '6', '0', '1', '1', '1', '1', '0'),
+('7', '7', '1', '1', '0', '0', '0', '1');
 
 -- --------------------------------------------------------
 
@@ -1359,6 +1357,15 @@ CREATE TABLE `historia_diente` (
   `id_diente` int(11) NOT NULL,
   `id_historia` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+INSERT INTO `historia_diente` (`id_diente`, `id_historia`) VALUES 
+('1', '1'),
+('2', '1'),
+('3', '1'),
+('4', '1'),
+('5', '1'),
+('6', '1'),
+('7', '1');
 
 -- --------------------------------------------------------
 

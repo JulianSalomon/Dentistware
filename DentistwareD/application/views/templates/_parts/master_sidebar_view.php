@@ -21,7 +21,8 @@
             		<?php 
  		                $nombre = explode(" ", $user_info['nombre_completo']);
                         echo ucwords($nombre[0]);
-                        if($length = count($nombre) > 1){
+                        $length = count($nombre);
+                        if($length > 1){
                             $pos = ceil($length/2);
                             echo " " . ucwords($nombre[$pos]);
                         }

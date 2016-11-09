@@ -1,7 +1,19 @@
 $(function() {
     $('.verRegistro-btn').click(function(e) {
         e.preventDefault();
-        var fecha = $(this).attr('value');
+        $('.ac_p_error').fadeOut('slow').remove();
+        var fecha  = new $(this).val(); 
+        $.ajax({
+            type: 'POST',
+            url: js_site_url + 'Historia_clinica/seleccionarHistoria/' + $fecha
+        });
+    });
+    
+    $('.verDiente-btn').click(function(e) {
+        e.preventDefault();
+        $('.ac_p_error').fadeOut('slow').remove();
+        var id = $(this).val();
+        document.location.href =  js_site_url + 'Dientes/seleccionarPaciente/' + id;
     });
     
     $(".date-select").datepicker({
@@ -20,5 +32,5 @@ $(function() {
         "ordering": true,
         "info": false,
         "autoWidth": false,
-    });
+    });    
 });

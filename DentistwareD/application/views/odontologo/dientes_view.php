@@ -38,7 +38,7 @@
 							);
 							echo img($data_input);                		                		
 							?>
-						<span class="hidden-xs"><?php echo $user_info['nombre_completo'];?></span>
+						<span class="hidden-xs"><?php echo ucwords($user_info['nombre_completo']);?></span>
 						</a>
 						<ul class="dropdown-menu">
 							<li class="user-header">
@@ -56,7 +56,7 @@
 									echo img($data_input);	
 									?>
 								<p>
-									<span><?php echo $user_info['nombre_completo'];?></span>
+									<span><?php echo ucwords($user_info['nombre_completo']);?></span>
 									<br>
 									<span>
 									<small>
@@ -98,30 +98,32 @@
 		<div class="wrapper">
 				<section class="content-header">
 					<h1>
-						Dientes
+						Odontodiagrama
 					</h1>
 				</section>
 				<section class="content">
 					<div class="row">
 						<div class="col-xs-12">
 							<div class="box">
-								<form role="form">
 									<div class="box-body">
-										<div class="col-xs-7 text-right" id="teeth-diagram">
+										<div class="col-xs-8 text-right" id="teeth-diagram">
 										</div>
-                                        <div class="col-xs-5 text-left">
+                                        <div class="col-xs-4 text-right">
                                             <h4>Convenciones</h4>
                                             <form id="choose-stateType" action="submit">
-                                                <input type="radio" name="state" value="A"> Ausente <i class="fa fa-times" id="i_refresh"></i><br>
-                                                <input type="radio" name="state" value="E"> Extraer <i class="fa fa-equal" id="i_refresh"></i><br>
-                                                <input type="radio" name="state" value="D"> Caries <i class="fa fa-circle" style="color:blue" id="i_refresh"></i><br>
-                                                <input type="radio" name="state" value="O"> Obturación <i class="fa fa-circle" style="color:red" id="i_refresh"></i><br>
-                                                <input type="radio" name="state" value="C"> Corona <i class="fa fa-circle-o" id="i_refresh"></i><br>
-                                                <input type="radio" name="state" value="T"> Tramo <i class="fa fa-minus" id="i_refresh"></i><br>
+                                                <input type="radio" name="state" value="A" checked> Ausente &emsp;&emsp;<i class="fa fa-times" id="i_refresh" ></i><br>
+                                                <input type="radio" name="state" value="E"> Extraer &emsp;&emsp;&nbsp;&nbsp;&nbsp;=<i class="fa " id="i_refresh"></i><br>
+                                                <input type="radio" name="state" value="D"> Caries  &emsp;&emsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-circle" style="color:blue" id="i_refresh"></i><br>
+                                                <input type="radio" name="state" value="O"> Obturación &nbsp;&nbsp;&nbsp;<i class="fa fa-circle" style="color:red" id="i_refresh"></i><br>
+                                                <input type="radio" name="state" value="C"> Corona &emsp;&emsp;&nbsp;<i class="fa fa-circle-o" id="i_refresh"></i><br>
+                                                <input type="radio" name="state" value="T"> Tramo &emsp;&emsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-minus" id="i_refresh"></i><br>
                                             </form>
                                         </div>
 									</div>
-								</form>
+                                    <div class="box-footer">
+                                        <button id="cancel_diente" type="button" data-dismiss="modal" class="btn btn-danger pull-left">Cancelar</button>
+                                        <input id="agregar_diente" type="submit" name="submit_reg" class="btn btn-info pull-right" value="Guardar">
+                                </div>
 							</div>
 						</div>
 					</div>
@@ -144,7 +146,7 @@
 									'target' => '_blank',
 									'style' => 'color: #3B5998; margin-left: 4px;',
 							);
-							?>
+				        ?>
 					</div>
 				</div>
 			</footer>
@@ -154,6 +156,25 @@
 			echo plugin_js('bootstrap');
 			echo plugin_js('p5');
             echo plugin_js('teeth-drawer');
+            echo plugin_js('assets/js/dentistware/diente.js', true);
         ?>
+        <script>
+        <?php
+            echo 'var js_site_url = "'. site_url() . '";
+        var teeth = [';
+            if($dientes != NULL){
+                foreach($dientes as $diente){
+                echo "[". $diente->aus . "," 
+                        . $diente->ext . "," 
+                        . $diente->car . "," 
+                        . $diente->obt . "," 
+                        . $diente->cor . "," 
+                        . $diente->tra . "]," ;
+                }
+            }
+            echo '];';
+        ?>
+        </script>
+      
 	</body>
 </html>
