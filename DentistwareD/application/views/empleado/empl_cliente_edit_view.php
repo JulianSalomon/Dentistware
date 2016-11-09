@@ -22,8 +22,8 @@
 		        echo form_input($data_input);
 		   	?>
          	<div class="box-body">
-                    <div class="form-group text-center">
-		                <?php 
+                <div class="form-group text-center">
+					<?php 
 						if($cliente_info->foto_persona){
 							echo '<img id="foto_img" class="center-block" height="240" width="240" src="'.base_url() . "uploads/cliente/" . $cliente_info->foto_persona . '">';
 							echo '<i id="i_foto" class="fa fa-image fa-5x hidden"></i>';
@@ -53,8 +53,9 @@
                         		'value' => $cliente_info->foto_persona,
                         );
                         echo form_upload($data_input); 
-                        ?>
-                    </div>         	
+                    ?>
+                </div>    
+                <hr>     	
             	<div class="row">
 					<div class="col-lg-6 form-group">
                     	<label  class="control-label">Tipo de Documento: *</label>

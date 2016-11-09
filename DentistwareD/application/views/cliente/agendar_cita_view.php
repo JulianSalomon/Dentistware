@@ -17,13 +17,21 @@
                                     'id' => "edit_cliente_form",
                             );        
                             echo form_open('paciente/AgendarCita/filtrar', $data_input);
+                            
+                            $fecha = $this->session->userdata('fecha');                            
+                            $fecha = str_replace("-", "/", $fecha);
+                            
+                            $hora = $this->session->userdata('hora');
+                            $odontologo = $this->session->userdata('odontologo');
+                            
                         ?>
                         <div class="row">
+                        	<div class="col-lg-2"></div>
 							<div class="col-lg-4 form-group">
                             	<label class="control-label">Filtrar por fecha: </label>
                                 <div class="input-group" id="div_inputFecha">
                                 	<span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                                    <input type="text" class="form-control date-select" id="inputFecha" placeholder="YYYY/MM/DD" name="inputFecha">
+                                    <input type="text" class="form-control date-select" id="inputFecha" placeholder="YYYY/MM/DD" name="inputFecha" value="<?php echo $fecha;?>">
                                	</div>
                           	</div>
                            	<div class="col-lg-4 form-group">
@@ -31,12 +39,13 @@
 									<label>Filtrar por hora:</label>
                               		<div class="input-group">
                                   		<span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
-                                		<input type="text" class="form-control timepicker" id="inputHora" name= "inputHora">
+                                		<input type="text" class="form-control timepicker" id="inputHora" name= "inputHora" value="<?php echo $hora;?>">
                               		</div>
                              	</div>
                          	</div>
-                        </div>
-                        <div class="row">
+                        </div>                        
+                        <div class="row"> 
+                        	<div class="col-lg-2"></div>
                         	<div class="col-lg-6 form-group">
                     			<label  class="control-label">Seleccione un Odontólogo:</label>
                         		<div class="input-group" id="div_selectOdontologo">
@@ -47,7 +56,7 @@
 						                		'class' => 'form-control',
 						                		'tabindex' => "-1",
 						                );
-						                echo form_dropdown('inputOdontologo', $odontologos, '-1', $data_input);
+						                echo form_dropdown('inputOdontologo', $odontologos, $odontologo, $data_input);
 	                        		?>
 								</div>
 							</div>
@@ -72,66 +81,61 @@
                             <table id="tabla_cita" type='tabla' class="table table-bordered table-hover tabla-citas">
                                 <thead>
                                     <tr>
+                                    	<th>Opción</th>
                                         <th>Fecha</th>
                                         <th>Hora</th>
                                         <th>Odontólogo</th>
-                                        <th>Consultorio</th>
-                                        <th></th>
+                                        <th>Consultorio</th>                                        
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php 
-
-                                            foreach ($citas as  $cita){
-                                                echo '<tr>';
-                                                echo '<td>';
-                                                echo ucwords($cita->fecha);
-                                                echo '</td>';
-                                                  echo '<td>';
-                                                $hora = DateTime::createFromFormat('H:i:s', $cita->hora);
-                                                 echo $hora->format("H:i A"); 
-                                                echo '</td>';
-                                                  echo '<td>';
-                                                echo ucwords($cita->odontologo);
-                                                echo '</td>';
-                                                  echo '<td>';
-                                                echo ucwords($cita->consultorio);
-                                                echo '</td>';
-                                                echo '<td class="text-center">';
-                                                echo '<button class="asignar-btn btn btn-info" cita="' . $cita->id_cita . '" odonto="' . ucwords($cita->odontologo) . '" type=button id="delete_persona" data-toggle="tooltip"  title="Asignar">
-                                                            <i class="fa fa-calendar-check-o"></i>
-                                                        </button>';
-                                                echo '</td>';
-                                                 
+										foreach ($citas as  $cita){
+                                            echo '<tr>';
+                                            echo '<td class="text-center">';
+                                            echo '<div align="center">
+	                        						<a type="button" cita="' . $cita->id_cita . '" odonto="' . ucwords($cita->odontologo) . '" class="asignar-btn btn" id="delete_persona" data-toggle="tooltip"  title="Agregar Cita">
+		                    							<i class="fa fa-fw fa-plus-square fa-3x"></i>
+	                    							</a>
+                    							</div>';
+                                            echo '</td>';                                                
+                                            echo '<td>';
+                                            echo ucwords($cita->fecha);
+                                            echo '</td>';
+                                            echo '<td>';
+                                            $hora = DateTime::createFromFormat('H:i:s', $cita->hora);
+                                            echo $hora->format("H:i A"); 
+                                            echo '</td>';
+                                            echo '<td>';
+                                            echo ucwords($cita->odontologo);
+                                            echo '</td>';
+                                            echo '<td>';
+                                            echo ucwords($cita->consultorio);
+                                            echo '</td>';                                                 
                                             echo '</tr>';   
                                         }
                                     ?>
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                     <th>Fecha</th>
+                                    	<th>Opción</th>
+                                     	<th>Fecha</th>
                                         <th>Hora</th>
                                         <th>Odontólogo</th>
-                                        <th>Consultorio</th>
-                                          <th></th>
+                                        <th>Consultorio</th>                                          
                                     </tr>
                                 </tfoot>                                
-                            </table>
-                    	<div class="text-center"> 
-                    		<?php // echo $links;?>
-                    	</div>                            
+                            </table>                         
                         </div>
-                    <?php 
-	                    } else {
-	                    	
+	                    <?php 
+		                    } else {		                    	
 		                    	echo br(1);
 			                	echo '<div class="form-group text-center">
 										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
-			                   	echo heading('No se encontraron resultados.<br>Intente con otra opción.', 3, 'class="text-muted"');
-			                   	echo '</div>';
-	                    	
-	                    }                    	
-                    ?>
+			                   	echo heading('No hay citas disponibles.<br>Por favor intente con otras opciones.', 3, 'class="text-muted"');
+			                   	echo '</div>';		                    	
+		                    }                    	
+	                    ?>
                     </div>
                 </div>
             </div>

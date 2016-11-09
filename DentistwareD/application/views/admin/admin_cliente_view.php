@@ -16,7 +16,7 @@
 					<div class="box-body">
 						<?php 
 							$data_input = array(
-                                id' => "cliente_search_form",
+                                'id' => "cliente_search_form",
                                 'name' => "cliente_search_form",
                             );
 							echo form_open('administrador/Cliente/search', $data_input);
@@ -183,6 +183,7 @@
 						echo form_upload($data_input);
 					?>
 				</div>
+				<hr>
 				<div class="row">
 					<div class="col-lg-6 form-group">
 						<label  class="control-label">Tipo de Documento: *</label>

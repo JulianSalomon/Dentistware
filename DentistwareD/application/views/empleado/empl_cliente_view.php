@@ -189,7 +189,8 @@
                         );
                         echo form_upload($data_input);
                         ?>
-                    </div>                  
+                    </div>
+                    	<hr>                  
                       <div class="row">
                          <div class="col-lg-6 form-group">
                               <label  class="control-label">Tipo de Documento: *</label>
