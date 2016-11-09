@@ -206,8 +206,8 @@ Tooth.prototype = {
 }
 
 $(document).ready(function(){
-    $("input[name=state]:checked").val(function () {
-        stateAux = $(this).val();
-    });
+    $("input[name=state]").click(function () {
+          stateAux = $(this).val();
+      });
 });
     
