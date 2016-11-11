@@ -33,5 +33,6 @@ $_css = array (
 		'datatables' => 'assets/js/plugins/datatables/dataTables.bootstrap.css',
 		'select' => 'assets/js/plugins/bootstrap-select/bootstrap-select.min.css',
 		'datepicker3' => 'assets/js/plugins/datepicker/datepicker3.css',
-        'timepicker' => 'assets/js/plugins/timepicker/bootstrap-timepicker.min.css'		
+        'timepicker' => 'assets/js/plugins/timepicker/bootstrap-timepicker.min.css',	
+		'w3' => 'assets/css/w3.css',
 );

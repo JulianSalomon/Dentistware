@@ -16,6 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			echo plugin_css('bootstrap');
 			echo plugin_css('adminLTE');
 			echo plugin_css('skin');
+			echo plugin_css('pace');
 	    ?>
     </head>
     <body class="hold-transition login-page">
@@ -93,8 +94,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             </div>
         </div>
         <?php 
-        echo plugin_js();
-        echo plugin_js('bootstrap');
+	        echo plugin_js();
+	        echo plugin_js('bootstrap');
+	        echo plugin_js('pace');
         ?>
     </body>
 </html>
