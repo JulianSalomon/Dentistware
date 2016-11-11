@@ -97,6 +97,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	        echo plugin_js();
 	        echo plugin_js('bootstrap');
 	        echo plugin_js('pace');
+	        echo plugin_js('app');
         ?>
     </body>
 </html>
