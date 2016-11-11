@@ -19,7 +19,7 @@
 		            		'id' => "cliente_search_form",
 		            		'name' => "cliente_search_form",
 		            );            
-		            echo form_open('empleado/Empl_Cliente/search', $data_input);
+		            echo form_open('empleado/Cliente/search', $data_input);
 		            ?>            	
 	                <div class="form-group col-xs-12">
 	                	<?php 
@@ -108,7 +108,7 @@
                                                 		'data-toggle' => 'tooltip',
                                                 		'title' => 'Editar',
                                                 );
-                                                echo anchor(base_url() . 'empleado/Empl_Cliente/edit_view/' . $cliente->id_persona, '<i class="fa fa-pencil"></i>', $data_input);
+                                                echo anchor(base_url() . 'empleado/Cliente/edit_view/' . $cliente->id_persona, '<i class="fa fa-pencil"></i>', $data_input);
                                                 
                                                 echo '<button class="borrar-btn btn btn-default" doc="' . $cliente->documento . '" type=button id="delete_persona" data-toggle="tooltip" title="Borrar">
                                                             <i class="fa fa-trash"></i>
@@ -370,7 +370,7 @@
     </div>
 
 <?php 
-    $path = "empleado/Empl_Cliente/";
+    $path = "empleado/Cliente/";
     echo '<script>
             var js_site_url = "'. site_url($path) . '";
             var tipo_usuario = "empleado";

@@ -96,8 +96,7 @@ $(function() {
 	$(".timepicker").timepicker({
           showInputs: false,
           minuteStep: 30,
-          defaultTime: false
-              
+          defaultTime: false              
     });
           
     $(".tabla-citas").DataTable({

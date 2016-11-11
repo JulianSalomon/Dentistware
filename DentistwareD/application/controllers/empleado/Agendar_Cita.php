@@ -1,28 +1,19 @@
 <?php
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
-
-class AgendarCita extends Cliente_Controller {
 	
-	public function __construct() {
+class Agendar_Cita extends Empl_Controller {
+	
+	public function __construct(){
 		parent::__construct();
-		$this->data['page_title_end'] = '| Agendar Cita';
+		$this->data['page_title_end'] = '| Agendar';
 		$this->load->model('cita_model');
 		$this->load->model('persona_model');
-		$this->get_user_menu('main-citas', 'citas-agendar');		
-		$this->data['before_closing_body'] = plugin_js('assets/js/dentistware/cliente_cita.js', true);
-    }
+		$this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/empl_agendar_cita.js', true);
+		$this->get_user_menu('main-cita', 'citas-agendar');
+	}
 	
-	public function index() {
-		/* Hacer esto en agendarCitas, aqui esta para probarlo
-        // Se necesitan los headers
-        $msg = "First line of text\nSecond line of text";
-        $headers =  'MIME-Version: 1.0' . "\r\n"; 
-        $headers .= 'From: Your name <info@address.com>' . "\r\n";
-        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n"; 
-        // send email
-        mail("nrestrepot@unal.edu.co","My subject",$msg, $headers);*/
-        
+	public function index(){
 		$_SESSION['fecha'] = date("Y-m-d");
 		$_SESSION['hora'] = '';
 		$_SESSION['odontologo'] = -1;
@@ -38,14 +29,7 @@ class AgendarCita extends Cliente_Controller {
 		
 		$this->data['odontologos'] = $adontos_array;
 		
-		$this->render('cliente/agendar_cita_view');
-	}
-	public function agendar_cita($cita) {				
-		$doc = $this->session->userdata['id_persona'];
-		$data = array(
-			"id_cliente" => $doc
-		);
-		echo $this->cita_model->agendar_cita($cita, $data);
+		$this->render('empleado/empl_agendar_cita_view');
 	}
 	
 	public function filtrar() {
@@ -81,5 +65,13 @@ class AgendarCita extends Cliente_Controller {
 		}
 						
 		$this->render('cliente/agendar_cita_view');		
+	}
+	
+	public function agendar_cita($id_cita, $doc_persona) {
+		$persona = $this->persona_model->get_persona($doc_persona, '');
+		$data = array(
+				"id_cliente" => $persona->id_persona,
+		);
+		echo $this->cita_model->agendar_cita($id_cita, $data);
 	}
 }
