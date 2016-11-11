@@ -46,8 +46,10 @@
 	                                    echo $cita->fecha;
 	                                    echo '</td>';
 	                                    echo '<td>';
-										$hora = DateTime::createFromFormat('H:i:s', $cita->hora);
-	                                    echo $hora->format("H:i A"); 
+                                        $hora_cita = $cita->hora;
+                                        $hora_cita = strtotime($hora_cita);
+                                        $hora_cita = date("g:i a", $hora_cita);
+                                        echo strtoupper($hora_cita);
 	                                    echo '</td>';
 	                                    echo '<td>';
 	                                    echo ucwords($cita->odontologo);
@@ -66,15 +68,15 @@
 								</tfoot>                                
 							</table>                           
 						</div>
-                    <?php 
-	                    } else {                    	
-	                    	echo br(1);
-		                	echo '<div class="form-group text-center">
-									<i id="logo_i" class="fa fa-warning fa-5x"></i>';
-		                   	echo heading('Hasta el momento, no tiene citas agendas.', 3, 'class="text-muted"');
-		                   	echo '</div>';	                    	
-	                    }                    	
-                    ?>
+	                    <?php 
+		                    } else {                    	
+		                    	echo br(1);
+			                	echo '<div class="form-group text-center">
+										<i id="logo_i" class="fa fa-warning fa-5x"></i>';
+			                   	echo heading('Hasta el momento no tiene citas agendas.', 3, 'class="text-muted"');
+			                   	echo '</div>';	                    	
+		                    }                    	
+	                    ?>
                     </div>
                 </div>
             </div>

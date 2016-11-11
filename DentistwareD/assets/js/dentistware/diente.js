@@ -18,7 +18,7 @@ $(function(){
                     cor: value["state"][4],
                     tra: value["state"][5]},
                 function(result) {
-                    
+                    console.log(result);
                 }
             );
         });

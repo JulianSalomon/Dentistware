@@ -1,7 +1,7 @@
 <?php
 if (!defined('BASEPATH'))
 	exit('No direct script access allowed');
-class Empl_Cliente extends Empl_Controller {
+class Cliente extends Empl_Controller {
     
 	function __construct() {
 		parent::__construct();

@@ -24,7 +24,7 @@ class Cita_model extends MY_Model {
 		$this->db->from('cita');
 		$this->db->join('persona as odonto', 'odonto.id_persona = cita.id_odonto');
 		$this->db->where('cita.id_cliente is NULL', NULL, FALSE);		
-		$this->db->where('hora_cita >', $horaActual);
+		$this->db->where('hora_cita >=', $horaActual);
 		$this->db->where('fecha_cita', $fechaActual);
 		if ($horaSolicitada != '') {
 			$this->db->where('hora_cita >=', $horaSolicitada);
@@ -84,9 +84,7 @@ class Cita_model extends MY_Model {
 	
 	
 	public function agendar_cita($id_cita, $data = '') {
-		return $this->actualizar_datos('cita', $data, array(
-			'id_cita' => $id_cita
-		));
+		return $this->actualizar_datos('cita', $data, array('id_cita' => $id_cita));
 	}
 	
 	public function cancelar_cita($id_cita, $data = '') {
