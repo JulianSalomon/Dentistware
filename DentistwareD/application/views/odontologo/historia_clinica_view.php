@@ -115,7 +115,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade modal-add" id="modal_add_odont" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade modal-add" id="modal_verRegistro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <!-- Modal content-->
         <div class="modal-content box">
@@ -133,35 +133,23 @@
                 
                 <div class="text-align:center;">
                    <table style="width:100%" align="center">
-                       <pre>
-                       <?php 
-                       print_r ($_POST);
-                        ?>
-                       </pre>
-                       
-                       <?php      
-                       echo $_REQUEST['verRegistro'];
-                       foreach ($registros as $registro){
-                           if($registro->fecha_reg == $_POST){
-                               echo "<tr>";
-                                echo "<th class= text-right style= width:45% >Odontologo:</td>";
-                                  echo "<td style= width:10% > </td>";
-                                echo "<td style= width:45% > " . ucwords($registro->nombre_persona) . "</td>";
-                              echo "</tr>";
 
-                                echo "<tr>";
-                                echo "<th class= text-right style= width:45% >Descripcion:</td>";
-                                  echo "<td style= width:10% > </td>";
-                                echo "<td style= width:45% > " . substr($registro->fecha_reg, 0, 10) .  "</td>";
-                              echo "</tr>";
-
-                               echo "<tr>";
-                                echo "<th class= text-right style= width:45% >Observaciones:</th>";
-                                  echo "<td style= width:10% > </td>";
-                                echo "<td style= width:45% > " . $historia_clinica_info->observaciones . "</td>";
-                              echo "</tr>";
-                            }
-                       }
+                       <?php
+                           echo "<tr>";
+                           echo "<th class= text-right style= width:45% >Odontologo:</td>";
+                           echo "<td style= width:10% > </td>";
+                           echo "<td style= width:45% > " . ucwords($registro->nombre_persona) . "</td>";
+                           echo "</tr>";
+                           echo "<tr>";
+                           echo "<th class= text-right style= width:45% >Descripcion:</td>";
+                           echo "<td style= width:10% > </td>";
+                           echo "<td style= width:45% > " . substr($registro->fecha_reg, 0, 10) .  "</td>";
+                           echo "</tr>";
+                           echo "<tr>";
+                           echo "<th class= text-right style= width:45% >Observaciones:</th>";
+                           echo "<td style= width:10% > </td>";
+                           echo "<td style= width:45% > " . $historia_clinica_info->observaciones . "</td>";
+                           echo "</tr>";
                        ?>
                     </table>
                 </div>

@@ -95,7 +95,7 @@
                                                 echo ucwords($cliente->contacto) . '<br>' ."<small> Tel: " . $cliente->contacto_tel . "</small>" ;
                                                 echo '</td>';
                                                 echo '<td class="text-center">';
-                                                if($cliente->estado = 'ACT'){
+                                                if($cliente->estado == 'ACT'){
                                                     echo '<i class="fa fa-check-square-o"></i>';
                                                 } else {
                                                     echo '<i class="fa fa-square-o"></i>';

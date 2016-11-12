@@ -87,4 +87,41 @@ class Perfil extends MY_Controller {
 			echo json_encode($this->form_validation->error_array());
 		}
 	}
+    
+    public function contrasena() {
+        $this->data['persona_info'] = $this->persona_model->get_persona($this->session->userdata('doc_persona'));
+        $this->data['before_closing_head'] .= plugin_css('icheck');
+		$this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/perfil.js', true);
+		$this->data['before_closing_body'] .= plugin_js('icheck');
+        $this->get_user_menu();
+		$this->render('Contrasena_edit_view');
+	}
+    
+    public function edit_contrasena() {
+		$this->load->library('form_validation');
+        
+		$this->form_validation->set_rules('inputPassword', 'Contraseña Actual', 'required');
+		$this->form_validation->set_rules('inputNewPassword', 'Contraseña nueva', 'required');
+        $this->form_validation->set_rules('inputPasswordConfirm', 'Confirmar contraseña', 'required|matches[inputNewPassword]', array('matches' => 'Las contraseñas no coindicen'));
+        
+		if ($this->form_validation->run()) {
+            
+            $oldPassword = $this->input->post('inputPassword');
+            $user = $this->persona_model->get_persona($this->session->userdata('doc_persona'));
+            
+            if(password_verify($oldPassword, $user->clave_acceso)){
+                $input = array(
+                    'clave_acceso' => password_hash($this->input->post ( 'inputNewPassword'), PASSWORD_BCRYPT),
+                );
+                $result = $this->persona_model->update_persona($this->session->userdata('id_persona'), $input);
+                header('Content-Type: application/json');
+                echo $result;
+            }else{
+                echo 2;
+            }
+		} else {
+			header('Content-Type: application/json');
+			echo json_encode($this->form_validation->error_array());
+		}
+	}
 }
