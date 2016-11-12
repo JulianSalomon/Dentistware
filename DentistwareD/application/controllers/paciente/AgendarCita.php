@@ -14,7 +14,15 @@ class AgendarCita extends Cliente_Controller {
     }
 	
 	public function index() {
-		
+		/* Hacer esto en agendarCitas, aqui esta para probarlo
+        // Se necesitan los headers
+        $msg = "First line of text\nSecond line of text";
+        $headers =  'MIME-Version: 1.0' . "\r\n"; 
+        $headers .= 'From: Your name <info@address.com>' . "\r\n";
+        $headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n"; 
+        // send email
+        mail("nrestrepot@unal.edu.co","My subject",$msg, $headers);*/
+        
 		$_SESSION['fecha'] = date("Y-m-d");
 		$_SESSION['hora'] = '';
 		$_SESSION['odontologo'] = -1;
