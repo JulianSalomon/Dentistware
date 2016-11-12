@@ -2,6 +2,7 @@ $(function() {
     $('.verRegistro-btn').click(function(e) {
         e.preventDefault();
         var fecha = $(this).attr('value');
+        console.log(fecha);
     });
     
     $(".date-select").datepicker({

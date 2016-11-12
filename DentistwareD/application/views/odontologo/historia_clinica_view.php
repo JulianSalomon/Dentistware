@@ -130,10 +130,16 @@
                 
                 <div class="text-align:center;">
                    <table style="width:100%" align="center">
-                       <?php
+                       <pre>
+                       <?php 
+                       print_r ($_POST);
+                        ?>
+                       </pre>
                        
+                       <?php      
+                       echo $_REQUEST['verRegistro'];
                        foreach ($registros as $registro){
-                           if($registro->fecha_reg == $fecha){
+                           if($registro->fecha_reg == $_POST){
                                echo "<tr>";
                                 echo "<th class= text-right style= width:45% >Odontologo:</td>";
                                   echo "<td style= width:10% > </td>";
