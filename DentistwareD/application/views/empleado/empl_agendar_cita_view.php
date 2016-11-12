@@ -16,12 +16,12 @@
                             $data_input = array(
                                     'id' => "edit_cliente_form",
                             );        
-                            echo form_open('paciente/AgendarCita/filtrar', $data_input);
+                            echo form_open('empleado/Agendar_Cita/filtrar', $data_input);
                             
                             $fecha = $this->session->userdata('fecha');                            
                             $fecha = str_replace("-", "/", $fecha);
                             
-                           	$hora = $this->session->userdata('hora');
+                            $hora = $this->session->userdata('hora');
                             $odontologo = $this->session->userdata('odontologo');
                             
                         ?>
@@ -90,12 +90,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <?php 
+                                    <?php
 										foreach ($citas as  $cita){
                                             echo '<tr>';
                                             echo '<td class="text-center">';
                                             echo '<div align="center">
-	                        						<a type="button" cita="' . $cita->id_cita . '" odonto="' . ucwords($cita->odontologo) . '" class="asignar-btn btn" id="delete_persona" data-toggle="tooltip"  title="Agendar Cita">
+	                        						<a type="button" cita="' . $cita->id_cita . '" odonto="' . ucwords($cita->odontologo) . '" class="asignar-btn btn" id="delete_persona" data-toggle="tooltip"  title="Agregar Cita">
 		                    							<i class="fa fa-fw fa-plus-square fa-3x"></i>
 	                    							</a>
                     							</div>';
@@ -147,7 +147,7 @@
 </div>
 
 <?php 
-    $path = "paciente/AgendarCita/";
+    $path = "empleado/Agendar_Cita/";
     echo '<script>
             var js_site_url = "'. site_url($path) . '";
           </script>';

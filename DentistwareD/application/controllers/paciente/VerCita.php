@@ -20,21 +20,12 @@ class VerCita extends Cliente_Controller {
 		$this->render('cliente/ver_cita_view');
 	}
 	
-	public function cancelar_cita($cita) {
+	public function cancelar_cita($id_cita) {
 		$data = array(
 			"id_cliente" => null
 		);
-		echo $this->cita_model->cancelar_cita($cita, $data);
+		
+		echo $this->cita_model->cancelar_cita($id_cita, $data);
+				
 	}
-	
-// 	public function calcular_horas($cita) {
-// 		$query = $this->cita_model->get_cita($cita);
-// 		echo $query->fecha_cita;
-// 		echo $query->hora_cita;
-// 		$datetime1 = date_create($query->fecha_cita . " " . $query->hora_cita);
-// 		$datetime2 = date_create(date('Y-m-d H:i:s'));
-// 		$interval = date_diff($datetime1, $datetime2);
-// 		//echo $interval->format('%a Day and %h hours');
-// 		return $interval->format('%h');
-// 	}
 }

@@ -145,7 +145,7 @@ $config['menu_EMP'] = array(
 		'cliente' => array(
 				'id' => 'main-cliente',
 				'title' => '<span>Cliente</span>',
-				'link' => base_url('empleado/Empl_Cliente') ,
+				'link' => base_url('empleado/Cliente') ,
 				'icon' => 'fa fa-user',
 		),
 		'cita' => array(
@@ -156,7 +156,7 @@ $config['menu_EMP'] = array(
 				'items' => array(
 						0 => array(
 								'title' => 'Agendar Cita',
-								'link' => '',
+								'link' => base_url('empleado/Agendar_Cita'),
 								'id' => 'citas-agendar',
 						),
 						1 => array(								

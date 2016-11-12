@@ -2,19 +2,21 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Dentistware</title>
+        <title>Dentistware | Inicio</title>
         <link rel="shortcut icon" type="image/png" href="<?php echo base_url('assets/img/logo.png')?>"/>
 	    <?php
 	    	echo meta('X-UA-Compatible', 'IE=edge', 'equiv');
 	    	echo meta('', 'text/html; charset=utf-8');
 			echo meta('viewport', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no');
+			
+			echo plugin_css('font-awesome');
+			echo plugin_css('icons');
+			echo plugin_css('bootstrap');
+			echo plugin_css('adminLTE');
+			echo plugin_css('skin');
+			echo plugin_css('pace');
+			echo plugin_css('w3');
 		?>
-        <link rel="stylesheet" href="assets/css/w3.css">
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css">
-        <link rel="stylesheet" href="assets/css/ionicons.min.css">
-        <link rel="stylesheet" href="assets/css/AdminLTE.min.css">
-        <link rel="stylesheet" href="assets/css/skin-blue-light.min.css">
         <style>
             .mySlides {display:none;}
         </style>
@@ -202,10 +204,12 @@
                 </div>
             </footer>
         </div>
-        <script src="assets/js/jquery-3.1.1.min.js"></script>
-        <script src="assets/js/bootstrap.min.js"></script>
-        <script src="assets/js/plugins/slimScroll/jquery.slimscroll.min.js"></script>
-        <script src="assets/js/app.min.js"></script>
+        <?php 
+	        echo plugin_js();
+	        echo plugin_js('bootstrap');
+	        echo plugin_js('app');
+	        echo plugin_js('pace');
+        ?>        
         <script>
             var myIndex = 0;
             carousel();

@@ -26,4 +26,12 @@ class Historia_model extends MY_Model {
 		$query = $this->db->get()->result();
 		return $query;
 	}
+    
+    public function get_historia($id_historia) {
+		$this->db->select('*');
+		$this->db->from('historia_clinica');
+		$this->db->where('id_historia', $id_historia);
+		$query = $this->db->get()->result();
+		return $query;
+	}
 }
