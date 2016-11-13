@@ -6,6 +6,7 @@
 
 $_js = array (
 		'jquery' => 'assets/js/jquery-3.1.1.min.js',
+        'jquery-ui' => 'assets/js/jquery-ui.min.js',
 		'bootstrap' => 'assets/js/bootstrap.min.js',
 		'app' => 'assets/js/app.min.js',
 		'pace' => 'assets/js/plugins/pace/pace.js',

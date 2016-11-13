@@ -16,9 +16,9 @@
                             
                             <div class="col-xs-12 text-center ">
                                 <?php
-                                echo '<label>' . ucwords($historia_clinica_info->nombre_persona) . '</label>';
+                                echo '<h2>' . ucwords($cliente['nombre']) . '</h2>';
                                 echo br(1);
-                                echo '<label> Fecha de apertura ' . ' &nbsp &nbsp' . substr($historia_clinica_info->fecha_apertura, 0, 10) . '</label>';
+                                echo '<h4> Fecha de apertura ' . ' &nbsp &nbsp' . substr($historia_clinica->fecha_apertura, 0, 10) . '</h4>';
                                 echo br(2);
                                 ?>
                             </div>
@@ -36,19 +36,19 @@
                                   echo "<tr>";
                                     echo "<th class= text-right style= width:45% >Antencedentes familiares:</td>";
                                       echo "<td style= width:10% > </td>";
-                                    echo "<td style= width:45% > " . $historia_clinica_info->antecedentes_fam . " </td>";
+                                    echo "<td style= width:45% > " . $historia_clinica->antecedentes_fam . " </td>";
                                   echo "</tr>";
 
                                    echo "<tr>";
                                     echo "<th class= text-right style= width:45% >Enfermedad actual:</td>";
                                       echo "<td style= width:10% > </td>";
-                                    echo "<td style= width:45% > " . $historia_clinica_info->enfermedad_actual . "</td>";
+                                    echo "<td style= width:45% > " . $historia_clinica->enfermedad_actual . "</td>";
                                   echo "</tr>";
                                   
                                    echo "<tr>";
                                     echo "<th class= text-right style= width:45% >Observaciones:</th>";
                                       echo "<td style= width:10% > </td>";
-                                    echo "<td style= width:45% > " . $historia_clinica_info->observaciones . "</td>";
+                                    echo "<td style= width:45% > " . $historia_clinica->observaciones . "</td>";
                                   echo "</tr>";
 
                                    ?>
@@ -71,15 +71,15 @@
                                     foreach ($registros as $registro){
                                             echo '<tr>';
                                             echo '<td>';
-                                            echo  substr($registro->fecha_reg, 0, 10);
+                                            echo substr($registro->fecha_reg, 0, 10);
                                             echo '</td>';
                                             echo '<td>';
-                                            echo ucwords($registro->desc_procedimiento);
+                                            echo $registro->desc_procedimiento;
                                             echo '<td class="text-center">
                                                 <button class="btn verRegistro-btn" type="submit" data-toggle="modal" data-target="#modal_verRegistro" name="verRegistro" value="'. $registro->fecha_reg . '" >
                                                     <i class="fa fa-file-text-o"></i>
                                                 </button>
-                                                <button class="btn verDiente-btn" type="submit" name="verDiente" value="'. $registro->id_cliente . '" >
+                                                <button class="btn verDiente-btn" type="submit" name="verDiente" value="'. $registro->id_registro . '" >
                                                     <i class="fa fa-motorcycle"></i>
                                                 </button>
                                                 
@@ -111,11 +111,17 @@
 </div>
 
 
-
+<div id="verDientes" class="modal fade modal-add" role="dialog" aria-labelledby="myModalLabel2" tabindex="-1">
+    <div id="verDientesModal" class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div id="verDientes_html"></div>
+        </div>
+    </div>    
+</div>          
 
 
 <!-- Modal -->
-<div class="modal fade modal-add" id="modal_add_odont" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade modal-add" id="modal_add_odont" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1">
     <div class="modal-dialog" role="document">
         <!-- Modal content-->
         <div class="modal-content box">
@@ -124,13 +130,9 @@
             </div>
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                
-                 <h3 class="modal-title">Informacion registro </h3>
-                
+                <h3 class="modal-title">Informacion registro </h3>                
             </div>
             <div class="modal-body">
-                
-                
                 <div class="text-align:center;">
                    <table style="width:100%" align="center">
                        <?php
@@ -147,13 +149,11 @@
                            echo "<tr>";
                            echo "<th class= text-right style= width:45% >Observaciones:</th>";
                            echo "<td style= width:10% > </td>";
-                           echo "<td style= width:45% > " . $historia_clinica_info->observaciones . "</td>";
+                           echo "<td style= width:45% > " . $historia_clinica->observaciones . "</td>";
                            echo "</tr>";
                        ?>
                     </table>
                 </div>
-                
-                
             </div>
         </div>
         <?php echo form_close(); ?>
