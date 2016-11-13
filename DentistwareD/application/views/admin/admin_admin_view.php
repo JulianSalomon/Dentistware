@@ -48,12 +48,11 @@
 	                        	echo '</span>';
 	                        echo '</div>';
 						?>
-	             	</div> 
-                        
-                    <?php 
-                        echo form_close();
-                    	if($admins != NULL){  
-                    ?>  
+			    	</div>                         
+	                    <?php 
+	                        echo form_close();
+	                    	if($admins != NULL){  
+	                    ?>  
                         <div class="table-responsive">
                             <table id="tabla_admin" type='tabla' class="table table-bordered table-hover tabla-usuario">
                                 <thead>

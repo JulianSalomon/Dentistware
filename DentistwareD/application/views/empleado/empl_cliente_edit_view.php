@@ -250,7 +250,7 @@
 	                		'name' => "cancelar_edit",
 	                		'content' => "Cancelar"
 	                );
-	                echo anchor(base_url() . 'empleado/Empl_Cliente/', 'Cancelar', $data_input);
+	                echo anchor(base_url() . 'empleado/Cliente/', 'Cancelar', $data_input);
                 	$data_input = array(
                 			'class' => "btn btn-primary btn-lg",
                 			'id' => "guardar_edit",

@@ -198,6 +198,33 @@ $(function() {
             return false;
         }
      });
+    
+    $('#estado_multa').on('ifChecked', function(event){
+    	var id_multa = $(this).attr("data-id");
+        event.preventDefault();
+        $('.ac_p_error').fadeOut('slow').remove();
+        var postData = $(this).serializeArray();
+        $.ajax({
+            type: 'GET',
+            url: js_site_url + '/update_estado_multa/' + id_multa,
+            data: postData,
+            success: function (msg) { 
+	            if (msg == 1) {    
+	            	swal({   
+	            		title: "",   
+	            		text: "La multa ha sido pagada!",   
+	            		type: "success"                 
+	            	},
+	            	function(){
+	            		location.reload();
+	            	}
+	            	);                    	
+	            } else {
+	            	swal("Error", "Se ha presentado un error cambiar el estado de la multa!", "error");
+	            }            
+            }
+        });
+    });
      
     $.fn.datepicker.defaults.format = "yyyy/mm/dd";
  	$.fn.datepicker.dates["es"] = {
@@ -236,6 +263,10 @@ $(function() {
      });
 	
     $("#chkEliminarFoto").iCheck({
+		"checkboxClass": "icheckbox_square-blue",
+    });
+    
+    $("#estado_multa").iCheck({
 		"checkboxClass": "icheckbox_square-blue",
     });
 });
