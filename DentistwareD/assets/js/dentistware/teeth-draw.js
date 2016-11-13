@@ -1,13 +1,15 @@
 var bg;
 var myTeeth;
 var ratio;
+var modalWidth;
+var modalHeight;
 
 preload = function() {
-    bg = loadImage(js_site_url + "assets/img/Teeth.png");
+    bg = loadImage(js_site_url + "../assets/img/Teeth.png");
 }
 
 setup = function() {
-    var canvas = createCanvas(windowWidth * 0.583333333, windowWidth * 0.858229166);
+    var canvas = createCanvas(modalWidth * 0.583333333, modalWidth   * 0.858229166);
     canvas.parent('teeth-diagram');
     ratio = width / 40;    
     myTeeth = new Teeth();
@@ -19,13 +21,14 @@ draw = function() {
 }
 
 windowResized = function() {
-    resizeCanvas(windowWidth * 0.583333333, windowWidth * 0.858229166);    
+    modalWidth = $("#verDientesModal").width();
+    modalHeight = $("#verDientesModal").height();
+    resizeCanvas(modalWidth * 0.583333333, modalWidth * 0.858229166);
     myTeeth = new Teeth();
     ratio = width / 40;
 }
 
 mouseClicked = function() {
-
     var distance;
 
     for (var i = 0; i < myTeeth.teeth.length; i++) {
@@ -204,10 +207,3 @@ Tooth.prototype = {
         }
     }
 }
-
-$(document).ready(function(){
-    $("input[name=state]").click(function () {
-          stateAux = $(this).val();
-      });
-});
-    

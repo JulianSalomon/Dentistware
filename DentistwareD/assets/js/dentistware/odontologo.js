@@ -1,4 +1,6 @@
 $(function() {
+    var modal = false;
+    
     $('.verRegistro-btn').click(function(e) {
         e.preventDefault();
         $('.ac_p_error').fadeOut('slow').remove();
@@ -14,7 +16,25 @@ $(function() {
         e.preventDefault();
         $('.ac_p_error').fadeOut('slow').remove();
         var id = $(this).val();
-        document.location.href =  js_site_url + 'Dientes/seleccionarPaciente/' + id;
+        if(modal != id){
+            $.ajax({
+            type: 'POST',
+            url: js_site_url + 'Dientes/',
+            data: {
+                'reg' : id
+                  },
+            success: function(html) {
+                $('#verDientes_html').html(html);
+                $('#verDientes').modal('show');
+            },
+            error: function(msg) {
+                alert(msg);
+            }
+        });  
+            modal=id;
+        } else {
+            $('#verDientes').modal('show');
+        }        
     });
     
     

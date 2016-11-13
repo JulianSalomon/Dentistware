@@ -3,12 +3,12 @@
 /* Created on:     12/11/2016 11:53:15 a. m.                    */
 /*==============================================================*/
 use dentistware_db;
+
 drop table if exists historia_pregunta;
 drop table if exists diente;
 drop table if exists registro;
 drop table if exists multa;
 drop table if exists info_paciente;
-
 drop table if exists historia_clinica;
 drop table if exists cita;
 drop table if exists persona;
@@ -1268,6 +1268,10 @@ create table registro
    primary key (id_registro)
 );
 
+INSERT INTO `registro` (`id_registro`, `id_historia`, `fecha_reg`, `id_odon`, `motivo_consulta`, `desc_procedimiento`) VALUES
+(1, 1, '2016-08-08 00:01:00', 6, 'Ninguna', 'Ninguna'),
+(2, 1, '2016-07-09 00:01:00', 6, 'Dolor en un diente', 'Se quita carie'),
+(3, 1, '2016-07-10 00:01:00', 6, 'Dolor en un diente', 'Se quita carie');
 
 /*==============================================================*/
 /* Table: diente                                                */
@@ -1287,15 +1291,15 @@ create table diente
    FOREIGN KEY(id_registro) REFERENCES registro(id_registro)
 );
 
-/*INSERT INTO `diente` (`id_diente`, `num_diente`, `ausente`, `extraer`, `carie`, `obturacion`, `corona`, `tramo`) VALUES 
-('1', '1', '1', '0', '1', '0', '1', '0'),
-('2', '2', '0', '1', '0', '1', '0', '1'),
-('3', '3', '0', '0', '0', '0', '0', '0'),
-('4', '4', '1', '1', '1', '1', '1', '1'),
-('5', '5', '1', '0', '0', '0', '0', '1'),
-('6', '6', '0', '1', '1', '1', '1', '0'),
-('7', '7', '1', '1', '0', '0', '0', '1');
-*/
+INSERT INTO `diente` (`id_diente`, `num_diente`, `id_registro`, `ausente`, `extraer`, `carie`, `obturacion`, `corona`, `tramo`) VALUES 
+('1', '1', '1', '1', '0', '1', '0', '1', '0'),
+('2', '2', '1', '0', '1', '0', '1', '0', '1'),
+('3', '3', '1', '0', '0', '0', '0', '0', '0'),
+('4', '4', '1', '1', '1', '1', '1', '1', '1'),
+('5', '5', '1', '1', '0', '0', '0', '0', '1'),
+('6', '6', '1', '0', '1', '1', '1', '1', '0'),
+('7', '7', '1', '1', '1', '0', '0', '0', '1');
+
 /*==============================================================*/
 /* Table: historia_clinica                                      */
 /*==============================================================*/
@@ -1383,7 +1387,6 @@ INSERT INTO `persona` (`id_persona`, `id_ciudad`, `documento_persona`, `tipo_doc
 (11, 5036, 56129365, 'CC', 'carol jazmín forero bojaca', '2840410', 'AV ind # 57 - 23', '$2y$10$bgmJGvYgCUa7gbPnkajfP.ErLrCBFtjXs.ZqJbv9In8dOYBQ154ou', 'CLT', 35, '1981-03-25', 'M', 'ACT', NULL, 'forero.boja@gmail.com', 'Alexandra Banguardia Fe', '3156483241', NULL, 'AB', '+', 'Famisanar'),
 (12, 5038, 97080536215, 'TI', 'jhonatan del jesus valencia', '3142947503', 'Calle 45 # 39 f - 23 sur', '$2y$10$bgmJGvYgCUa7gbPnkajfP.ErLrCBFtjXs.ZqJbv9In8dOYBQ154ou', 'CLT', 17, '1999-04-03', 'M', 'ACT', NULL, 'jhonatan2155@hotmail.com', 'Alvaro Hernando Cardona G.', '8521244', NULL, 'A', '-', 'vive sano');
 
-
 /*==============================================================*/
 /* Table: pregunta                                              */
 /*==============================================================*/
@@ -1394,12 +1397,6 @@ create table pregunta
    primary key (id_pregunta)
 );
 
-
-
-INSERT INTO `registro` (`id_registro`, `id_historia`, `fecha_reg`, `id_odon`, `motivo_consulta`, `desc_procedimiento`) VALUES
-(1, 1, '2016-07-09 00:00:00', 6, 'Dolor en un diente', 'Se quita carie'),
-(2, 1, '2016-07-10 00:00:00', 6, 'Dolor en un diente', 'Se quita carie');
-
 alter table cita add constraint fk_cliente_cita foreign key (id_cliente)
       references persona (id_persona) on delete restrict on update restrict;
 
@@ -1408,8 +1405,6 @@ alter table cita add constraint fk_odont_cita foreign key (id_odonto)
 
 alter table ciudad add constraint fk_dept_ciudad foreign key (id_departamento)
       references departamento (id_departamento) on delete restrict on update restrict;
-
-
 
 alter table historia_clinica add constraint fk_cliente_historia foreign key (id_cliente)
       references persona (id_persona) on delete restrict on update restrict;
