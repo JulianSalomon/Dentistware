@@ -92,4 +92,12 @@ class Cita_model extends MY_Model {
 			'id_cita' => $id_cita
 		));
 	}
+    
+    public function count_citas($idPersona, $estadoCita) {
+		$this->db->select('id_cita, fecha_cita as fecha, hora_cita as hora, estado_cita as estado, odonto.nombre_persona  as odontologo, consultorio');
+		$this->db->from('cita');
+        $this->db->where('id_odonto', $idPersona);
+        $query = $this->db->get();
+		return count($query->result());
+	}
 }
