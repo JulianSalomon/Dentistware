@@ -10,50 +10,48 @@
     <section class="content">
         <div class="row">
             <div class="col-xs-12">
-                <div class="box">
+                <div class="box box-primary">
                     <form role="form">
-                        <div class="box-body">
-                            
+                        <div class="box-body">                            
                             <div class="col-xs-12 text-center ">
                                 <?php
                                 echo '<h2>' . ucwords($cliente['nombre']) . '</h2>';
-                                echo br(1);
+                                echo br();
                                 echo '<h4> Fecha de apertura ' . ' &nbsp &nbsp' . substr($historia_clinica->fecha_apertura, 0, 10) . '</h4>';
-                                echo br(2);
+                                echo br();
                                 ?>
                             </div>
-                            
-                            <div class="text-align:center;">
-                               <table style="width:100%" align="center">
-                                   <?php
-
-                                  echo "<tr>";                                   
-                                    echo "<th class= text-right style= width:30% >Motivo de la consulta:</th>";
-                                      echo "<td style= width:10% > </td>";
-                                   echo "<td style= width:60% > " . "<input type= text class= form-control id= inputNombre placeholder= Nombres y apellidos  name= inputNombre >" . "</td>";
-                                  echo "</tr>";
-
-                                  echo "<tr>";
-                                    echo "<th class= text-right style= width:45% >Antencedentes familiares:</td>";
-                                      echo "<td style= width:10% > </td>";
-                                    echo "<td style= width:45% > " . $historia_clinica->antecedentes_fam . " </td>";
-                                  echo "</tr>";
-
-                                   echo "<tr>";
-                                    echo "<th class= text-right style= width:45% >Enfermedad actual:</td>";
-                                      echo "<td style= width:10% > </td>";
-                                    echo "<td style= width:45% > " . $historia_clinica->enfermedad_actual . "</td>";
-                                  echo "</tr>";
-                                  
-                                   echo "<tr>";
-                                    echo "<th class= text-right style= width:45% >Observaciones:</th>";
-                                      echo "<td style= width:10% > </td>";
-                                    echo "<td style= width:45% > " . $historia_clinica->observaciones . "</td>";
-                                  echo "</tr>";
-
-                                   ?>
+                               <table class="table-responsive">
+                                   <tr>
+                                       <th class="text-left" style="width:20%">
+                                           Antencedentes familiares:
+                                       </th>
+                                       <td style="width:5%"></td>
+                                       <td style="width:80%">
+                                           <?php
+                                                echo $historia_clinica->antecedentes_fam;
+                                           ?>
+                                       </td>
+                                   </tr>
+                                   <tr>
+                                        <th class="text-left" style="width:10%" >
+                                           Enfermedad actual:
+                                        </th>
+                                        <td style="width:5%"></td>
+                                        <td style="width:45%">
+                                            <?php echo $historia_clinica->enfermedad_actual; ?>
+                                        </td>
+                                   </tr>
+                                   <tr>
+                                        <th class="text-left" style="width:10%" >
+                                           Observaciones:
+                                        </th>
+                                        <td style="width:5%"></td>
+                                        <td style="width:45%">
+                                            <?php echo $historia_clinica->observaciones; ?>
+                                        </td>
+                                   </tr>
                                 </table>
-                            </div>
 
                         <div class="table-responsive">
                             <table id="tablaRegistro" type='tabla' class="table table-bordered table-hover tabla-usuario " style="width:100%">
@@ -76,13 +74,9 @@
                                             echo '<td>';
                                             echo $registro->desc_procedimiento;
                                             echo '<td class="text-center">
-                                                <button class="btn verRegistro-btn" type="submit" data-toggle="modal" data-target="#modal_verRegistro" name="verRegistro" value="'. $registro->fecha_reg . '" >
+                                                <button class="btn verRegistro-btn" type="button" name="verRegistro" value="'. $registro->id_registro . '" >
                                                     <i class="fa fa-file-text-o"></i>
-                                                </button>
-                                                <button class="btn verDiente-btn" type="submit" name="verDiente" value="'. $registro->id_registro . '" >
-                                                    <i class="fa fa-motorcycle"></i>
-                                                </button>
-                                                
+                                                </button>                                                
                                                 </td>';
                                             echo '</td>';
                             			echo '</tr>';   
@@ -109,55 +103,14 @@
 </section>
         <!-- /.content -->
 </div>
-
-
-<div id="verDientes" class="modal fade modal-add" role="dialog" aria-labelledby="myModalLabel2" tabindex="-1">
-    <div id="verDientesModal" class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div id="verDientes_html"></div>
-        </div>
-    </div>    
-</div>          
-
+        $this->data['id_registro'] = $_POST['reg'];
 
 <!-- Modal -->
-<div class="modal fade modal-add" id="modal_verRegistro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <!-- Modal content-->
-        <div class="modal-content box">
-            <div class="overlay hidden" id="div_waiting_new_odont">
-                <i class="fa fa-refresh fa-spin" id="i_refresh"></i>
-            </div>
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h3 class="modal-title">Informacion registro </h3>                
-            </div>
-            <div class="modal-body">
-                <div class="text-align:center;">
-                   <table style="width:100%" align="center">
-
-                       <?php
-                           echo "<tr>";
-                           echo "<th class= text-right style= width:45% >Odontologo:</td>";
-                           echo "<td style= width:10% > </td>";
-                           echo "<td style= width:45% > " . ucwords($registro->nombre_persona) . "</td>";
-                           echo "</tr>";
-                           echo "<tr>";
-                           echo "<th class= text-right style= width:45% >Descripcion:</td>";
-                           echo "<td style= width:10% > </td>";
-                           echo "<td style= width:45% > " . substr($registro->fecha_reg, 0, 10) .  "</td>";
-                           echo "</tr>";
-                           echo "<tr>";
-                           echo "<th class= text-right style= width:45% >Observaciones:</th>";
-                           echo "<td style= width:10% > </td>";
-                           echo "<td style= width:45% > " . $historia_clinica->observaciones . "</td>";
-                           echo "</tr>";
-                       ?>
-                    </table>
-                </div>
-            </div>
+<div id="verRegistro" class="modal fade modal-add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div id="verRegistroModal" class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div id="verRegistro_html"></div>
         </div>
-        <?php echo form_close(); ?>
     </div>
 </div>
 
