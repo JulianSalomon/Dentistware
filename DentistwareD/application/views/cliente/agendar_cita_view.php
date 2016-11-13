@@ -16,7 +16,7 @@
                             $data_input = array(
                                     'id' => "edit_cliente_form",
                             );        
-                            echo form_open('paciente/AgendarCita/filtrar', $data_input);
+                            echo form_open('paciente/AgendarCita/', $data_input);
                             
                             $fecha = $this->session->userdata('fecha');                            
                             $fecha = str_replace("-", "/", $fecha);
@@ -126,7 +126,7 @@
                                             echo '</td>';
                                             echo '<td>';
                                             
-                                            echo '<a type="button" onclick="abrirInformacion("7")" odonto="' . ucwords($cita->odontologo) . '"  class="informacion-btn btn" id="informacion_odonto"  title="Informacion odontologo" >' . ucwords($cita->odontologo) .  '</a>';
+                                            echo '<a type="button"  odonto="' . ucwords($cita->odontologo) . '"  class="informacion-btn btn" id="informacion_odonto"  title="Informacion odontologo" >' . ucwords($cita->odontologo) .  '</a>';
                                             echo '</td>';
                                             echo '<td>';
                                             echo ucwords($cita->consultorio);
@@ -163,7 +163,7 @@
 </div>
 
 <?php 
-    $path = "paciente/AgendarCita/";
+    $path = "paciente/AgendarCita";
     echo '<script>
             var js_site_url = "'. site_url($path) . '";
           </script>';

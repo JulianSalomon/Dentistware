@@ -31,7 +31,29 @@ $(function(){
         });
     });
     
-    $(".date-select").datepicker({
+    
+    $.fn.datepicker.defaults.format = "yyyy/mm/dd";
+  	$.fn.datepicker.dates["es"] = {
+  		days: ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"],
+  		daysShort: ["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb", "Dom"],
+  		daysMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa", "Do"],
+  		months: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+  		monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
+  		today: "Hoy"
+  	};
+      
+    
+    	$(".date-select").datepicker({
+          language: "es",
+          autoclose: true,
+          startDate: "0d",
+          daysOfWeekDisabled: [0],
+          todayHighlight: true,
+          daysOfWeekHighlighted: "0",
+	});
+      
+    
+   /* $(".date-select").datepicker({
         language: "es",
         autoclose: true,
     }).on(
@@ -47,7 +69,7 @@ $(function(){
         "ordering": true,
         "info": false,
         "autoWidth": false,
-    });  
+    });  */
     
     $('.no-asistir-btn').click(function(e) {
 		e.preventDefault();
@@ -124,4 +146,13 @@ $(function(){
             }
         });           
     });
+    
+    
+
+	$(".timepicker").timepicker({
+          showInputs: false,
+          minuteStep: 30,
+          defaultTime: false              
+    });
+          
 });

@@ -37,7 +37,7 @@ $(function() {
     });
     
     
-    $('.informacion-btn').click(function(e) {
+   $('.informacion-btn').click(function(e) {
 		e.preventDefault();
         var odonto = $(this).attr('odonto');
       
@@ -127,9 +127,9 @@ $(function() {
 
 
 
-function abrirInformacion(idOdontologo) {
+/*function abrirInformacion(idOdontologo) {
 	var opciones = "width=500,height=500,scrollbars=NO";
     	
     window.open("AgendarCita/mostrar_informacion","Información Odontologo", opciones);
-}
+}*/
 

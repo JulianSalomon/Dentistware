@@ -64,7 +64,31 @@ class Cita_model extends MY_Model {
 			return $query->result();
 		return false;
 	}
+        
+    
+    public function get_citas_odontologo($fechaActual = '', $horaSolicitada = '', $odontologoActual = '') {
+    
+		$this->db->select('id_cita, fecha_cita as fecha, hora_cita as hora, estado_cita as estado, cliente.nombre_persona  as cliente, consultorio');
+		$this->db->from('cita');
+		$this->db->join('persona as cliente', 'odonto.id_persona = cita.id_odonto');
+		$this->db->where('cita.id_cliente is NULL', NULL, FALSE);
+		$this->db->group_start();
 
+		$this->db->where('fecha_cita', $fechaActual);
+		if ($horaSolicitada != '') {
+			$this->db->where('hora_cita =', $horaSolicitada);
+		}
+		if ($odontologoActual != '' && $odontologoActual != '-1') {
+			$this->db->where('id_odonto', $odontologoActual);
+		}
+		$this->db->group_end();
+		$this->db->order_by('hora_cita', 'asc');
+		
+		$query = $this->db->get();
+		if ($query)
+			return $query->result();
+		return false;
+	}
     
     public function get_citas_para_odontologo($horaSolicitada = '', $odontologoActual = ''){
 		$fechaActual = date("Y-m-d");
