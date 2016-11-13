@@ -65,7 +65,6 @@
                                         <th>Ubicación</th>
                                         <th>EPS</th>
                                         <th>Contacto</th>
-                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
@@ -93,16 +92,17 @@
                                                 echo '</td>';
                                                 echo '<td>';
                                                 echo ucwords($cliente->contacto) . '<br>' ."<small> Tel: " . $cliente->contacto_tel . "</small>" ;
-                                                echo '</td>';
+                                                echo '</td>';                                                                                                                                                                                                                                            
                                                 echo '<td class="text-center">';
-                                                if($cliente->estado == 'ACT'){
-                                                    echo '<i class="fa fa-check-square-o"></i>';
-                                                } else {
-                                                    echo '<i class="fa fa-square-o"></i>';
-                                                }
-                                                echo '</td>';                                                                                                                                                                                                
-                                                echo '<td class="text-center">';
-                                                        $data_input = array(
+                                                $data_input = array(
+                                                		'type' => 'button',
+                                                		'class' => 'btn btn-default',
+                                                		'data-toggle' => 'tooltip',
+                                                		'title' => 'Multas',
+                                                );
+                                                echo anchor(base_url() . 'empleado/Cliente/multas_view/' . $cliente->id_persona, '<i class="fa fa-list"></i>', $data_input);                                                                                                                                                                                                                                            
+                                                
+                                                $data_input = array(
                                                 		'type' => 'button',
                                                         'class' => 'btn btn-default',
                                                 		'data-toggle' => 'tooltip',
@@ -126,7 +126,6 @@
                                         <th>Ubicación</th>
                                         <th>EPS</th>
                                         <th>Contacto</th>
-                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </tfoot>                                
