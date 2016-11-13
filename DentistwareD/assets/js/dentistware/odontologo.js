@@ -3,9 +3,10 @@ $(function() {
         e.preventDefault();
         $('.ac_p_error').fadeOut('slow').remove();
         var fecha  = new $(this).val(); 
+        console.log(fecha);
         $.ajax({
             type: 'POST',
-            url: js_site_url + 'Historia_clinica/seleccionarHistoria/' + $fecha
+            url: js_site_url + 'Historia_clinica/seleccionarHistoria/' + fecha,
         });
     });
     

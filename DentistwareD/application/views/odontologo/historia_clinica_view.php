@@ -115,7 +115,7 @@
 
 
 <!-- Modal -->
-<div class="modal fade modal-add" id="modal_add_odont" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade modal-add" id="modal_verRegistro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <!-- Modal content-->
         <div class="modal-content box">
@@ -133,6 +133,7 @@
                 
                 <div class="text-align:center;">
                    <table style="width:100%" align="center">
+
                        <?php
                            echo "<tr>";
                            echo "<th class= text-right style= width:45% >Odontologo:</td>";
