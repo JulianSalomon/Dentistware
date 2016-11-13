@@ -33,7 +33,7 @@
                                    	echo $multa->valor_multa;
                                     echo '</td>';
                                     echo '<td align="center">';                                                                   
-									if($multa->estado_multa = 'ACT'){
+									if($multa->estado_multa){
                                     	echo '<i class="fa fa-check-square-o"></i>';
 									} else {
                                     	echo '<i class="fa fa-square-o"></i>';

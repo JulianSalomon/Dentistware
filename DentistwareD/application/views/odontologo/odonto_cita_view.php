@@ -44,23 +44,7 @@
                              	</div>
                          	</div>
                         </div>                        
-                        <div class="row"> 
-                        	<div class="col-lg-2"></div>
-                        	<div class="col-lg-6 form-group">
-                    			<label  class="control-label">Seleccione un Odontólogo:</label>
-                        		<div class="input-group" id="div_selectOdontologo">
-                        			<span class="input-group-addon"><i class="fa fa-user-md"></i></span>
-		                    		<?php
-						                $data_input = array(
-						                		'id' => 'inputOdontologo',
-						                		'class' => 'form-control',
-						                		'tabindex' => "-1",
-						                );
-						                echo form_dropdown('inputOdontologo', $odontologos, $odontologo, $data_input);
-	                        		?>
-								</div>
-							</div>
-						</div>
+                       
 						<div class="form-group text-center">
 						<?php
 							$data_input = array(
@@ -75,32 +59,17 @@
 						<?php
 		                  	echo form_close();
 		             		echo '<hr>';
-                        if($cantidadDeMultas >0){
-                            echo br(1);
-			                	echo '<div class="form-group text-center">
-										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
-			                   	echo heading('Usted tiene multas pendientes.<br>Por favor paguelas antes de poder solicitar citas.', 3, 'class="text-muted"');
-			                   	echo '</div>';	
-                        }
-                        
-                         else if($cantidadDeCitas >2){
-                            echo br(1);
-			                	echo '<div class="form-group text-center">
-										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
-			                   	echo heading('Usted ya tiene tres citas asignadas.<br>Por favor cancele alguna antes de poder agendar más citas.', 3, 'class="text-muted"');
-			                   	echo '</div>';	
-                        }
-                        	else if($citas != NULL){
+                        if($citas != NULL){
                     	?>
                     	<h4>Citas disponibles:</h4>
                         <div class="table-responsive">
                             <table id="tabla_cita" type='tabla' class="table table-bordered table-hover tabla-citas">
                                 <thead>
                                     <tr>
-                                    	<th>Opción</th>
+                                    	<th>Acción</th>
+                                        <th>Cliente</th>
                                         <th>Fecha</th>
                                         <th>Hora</th>
-                                        <th>Odontólogo</th>
                                         <th>Consultorio</th>                                        
                                     </tr>
                                 </thead>
@@ -110,11 +79,17 @@
                                             echo '<tr>';
                                             echo '<td class="text-center">';
                                             echo '<div align="center">
-	                        						<a type="button" cita="' . $cita->id_cita . '" odonto="' . ucwords($cita->odontologo) . '" class="asignar-btn btn" id="delete_persona" data-toggle="tooltip"  title="Agendar Cita">
-		                    							<i class="fa fa-fw fa-plus-square fa-3x"></i>
+	                        						<a type="button" cita="' . $cita->id_cita . '" cliente="' . ucwords($cita->cliente) . '" class="no-asistir-btn btn" id="no_asistir" data-toggle="tooltip"  title="No asistió">
+		                    							<i class="fa fa-eye-slash fa-3x"></i>
+	                    							</a>
+                                                    <a type="button" cita="' . $cita->id_cita . '" cliente="' . ucwords($cita->cliente) . '" class="atender-btn btn" id="atender-cita" data-toggle="tooltip"  title="Atender cita">
+		                    							<i class="fa fa-sign-in fa-3x"></i>
 	                    							</a>
                     							</div>';
-                                            echo '</td>';                                                
+                                            echo '</td>';
+                                             echo '<td>';
+                                            echo ucwords($cita->cliente);
+                                             echo '</td>';
                                             echo '<td>';
                                             echo ucwords($cita->fecha);
                                             echo '</td>';
@@ -125,10 +100,6 @@
                                             echo strtoupper($hora_cita);
                                             echo '</td>';
                                             echo '<td>';
-                                            
-                                            echo '<a type="button" onclick="abrirInformacion("7")" odonto="' . ucwords($cita->odontologo) . '"  class="informacion-btn btn" id="informacion_odonto"  title="Informacion odontologo" >' . ucwords($cita->odontologo) .  '</a>';
-                                            echo '</td>';
-                                            echo '<td>';
                                             echo ucwords($cita->consultorio);
                                             echo '</td>';                                                 
                                             echo '</tr>';   
@@ -137,10 +108,10 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                    	<th>Opción</th>
+                                    	<th>Acción</th>
+                                        <th>Cliente</th>
                                      	<th>Fecha</th>
                                         <th>Hora</th>
-                                        <th>Odontólogo</th>
                                         <th>Consultorio</th>                                          
                                     </tr>
                                 </tfoot>                                
@@ -163,7 +134,7 @@
 </div>
 
 <?php 
-    $path = "paciente/AgendarCita/";
+    $path = "odontologo/Cita/";
     echo '<script>
             var js_site_url = "'. site_url($path) . '";
           </script>';

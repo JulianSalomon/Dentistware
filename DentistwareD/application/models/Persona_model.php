@@ -22,6 +22,17 @@ class Persona_model extends MY_Model {
 		return $query;
 	}
 	
+    	public function get_odontologo($odonto = '') {
+		$this->db->select('*');
+		$this->db->from('persona');
+		$this->db->join('ciudad', 'ciudad.id_ciudad = persona.id_ciudad');
+		$this->db->join('departamento', 'departamento.id_departamento = ciudad.id_departamento');
+			$this->db->where('nombre_persona', $odonto);
+		
+		$query = $this->db->get()->row();
+		return $query;
+	}
+    
 	public function get_clientes($order_by = 'id_persona', $order = 'asc', $limit = 0, $offset = 0, $word_like = '') {
 		$array_termino = array(
 			'nombre_persona' => $word_like,
@@ -58,7 +69,6 @@ class Persona_model extends MY_Model {
 		));
 		return count($query->result());
 	}
-	
 	public function get_list_odontologos(){
 		$this->db->select('id_persona, nombre_persona as nombre');
 		$this->db->from('persona');

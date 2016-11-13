@@ -9,8 +9,22 @@ class AgendarCita extends Cliente_Controller {
 		$this->data['page_title_end'] = '| Agendar Cita';
 		$this->load->model('cita_model');
 		$this->load->model('persona_model');
+        $this->load->model('multa_model');
 		$this->get_user_menu('main-citas', 'citas-agendar');		
 		$this->data['before_closing_body'] = plugin_js('assets/js/dentistware/cliente_cita.js', true);
+        $multas = $this->multa_model->get_multas_no_pagadas_cliente($this->session->userdata['id_persona']);
+        $cantidadDeMultas= 0; $cantidadDeCitas = 0;
+        if($multas){
+            foreach($multas as $multa){
+                $cantidadDeMultas++;
+            }}
+        $citasActuales = $this->cita_model->get_citas_by_cliente($this->session->userdata['id_persona']);
+        if($citasActuales){
+            foreach($citasActuales as $citaActual){
+                $cantidadDeCitas++;
+            }}
+        $this->data['cantidadDeMultas'] = $cantidadDeMultas;
+        $this->data['cantidadDeCitas'] = $cantidadDeCitas;
     }
 	
 	public function index() {
@@ -82,4 +96,13 @@ class AgendarCita extends Cliente_Controller {
 						
 		$this->render('cliente/agendar_cita_view');		
 	}
+        public function mostrar_informacion($id = '')
+            {
+            $id = strtolower(str_replace("%20", " ", $id));
+            $this->load->model('persona_model');
+            $this->load->model('lugar_model');
+            $this->data['persona'] = $this->persona_model->get_odontologo( $id);
+            $this->load->view('cliente/informacion_odontologo', $this->data); 
+            }
+    
 }

@@ -36,6 +36,17 @@ $(function() {
         });               
     });
     
+    
+    $('.informacion-btn').click(function(e) {
+		e.preventDefault();
+        var odonto = $(this).attr('odonto');
+      
+        var opciones = "width=500,height=500,scrollbars=NO";
+    	var parametro = "AgendarCita/mostrar_informacion/" + odonto;
+    window.open(parametro,"Información Odontologo", opciones);
+     
+    });
+    
 	$('.cancelar-btn').click(function(e) {
 		e.preventDefault();
         var cita = $(this).attr('cita');
@@ -110,5 +121,15 @@ $(function() {
           "ordering": true,
           "autoWidth": false,
     });
+
       
 });
+
+
+
+function abrirInformacion(idOdontologo) {
+	var opciones = "width=500,height=500,scrollbars=NO";
+    	
+    window.open("AgendarCita/mostrar_informacion","Información Odontologo", opciones);
+}
+

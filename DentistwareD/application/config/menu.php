@@ -102,24 +102,12 @@ $config['menu_ODO'] = array(
 				'link' => base_url('Perfil'),
 				'icon' => 'fa fa-user',
 		),
-		'cliente' => array(
+		'citas' => array(
 				'id' => 'main-cliente',
-				'title' => '<span>Cliente</span>',
-				'link' => '',
-				'icon' => 'fa fa-book',
-                'items' => array(
-                    0 => array(
-								'title' => 'Información cliente',
-								'link' => base_url('odontologo/Cliente_inf') ,
-								'id' => 'citas-agendar',
-						),
-						1 => array(
-								'title' => 'Historia cliente',
-								'link' => base_url('odontologo/Historia_clinica'),
-								'id' => 'citas-agendadas',
-						),
-                
-                ),
+				'title' => '<span>Citas</span>',
+				'link' => base_url('odontologo/Cita'),
+				'icon' => 'fa fa-calendar'
+              
 		),
 		'logout' => array(
 				'id' => 'main-logout',
