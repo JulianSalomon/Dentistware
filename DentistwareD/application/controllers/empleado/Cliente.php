@@ -8,12 +8,13 @@ class Cliente extends Empl_Controller {
 		$this->data['page_title_end'] = '| Clientes';
 		$this->load->model('lugar_model');
 		$this->load->model('persona_model');
+		$this->load->model('multa_model');
 		$this->load->library("pagination");
 		$this->data['departamentos'] = $this->lugar_model->get_departamentos();
 		$this->data['before_closing_head'] .= plugin_css('icheck');
 		$this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/empl_cliente.js', true);
 		$this->data['before_closing_body'] .= plugin_js('icheck');
-		$this->get_user_menu('main-cliente');
+		$this->get_user_menu('main-cliente', 'admin-cliente');
 		$this->data['clientes'] = '';
 	}
 	
@@ -42,6 +43,7 @@ class Cliente extends Empl_Controller {
 			$this->pagination->initialize($config);
 			
 			$this->data['clientes'] = $clientes;
+// 			$this->data['num_multas'] = count($this->multa_model->get_active_multas($clientes->id_persona));
 			$this->data["links"] = $this->pagination->create_links();
 		}
 		$this->render('empleado/empl_cliente_view');
@@ -153,6 +155,7 @@ class Cliente extends Empl_Controller {
 				'id_ciudad' => $this->input->post('select_ciudades'),
 				'direccion_persona' => $this->input->post('inputDireccion'),
 				'telefono_persona' => $this->input->post('inputTelefono'),
+                'estado_persona' => $this->input->post ( 'selectEstado' ),
 				'tipo_sangre_cliente' => $this->input->post('selectGrupo'),
 				'rh_cliente' => $this->input->post('selectRH'),
 				'eps_persona' => $this->input->post('inputEps'),
@@ -179,6 +182,22 @@ class Cliente extends Empl_Controller {
 			header('Content-Type: application/json');
 			echo json_encode($this->form_validation->error_array());
 		}
+	}
+	
+	public function multas_view($id) {
+		$query = $this->multa_model->get_active_multas($id);
+		$this->data['multas'] = $query;
+		$this->data['persona'] = $this->persona_model->get_persona('', $id);
+		
+// 		$this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/empl_cliente.js', true);
+// 		$this->data['before_closing_body'] .= plugin_js('icheck');
+		$this->render('empleado/empl_multa_view');
+	}
+	
+	public function update_estado_multa($id_multa){
+		$input['estado_multa'] = 1;
+		$result = $this->multa_model->update_multa($id_multa, $input );
+		echo $result;
 	}
 	
 	public function eliminar_usuario($docPersona) {

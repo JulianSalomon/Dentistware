@@ -102,24 +102,12 @@ $config['menu_ODO'] = array(
 				'link' => base_url('Perfil'),
 				'icon' => 'fa fa-user',
 		),
-		'cliente' => array(
+		'citas' => array(
 				'id' => 'main-cliente',
-				'title' => '<span>Cliente</span>',
-				'link' => '',
-				'icon' => 'fa fa-book',
-                'items' => array(
-                    0 => array(
-								'title' => 'Información cliente',
-								'link' => base_url('odontologo/Cliente_inf') ,
-								'id' => 'citas-agendar',
-						),
-						1 => array(
-								'title' => 'Historia cliente',
-								'link' => base_url('odontologo/Historia_clinica'),
-								'id' => 'citas-agendadas',
-						),
-                
-                ),
+				'title' => '<span>Citas</span>',
+				'link' => base_url('odontologo/Cita'),
+				'icon' => 'fa fa-calendar'
+              
 		),
 		'logout' => array(
 				'id' => 'main-logout',
@@ -145,8 +133,20 @@ $config['menu_EMP'] = array(
 		'cliente' => array(
 				'id' => 'main-cliente',
 				'title' => '<span>Cliente</span>',
-				'link' => base_url('empleado/Cliente') ,
+				'link' => '' ,
 				'icon' => 'fa fa-user',
+				'items' => array(
+						0 => array(
+								'title' => 'Administrar Clientes',
+								'link' => base_url('empleado/Cliente'),
+								'id' => 'admin-cliente',
+						),						
+						1 => array(
+								'title' => 'Agendar Cita',
+								'link' => base_url('empleado/Agendar_Cita'),
+								'id' => 'citas-agendar',
+						),				
+				),
 		),
 		'cita' => array(
 				'id' => 'main-cita',
@@ -155,16 +155,15 @@ $config['menu_EMP'] = array(
 				'icon' => 'fa fa-calendar',
 				'items' => array(
 						0 => array(
-								'title' => 'Agendar Cita',
-								'link' => base_url('empleado/Agendar_Cita'),
+								'title' => 'Crear Citas',
+								'link' => '',
 								'id' => 'citas-agendar',
 						),
 						1 => array(								
-								'title' => 'Agregar Citas',
-								'link' => '',
-								'id' => 'citas-agregar',
-						),
-				
+								'title' => 'Administrar Citas',
+								'link' => base_url('empleado/Administrar_Cita'),
+								'id' => 'citas-administrar',
+						),				
 				),				
 		),
 		'logout' => array(

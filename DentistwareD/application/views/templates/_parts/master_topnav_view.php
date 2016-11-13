@@ -76,7 +76,16 @@
 	                  		</li>
 	                	</ul>
 	              	</li>
+                    <li>
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-expeditedssl" style="font-size:18px"></i></a>
+                        <ul class="dropdown-menu">
+                            <div class="text-center">
+                                <?php echo anchor('Perfil/contrasena', 'Editar contraseña', 'class="btn btn-danger btn-flat"');?>
+                            </div>
+	                	</ul>
+                    </li>
             	</ul>
         	</div>
+            
     	</nav>
 	</header>

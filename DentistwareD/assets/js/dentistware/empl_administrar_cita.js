@@ -36,48 +36,35 @@ $(function() {
         });               
     });
     
-    
-    $('.informacion-btn').click(function(e) {
+	$('.borrar-btn').click(function(e) {
 		e.preventDefault();
-        var odonto = $(this).attr('odonto');
-      
-        var opciones = "width=500,height=500,scrollbars=NO";
-    	var parametro = "AgendarCita/mostrar_informacion/" + odonto;
-    window.open(parametro,"Información Odontologo", opciones);
-     
-    });
-    
-	$('.cancelar-btn').click(function(e) {
-		e.preventDefault();
-        var cita = $(this).attr('cita');
-        var odonto = $(this).attr('odonto');
+        var cita = $(this).attr('data-id');
         swal({
-            title: 'Cancelar',
-            text: '¿Desea cancelar su cita con ' + odonto + '?',
+            title: 'Borrar',
+            text: '¿Desea borrar esta cita?',
             type: 'warning',
             showCancelButton: true,
-            confirmButtonText: 'Sí, cancelar cita',
-            cancelButtonText: 'No, mantener cita',
+            confirmButtonText: 'Sí, Borrar',
+            cancelButtonText: 'Cancelar',
             showLoaderOnConfirm: true,
         },
         function(isConfirm) {
             if (isConfirm) {
             	$.ajax({
                     type: 'GET',
-                    url: js_site_url + 'cancelar_cita/' + cita,
+                    url: js_site_url + 'borrar_cita/' + cita,
                     success: function(msg){
-                        console.log(msg);
                         if(msg){                            
                             swal({   
-                                title: "Cita cancelada",
-                                text: "La cita con " + odonto + " ha sido cancelada.",
+                                title: "Cita Borrada",
+                                text: "La cita ha sido borrada.",
                                 type: "success",
                             }, 
                             function(){   
                                 location.reload(); 
                             });
                         } else {
-                            swal("Error", "La cita con " + odonto + " no puede ser cancelada, vuelva a intentarlo.", "error");
+                            swal("Error", "La cita no ha podido ser borrada.", "error");
                         }
                     }
                 });
@@ -121,15 +108,5 @@ $(function() {
           "ordering": true,
           "autoWidth": false,
     });
-
       
 });
-
-
-
-function abrirInformacion(idOdontologo) {
-	var opciones = "width=500,height=500,scrollbars=NO";
-    	
-    window.open("AgendarCita/mostrar_informacion","Información Odontologo", opciones);
-}
-

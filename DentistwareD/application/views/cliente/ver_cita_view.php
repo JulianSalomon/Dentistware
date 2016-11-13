@@ -73,7 +73,7 @@
 		                    	echo br(1);
 			                	echo '<div class="form-group text-center">
 										<i id="logo_i" class="fa fa-warning fa-5x"></i>';
-			                   	echo heading('Hasta el momento no tiene citas agendas.', 3, 'class="text-muted"');
+			                   	echo heading('Hasta el momento no tiene citas agendadas.', 3, 'class="text-muted"');
 			                   	echo '</div>';	                    	
 		                    }                    	
 	                    ?>

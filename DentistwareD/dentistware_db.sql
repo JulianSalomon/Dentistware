@@ -1387,7 +1387,6 @@ INSERT INTO `persona` (`id_persona`, `id_ciudad`, `documento_persona`, `tipo_doc
 (11, 5036, 56129365, 'CC', 'carol jazmín forero bojaca', '2840410', 'AV ind # 57 - 23', '$2y$10$bgmJGvYgCUa7gbPnkajfP.ErLrCBFtjXs.ZqJbv9In8dOYBQ154ou', 'CLT', 35, '1981-03-25', 'M', 'ACT', NULL, 'forero.boja@gmail.com', 'Alexandra Banguardia Fe', '3156483241', NULL, 'AB', '+', 'Famisanar'),
 (12, 5038, 97080536215, 'TI', 'jhonatan del jesus valencia', '3142947503', 'Calle 45 # 39 f - 23 sur', '$2y$10$bgmJGvYgCUa7gbPnkajfP.ErLrCBFtjXs.ZqJbv9In8dOYBQ154ou', 'CLT', 17, '1999-04-03', 'M', 'ACT', NULL, 'jhonatan2155@hotmail.com', 'Alvaro Hernando Cardona G.', '8521244', NULL, 'A', '-', 'vive sano');
 
-
 /*==============================================================*/
 /* Table: pregunta                                              */
 /*==============================================================*/
@@ -1406,8 +1405,6 @@ alter table cita add constraint fk_odont_cita foreign key (id_odonto)
 
 alter table ciudad add constraint fk_dept_ciudad foreign key (id_departamento)
       references departamento (id_departamento) on delete restrict on update restrict;
-
-
 
 alter table historia_clinica add constraint fk_cliente_historia foreign key (id_cliente)
       references persona (id_persona) on delete restrict on update restrict;

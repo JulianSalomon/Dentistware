@@ -63,7 +63,6 @@
                         	<span class="input-group-addon"><i class="fa fa-credit-card fa-fw"></i></span>
 		                    <?php   
 		                    	$generos = array(
-										'-1' => '- Elija un tipo de documento -',
 						    			'CC' => 'Cédula de Ciudadania',
 						    			'TI' => 'Tarjeta de Identidad',
 						    			'CE' => 'Cedula de Extranjeria',
@@ -94,13 +93,35 @@
                         <input type="text" class="form-control" id="inputNombre" placeholder="Nombres y apellidos" name="inputNombre" value="<?php echo $cliente_info->nombre_persona;?>">
 					</div>
 				</div>
-               	<div class="form-group">
-                   	<label class=" control-label">Teléfono: *</label>
-                    <div class="input-group" id="div_inputTelefono">
-                    	<span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
-                        <input type="text" class="form-control" id="inputTelefono" placeholder="Teléfono" name="inputTelefono" value="<?php echo $cliente_info->telefono_persona;?>">
+               	<div class="row">
+                    <div class="col-lg-6 form-group">
+                        <label class=" control-label">Teléfono: *</label>
+                        <div class="input-group" id="div_inputTelefono">
+                            <span class="input-group-addon"><i class="fa fa-phone fa-fw"></i></span>
+                            <input type="text" class="form-control" id="inputTelefono" placeholder="Teléfono" name="inputTelefono" value="<?php echo $cliente_info->telefono_persona;?>">
+                        </div>
+                    </div> 
+                    <div class="col-lg-6 form-group">
+                    	<label  class="control-label">Estado: *</label>
+                        <div class="input-group" id="div_selectEstado">
+                        	<span class="input-group-addon"><i class="fa fa-check-square-o"></i></span>
+		                    <?php   
+		                    	$estados = array(
+						    			'ACT' => 'Activo',
+						    			'DST' => 'Desactivado',						    			
+								);
+		                    	
+		                    	$data_input = array(
+		                    			'id' => 'selectEstado',
+		                    			'class' => 'form-control',
+		                    	);
+		                    	
+		                    	$selected = $cliente_info->estado_persona;		                    	
+		                    	echo form_dropdown('selectEstado', $estados, $selected, $data_input);
+	                        ?>                         	
+						</div>
 					</div>
-	 			</div>                                  
+                </div>                                 
         		<div class="form-group">
                   	<label  class="control-label">Dirección de residencia: *</label>
                     <div class="input-group" id="div_inputDireccion">
@@ -167,7 +188,6 @@
                         	<span class="input-group-addon"><i class="fa fa-venus-mars fa-fw"></i></span>
 		                    <?php   
 		                    	$generos = array(
-										'-1' => '- Género -',
 						    			'M' => 'Masculino',
 						    			'F' => 'Femenino',						    			
 								);
@@ -188,7 +208,6 @@
                         	<span class="input-group-addon"><i class="fa fa-plus-square fa-fw"></i></span>
 		                    <?php 
 		                    	$tipos_sangre = array(
-		                    			'-1' => "- Elija una opción -",
 		                    			'A' => 'A',
 		                    			'B' => 'B',
 		                    			'AB' => 'AB',
@@ -209,7 +228,6 @@
                         	<span class="input-group-addon"><i class="fa  fa-plus-square fa-fw"></i></span>
 		                    <?php 
 		                    	$tipos_rh = array(
-		                    			'-1' => "- Elija una opción -",
 		                    			'+' => '+',
 		                    			'-' => '-',
 		                    	);
@@ -250,7 +268,7 @@
 	                		'name' => "cancelar_edit",
 	                		'content' => "Cancelar"
 	                );
-	                echo anchor(base_url() . 'empleado/Empl_Cliente/', 'Cancelar', $data_input);
+	                echo anchor(base_url() . 'empleado/Cliente/', 'Cancelar', $data_input);
                 	$data_input = array(
                 			'class' => "btn btn-primary btn-lg",
                 			'id' => "guardar_edit",
