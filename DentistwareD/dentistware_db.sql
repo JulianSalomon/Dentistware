@@ -1,132 +1,88 @@
-﻿-- use dentistware_db;
-
+/*==============================================================*/
+/* DBMS name:      MySQL 5.0                                    */
+/* Created on:     12/11/2016 11:53:15 a. m.                    */
+/*==============================================================*/
+use dentistware_db;
 drop table if exists historia_pregunta;
-drop table if exists historia_diente;
-drop table if exists registro_historia;
+drop table if exists diente;
+drop table if exists registro;
 drop table if exists multa;
 drop table if exists info_paciente;
-drop table if exists diente;
+
 drop table if exists historia_clinica;
 drop table if exists cita;
 drop table if exists persona;
+drop table if exists pregunta;
 drop table if exists ciudad;
 drop table if exists departamento;
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET time_zone = "+00:00";
+/*==============================================================*/
+/* Table: cita                                                  */
+/*==============================================================*/
+create table cita
+(
+   id_cita              bigint not null AUTO_INCREMENT,
+   fecha_cita           date not null,
+   hora_cita            time not null,
+   id_odonto            int not null,
+   id_cliente           int,
+   estado_cita          bool,
+   consultorio          varchar(10),
+   primary key (id_cita)
+);
 
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Base de datos: `dentistware_db`
---
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `cita`
---
-
-CREATE TABLE `cita` (
-  `id_cita` bigint(20) NOT NULL,
-  `fecha_cita` date NOT NULL,
-  `hora_cita` time NOT NULL,
-  `estado_cita` tinyint(1) DEFAULT NULL,
-  `id_cliente` int(11) DEFAULT NULL,
-  `id_odonto` int(11) NOT NULL,
-  `consultorio` varchar(10) COLLATE utf8_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Volcado de datos para la tabla `cita`
---
+-- Inserciones para la tabla cita
 INSERT INTO `cita` (`id_cita`, `fecha_cita`, `hora_cita`, `estado_cita`, `id_cliente`, `id_odonto`, `consultorio`) VALUES
-(1, '2016-10-12', '16:00:00',  NULL,  NULL, 6, '302'),
-(2, '2016-11-16', '08:00:00',  NULL,  NULL, 7, '1'),
-(3, '2015-03-08', '11:30:00',  NULL,  NULL, 10, '201'),
-(4, '2014-07-30', '17:30:00',  NULL,  NULL, 6, '46'),
-(5, '2016-10-12', '10:30:00',  NULL,  NULL, 7, '174'),
-(6, '2016-11-16', '09:30:00',  NULL,  NULL, 10, '10'),
-(7, '2015-03-08', '15:00:00',  NULL,  NULL, 10, '604'),
-(8, '2014-07-30', '14:00:00',  NULL,  NULL, 6, '403'),
-(9, '2016-10-12', '10:30:00',  NULL,  NULL, 7, '5'),
-(10, '2016-11-07', '14:30:00',  NULL, NULL, 10, '502'),
-(11, '2016-11-07', '16:00:00',  NULL, NULL, 6, '302'),
-(12, '2016-11-07', '08:30:00',  NULL, NULL, 7, '1'),
-(13, '2015-11-07', '11:00:00',  NULL, NULL, 10, '201'),
-(14, '2014-11-07', '17:00:00',  NULL, NULL, 6, '46'),
-(15, '2016-11-07', '10:30:00',  NULL, NULL, 7, '174'),
-(16, '2016-11-07', '09:30:00',  NULL, NULL, 10, '10'),
-(17, '2015-11-07', '15:30:00',  NULL, NULL, 10, '604'),
-(18, '2014-11-07', '14:00:00',  NULL, NULL, 6, '403'),
-(19, '2016-11-07', '10:30:00',  NULL, NULL, 7, '5'),
-(20, '2016-11-07', '14:00:00',  NULL, NULL, 10, '502'),
-(21, '2016-11-07', '14:30:00',  NULL, NULL, 10, '502');
+(1, '2016-11-12', '16:00:00',  NULL,  NULL, 6, '302'),
+(2, '2016-11-12', '08:00:00',  NULL,  NULL, 7, '1'),
+(3, '2016-11-12', '11:30:00',  NULL,  NULL, 10, '201'),
+(4, '2016-11-12', '17:30:00',  NULL,  NULL, 6, '46'),
+(5, '2016-11-12', '10:30:00',  NULL,  NULL, 7, '174'),
+(6, '2016-11-12', '09:30:00',  NULL,  NULL, 10, '10'),
+(7, '2016-11-13', '15:00:00',  NULL,  NULL, 10, '604'),
+(8, '2016-11-13', '14:00:00',  NULL,  NULL, 6, '403'),
+(9, '2016-11-13', '10:30:00',  NULL,  NULL, 7, '5'),
+(10, '2016-11-14', '14:30:00',  NULL, NULL, 10, '502'),
+(11, '2016-11-14', '16:00:00',  NULL, NULL, 6, '302'),
+(12, '2016-11-14', '08:30:00',  NULL, NULL, 7, '1'),
+(13, '2016-11-14', '11:00:00',  NULL, NULL, 10, '201'),
+(14, '2016-11-14', '17:00:00',  NULL, NULL, 6, '46'),
+(15, '2016-11-14', '10:30:00',  NULL, NULL, 7, '174'),
+(16, '2016-11-14', '09:30:00',  NULL, NULL, 10, '10'),
+(17, '2016-11-14', '15:30:00',  NULL, NULL, 10, '604'),
+(18, '2016-11-14', '14:00:00',  NULL, NULL, 6, '403'),
+(19, '2016-11-14', '10:30:00',  NULL, NULL, 7, '5'),
+(20, '2016-11-15', '14:00:00',  NULL, NULL, 10, '502'),
+(21, '2016-11-15', '14:30:00',  NULL, NULL, 10, '502'),
+(22, '2016-11-10', '20:30:00',  NULL, NULL, 10, '310'),
+(23, '2016-11-10', '21:00:00',  NULL, NULL, 6, '311'),
+(24, '2016-11-10', '19:00:00',  NULL, NULL, 6, '307'),
+(25, '2016-11-11', '19:30:00',  NULL, NULL, 10, '308'),
+(26, '2016-11-11', '20:00:00',  NULL, NULL, 7, '309'),
+(27, '2016-11-11', '20:30:00',  NULL, NULL, 10, '310'),
+(28, '2016-11-11', '21:00:00',  NULL, NULL, 6, '311'),
+(29, '2016-11-11', '19:00:00',  NULL, NULL, 6, '307'),
+(30, '2016-11-12', '19:30:00',  NULL, NULL, 10, '308'),
+(31, '2016-11-12', '20:00:00',  NULL, NULL, 7, '309'),
+(32, '2016-11-12', '20:30:00',  NULL, NULL, 10, '310'),
+(33, '2016-11-12', '21:00:00',  NULL, NULL, 6, '311'),
+(34, '2016-11-12', '19:00:00',  NULL, NULL, 6, '307'),
+(35, '2016-11-13', '19:30:00',  NULL, NULL, 10, '308'),
+(36, '2016-11-13', '20:00:00',  NULL, NULL, 7, '309'),
+(37, '2016-11-13', '20:30:00',  NULL, NULL, 10, '310'),
+(38, '2016-11-13', '21:00:00',  NULL, NULL, 6, '311'),
+(39, '2016-11-13', '18:30:00',  NULL, NULL, 6, '306');
 
-
-INSERT INTO `cita` (`id_cita`, `fecha_cita`, `hora_cita`, `estado_cita`, `id_cliente`, `id_odonto`, `consultorio`) VALUES
-(110, '2016-11-07', '16:30:00',  NULL, NULL, 6, '302'),
-(111, '2016-11-07', '17:00:00',  NULL, NULL, 10, '303'),
-(112, '2016-11-07', '17:30:00',  NULL, NULL, 7, '304'),
-(113, '2016-11-07', '18:00:00',  NULL, NULL, 10, '305'),
-(114, '2016-11-07', '18:00:00',  NULL, NULL, 10, '305'),
-(115, '2016-11-08', '19:00:00',  NULL, NULL, 6, '307'),
-(116, '2016-11-08', '19:30:00',  NULL, NULL, 10, '308'),
-(117, '2016-11-08', '20:00:00',  NULL, NULL, 7, '309'),
-(118, '2016-11-08', '20:30:00',  NULL, NULL, 10, '310'),
-(119, '2016-11-08', '21:00:00',  NULL, NULL, 6, '311'),
-(120, '2016-11-09', '19:00:00',  NULL, NULL, 6, '307'),
-(121, '2016-11-09', '19:30:00',  NULL, NULL, 10, '308'),
-(122, '2016-11-09', '20:00:00',  NULL, NULL, 7, '309'),
-(123, '2016-11-09', '20:30:00',  NULL, NULL, 10, '310'),
-(124, '2016-11-09', '21:00:00',  NULL, NULL, 6, '311'),
-(125, '2016-11-10', '19:00:00',  NULL, NULL, 6, '307'),
-(126, '2016-11-10', '19:30:00',  NULL, NULL, 10, '308'),
-(127, '2016-11-10', '20:00:00',  NULL, NULL, 7, '309'),
-(128, '2016-11-10', '20:30:00',  NULL, NULL, 10, '310'),
-(129, '2016-11-10', '21:00:00',  NULL, NULL, 6, '311'),
-(130, '2016-11-10', '19:00:00',  NULL, NULL, 6, '307'),
-(131, '2016-11-11', '19:30:00',  NULL, NULL, 10, '308'),
-(132, '2016-11-11', '20:00:00',  NULL, NULL, 7, '309'),
-(133, '2016-11-11', '20:30:00',  NULL, NULL, 10, '310'),
-(134, '2016-11-11', '21:00:00',  NULL, NULL, 6, '311'),
-(135, '2016-11-11', '19:00:00',  NULL, NULL, 6, '307'),
-(136, '2016-11-12', '19:30:00',  NULL, NULL, 10, '308'),
-(137, '2016-11-12', '20:00:00',  NULL, NULL, 7, '309'),
-(138, '2016-11-12', '20:30:00',  NULL, NULL, 10, '310'),
-(139, '2016-11-12', '21:00:00',  NULL, NULL, 6, '311'),
-(140, '2016-11-12', '19:00:00',  NULL, NULL, 6, '307'),
-(141, '2016-11-13', '19:30:00',  NULL, NULL, 10, '308'),
-(142, '2016-11-13', '20:00:00',  NULL, NULL, 7, '309'),
-(143, '2016-11-13', '20:30:00',  NULL, NULL, 10, '310'),
-(144, '2016-11-13', '21:00:00',  NULL, NULL, 6, '311'),
-(145, '2016-11-13', '18:30:00',  NULL, NULL, 6, '306');
-
-
-
-
--- --------------------------------------------------------
-
-select * from cita;
-
---
--- Estructura de tabla para la tabla `ciudad`
---
-
-CREATE TABLE `ciudad` (
-  `id_ciudad` int(11) NOT NULL,
-  `id_departamento` int(11) NOT NULL,
-  `nombre_ciudad` varchar(100) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Volcado de datos para la tabla `ciudad`
---
-
+/*==============================================================*/
+/* Table: ciudad                                                */
+/*==============================================================*/
+create table ciudad
+(
+   id_ciudad            int not null,
+   id_departamento      int not null,
+   nombre_ciudad        varchar(100) not null,
+   primary key (id_ciudad)
+);
 INSERT INTO `ciudad` (`id_ciudad`, `id_departamento`, `nombre_ciudad`) VALUES
 (5001, 5, 'MEDELLÍN'),
 (5002, 5, 'ABEJORRAL'),
@@ -1248,16 +1204,15 @@ INSERT INTO `ciudad` (`id_ciudad`, `id_departamento`, `nombre_ciudad`) VALUES
 (99624, 99, 'SANTA ROSALÍA'),
 (99773, 99, 'CUMARIBO');
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `departamento`
---
-
-CREATE TABLE `departamento` (
-  `id_departamento` int(11) NOT NULL,
-  `nombre_dept` varchar(60) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*==============================================================*/
+/* Table: departamento                                          */
+/*==============================================================*/
+create table departamento
+(
+   id_departamento      int not null,
+   nombre_dept          varchar(60) not null,
+   primary key (id_departamento)
+);
 
 --
 -- Volcado de datos para la tabla `departamento`
@@ -1298,24 +1253,41 @@ INSERT INTO `departamento` (`id_departamento`, `nombre_dept`) VALUES
 (97, 'VAUPÉS'),
 (99, 'VICHADA');
 
--- --------------------------------------------------------
+/*==============================================================*/
+/* Table: registro                                              */
+/*==============================================================*/
+create table registro
+(
+   id_registro          bigint not null AUTO_INCREMENT,
+   id_historia          bigint not null,
+   fecha_reg            timestamp not null,
+   id_odon              int not null,
+   motivo_consulta      varchar(200) not null,
+   desc_procedimiento   varchar(1000) not null,
+   enfermedad_actual    varchar(100),
+   primary key (id_registro)
+);
 
---
--- Estructura de tabla para la tabla `diente`
---
 
-CREATE TABLE `diente` (
-  `id_diente` int(11) NOT NULL,
-  `num_diente` int(11) NOT NULL,
-  `ausente` tinyint(1) NOT NULL,
-  `extraer` tinyint(1) NOT NULL,
-  `carie` tinyint(1) NOT NULL,
-  `obturacion` tinyint(1) NOT NULL,
-  `corona` tinyint(1) NOT NULL,
-  `tramo` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+/*==============================================================*/
+/* Table: diente                                                */
+/*==============================================================*/
+create table diente
+(
+   id_diente            bigint not null AUTO_INCREMENT,
+   num_diente           int not null,
+   id_registro          bigint not null,
+   ausente              bool not null,
+   extraer              bool not null,
+   carie                bool not null,
+   obturacion           bool not null,
+   corona               bool not null,
+   tramo                bool not null,
+   primary key (id_diente),
+   FOREIGN KEY(id_registro) REFERENCES registro(id_registro)
+);
 
-INSERT INTO `diente` (`id_diente`, `num_diente`, `ausente`, `extraer`, `carie`, `obturacion`, `corona`, `tramo`) VALUES 
+/*INSERT INTO `diente` (`id_diente`, `num_diente`, `ausente`, `extraer`, `carie`, `obturacion`, `corona`, `tramo`) VALUES 
 ('1', '1', '1', '0', '1', '0', '1', '0'),
 ('2', '2', '0', '1', '0', '1', '0', '1'),
 ('3', '3', '0', '0', '0', '0', '0', '0'),
@@ -1323,127 +1295,79 @@ INSERT INTO `diente` (`id_diente`, `num_diente`, `ausente`, `extraer`, `carie`, 
 ('5', '5', '1', '0', '0', '0', '0', '1'),
 ('6', '6', '0', '1', '1', '1', '1', '0'),
 ('7', '7', '1', '1', '0', '0', '0', '1');
+*/
+/*==============================================================*/
+/* Table: historia_clinica                                      */
+/*==============================================================*/
+create table historia_clinica
+(
+   id_historia          bigint not null AUTO_INCREMENT,
+   id_cliente           int not null,
+   fecha_apertura       timestamp not null,
+   antecedentes_fam     varchar(1000) not null,
+   enfermedad_actual    varchar(100),
+   observaciones        varchar(2000),
+   primary key (id_historia)
+);
 
--- --------------------------------------------------------
+INSERT INTO `historia_clinica` (`id_historia`, `id_cliente`, `fecha_apertura`, `antecedentes_fam`, `enfermedad_actual`, `observaciones`) VALUES
+(1, 2, '2016-08-08 00:00:00', 'Ninguno', 'Ninguna', 'Buena salud oral');
 
---
--- Estructura de tabla para la tabla `historia_clinica`
---
+/*==============================================================*/
+/* Table: historia_pregunta                                     */
+/*==============================================================*/
+create table historia_pregunta
+(
+   id_pregunta         int not null,
+   id_historia          bigint not null,
+   estado_pregunta      bool not null,
+   primary key (id_pregunta, id_historia)
+);
 
-CREATE TABLE `historia_clinica` (
-  `id_historia` bigint(20) NOT NULL,
-  `id_cliente` int(11) NOT NULL,
-  `motivo_consulta` varchar(1000) COLLATE utf8_bin NOT NULL,
-  `fecha_apertura` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `antecedentes_fam` varchar(3000) COLLATE utf8_bin NOT NULL,
-  `enfermedad_actual` varchar(300) COLLATE utf8_bin DEFAULT NULL,
-  `observaciones` varchar(3000) COLLATE utf8_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Volcado de datos para la tabla `historia_clinica`
---
-
-INSERT INTO `historia_clinica` (`id_historia`, `id_cliente`, `motivo_consulta`, `fecha_apertura`, `antecedentes_fam`, `enfermedad_actual`, `observaciones`) VALUES
-(1, 2, 'chequeo ', '2016-08-08 00:00:00', 'Ninguno', 'Ninguna', 'Buena salud oral');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `historia_diente`
---
-
-CREATE TABLE `historia_diente` (
-  `id_diente` int(11) NOT NULL,
-  `id_historia` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
-INSERT INTO `historia_diente` (`id_diente`, `id_historia`) VALUES 
-('1', '1'),
-('2', '1'),
-('3', '1'),
-('4', '1'),
-('5', '1'),
-('6', '1'),
-('7', '1');
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `historia_pregunta`
---
-
-CREATE TABLE `historia_pregunta` (
-  `id_info` int(11) NOT NULL,
-  `id_historia` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `info_paciente`
---
-
-CREATE TABLE `info_paciente` (
-  `id_info` int(11) NOT NULL,
-  `desc_pregunta` varchar(100) COLLATE utf8_bin NOT NULL,
-  `estado_pregunta` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `multa`
---
-
-CREATE TABLE `multa` (
-  `id_multa` int(11) NOT NULL,
-  `id_cliente` int(11) NOT NULL,
-  `concepto_multa` varchar(60) COLLATE utf8_bin NOT NULL,
-  `valor_multa` float(6,3) NOT NULL,
-  `estado_multa` tinyint(1) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Volcado de datos para la tabla `multa`
---
+/*==============================================================*/
+/* Table: multa                                                 */
+/*==============================================================*/
+create table multa
+(
+   id_multa             int not null AUTO_INCREMENT,
+   id_cliente           int not null,
+   concepto_multa       varchar(60) not null,
+   valor_multa          float(6,3) not null,
+   estado_multa         bool not null,
+   primary key (id_multa)
+);
 
 INSERT INTO `multa` (`id_multa`, `id_cliente`, `concepto_multa`, `valor_multa`, `estado_multa`) VALUES
 (1, 12, 'Cita no cancelada a tiempo', 10.000, 1);
 
--- --------------------------------------------------------
-
---
--- Estructura de tabla para la tabla `persona`
---
-
-CREATE TABLE `persona` (
-  `id_persona` int(11) NOT NULL,
-  `id_ciudad` int(11) NOT NULL,
-  `documento_persona` bigint(20) NOT NULL,
-  `tipo_documento` varchar(2) COLLATE utf8_bin NOT NULL,
-  `nombre_persona` varchar(60) COLLATE utf8_bin NOT NULL,
-  `telefono_persona` varchar(30) COLLATE utf8_bin NOT NULL,
-  `direccion_persona` varchar(40) COLLATE utf8_bin NOT NULL,
-  `clave_acceso` varchar(60) COLLATE utf8_bin NOT NULL,
-  `tipo_persona` varchar(3) COLLATE utf8_bin NOT NULL,
-  `edad_persona` int(11) NOT NULL,
-  `fecha_nacimiento` date NOT NULL,
-  `genero_persona` varchar(1) COLLATE utf8_bin NOT NULL,
-  `estado_persona` varchar(3) COLLATE utf8_bin NOT NULL,
-  `foto_persona` varchar(30) COLLATE utf8_bin DEFAULT NULL,
-  `correo_persona` varchar(60) COLLATE utf8_bin DEFAULT NULL,
-  `contacto_cliente` varchar(60) COLLATE utf8_bin DEFAULT NULL,
-  `telefono_contacto_cliente` varchar(30) COLLATE utf8_bin NOT NULL,
-  `estudios_odont` varchar(1000) COLLATE utf8_bin DEFAULT NULL,
-  `tipo_sangre_cliente` varchar(2) COLLATE utf8_bin DEFAULT NULL,
-  `rh_cliente` varchar(2) COLLATE utf8_bin DEFAULT NULL,
-  `eps_persona` varchar(60) COLLATE utf8_bin DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Volcado de datos para la tabla `persona`
---
+/*==============================================================*/
+/* Table: persona                                               */
+/*==============================================================*/
+create table persona
+(
+   id_persona           int not null AUTO_INCREMENT,
+   id_ciudad            int not null,
+   documento_persona    bigint not null unique,
+   tipo_documento       varchar(2) not null,
+   nombre_persona       varchar(60) not null,
+   telefono_persona     varchar(30) not null,
+   direccion_persona    varchar(40) not null,
+   clave_acceso         varchar(60) not null,
+   tipo_persona         varchar(3) not null,
+   edad_persona         int not null,
+   fecha_nacimiento     date not null,
+   genero_persona       varchar(1) not null,
+   estado_persona       varchar(3) not null,
+   foto_persona         varchar(30),
+   correo_persona       varchar(60),
+   contacto_cliente     varchar(60),
+   telefono_contacto_cliente varchar(30),
+   estudios_odont       varchar(1000),
+   tipo_sangre_cliente  varchar(2),
+   rh_cliente           varchar(1),
+   eps_persona          varchar(60),
+   primary key (id_persona)
+);
 
 INSERT INTO `persona` (`id_persona`, `id_ciudad`, `documento_persona`, `tipo_documento`, `nombre_persona`, `telefono_persona`, `direccion_persona`, `clave_acceso`, `tipo_persona`, `edad_persona`, `fecha_nacimiento`, `genero_persona`, `estado_persona`, `foto_persona`, `correo_persona`, `contacto_cliente`, `telefono_contacto_cliente`, `estudios_odont`, `tipo_sangre_cliente`, `rh_cliente`, `eps_persona`) VALUES
 (1, 5001, 1049648379, 'CC', 'ricardo antonio perez manrique', '3152467963', 'Calle 20 #50 - 60', '$2y$10$bgmJGvYgCUa7gbPnkajfP.ErLrCBFtjXs.ZqJbv9In8dOYBQ154ou', 'ADM', 34, '1980-10-21', 'M', 'ACT', NULL, NULL, NULL, '', NULL, NULL, NULL, NULL),
@@ -1459,199 +1383,52 @@ INSERT INTO `persona` (`id_persona`, `id_ciudad`, `documento_persona`, `tipo_doc
 (11, 5036, 56129365, 'CC', 'carol jazmín forero bojaca', '2840410', 'AV ind # 57 - 23', '$2y$10$bgmJGvYgCUa7gbPnkajfP.ErLrCBFtjXs.ZqJbv9In8dOYBQ154ou', 'CLT', 35, '1981-03-25', 'M', 'ACT', NULL, 'forero.boja@gmail.com', 'Alexandra Banguardia Fe', '3156483241', NULL, 'AB', '+', 'Famisanar'),
 (12, 5038, 97080536215, 'TI', 'jhonatan del jesus valencia', '3142947503', 'Calle 45 # 39 f - 23 sur', '$2y$10$bgmJGvYgCUa7gbPnkajfP.ErLrCBFtjXs.ZqJbv9In8dOYBQ154ou', 'CLT', 17, '1999-04-03', 'M', 'ACT', NULL, 'jhonatan2155@hotmail.com', 'Alvaro Hernando Cardona G.', '8521244', NULL, 'A', '-', 'vive sano');
 
--- --------------------------------------------------------
 
---
--- Estructura de tabla para la tabla `registro_historia`
---
-
-CREATE TABLE `registro_historia` (
-  `id_historia` bigint(20) NOT NULL,
-  `id_odon` int(11) NOT NULL,
-  `fecha_reg` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `desc_procedimiento` varchar(3000) COLLATE utf8_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
-
---
--- Volcado de datos para la tabla `registro_historia`
---
-
-INSERT INTO `registro_historia` (`id_historia`, `id_odon`, `fecha_reg`, `desc_procedimiento`) VALUES
-(1, 6, '2016-07-09 00:00:00', 'general'),
-(1, 6, '2016-07-10 00:00:00', 'general');
-
---
--- Índices para tablas volcadas
---
-
---
--- Indices de la tabla `cita`
---
-ALTER TABLE `cita`
-  ADD PRIMARY KEY (`id_cita`),
-  ADD KEY `fk_cliente_cita` (`id_cliente`),
-  ADD KEY `fk_odont_cita` (`id_odonto`);
-
---
--- Indices de la tabla `ciudad`
---
-ALTER TABLE `ciudad`
-  ADD PRIMARY KEY (`id_ciudad`),
-  ADD KEY `fk_dept_ciudad` (`id_departamento`);
-
---
--- Indices de la tabla `departamento`
---
-ALTER TABLE `departamento`
-  ADD PRIMARY KEY (`id_departamento`);
-
---
--- Indices de la tabla `diente`
---
-ALTER TABLE `diente`
-  ADD PRIMARY KEY (`id_diente`);
-
---
--- Indices de la tabla `historia_clinica`
---
-ALTER TABLE `historia_clinica`
-  ADD PRIMARY KEY (`id_historia`),
-  ADD KEY `fk_cliente_historia` (`id_cliente`);
-
---
--- Indices de la tabla `historia_diente`
---
-ALTER TABLE `historia_diente`
-  ADD PRIMARY KEY (`id_diente`,`id_historia`),
-  ADD KEY `fk_historia_diente` (`id_historia`);
-
---
--- Indices de la tabla `historia_pregunta`
---
-ALTER TABLE `historia_pregunta`
-  ADD PRIMARY KEY (`id_info`,`id_historia`),
-  ADD KEY `fk_pregunta_historia` (`id_historia`);
-
---
--- Indices de la tabla `info_paciente`
---
-ALTER TABLE `info_paciente`
-  ADD PRIMARY KEY (`id_info`);
-
---
--- Indices de la tabla `multa`
---
-ALTER TABLE `multa`
-  ADD PRIMARY KEY (`id_multa`),
-  ADD KEY `fk_cliente_multa` (`id_cliente`);
-
---
--- Indices de la tabla `persona`
---
-ALTER TABLE `persona`
-  ADD PRIMARY KEY (`id_persona`),
-  ADD UNIQUE KEY `documento_persona` (`documento_persona`),
-  ADD KEY `fk_ciudad_persona` (`id_ciudad`);
-
---
--- Indices de la tabla `registro_historia`
---
-ALTER TABLE `registro_historia`
-  ADD PRIMARY KEY (`id_historia`,`fecha_reg`),
-  ADD KEY `fk_historia_odontologo2` (`id_odon`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `cita`
---
-ALTER TABLE `cita`
-  MODIFY `id_cita` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
---
--- AUTO_INCREMENT de la tabla `diente`
---
-ALTER TABLE `diente`
-  MODIFY `id_diente` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `historia_clinica`
---
-ALTER TABLE `historia_clinica`
-  MODIFY `id_historia` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT de la tabla `info_paciente`
---
-ALTER TABLE `info_paciente`
-  MODIFY `id_info` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT de la tabla `multa`
---
-ALTER TABLE `multa`
-  MODIFY `id_multa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
---
--- AUTO_INCREMENT de la tabla `persona`
---
-ALTER TABLE `persona`
-  MODIFY `id_persona` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
---
--- Restricciones para tablas volcadas
---
---
--- Filtros para la tabla `cita`
---
-select * from cita ;
-ALTER TABLE `cita`
-  ADD CONSTRAINT `fk_cliente_cita` FOREIGN KEY (`id_cliente`) REFERENCES `persona` (`id_persona`),
-  ADD CONSTRAINT `fk_odont_cita` FOREIGN KEY (`id_odonto`) REFERENCES `persona` (`id_persona`);
-
---
--- Filtros para la tabla `ciudad`
---
-ALTER TABLE `ciudad`
-  ADD CONSTRAINT `fk_dept_ciudad` FOREIGN KEY (`id_departamento`) REFERENCES `departamento` (`id_departamento`);
-
---
--- Filtros para la tabla `historia_clinica`
---
-ALTER TABLE `historia_clinica`
-  ADD CONSTRAINT `fk_cliente_historia` FOREIGN KEY (`id_cliente`) REFERENCES `persona` (`id_persona`);
-
---
--- Filtros para la tabla `historia_diente`
---
-ALTER TABLE `historia_diente`
-  ADD CONSTRAINT `fk_diente_historia` FOREIGN KEY (`id_diente`) REFERENCES `diente` (`id_diente`),
-  ADD CONSTRAINT `fk_historia_diente` FOREIGN KEY (`id_historia`) REFERENCES `historia_clinica` (`id_historia`);
-
---
--- Filtros para la tabla `historia_pregunta`
---
-ALTER TABLE `historia_pregunta`
-  ADD CONSTRAINT `fk_historia_pregunta` FOREIGN KEY (`id_info`) REFERENCES `info_paciente` (`id_info`),
-  ADD CONSTRAINT `fk_pregunta_historia` FOREIGN KEY (`id_historia`) REFERENCES `historia_clinica` (`id_historia`);
-
---
--- Filtros para la tabla `multa`
---
-ALTER TABLE `multa`
-  ADD CONSTRAINT `fk_cliente_multa` FOREIGN KEY (`id_cliente`) REFERENCES `persona` (`id_persona`);
-
---
--- Filtros para la tabla `persona`
---
-ALTER TABLE `persona`
-  ADD CONSTRAINT `fk_ciudad_persona` FOREIGN KEY (`id_ciudad`) REFERENCES `ciudad` (`id_ciudad`);
-
---
--- Filtros para la tabla `registro_historia`
---
-ALTER TABLE `registro_historia`
-  ADD CONSTRAINT `fk_historia_odontologo` FOREIGN KEY (`id_historia`) REFERENCES `historia_clinica` (`id_historia`),
-  ADD CONSTRAINT `fk_historia_odontologo2` FOREIGN KEY (`id_odon`) REFERENCES `persona` (`id_persona`);
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*==============================================================*/
+/* Table: pregunta                                              */
+/*==============================================================*/
+create table pregunta
+(
+   id_pregunta         int not null,
+   desc_pregunta        varchar(100) not null,
+   primary key (id_pregunta)
+);
 
 
+
+INSERT INTO `registro` (`id_registro`, `id_historia`, `fecha_reg`, `id_odon`, `motivo_consulta`, `desc_procedimiento`) VALUES
+(1, 1, '2016-07-09 00:00:00', 6, 'Dolor en un diente', 'Se quita carie'),
+(2, 1, '2016-07-10 00:00:00', 6, 'Dolor en un diente', 'Se quita carie');
+
+alter table cita add constraint fk_cliente_cita foreign key (id_cliente)
+      references persona (id_persona) on delete restrict on update restrict;
+
+alter table cita add constraint fk_odont_cita foreign key (id_odonto)
+      references persona (id_persona) on delete restrict on update restrict;
+
+alter table ciudad add constraint fk_dept_ciudad foreign key (id_departamento)
+      references departamento (id_departamento) on delete restrict on update restrict;
+
+
+
+alter table historia_clinica add constraint fk_cliente_historia foreign key (id_cliente)
+      references persona (id_persona) on delete restrict on update restrict;
+
+alter table historia_pregunta add constraint fk_historia_pregunta foreign key (id_historia)
+      references historia_clinica (id_historia) on delete restrict on update restrict;
+
+alter table historia_pregunta add constraint fk_info_pregunta foreign key (id_pregunta)
+      references pregunta (id_pregunta) on delete restrict on update restrict;
+
+alter table multa add constraint fk_cliente_multa foreign key (id_cliente)
+      references persona (id_persona) on delete restrict on update restrict;
+
+alter table persona add constraint fk_ciudad_persona foreign key (id_ciudad)
+      references ciudad (id_ciudad) on delete restrict on update restrict;
+
+alter table registro add constraint fk_historia_odontologo foreign key (id_historia)
+      references historia_clinica (id_historia) on delete restrict on update restrict;
+
+alter table registro add constraint fk_historia_odontologo2 foreign key (id_odon)
+      references persona (id_persona) on delete restrict on update restrict;
+      

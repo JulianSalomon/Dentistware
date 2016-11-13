@@ -92,18 +92,17 @@
                                                 echo '</td>';
                                                 echo '<td>';
                                                 echo ucwords($cliente->contacto) . '<br>' ."<small> Tel: " . $cliente->contacto_tel . "</small>" ;
-                                                echo '</td>';                                                                                                                                                                                             
-                                                echo '<td class="text-center">';                                                
-                                                
+                                                echo '</td>';                                                                                                                                                                                                                                            
+                                                echo '<td class="text-center">';
                                                 $data_input = array(
                                                 		'type' => 'button',
                                                 		'class' => 'btn btn-default',
                                                 		'data-toggle' => 'tooltip',
                                                 		'title' => 'Multas',
                                                 );
-                                                echo anchor(base_url() . 'empleado/Cliente/multas_view/' . $cliente->id_persona, '<i class="fa fa-list"></i>', $data_input);
+                                                echo anchor(base_url() . 'empleado/Cliente/multas_view/' . $cliente->id_persona, '<i class="fa fa-list"></i>', $data_input);                                                                                                                                                                                                                                            
                                                 
-												$data_input = array(
+                                                $data_input = array(
                                                 		'type' => 'button',
                                                         'class' => 'btn btn-default',
                                                 		'data-toggle' => 'tooltip',
