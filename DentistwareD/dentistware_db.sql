@@ -1431,4 +1431,3 @@ alter table registro add constraint fk_historia_odontologo foreign key (id_histo
 
 alter table registro add constraint fk_historia_odontologo2 foreign key (id_odon)
       references persona (id_persona) on delete restrict on update restrict;
-      

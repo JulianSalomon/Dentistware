@@ -37,11 +37,15 @@ class AgendarCita extends Cliente_Controller {
         // send email
         mail("nrestrepot@unal.edu.co","My subject",$msg, $headers);*/
         
-		$_SESSION['fecha'] = date("Y-m-d");
+         $fecha = $this->input->post('inputFecha');
+		$hora = $this->input->post('inputHora');
+		$odontologo = $this->input->post('inputOdontologo');
+        echo $fecha == null;
+        if( ($fecha == null) && ($hora == null) &&($odontologo == null)){
+            $_SESSION['fecha'] = date("Y-m-d");
 		$_SESSION['hora'] = '';
 		$_SESSION['odontologo'] = -1;
-		
-		$this->data['citas'] = $this->cita_model->get_citas_today();
+            $this->data['citas'] = $this->cita_model->get_citas_today();
 		
 		$adontos_array = array();
 		$adontos_array['-1'] = '- Seleccione un Odontólogo -';
@@ -53,6 +57,41 @@ class AgendarCita extends Cliente_Controller {
 		$this->data['odontologos'] = $adontos_array;
 		
 		$this->render('cliente/agendar_cita_view');
+        }else {
+            $_SESSION['fecha'] = $fecha;
+		$_SESSION['hora'] = $hora;
+		$_SESSION['odontologo'] = $odontologo;		
+		
+		$fecha = str_replace("/", "-", $fecha);
+		
+		if($hora != ''){
+			$hora = strtotime($hora);
+			$hora = date("H:i:s", $hora);
+		}
+		
+		$odontos_array = array();
+		$odontos_array['-1'] = '- Seleccione un Odontólogo -';
+		$query = $this->persona_model->get_list_odontologos();
+		foreach ($query as $arreglo) {
+			$odontos_array[$arreglo->id_persona] = ucwords($arreglo->nombre);
+		}
+		
+		$this->data['odontologos'] = $odontos_array;
+		
+		if($fecha == date("Y-m-d")){
+			$_SESSION['fecha'] = date("Y-m-d");
+			$this->data['citas'] = $this->cita_model->get_citas_today($hora, $odontologo);
+		} else {
+			$this->data['citas'] = $this->cita_model->get_citas($fecha, $hora, $odontologo);
+		}
+						
+		$this->render('cliente/agendar_cita_view');
+        }
+		//$_SESSION['fecha'] = date("Y-m-d");
+//		$_SESSION['hora'] = '';
+	//	$_SESSION['odontologo'] = -1;
+		
+		
 	}
 	public function agendar_cita($cita) {				
 		$doc = $this->session->userdata['id_persona'];
