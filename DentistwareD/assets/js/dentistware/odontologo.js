@@ -1,40 +1,34 @@
-$(function() {
-    var modal = false;
-    
+$(function(){
     $('.verRegistro-btn').click(function(e) {
         e.preventDefault();
         $('.ac_p_error').fadeOut('slow').remove();
-        var fecha  = new $(this).val(); 
-        console.log(fecha);
+        var id = $(this).val();
+        var postData = { 'reg'   : id, };
+        var htmlWrapper = '';
         $.ajax({
             type: 'POST',
-            url: js_site_url + 'Historia_clinica/seleccionarHistoria/' + fecha,
-        });
-    });
-    
-    $('.verDiente-btn').click(function(e) {
-        e.preventDefault();
-        $('.ac_p_error').fadeOut('slow').remove();
-        var id = $(this).val();
-        if(modal != id){
-            $.ajax({
-            type: 'POST',
-            url: js_site_url + 'Dientes/',
-            data: {
-                'reg' : id
-                  },
+            url: js_site_url + 'Registro/',
+            data: postData,
             success: function(html) {
-                $('#verDientes_html').html(html);
-                $('#verDientes').modal('show');
+                htmlWrapper = html;
             },
-            error: function(msg) {
-                alert(msg);
+            error: function(msg){
+                console.log(msg);
             }
-        });  
-            modal=id;
-        } else {
-            $('#verDientes').modal('show');
-        }        
+        });
+        $.ajax({
+            type: 'POST',
+            url: js_site_url + 'Diente/',
+            data: postData,
+            success: function(html) {
+                htmlWrapper += html;
+                $('#verRegistro_html').html(htmlWrapper);
+                $('#verRegistro').modal('show');
+            },
+            error: function(msg){
+                console.log(msg);
+            }
+        });
     });
     
     $(".date-select").datepicker({

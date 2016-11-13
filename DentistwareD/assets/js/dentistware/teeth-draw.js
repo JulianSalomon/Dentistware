@@ -3,6 +3,7 @@ var myTeeth;
 var ratio;
 var modalWidth;
 var modalHeight;
+var editable;
 
 preload = function() {
     bg = loadImage(js_site_url + "../assets/img/Teeth.png");
@@ -10,7 +11,11 @@ preload = function() {
 
 setup = function() {
     var canvas = createCanvas(modalWidth * 0.583333333, modalWidth   * 0.858229166);
-    canvas.parent('teeth-diagram');
+    if(editable){
+        canvas.parent('teeth-editor');
+    } else {
+        canvas.parent('teeth-viewer');
+    }
     ratio = width / 40;    
     myTeeth = new Teeth();
 }
@@ -29,30 +34,32 @@ windowResized = function() {
 }
 
 mouseClicked = function() {
-    var distance;
+    if(editable){
+        var distance;
 
-    for (var i = 0; i < myTeeth.teeth.length; i++) {
-        distance = Math.sqrt(pow((myTeeth.teeth[i].x - mouseX), 2) + pow((myTeeth.teeth[i].y - mouseY), 2));
-        if (distance < ratio) {
-            switch (stateAux) {
-                case 'A':
-                    myTeeth.teeth[i].state[0] = (myTeeth.teeth[i].state[0] === 1) ? 0 : 1;
-                    break;
-                case 'E':
-                    myTeeth.teeth[i].state[1] = (myTeeth.teeth[i].state[1] === 1) ? 0 : 1;
-                    break;
-                case 'D':
-                    myTeeth.teeth[i].state[2] = (myTeeth.teeth[i].state[2] === 1) ? 0 : 1;
-                    break;
-                case 'O':
-                    myTeeth.teeth[i].state[3] = (myTeeth.teeth[i].state[3] === 1) ? 0 : 1;
-                    break;
-                case 'C':
-                    myTeeth.teeth[i].state[4] = (myTeeth.teeth[i].state[4] === 1) ? 0 : 1;
-                    break;
-                case 'T':
-                    myTeeth.teeth[i].state[5] = (myTeeth.teeth[i].state[5] === 1) ? 0 : 1;
-                    break;
+        for (var i = 0; i < myTeeth.teeth.length; i++) {
+            distance = Math.sqrt(pow((myTeeth.teeth[i].x - mouseX), 2) + pow((myTeeth.teeth[i].y - mouseY), 2));
+            if (distance < ratio) {
+                switch (stateAux) {
+                    case 'A':
+                        myTeeth.teeth[i].state[0] = (myTeeth.teeth[i].state[0] === 1) ? 0 : 1;
+                        break;
+                    case 'E':
+                        myTeeth.teeth[i].state[1] = (myTeeth.teeth[i].state[1] === 1) ? 0 : 1;
+                        break;
+                    case 'D':
+                        myTeeth.teeth[i].state[2] = (myTeeth.teeth[i].state[2] === 1) ? 0 : 1;
+                        break;
+                    case 'O':
+                        myTeeth.teeth[i].state[3] = (myTeeth.teeth[i].state[3] === 1) ? 0 : 1;
+                        break;
+                    case 'C':
+                        myTeeth.teeth[i].state[4] = (myTeeth.teeth[i].state[4] === 1) ? 0 : 1;
+                        break;
+                    case 'T':
+                        myTeeth.teeth[i].state[5] = (myTeeth.teeth[i].state[5] === 1) ? 0 : 1;
+                        break;
+                }
             }
         }
     }
