@@ -179,13 +179,20 @@ class Cita_model extends MY_Model {
 			'id_cita' => $id_cita
 		));
 	}
-	
-    public function count_citas($idPersona, $estadoCita) {
-		$this->db->select('id_cita, fecha_cita as fecha, hora_cita as hora, estado_cita as estado, odonto.nombre_persona  as odontologo, consultorio');
-		$this->db->from('cita');
-        $this->db->where('id_odonto', $idPersona);
-        $query = $this->db->get();
-		return count($query->result());
+
+
+    public function count_citas($idPersona, $estadoCita ='') {
+		$array_termino = array(
+			'id_odonto' => $idPersona,
+		);
+		$this->db->group_start();
+		$this->db->or_like($array_termino);
+		$this->db->group_end();
+		$query = $this->db->get_where('cita', array(
+			'estado_cita' => $estadoCita
+		));
+		return count($query->result());        
+
 	}
 	
 	public function delete_cita($id_cita) {

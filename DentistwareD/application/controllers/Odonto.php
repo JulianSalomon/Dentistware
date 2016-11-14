@@ -9,8 +9,18 @@ class Odonto extends Odon_Controller {
 			redirect('Login', 'refresh');
 		}
         $this->load->model ( 'cita_model' );
-        $this->data['totalCitas'] = $this->cita_model->count_citas($this->session->userdata('id_persona'), '1');
-        echo  $this->data['totalCitas'];
+        $totalCitas = 0;
+        $citasNull = 0;
+        $citasAtendidas = 0;
+        $citasCanceladas = 0;
+        $citasNull = $this->cita_model->count_citas($this->session->userdata('id_persona'), NULL);
+        $citasAtendidas = $this->cita_model->count_citas($this->session->userdata('id_persona'), 1);
+        $citasCanceladas = $this->cita_model->count_citas($this->session->userdata('id_persona'), 0);
+        $totalCitas = $citasNull + $citasAtendidas + $citasCanceladas;
+        $this->data['totalCitas'] = $totalCitas;
+        $porcentajeCitasNull = 0;
+        $porcentajeCitasAtendidas = 0;
+        $porcentajeCitasCanceladas = 0;
 	}
 	
 	public function index() {
