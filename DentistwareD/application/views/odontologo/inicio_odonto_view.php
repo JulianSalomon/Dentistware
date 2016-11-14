@@ -4,6 +4,7 @@
             <h1>Bienvenido a Dentistware</h1>
         </section>
         <section class="content">
+            
             <p><?php echo $totalCitas ?></p>
             <!-- /.col (left) -->
             <div class="col-md-6">
