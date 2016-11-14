@@ -23,9 +23,7 @@ class VerCita extends Cliente_Controller {
 	public function cancelar_cita($id_cita) {
 		$data = array(
 			"id_cliente" => null
-		);
-		
-		echo $this->cita_model->cancelar_cita($id_cita, $data);
-				
+		);		
+		echo $this->cita_model->cancelar_cita($id_cita, $data);				
 	}
 }

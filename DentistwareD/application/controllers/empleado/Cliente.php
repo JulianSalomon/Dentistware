@@ -185,12 +185,10 @@ class Cliente extends Empl_Controller {
 	}
 	
 	public function multas_view($id) {
-		$query = $this->multa_model->get_active_multas($id);
+		$query = $this->multa_model->get_multas_no_pagadas($id);
 		$this->data['multas'] = $query;
 		$this->data['persona'] = $this->persona_model->get_persona('', $id);
-		
-// 		$this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/empl_cliente.js', true);
-// 		$this->data['before_closing_body'] .= plugin_js('icheck');
+
 		$this->render('empleado/empl_multa_view');
 	}
 	

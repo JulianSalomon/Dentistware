@@ -18,7 +18,7 @@ class Multa_model extends MY_Model {
 		return false;
 	}
 
-    	public function get_multas_no_pagadas($id_cliente) {
+    public function get_multas_no_pagadas($id_cliente) {
 		$this->db->select('*');
 		$this->db->from('multa');
 		$this->db->where('id_cliente', $id_cliente);
