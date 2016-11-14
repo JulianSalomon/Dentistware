@@ -71,33 +71,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								  }else{
                                   		echo "<td style= width:45% > Femenino</td>";
                                   }
-                                  echo "</tr>";
-                                   
-                          
-
-                               
-                                   
-
-                                   echo "<tr>";
                                    echo "<th class= text-right style= width:45% >E-mail:</th>";
                                    echo "<td style= width:10% > </td>";
                                    echo "<td> " . strtolower($persona->correo_persona) . "</td>";
                                    echo "</tr>";                                      
-                                   
-                                   
-                                
-                                   
-                                  
                                        echo "<tr>";
                                             echo "<th class= text-right style= width:45% >Estudios:</th>";
                                               echo "<td style= width:10% > </td>";
                                             echo "<td style= width:45% > " . $persona->estudios_odont . "</td>";
                                           echo "</tr>";
-                                    
                                    ?>
                                 </table>
                             </div>
-                                                                                                                                                                   
                     </div>                                     
                 </div>						   
             </div>
@@ -112,11 +97,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		echo plugin_js('fastclick');
 		echo plugin_js('app');
 		echo plugin_js('pace');
-        echo plugin_js('datepicker');
-        echo plugin_js('timepicker');
-        echo plugin_js('datatable');
-        echo plugin_js('datatable-bootstrap');
-        echo plugin_js('sweetalert');
         echo $before_closing_body;
 	?>
 </body>

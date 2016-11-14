@@ -18,7 +18,7 @@ class Cita extends Odon_Controller {
 		$_SESSION['hora'] = '';
 		$_SESSION['odontologo'] = $this->session->userdata['id_persona'];
 		$this->data['citas'] = $this->cita_model->get_citas_para_odontologo('', $this->session->userdata['id_persona']);
-		$this->get_user_menu('Informacion_Cliente');
+		$this->get_user_menu('Citas');
 		$this->render('odontologo/odonto_cita_view');
 	}
     
@@ -26,19 +26,19 @@ class Cita extends Odon_Controller {
 		$data = array(
 			"estado_cita" => 0
 		);
-		echo $this->cita_model->no_asistir_cita($cita, $data);
+		echo $this->cita_model->marcar_cita($cita, $data);
 	}
     
     	public function filtrar() {
-		$fecha = $this->input->post('inputFecha');
+		//$fecha = $this->input->post('inputFecha');
 		$hora = $this->input->post('inputHora');
 		//$odontologo = $this->input->post('inputOdontologo');		
 		
-		$_SESSION['fecha'] = $fecha;
+		//$_SESSION['fecha'] = $fecha;
 		$_SESSION['hora'] = $hora;
 		//$_SESSION['odontologo'] = $odontologo;		
-		
-		$fecha = str_replace("/", "-", $fecha);
+		$fecha = date("Y-m-d");
+		//$fecha = str_replace("/", "-", $fecha);
 		
 		if($hora != ''){
 			$hora = strtotime($hora);
@@ -54,13 +54,13 @@ class Cita extends Odon_Controller {
 		
 		$this->data['odontologos'] = $odontos_array;*/
 		
-		if($fecha == date("Y-m-d")){
+		//if($fecha == date("Y-m-d")){
 			$_SESSION['fecha'] = date("Y-m-d");
 			$this->data['citas'] = $this->cita_model->get_citas_para_odontologo($hora, $this->session->userdata['id_persona']);
-		} else {
-			$this->data['citas'] = $this->cita_model->get_citas_odontologo($fecha, $hora, $this->session->userdata['id_persona']);
-		}
-						
+		/*} else {
+			//$this->data['citas'] = $this->cita_model->get_citas_odontologo($fecha, $hora, $this->session->userdata['id_persona']);
+		}*/
+            $this->get_user_menu('Citas');	
 		$this->render('odontologo/odonto_cita_view');		
 	}
 }

@@ -93,7 +93,7 @@ class Cita_model extends MY_Model {
 		$fechaActual = date("Y-m-d");
 		$horaActual = date('H:i:s');
 		
-		$this->db->select('id_cita, fecha_cita as fecha, hora_cita as hora, estado_cita as estado, cliente.nombre_persona  as cliente, consultorio');
+		$this->db->select('id_cita, fecha_cita as fecha, hora_cita as hora, estado_cita as estado, cliente.nombre_persona  as cliente, consultorio, cliente.id_persona as id');
 		$this->db->from('cita');
 		$this->db->join('persona as cliente', 'cliente.id_persona = cita.id_cliente');
 		$this->db->where('cita.id_cliente is not NULL', NULL, FALSE);		
@@ -174,7 +174,7 @@ class Cita_model extends MY_Model {
 		));
 	}
     
-    public function no_asistir_cita($id_cita, $data = '') {
+    public function marcar_cita($id_cita, $data = '') {
 		return $this->actualizar_datos('cita', $data, array(
 			'id_cita' => $id_cita
 		));
