@@ -1397,6 +1397,44 @@ create table pregunta
    primary key (id_pregunta)
 );
 
+INSERT INTO `pregunta` (`id_pregunta`, `desc_pregunta`) VALUES
+( 1, '¿Está usted bajo tratamiendo médico?'),
+( 2, '¿Toma actualmente algún medicamento?'),
+( 3, '¿Le han practicado alguna intervención quirúrgica?'),
+( 4, '¿Ha recibido alguna transfusión sanguínea?'),
+( 5, '¿Ha consumido o consume drogas?'),
+( 6, '¿Ha presentado reacción alérgica a Penicilina?'),
+( 7, '¿Ha presentado reacción alérgica a Anestesia?'),
+( 8, '¿Ha presentado reacción alérgica a Aspirina?'),
+( 9, '¿Ha presentado reacción alérgica a Yodo?'),
+(10, '¿Ha presentado reacción alérgica a Merthiolate?'),
+(11, '¿Sufre de tensión arterial alta?'),
+(12, '¿Sufre de tensión arterial baja?'),
+(13, '¿Sangra excesivamente al cortarse?'),
+(14, '¿Padece o ha padecido anemia?'),
+(15, '¿Padece o ha padecido leucemia?'),
+(16, '¿Padece o ha padecido hemofília?'),
+(17, '¿Padece o ha padecido déficit de vitamina K?'),
+(18, '¿Es usted V.I.H. positivo?'),
+(19, '¿Toma algún medicamento retroviral?'),
+(20, '¿Está usted embarazada?'),
+(21, '¿Está tomando actualmente pastillas anticonceptivas?'),
+(22, '¿Sufre o ha sufrido de enfermedades venéreas?'),
+(23, '¿Sufre o ha sufrido de problemas del corazón?'),
+(24, '¿Sufre o ha sufrido de hepatitis?'),
+(25, '¿Sufre o ha sufrido de fiebre reumática?'),
+(26, '¿Sufre o ha sufrido de asma?'),
+(27, '¿Sufre o ha sufrido de diabetes?'),
+(28, '¿Sufre o ha sufrido de úlcera gástrica?'),
+(29, '¿Sufre o ha sufrido de tiroides?'),
+(30, '¿Ha tenido limitación al abrir o cerrar la boca?'),
+(31, '¿Siente ruidos en la mandíbula al abrir o cerrar la boca?'),
+(32, '¿Sufre de herpes o aftas recurrentes?'),
+(33, '¿Suele morderse las uñas o labios?'),
+(34, '¿Suele fumar?'),
+(35, '¿Suele consumir alimentos cítricos?'),
+(36, '¿Suele morder objetos con los dientes?');
+
 alter table cita add constraint fk_cliente_cita foreign key (id_cliente)
       references persona (id_persona) on delete restrict on update restrict;
 

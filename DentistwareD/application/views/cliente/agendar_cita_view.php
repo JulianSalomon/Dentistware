@@ -160,7 +160,7 @@
 </div>
 
 <?php 
-    $path = "paciente/AgendarCita";
+    $path = "paciente/AgendarCita/";
     echo '<script>
             var js_site_url = "'. site_url($path) . '";
           </script>';
