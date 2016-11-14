@@ -1,8 +1,9 @@
-var removed = false;
 $('#verRegistro').on('hidden.bs.modal', function(){
-    if(!removed){
+    try {
         remove();
-        removed = true;
+    }
+    catch(err) {
+        // Handle error(s) here
     }
     $('#verRegistro_html').html('');
 });
@@ -13,6 +14,7 @@ $('#verRegistro').on('shown.bs.modal', function () {
     stateAux = $('input[name="state"]:checked').val();
     var editable = 0;
     setup();
+    draw();
         /*$("input[name=state]").click(function () {
               stateAux = $(this).val();
         });

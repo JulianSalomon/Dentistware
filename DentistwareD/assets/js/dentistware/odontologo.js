@@ -1,36 +1,37 @@
 $(function(){
+    var lastRegId;
     $('.verRegistro-btn').click(function(e) {
         e.preventDefault();
         $('.ac_p_error').fadeOut('slow').remove();
         var id = $(this).val();
-        var postData = { 'reg'   : id, };
-        var htmlWrapper = '';
-        $.ajax({
-            type: 'POST',
-            url: js_site_url + 'Registro/',
-            data: postData,
-            success: function(html) {
-                htmlWrapper = html;
-            },
-            error: function(msg){
-                console.log(msg);
-            }
-        });
-        $.ajax({
-            type: 'POST',
-            url: js_site_url + 'Diente/',
-            data: postData,
-            success: function(html) {
-                htmlWrapper += html;
-                $('#verRegistro_html').html(htmlWrapper);
-                $('#verRegistro').modal('show');
-            },
-            error: function(msg){
-                console.log(msg);
-            }
-        });
-    });
-    
+        if( id != lastRegId ){
+            var postData = { 'reg'   : id, };
+            var htmlWrapper;
+            $.ajax({
+                type: 'POST',
+                url: js_site_url + 'Registro/',
+                data: postData,
+                success: function(html) {
+                    htmlWrapper = html;
+                },
+                error: function(msg){
+                }
+            });
+            $.ajax({
+                type: 'POST',
+                url: js_site_url + 'Diente/',
+                data: postData,
+                success: function(html) {
+                    htmlWrapper += html;
+                    $('#verRegistro_html').html(htmlWrapper);
+                    $('#verRegistro').modal('show');
+                },
+                error: function(msg){
+                    console.log(msg);
+                }
+            });
+        }
+    });    
     
     $.fn.datepicker.defaults.format = "yyyy/mm/dd";
   	$.fn.datepicker.dates["es"] = {
@@ -41,9 +42,8 @@ $(function(){
   		monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
   		today: "Hoy"
   	};
-      
-    
-    	$(".date-select").datepicker({
+     
+    $(".date-select").datepicker({
           language: "es",
           autoclose: true,
           startDate: "0d",
@@ -51,25 +51,6 @@ $(function(){
           todayHighlight: true,
           daysOfWeekHighlighted: "0",
 	});
-      
-    
-   /* $(".date-select").datepicker({
-        language: "es",
-        autoclose: true,
-    }).on(
-        "show", function() {
-            var zIndexModal = $(".modal-add").css("z-index");
-            var zIndexFecha = $(".datepicker").css("z-index");
-            $(".datepicker").css("z-index",zIndexModal+1);
-    });
-
-    $(".tabla-usuario").DataTable({
-        "lengthChange": false,
-        "searching": false,
-        "ordering": true,
-        "info": false,
-        "autoWidth": false,
-    });  */
     
     $('.no-asistir-btn').click(function(e) {
 		e.preventDefault();
@@ -145,14 +126,11 @@ $(function(){
                 });
             }
         });           
-    });
-    
-    
+    });    
 
 	$(".timepicker").timepicker({
           showInputs: false,
           minuteStep: 30,
           defaultTime: false              
-    });
-          
+    });          
 });
