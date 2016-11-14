@@ -90,9 +90,6 @@ class Perfil extends MY_Controller {
     
     public function contrasena() {
         $this->data['persona_info'] = $this->persona_model->get_persona($this->session->userdata('doc_persona'));
-        $this->data['before_closing_head'] .= plugin_css('icheck');
-		$this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/perfil.js', true);
-		$this->data['before_closing_body'] .= plugin_js('icheck');
         $this->get_user_menu();
 		$this->render('Contrasena_edit_view');
 	}
@@ -105,8 +102,7 @@ class Perfil extends MY_Controller {
         $this->form_validation->set_rules('inputPasswordConfirm', 'Confirmar contraseña', 'required|matches[inputNewPassword]', array('matches' => 'Las contraseñas no coindicen'));
         
 		if ($this->form_validation->run()) {
-            
-            $oldPassword = $this->input->post('inputPassword');
+            $oldPassword = $this->input->post('inputPassword'); 
             $user = $this->persona_model->get_persona($this->session->userdata('doc_persona'));
             
             if(password_verify($oldPassword, $user->clave_acceso)){

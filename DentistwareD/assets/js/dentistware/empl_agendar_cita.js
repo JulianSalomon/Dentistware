@@ -36,6 +36,7 @@ $(function() {
 						type: 'GET',
 						url: js_site_url + 'agendar_cita/' + cita + '/' + inputValue ,
 						success: function(msg){
+							console.log(msg);
 							if(msg == 1){								
 						        swal({   
 						            title: "Cita agendada",
@@ -47,7 +48,7 @@ $(function() {
 							        location.reload(); 
 							    });
 							} else {
-							    swal("Error", "La cita con no se ha podido agendar. Verifique el documento ingresado y vuelva a intentarlo", "error");
+							    swal("Error", msg, "error");
 							}
 						}
 					});					

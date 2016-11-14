@@ -16,7 +16,7 @@
                             $data_input = array(
                                     'id' => "edit_cliente_form",
                             );        
-                            echo form_open('paciente/AgendarCita/', $data_input);
+                            echo form_open('paciente/AgendarCita/filtrar', $data_input);
                             
                             $fecha = $this->session->userdata('fecha');                            
                             $fecha = str_replace("-", "/", $fecha);
@@ -75,22 +75,19 @@
 						<?php
 		                  	echo form_close();
 		             		echo '<hr>';
-                        if($cantidadDeMultas >0){
-                            echo br(1);
+	                        if($cantidadDeMultas > 0){
+	                            echo br(1);
+				                echo '<div class="form-group text-center">
+										<i id="logo_i" class="fa fa-warning fa-5x"></i>';
+								echo heading('Usted tiene multas pendientes.<br>Por favor paguelas antes de poder solicitar citas.', 3, 'class="text-muted"');
+				                echo '</div>';	
+	                        } else if($cantidadDeCitas >= 3) { 	                        	
+                            	echo br(1);
 			                	echo '<div class="form-group text-center">
 										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
-			                   	echo heading('Usted tiene multas pendientes.<br>Por favor paguelas antes de poder solicitar citas.', 3, 'class="text-muted"');
+			                   	echo heading('Usted ya tiene tres citas asignadas.<br>Podrá agendar más citas cuando tenga menos de tres citas activas.', 3, 'class="text-muted"');
 			                   	echo '</div>';	
-                        }
-                        
-                         else if($cantidadDeCitas >2){
-                            echo br(1);
-			                	echo '<div class="form-group text-center">
-										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
-			                   	echo heading('Usted ya tiene tres citas asignadas.<br>Por favor cancele alguna antes de poder agendar más citas.', 3, 'class="text-muted"');
-			                   	echo '</div>';	
-                        }
-                        	else if($citas != NULL){
+                        	} else if($citas != NULL) {
                     	?>
                     	<h4>Citas disponibles:</h4>
                         <div class="table-responsive">
@@ -163,7 +160,7 @@
 </div>
 
 <?php 
-    $path = "paciente/AgendarCita";
+    $path = "paciente/AgendarCita/";
     echo '<script>
             var js_site_url = "'. site_url($path) . '";
           </script>';

@@ -9,6 +9,14 @@
           	</a>
           	<div class="navbar-custom-menu">
             	<ul class="nav navbar-nav">
+            	  	<li>
+                        <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-key" style="font-size:18px"></i></a>
+                        <ul class="dropdown-menu">
+                            <div class="text-center">
+                                <?php echo anchor('Perfil/contrasena', 'Cambiar contraseña', 'class="btn btn-warning"');?>
+                            </div>
+	                	</ul>
+                    </li>
               		<li class="dropdown user user-menu">
                 		<a href="" class="dropdown-toggle" data-toggle="dropdown">
                 		<?php                 		
@@ -76,14 +84,6 @@
 	                  		</li>
 	                	</ul>
 	              	</li>
-                    <li>
-                        <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-expeditedssl" style="font-size:18px"></i></a>
-                        <ul class="dropdown-menu">
-                            <div class="text-center">
-                                <?php echo anchor('Perfil/contrasena', 'Editar contraseña', 'class="btn btn-danger btn-flat"');?>
-                            </div>
-	                	</ul>
-                    </li>
             	</ul>
         	</div>
             
