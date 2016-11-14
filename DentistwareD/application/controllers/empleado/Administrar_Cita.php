@@ -11,6 +11,15 @@ class Administrar_Cita extends Empl_Controller {
 		$this->load->model('persona_model');
 		$this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/empl_administrar_cita.js', true);
 		$this->get_user_menu('main-cita', 'citas-administrar');
+		
+		$odontos_array = array();
+		$odontos_array['-1'] = '- Seleccione un Odontólogo -';
+		$query = $this->persona_model->get_list_odontologos();
+		foreach ($query as $arreglo) {
+			$odontos_array[$arreglo->id_persona] = ucwords($arreglo->nombre);
+		}
+		
+		$this->data['odontologos'] = $odontos_array;
 	}
 	
 	public function index(){
@@ -20,15 +29,6 @@ class Administrar_Cita extends Empl_Controller {
 		$_SESSION['odontologo'] = -1;
 		
 		$this->data['citas'] = $this->cita_model->get_all_citas($fecha);
-		
-		$adontos_array = array();
-		$adontos_array['-1'] = '- Seleccione un Odontólogo -';
-		$query = $this->persona_model->get_list_odontologos();
-		foreach ($query as $arreglo) {
-			$adontos_array[$arreglo->id_persona] = ucwords($arreglo->nombre);
-		}
-		
-		$this->data['odontologos'] = $adontos_array;
 		
 		$this->render('empleado/empl_administrar_cita_view');
 	}
@@ -51,21 +51,13 @@ class Administrar_Cita extends Empl_Controller {
 			$hora = strtotime($hora);
 			$hora = date("H:i:s", $hora);
 		}
-		
-		$odontos_array = array();
-		$odontos_array['-1'] = '- Seleccione un Odontólogo -';
-		$query = $this->persona_model->get_list_odontologos();
-		foreach ($query as $arreglo) {
-			$odontos_array[$arreglo->id_persona] = ucwords($arreglo->nombre);
-		}
-		
-		$this->data['odontologos'] = $odontos_array;		
+			
 		$this->data['citas'] = $this->cita_model->get_all_citas($fecha, $hora, $odontologo);
 						
 		$this->render('empleado/empl_administrar_cita_view');		
 	}
 	
 	public function borrar_cita($id_cita) {
-		echo $this->cita_model->borrar_cita($id_cita);
+		echo $this->cita_model->delete_cita($id_cita);
 	}
 }

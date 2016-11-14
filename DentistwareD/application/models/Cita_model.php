@@ -63,8 +63,7 @@ class Cita_model extends MY_Model {
 		if ($query)
 			return $query->result();
 		return false;
-	}
-        
+	}       
     
     public function get_citas_odontologo($fechaActual = '', $horaSolicitada = '', $odontologoActual = '') {
     
@@ -103,12 +102,13 @@ class Cita_model extends MY_Model {
         $this->db->group_start();
         $this->db->where('estado_cita ', NULL);
         $this->db->or_where('estado_cita ', '1');
-         $this->db->group_end();
+        $this->db->group_end();
+		
 		if ($horaSolicitada != '') {
-			$this->db->where('hora_cita =', $horaSolicitada);
-            
+			$this->db->where('hora_cita =', $horaSolicitada);          
         }
-            if ($odontologoActual != '' && $odontologoActual != '-1') {
+        
+        if ($odontologoActual != '' && $odontologoActual != '-1') {
 			$this->db->where('id_odonto', $odontologoActual);
 		}
 		
@@ -182,18 +182,29 @@ class Cita_model extends MY_Model {
 	}
 	
 
-    public function count_citas($idPersona, $estadoCita ='') {
-		$array_termino = array(
-			'id_odonto' => $idPersona,
-		);
-		$this->db->group_start();
-		$this->db->or_like($array_termino);
-		$this->db->group_end();
-		$query = $this->db->get_where('cita', array(
-			'estado_cita' => $estadoCita
-		));
+
+    public function count_citas($idPersona, $estadoCita ='', $day = '') {
+        
+		$this->db->select('*');
+        $this->db->from('cita');
+		$this->db->where('id_odonto', $idPersona);
+		$this->db->where('estado_cita', $estadoCita);
+        if($day == ''){
+            $firstday = date('Y-m-d', strtotime('sunday -1 weeks'));
+            $this->db->where('fecha_cita >', $firstday);
+        }else{
+            $firstday = date('Y-m-d', strtotime($day));
+            $this->db->where('fecha_cita', $firstday);
+        }
+        
+        $query = $this->db->get();
 		return count($query->result());        
 	}
-
-
+	
+	public function delete_cita($id_cita) {
+		$array = array(
+				'id_cita' => $id_cita,
+		);
+		return $this->eliminar_datos('cita', $array);
+	}
 }
