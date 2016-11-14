@@ -16,7 +16,7 @@ $(function() {
               if (isConfirm) {
                   $.ajax({
                 	type: 'GET',
-                    url: js_site_url + 'agendar_cita/' + cita,
+                    url: js_site_url + '/agendar_cita/' + cita,
                     success: function(msg){
                         if(msg){
                             swal({   
@@ -42,9 +42,8 @@ $(function() {
         var odonto = $(this).attr('odonto');
       
         var opciones = "width=500,height=500,scrollbars=NO";
-    	var parametro = "AgendarCita/mostrar_informacion/" + odonto;
-    window.open(parametro,"Información Odontologo", opciones);
-     
+    	var url = js_site_url + "/mostrar_informacion/" + odonto;
+    	window.open(url, "Información Odontologo", opciones);     
     });
     
 	$('.cancelar-btn').click(function(e) {
@@ -120,16 +119,5 @@ $(function() {
   		"searching": false,
           "ordering": true,
           "autoWidth": false,
-    });
-
-      
+    });      
 });
-
-
-
-/*function abrirInformacion(idOdontologo) {
-	var opciones = "width=500,height=500,scrollbars=NO";
-    	
-    window.open("AgendarCita/mostrar_informacion","Información Odontologo", opciones);
-}*/
-

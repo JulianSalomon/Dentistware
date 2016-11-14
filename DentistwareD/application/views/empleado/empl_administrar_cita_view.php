@@ -110,12 +110,23 @@
                                             echo '</td>';
                                             echo '<td class="text-center">'; 
                                             
+                                            $value = 0;
+                                            if($cita->id_cliente){
+                                            	$value = 1;
+                                            }
+                                            
                                             $data_input = array(
                                             		'type' => 'button',
                                             		'class' => 'editar-btn btn btn-default',
                                             		'data-toggle' => "modal",
                                             		'data-target' => "#modal_edit_cita",
                                             		'content' => '<i class="fa fa-pencil"></i>',
+                                            		'data-id' => $cita->id_cita,
+                                            		'data-hora' => $cita->hora,
+                                            		'data-fecha' => $cita->fecha,
+                                            		'data-odonto' => $cita->odontologo,
+                                            		'data-cliente' => $value,
+                                            		'data-consultorio' => $cita->consultorio,
                                             );                                           
                                             echo form_button($data_input);                                            
                                             $habilitar = '';
@@ -175,28 +186,45 @@
             </div>
             <div class="modal-body">           
                 <div class="row">
-                    <div class="col-lg-6 form-group">
+                    <div class="col-lg-6 form-group" id="fecha">
                         <label class="control-label">Fecha cita: *</label>
                         <div class="input-group" id="div_inputFecha">
                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                            <input type="text" class="form-control date-select" id="inputFecha" placeholder="YYYY/MM/DD" name="inputFecha">
+                            <input type="text" class="form-control date-select" id="inputEditFecha" placeholder="YYYY/MM/DD" name="inputFecha">
                         </div>
                     </div>
-                    <div class="col-lg-6 form-group">
+                    <div class="col-lg-6 form-group" id="hora">
                         <label  class="control-label">Hora cita: *</label>
                         <div class="input-group" id="div_inputHora">
                             <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
-                            <input type="text" class="form-control" id="inputFecha" placeholder="HH:MM AM" name="inputFecha">
+                            <input type="text" class="form-control" id="inputEditFecha" placeholder="HH:MM AM" name="inputFecha">
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
-                	<label class="control-label">Odontólogo: *</label>
-                    <div class="input-group" id="div_selectOdonto">
-                    	<span class="input-group-addon"><i class="fa fa-user-md fa-fw"></i></span>
-                        <input type="text" class="form-control" id="selectOdonto" name="selectOdonto">
-					</div>
-				</div>                
+                <div class="row">
+	                <div class="col-lg-6 form-group">
+	                	<label class="control-label">Odontólogo: *</label>
+	                    <div class="input-group" id="div_selectOdonto">
+	                    	<span class="input-group-addon"><i class="fa fa-user-md fa-fw"></i></span>
+	                        <?php 
+				                $data_input = array(
+				                		'id' => 'selectEditOdontologo',
+				                		'class' => 'form-control',
+				                		'tabindex' => "-1",
+				                );
+				                echo form_dropdown('selectEditOdontologo', $odontologos, '', $data_input);                   
+	                        
+	                        ?>
+						</div>
+					</div>   
+                    <div class="col-lg-6 form-group">
+                        <label class="control-label">Consultorio: *</label>
+                        <div class="input-group" id="div_inputConsultorio">
+                            <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
+                            <input type="text" class="form-control date-select" id="inputConsultorio" placeholder="Consultorio" name="inputConsultorio">
+                        </div>
+                    </div>					                              
+                </div>               
             </div>
             <div class="modal-footer">
                 <button type="button" data-dismiss="modal" class="btn btn-danger pull-left cancel-btn">Cancelar</button>
