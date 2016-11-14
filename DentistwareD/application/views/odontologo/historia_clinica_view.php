@@ -239,7 +239,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     </div>
 </div>
 
-<?php 
+<?php
     $path = "odontologo/";
     echo '<script>
             var js_site_url = "'. site_url($path) . '";

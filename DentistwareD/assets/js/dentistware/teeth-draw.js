@@ -23,6 +23,9 @@ setup = function() {
 draw = function() {
     background(bg);
     myTeeth.draw();
+    if(!editable){
+        noLoop();
+    }
 }
 
 windowResized = function() {

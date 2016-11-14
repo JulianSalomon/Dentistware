@@ -1,35 +1,39 @@
 $(function(){
+    var lastRegId;
     $('.verRegistro-btn').click(function(e) {
         e.preventDefault();
         $('.ac_p_error').fadeOut('slow').remove();
         var id = $(this).val();
-        var postData = { 'reg'   : id, };
-        var htmlWrapper = '';
-        $.ajax({
-            type: 'POST',
-            url: js_site_url + 'Registro/',
-            data: postData,
-            success: function(html) {
-                htmlWrapper = html;
-            },
-            error: function(msg){
-                console.log(msg);
-            }
-        });
-        $.ajax({
-            type: 'POST',
-            url: js_site_url + 'Diente/',
-            data: postData,
-            success: function(html) {
-                htmlWrapper += html;
-                $('#verRegistro_html').html(htmlWrapper);
-                $('#verRegistro').modal('show');
-            },
-            error: function(msg){
-                console.log(msg);
-            }
-        });
-    });
+        if( id != lastRegId ){
+            var postData = { 'reg'   : id, };
+            var htmlWrapper;
+            $.ajax({
+                type: 'POST',
+                url: js_site_url + 'Registro/',
+                data: postData,
+                success: function(html) {
+                    htmlWrapper = html;
+                },
+                error: function(msg){
+                }
+            });
+            $.ajax({
+                type: 'POST',
+                url: js_site_url + 'Diente/',
+                data: postData,
+                success: function(html) {
+                    htmlWrapper += html;
+                    $('#verRegistro_html').html(htmlWrapper);
+                    $('#verRegistro').modal('show');
+                },
+                error: function(msg){
+                    console.log(msg);
+                }
+            });
+        }
+    });    
+    
+ 
     
     $('.no-asistir-btn').click(function(e) {
 		e.preventDefault();
@@ -89,14 +93,11 @@ $(function(){
                 
             }
         });           
-    });
-    
-    
+    });    
 
 	$(".timepicker").timepicker({
           showInputs: false,
           minuteStep: 30,
           defaultTime: false              
-    });
-          
+    });          
 });
