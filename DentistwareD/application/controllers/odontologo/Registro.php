@@ -17,18 +17,7 @@ class Registro extends Odon_Controller {
         $this->load->view('odontologo/registro_view', $this->data);
 	}
     
-    public function agregar_registro() {
-        $this->load->view('odontologo/nuevo_registro_view', true);
-    }
-    
     public function nuevo_registro() {
-		$this->load->library('form_validation');
-        
-		$this->form_validation->set_rules('inputMotivo', 'Motivo', 'required');
-		$this->form_validation->set_rules('inputDescripcion', 'Descripcion', 'required');
-		$this->form_validation->set_rules('inputEnfermedad', 'Enfermedad', 'required');
-		
-		if ($this->form_validation->run()) {
 			$input = array(
 				'id_historia' => $this->input->post('inputHistoria'),
 				'fecha_reg' => date('Y-m-d H:i:s'),
@@ -39,13 +28,9 @@ class Registro extends Odon_Controller {
 			);
 			$result = $this->registro_model->nuevo_registro($input);
             if($result){
-			     echo $this->registro_model->get_registro($this->input->post('inputHistoria'))->id_registro;
+			     echo $this->registro_model->get_registro('',$input['id_historia'])->id_registro;
             } else {
                  echo $result;
             }
-		} else {
-			header('Content-Type: application/json');
-			echo json_encode($this->form_validation->error_array());
-		}
 	}
 }

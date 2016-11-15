@@ -11,7 +11,6 @@ preload = function() {
 
 setup = function() {
     var canvas = createCanvas(modalWidth * 0.583333333, modalWidth   * 0.858229166);
-    console.log(editable);
     if(editable){
         canvas.parent('teeth-editor');
     } else {
