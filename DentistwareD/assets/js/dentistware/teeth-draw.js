@@ -63,7 +63,7 @@ mouseClicked = function() {
                         break;
                     case 'C':
                         myTeeth.teeth[i].state[4] = (myTeeth.teeth[i].state[4] === 1) ? 0 : 1;
-                        teeth[i][3] = myTeeth.teeth[i].state[4];
+                        teeth[i][4] = myTeeth.teeth[i].state[4];
                         break;
                     case 'T':
                         myTeeth.teeth[i].state[5] = (myTeeth.teeth[i].state[5] === 1) ? 0 : 1;
