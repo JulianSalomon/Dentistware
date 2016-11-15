@@ -4,53 +4,53 @@
             <h1>Bienvenido a Dentistware</h1>
         </section>
         <section class="content">
-            <div class="col-md-7">
+            <div class="col-md-6">
               <div class="box box-solid">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Citas por dia</h3>
+                  <h3 class="box-title">Numero de citas pendientes por dia</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">
-                <p>Lunes: <?php echo $Monday ?></p>
+                <p>Citas para el dia Lunes: <?php echo $Monday ?></p>
                  <div class="progress">
                     <?php 
-                        echo "<div class= ". "'progress-bar progress-bar-yellow'"." role=progressbar aria-valuenow=" . $Monday  . " aria-valuemin= 0 aria-valuemax= 20 style= 'width: " . $percentMonday  . "%'>
+                        echo "<div class= ". "'progress-bar progress-bar-blue'"." role=progressbar aria-valuenow=" . $Monday  . " aria-valuemin= 0 aria-valuemax= 20 style= 'width: " . $percentMonday  . "%'>
                         </div>";
                     ?>
                   </div>
-                <p>Martes: <?php echo $Tuesday ?></p>
+                <p>Citas para el dia Martes: <?php echo $Tuesday ?></p>
                   <div class="progress">
                     <?php 
-                        echo "<div class= ". "'progress-bar progress-bar-green'"." role=progressbar aria-valuenow=" . $Tuesday  . " aria-valuemin= 0 aria-valuemax=20 style= 'width: " . $percentTuesday  . "%'>
+                        echo "<div class= ". "'progress-bar progress-bar-yellow'"." role=progressbar aria-valuenow=" . $Tuesday  . " aria-valuemin= 0 aria-valuemax=20 style= 'width: " . $percentTuesday  . "%'>
                         </div>";
                       
                     ?>
                   </div>
-                <p>Miercoles: <?php echo $Wednesday ?></p>
+                <p>Citas para el dia Miercoles: <?php echo $Wednesday ?></p>
                   <div class="progress">
                     <?php 
                         echo "<div class= ". "'progress-bar progress-bar-red'"." role=progressbar aria-valuenow=" . $Wednesday  . " aria-valuemin= 0 aria-valuemax=20 style= 'width: " . $percentWednesday  . "%'>
                         </div>"
                     ?>
                   </div>
-                <p>Jueves: <?php echo $Thursday ?></p>
+                <p>Citas para el dia Jueves: <?php echo $Thursday ?></p>
                   <div class="progress">
                     <?php 
-                        echo "<div class= ". "'progress-bar progress-bar-red'"." role=progressbar aria-valuenow=" . $Thursday  . " aria-valuemin= 0 aria-valuemax=20 style= 'width: " . $percentThursday  . "%'>
+                        echo "<div class= ". "'progress-bar progress-bar-green'"." role=progressbar aria-valuenow=" . $Thursday  . " aria-valuemin= 0 aria-valuemax=20 style= 'width: " . $percentThursday  . "%'>
                         </div>"
                     ?>
                   </div>
-                <p>Viernes: <?php echo $Friday ?></p>
+                <p>Citas para el dia Viernes: <?php echo $Friday ?></p>
                   <div class="progress">
                     <?php 
-                        echo "<div class= ". "'progress-bar progress-bar-red'"." role=progressbar aria-valuenow=" . $Friday  . " aria-valuemin= 0 aria-valuemax=20 style= 'width: " . $percentFriday  . "%'>
+                        echo "<div class= ". "'progress-bar progress-bar-yellow '"." role=progressbar aria-valuenow=" . $Friday  . " aria-valuemin= 0 aria-valuemax=20 style= 'width: " . $percentFriday  . "%'>
                         </div>"
                     ?>
                   </div>
-                <p>Sabado: <?php echo $Saturday ?></p>
+                <p>Citas para el dia Sabado: <?php echo $Saturday ?></p>
                   <div class="progress">
                     <?php 
-                        echo "<div class= ". "'progress-bar progress-bar-red'"." role=progressbar aria-valuenow=" . $Saturday  . " aria-valuemin= 0 aria-valuemax=20 style= 'width: " . $percentSaturday  . "%'>
+                        echo "<div class= ". "'progress-bar progress-bar-orange'"." role=progressbar aria-valuenow=" . $Saturday  . " aria-valuemin= 0 aria-valuemax=20 style= 'width: " . $percentSaturday  . "%'>
                         </div>"
                     ?>
                   </div>
@@ -58,10 +58,10 @@
               </div>
             </div>
             
-            <div class="col-md-7">
+            <div class="col-md-6">
               <div class="box box-solid">
                 <div class="box-header with-border">
-                  <h3 class="box-title">Progreso de citas</h3>
+                  <h3 class="box-title">Progreso de las citas asignadas en la semana</h3>
                 </div>
                 <!-- /.box-header -->
                 <div class="box-body">

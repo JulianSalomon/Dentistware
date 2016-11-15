@@ -182,7 +182,6 @@ class Cita_model extends MY_Model {
 
 
     public function count_citas($idPersona, $estadoCita ='', $day = '') {
-        
 		$this->db->select('*');
         $this->db->from('cita');
 		$this->db->where('id_odonto', $idPersona);
@@ -194,6 +193,18 @@ class Cita_model extends MY_Model {
             $firstday = date('Y-m-d', strtotime($day));
             $this->db->where('fecha_cita', $firstday);
         }
+        
+        $query = $this->db->get();
+		return count($query->result());        
+	}
+    
+    public function count_allCitas_byWeek($day = '') {
+		$this->db->select('*');
+        $this->db->from('cita');
+		$this->db->where('id_cliente', null);
+        $firstday = date('Y-m-d', strtotime($day));
+        $this->db->where('fecha_cita', $firstday);
+        
         
         $query = $this->db->get();
 		return count($query->result());        

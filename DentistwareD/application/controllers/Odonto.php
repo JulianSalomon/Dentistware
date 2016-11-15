@@ -17,6 +17,9 @@ class Odonto extends Odon_Controller {
         $citasAtendidas = $this->cita_model->count_citas($this->session->userdata('id_persona'), 1);
         $citasCanceladas = $this->cita_model->count_citas($this->session->userdata('id_persona'), 0);
         $totalCitas = $citasNull + $citasAtendidas + $citasCanceladas;
+        if($totalCitas == 0){
+            $totalCitas =1;
+        }
         $porcentajeCitasNull = ($citasNull * 100)/$totalCitas;
         $porcentajeCitasAtendidas = ($citasAtendidas * 100)/$totalCitas;
         $porcentajeCitasCanceladas = ($citasCanceladas * 100)/$totalCitas;
