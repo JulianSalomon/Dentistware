@@ -19,11 +19,20 @@ class Registro_model extends MY_Model {
 		return false;
 	}
 	
-    public function get_registro($id_registro = '') {
+    public function get_registro($id_registro = '', $id_historia = '', $fecha_reg = '') {
 		$this->db->select('*');
 		$this->db->from('registro');
-		$this->db->where('id_registro', $id_registro);
+        if($id_registro != NULL){
+		  $this->db->where('id_registro', $id_registro);
+        }
+        if($id_historia != NULL){
+		  $this->db->where('id_historia', $id_historia);
+        }
+        if($fecha_reg != NULL){
+		  $this->db->where('fecha_reg', $fecha_reg);
+        }
         $this->db->join('persona', 'persona.id_persona = registro.id_odon');
+        $this->db->order_by('fecha_reg', 'desc');
 		$query = $this->db->get();
         if($query)
             return $query->row();

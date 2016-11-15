@@ -21,7 +21,8 @@ class Historia_clinica extends Odon_Controller {
         if($historia_clinica != null){
             $registros = $this->registro_model->get_registros($historia_clinica->id_historia);
             $this->load->model('diente_model');
-         //  $dientes = $this->diente_model->get_dientes($registros[0]->id_registro);
+            $dientes = $this->diente_model->get_dientes($registros[0]->id_registro);
+            print_r($registros[0]->id_registro);
         }
         $data = array('historia_clinica' => $historia_clinica,
                      'registros' => $registros,

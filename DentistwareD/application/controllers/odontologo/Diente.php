@@ -17,10 +17,6 @@ class Diente extends Odon_Controller {
         $this->load->view('odontologo/dientes_view', $this->data);
     }
     
-    public function agregar_dientes() {
-        $this->load->view('odontologo/nuevo_dientes_view');
-    }
-    
     public function nuevoDiente() {
         $input = array(
             'id_registro'=> $_POST['reg'],
@@ -32,6 +28,7 @@ class Diente extends Odon_Controller {
             'corona'     => $_POST['cor'],
             'tramo'      => $_POST['tra']
         );
+        console.log($input);
         $result = $this->diente_model->nuevo_diente($input);            
     }
 }
