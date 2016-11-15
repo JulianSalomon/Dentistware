@@ -8,6 +8,7 @@ $(function() {
             text: '¿Desea agendar esta cita con ' + odonto + '?',
             type: 'warning',
             showCancelButton: true,
+            closeOnConfirm: false,
             confirmButtonText: 'Sí, agendar',
             cancelButtonText: 'No, cancelar',
             showLoaderOnConfirm: true,
@@ -18,7 +19,8 @@ $(function() {
                 	type: 'GET',
                     url: js_site_url + '/agendar_cita/' + cita,
                     success: function(msg){
-                        if(msg){
+                    	console.log(msg);
+                        if(msg == 1){                        	
                             swal({   
                                 title: "Cita agendada",
                                 text: "La cita con " + odonto + " ha sido agendada.",
@@ -27,8 +29,10 @@ $(function() {
                             function(){   
                                 location.reload(); 
                             });
+                        } else if (msg == 2){
+                            swal("Error", "Usted ya tiene una cita en el mismo horario, por favor seleccione otro horario.", "error");
                         } else {
-                            swal("Error", "La cita con " + odonto + " no puede ser agendada, vuelva a intentarlo.", "error");
+                        	swal("Error", "La cita con " + odonto + " no puede ser agendada, vuelva a intentarlo.", "error");
                         }
                     }
                 });
@@ -42,8 +46,8 @@ $(function() {
         var odonto = $(this).attr('odonto');
       
         var opciones = "width=500,height=500,scrollbars=NO";
-    	var url = js_site_url + "/mostrar_informacion/" + odonto;
-    	window.open(url, "Información Odontologo", opciones);     
+    	var url = js_site_url + "/informacion_odontologo/" + odonto;
+    	window.open(url, "Información Odontólogo", opciones);     
     });
     
 	$('.cancelar-btn').click(function(e) {

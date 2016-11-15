@@ -69,31 +69,41 @@ class Agendar_Cita extends Empl_Controller {
 	
 	public function agendar_cita($id_cita, $doc_persona) {
 		$persona = $this->persona_model->get_persona($doc_persona, '');
-		$data = array(
-				"id_cliente" => $persona->id_persona,
-		);
 		
-		$this->load->model('multa_model');
-		
-		$multas = $this->multa_model->get_multas_no_pagadas($persona->id_persona);
-		
-		$numMultas= 0;
-		$numCitas = 0;
-		if($multas){
-			$numMultas = count($multas);
-		}
-		
-		$citasActuales = $this->cita_model->get_citas_by_cliente($persona->id_persona);
-		if($citasActuales){
-			$numCitas = count($citasActuales);
-		}
-		
-		if($numMultas > 0){
-			echo "Este cliente tiene multas por pagar, no puede agendarle citas.";
-		} else if ($numCitas >= 3){
-			echo "Este cliente ya tiene agendadas más de tres citas.";
-		} else {		
-			echo $this->cita_model->agendar_cita($id_cita, $data);
+		if($persona){
+			$data = array(
+					"id_cliente" => $persona->id_persona,
+			);
+			$this->load->model('multa_model');
+			
+			$multas = $this->multa_model->get_multas_no_pagadas($persona->id_persona);
+			
+			$numMultas= 0;
+			$numCitas = 0;
+			if($multas){
+				$numMultas = count($multas);
+			}
+			
+			$citasActuales = $this->cita_model->get_citas_by_cliente($persona->id_persona);
+			if($citasActuales){
+				$numCitas = count($citasActuales);
+			}
+			
+			$cita = $this->cita_model->get_cita($id_cita);
+			
+			$count = $this->cita_model->same_cita($persona->id_persona, '', $cita->fecha_cita, $cita->hora_cita);
+			
+			if($numMultas > 0){
+				echo "Este cliente tiene multas por pagar, no puede agendarle citas.";
+			} else if ($numCitas >= 3){
+				echo "Este cliente ya tiene agendadas más de tres citas.";
+			} else if($count){
+				echo "Este cliente ya tiene asignada en el mismo horario, por favor elija otra opción.";
+			} else {
+				$result = $this->cita_model->agendar_cita($id_cita, $data);
+			}
+		} else {
+			echo "El cliente no se encuentra registrado, por favor verifique el documento.";
 		}
 	}
 }

@@ -328,7 +328,7 @@
                              <div class="input-group" id="div_selectGenero">
                                  <span class="input-group-addon"><i class="fa fa-venus-mars fa-fw"></i></span>
                                 <select class="form-control" name="selectGenero" id="selectGenero">
-                                <option value='-1' selected disabled>- Género -</option>
+                                	<option value='-1' selected disabled>- Género -</option>
                                     <option value='M'>Masculino</option>
                                     <option value='F'>Femenino</option>
                                  </select>

@@ -9,6 +9,8 @@ $(function() {
 			type: "input",
 			showCancelButton: true,
 			closeOnConfirm: false,
+			confirmButtonText: 'Aceptar',
+			cancelButtonText: 'Cancelar',
 			animation: "slide-from-top",
 			inputPlaceholder: "Documento"
 		},
@@ -22,7 +24,7 @@ $(function() {
 			}			 
 			swal({
 				title: 'Asignar',        
-				text: '¿Desea agendar esta cita con ' + odonto + '?',
+				text: '¿Desea agendar la cita con ' + odonto + '?',
 				type: 'warning',
 				showCancelButton: true,
 				closeOnConfirm: false,

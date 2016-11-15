@@ -120,11 +120,10 @@ class Cita_model extends MY_Model {
 		return false;
             
     }
-
 	
 	public function get_all_citas($fechaActual = '', $horaSolicitada = '', $odontologoActual = '') {
 	
-		$this->db->select('id_cita, fecha_cita as fecha, hora_cita as hora, estado_cita as estado, odonto.nombre_persona  as odontologo, consultorio, id_cliente');
+		$this->db->select('id_cita, fecha_cita as fecha, hora_cita as hora, estado_cita as estado, odonto.nombre_persona  as odontologo, consultorio, id_cliente, id_odonto');
 		$this->db->from('cita');
 		$this->db->join('persona as odonto', 'odonto.id_persona = cita.id_odonto');
 		$this->db->group_start();
@@ -161,8 +160,7 @@ class Cita_model extends MY_Model {
 		if ($query)
 			return $query->result();
 		return false;
-	}
-	
+	}	
 	
 	public function agendar_cita($id_cita, $data = '') {
 		return $this->actualizar_datos('cita', $data, array('id_cita' => $id_cita));
@@ -193,6 +191,30 @@ class Cita_model extends MY_Model {
 				'id_cita' => $id_cita,
 		);
 		return $this->eliminar_datos('cita', $array);
+	}
+	
+	public function update_cita($id_cita, $data = '') {
+		return $this->actualizar_datos('cita', $data, array(
+				'id_cita' => $id_cita
+		));
+	}
+	
+	public function nueva_cita($data) {
+		return $this->insertar_nuevo('cita', $data);
+	}
+	
+	public function same_cita($id_cliente = '', $id_odonto = '', $fecha = '', $hora = ''){
+		$this->db->select('*');
+		$this->db->from('cita');
+		$this->db->where('fecha_cita', $fecha);
+		$this->db->where('hora_cita', $hora);
+		if($id_cliente){
+			$this->db->where('id_cliente', $id_cliente);
+		}
+		if($id_odonto)
+			$this->db->where('id_odonto', $id_odonto);
+		
+		return count($this->db->get()->result());
 	}
 
 }

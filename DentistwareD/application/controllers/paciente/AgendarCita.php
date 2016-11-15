@@ -25,6 +25,15 @@ class AgendarCita extends Cliente_Controller {
         	$cantidadDeCitas = count($citasActuales);
         }
         
+        $odontos_array = array();
+        $odontos_array['-1'] = '- Seleccione un Odontólogo -';
+        $query = $this->persona_model->get_list_odontologos();
+        foreach ($query as $arreglo) {
+        	$odontos_array[$arreglo->id_persona] = ucwords($arreglo->nombre);
+        }
+        
+        $this->data['odontologos'] = $odontos_array;
+        
         $this->data['cantidadDeMultas'] = $cantidadDeMultas;
         $this->data['cantidadDeCitas'] = $cantidadDeCitas;
     }
@@ -49,23 +58,7 @@ class AgendarCita extends Cliente_Controller {
         
 		$this->data['citas'] = $this->cita_model->get_citas_today();
 		
-		$adontos_array = array();
-		$adontos_array['-1'] = '- Seleccione un Odontólogo -';
-		$query = $this->persona_model->get_list_odontologos();
-		foreach ($query as $arreglo) {
-			$adontos_array[$arreglo->id_persona] = ucwords($arreglo->nombre);
-		}
-		
-		$this->data['odontologos'] = $adontos_array;
-		
 		$this->render('cliente/agendar_cita_view');
-	}
-	public function agendar_cita($cita) {				
-		$doc = $this->session->userdata['id_persona'];
-		$data = array(
-			"id_cliente" => $doc
-		);
-		echo $this->cita_model->agendar_cita($cita, $data);
 	}
 	
 	public function filtrar() {
@@ -82,16 +75,7 @@ class AgendarCita extends Cliente_Controller {
 		if($hora != ''){
 			$hora = strtotime($hora);
 			$hora = date("H:i:s", $hora);
-		}
-		
-		$odontos_array = array();
-		$odontos_array['-1'] = '- Seleccione un Odontólogo -';
-		$query = $this->persona_model->get_list_odontologos();
-		foreach ($query as $arreglo) {
-			$odontos_array[$arreglo->id_persona] = ucwords($arreglo->nombre);
-		}
-		
-		$this->data['odontologos'] = $odontos_array;
+		}		
 		
 		if($fecha == date("Y-m-d")){
 			$_SESSION['fecha'] = date("Y-m-d");
@@ -102,11 +86,28 @@ class AgendarCita extends Cliente_Controller {
 						
 		$this->render('cliente/agendar_cita_view');		
 	}
+	
+	public function agendar_cita($id_cita) {
+		$id_cliente = $this->session->userdata('id_persona');
+		$data = array(
+				"id_cliente" => $id_cliente
+		);
+		
+		$cita = $this->cita_model->get_cita($id_cita);
+		
+		$value = $this->cita_model->same_cita($id_cliente, '', $cita->fecha_cita, $cita->hora_cita);
+		
+		if($value >= 1){
+			echo 2;
+		} else {
+			echo $this->cita_model->agendar_cita($id_cita, $data);
+		}		
+	}
 
-    public function mostrar_informacion($id = ''){
+    public function informacion_odontologo($id = ''){
 		$id = strtolower(str_replace("%20", " ", $id));
         $this->load->model('persona_model');
-        $this->data['persona'] = $this->persona_model->get_odontologo( $id);
-        $this->load->view('cliente/informacion_odontologo', $this->data); 
+        $this->data['persona'] = $this->persona_model->get_odontologo($id);
+        $this->load->view('cliente/informacion_odontologo_view', $this->data); 
   	}    
 }

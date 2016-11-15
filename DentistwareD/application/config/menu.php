@@ -19,7 +19,7 @@ $config['menu_CLT'] = array(
 				'icon' => 'fa fa-calendar',
 				'items' => array(
 						0 => array(
-								'title' => 'Agregar nueva cita',
+								'title' => 'Agendar cita',
 								'link' => base_url('paciente/AgendarCita'),
 								'id' => 'citas-agendar',
 						),
@@ -156,8 +156,8 @@ $config['menu_EMP'] = array(
 				'items' => array(
 						0 => array(
 								'title' => 'Crear Citas',
-								'link' => '',
-								'id' => 'citas-agendar',
+								'link' => base_url('empleado/Crear_Cita'),
+								'id' => 'citas-crear',
 						),
 						1 => array(								
 								'title' => 'Administrar Citas',
