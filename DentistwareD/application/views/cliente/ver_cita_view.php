@@ -15,7 +15,7 @@
 	                        if($citas){                                         
 	                    ?>
 	                   	<div class="table-responsive">
-	                    	<table id="tabla_cita" type='tabla' class="table table-bordered table-hover tabla-citas">
+	                    	<table id="tabla_cita" class="table table-bordered table-hover tabla-citas">
 	                        	<thead>
 	                            	<tr>
 	                            		<th>Opción</th>

@@ -15,7 +15,7 @@
                 <?php if ($multas) { ?> 
                 <small>*Para cancelar una multa debe seleccionar la multa deseada, y esta será cancelada automaticamente.</small>
                 <div class="table-responsive">
-                    <table type='tabla' class="table table-bordered table-hover datatable tabla-usuario">
+                    <table class="table table-bordered table-hover datatable tabla-usuario">
                         <thead>
                             <tr>
                                 <th>Concepto</th>

@@ -130,12 +130,22 @@
                     <div class="row">    
                     	<div class="col-lg-5 form-group">
                         	<label  class="control-label">Género: *</label>
-							<div class="input-group" id="div_inputGenero">
+							<div class="input-group" id="div_selectGenero">
                             	<span class="input-group-addon"><i class="fa fa-venus-mars fa-fw"></i></span>
-                                <select class="form-control select2 select2-hidden-accessible" name="selectGenero" id="selectGenero" value="<?php echo $persona_info->genero_persona;?>">
-                                	<option value='M'>Masculino</option>
-                                    <option value='F'>Femenino</option>
-                                </select>
+			                    <?php   
+			                    	$generos = array(
+							    			'M' => 'Masculino',
+							    			'F' => 'Femenino',						    			
+									);
+			                    	
+			                    	$data_input = array(
+			                    			'id' => 'selectGenero',
+			                    			'class' => 'form-control',
+			                    	);
+			                    	
+			                    	$selected = $persona_info->genero_persona;		                    	
+			                    	echo form_dropdown('selectGenero', $generos, $selected, $data_input);
+		                        ?>                               	
 							</div>
                        	</div>
                    	<div class="col-lg-7 form-group">

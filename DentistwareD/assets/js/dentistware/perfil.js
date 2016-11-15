@@ -1,5 +1,4 @@
-$(function() {
-    
+$(function() {    
 	$('#edit_perfil_form').submit(function (event) {
         event.preventDefault();
         $('.ac_p_error').fadeOut('slow').remove();
@@ -31,7 +30,7 @@ $(function() {
                     	});              
                     } else {
                     	$('#div_waiting_edit_perfil').addClass("hidden");
-                    	swal("Error", "Se ha presentado un error al editar éste perfil!", "error");
+                    	swal("Error", "Se ha presentado un error al editar su perfil!", "error");
                     }
                 }
             }
@@ -126,7 +125,7 @@ $(function() {
                     if (msg == 1) {    
                     	swal({   
                     		title: "Editado",   
-                    		text: "Se actualizó correctamente el la contraseña!",   
+                    		text: "Se actualizó correctamente la contraseña!",   
                     		type: "success"                 
                     	}, 
                     	function(){
@@ -134,10 +133,10 @@ $(function() {
                     	});              
                     } else if (msg == 0) {
                     	$('#div_waiting_edit_pass').addClass("hidden");
-                    	swal("Error", "Se ha presentado un error al editar la contraseña!", "error");
+                    	swal("Error", "Se ha presentado un error al cambiar la contraseña!", "error");
                     } else {
                         $('#div_waiting_edit_pass').addClass("hidden");
-                    	swal("Error", "La contraseña actual no coincide, por favor vuelva a ingresar su contraseña actual!", "error");
+                    	swal("Error", "La contraseña actual no coincide, por favor vuelva a ingresar la contraseña actual!", "error");
                     }
                 }
             }

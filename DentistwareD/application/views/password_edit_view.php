@@ -22,22 +22,6 @@
                                 'value' => $persona_info->id_persona
                         );
                         echo form_input($data_input);
-                        $tipo = $persona_info->tipo_persona;
-                        $route = '';
-                        switch ($tipo) {
-                        	case "ADM":
-                            	$route = 'admin';
-                                break;
-                            case "CLT":
-                                $route = 'cliente';
-                                break;
-                            case "ODO":
-                                $route = 'odonto';
-                                break;
-                            case "EMP":
-                                $route = 'empleado';
-                        		break;
-						}
                     ?>
                     <div class="box-header">
                     	<h4>En el siguiente formulario podrá cambiar su contraseña:</h4>
@@ -86,7 +70,7 @@
                                     'name' => "cancelar_edit",
                                     'content' => "Cancelar"
                             );
-                            echo anchor(base_url() . $route , 'Cancelar', $data_input);
+                            echo anchor(base_url("Perfil") , 'Cancelar', $data_input);
                             $data_input = array(
                                     'class' => "btn btn-primary btn-lg",
                                     'id' => "guardar_edit",
@@ -105,21 +89,4 @@
 </div>
 <script>
 	var js_site_url = '<?php echo site_url("Perfil/");?>';
-    var tipouser = "<?php echo $tipo ?>";
-    var js_site_url2 = '' ;
-    switch(tipouser) {
-        case "ADM":
-            js_site_url2 = '<?php echo site_url("Admin");?>';
-            break;
-        case "CLT":
-            js_site_url2 = '<?php echo site_url("Cliente");?>';
-            break;
-        case "ODO":
-            js_site_url2 = '<?php echo site_url("Odonto");?>';
-            break;
-        case "EMP":
-            js_site_url2 = '<?php echo site_url("Empl");?>';
-            break;
-            
-    }
 </script> 
