@@ -12,9 +12,9 @@
             	  	<li>
                         <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-key" style="font-size:18px"></i></a>
                         <ul class="dropdown-menu">
-                            <div class="text-center">
-                                <?php echo anchor('Perfil/contrasena', 'Cambiar contraseña', 'class="btn btn-warning"');?>
-                            </div>
+                            <li>
+                                <?php echo anchor('Perfil/password_view', 'Cambiar contraseña', 'class="btn btn-default btn-flat"');?>
+                            </li>
 	                	</ul>
                     </li>
               		<li class="dropdown user user-menu">

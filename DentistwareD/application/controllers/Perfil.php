@@ -88,13 +88,13 @@ class Perfil extends MY_Controller {
 		}
 	}
     
-    public function contrasena() {
+    public function password_view() {
         $this->data['persona_info'] = $this->persona_model->get_persona($this->session->userdata('doc_persona'));
         $this->get_user_menu();
-		$this->render('Contrasena_edit_view');
+		$this->render('password_edit_view');
 	}
     
-    public function edit_contrasena() {
+    public function edit_password() {
 		$this->load->library('form_validation');
         
 		$this->form_validation->set_rules('inputPassword', 'Contraseña Actual', 'required');

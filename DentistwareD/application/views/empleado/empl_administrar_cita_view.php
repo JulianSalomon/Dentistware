@@ -53,7 +53,6 @@
 						                $data_input = array(
 						                		'id' => 'inputOdontologo',
 						                		'class' => 'form-control',
-						                		'tabindex' => "-1",
 						                );
 						                echo form_dropdown('inputOdontologo', $odontologos, $odontologo, $data_input);
 	                        		?>

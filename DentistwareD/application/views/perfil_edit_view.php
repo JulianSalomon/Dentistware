@@ -23,8 +23,7 @@
                         );
                         echo form_input($data_input);
                     ?>
-                	<div class="box-body">
-                        
+                	<div class="box-body">                        
                  		<div class="form-group text-center">
 		                <?php 
 						if($persona_info->foto_persona){
@@ -110,8 +109,7 @@
                             echo "<p> " . $persona_info->documento_persona . "</p>";
                             ?>
                         </div>                                                                                                  
-               	    </div>  
-                        
+               	    </div>                          
                     <div class="row">
                         <div class="col-lg-5 form-group">
                             <label class="control-label">Fecha de nacimiento: *</label>
@@ -129,80 +127,83 @@
                             ?>
                         </div>                  	                  	
                     </div>	    
-                        
-                        
-                        
-                        <div class="row">    
-                            <div class="col-lg-5 form-group">
-                                <label  class="control-label">Género: *</label>
-                                <div class="input-group" id="div_inputGenero">
-                                    <span class="input-group-addon"><i class="fa fa-venus-mars fa-fw"></i></span>
-                                    <select class="form-control select2 select2-hidden-accessible" name="selectGenero" id="selectGenero" value="<?php echo $persona_info->genero_persona;?>">
-                                        <option value='M'>Masculino</option>
-                                        <option value='F'>Femenino</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="col-lg-7 form-group">
-                                <label class=" control-label">Estado:</label>
-                                <?php 
-                                    echo "<BR>";
-                                    if ($persona_info->estado_persona == 'ACT'){
-                                         echo "<p> Activo</p>";
-                                    }else{
-                                         echo "<p> Retirado</p>";
-                                    };
-                                ?>
-                            </div>      	                                              
-                        </div> 
-                        
-                        
-                        <?php
-                            if($persona_info->tipo_persona != 'ADM'){
-                                $valueADM = '';
-                            } else 
-                                    $valueADM = 'hidden';
+                    <div class="row">    
+                    	<div class="col-lg-5 form-group">
+                        	<label  class="control-label">Género: *</label>
+							<div class="input-group" id="div_selectGenero">
+                            	<span class="input-group-addon"><i class="fa fa-venus-mars fa-fw"></i></span>
+			                    <?php   
+			                    	$generos = array(
+							    			'M' => 'Masculino',
+							    			'F' => 'Femenino',						    			
+									);
+			                    	
+			                    	$data_input = array(
+			                    			'id' => 'selectGenero',
+			                    			'class' => 'form-control',
+			                    	);
+			                    	
+			                    	$selected = $persona_info->genero_persona;		                    	
+			                    	echo form_dropdown('selectGenero', $generos, $selected, $data_input);
+		                        ?>                               	
+							</div>
+                       	</div>
+                   	<div class="col-lg-7 form-group">
+                    	<label class=" control-label">Estado:</label>
+                       	<?php 
+                            echo br(1);
+                           	if ($persona_info->estado_persona == 'ACT'){
+                            	echo "<p> Activo</p>";
+                           	}else{
+                            	echo "<p> Retirado</p>";
+                        	}
                         ?>
-                            <div class="row" <?php echo $valueADM?> >    
-                                <div class="col-lg-4 form-group">
-                                    <label class=" control-label">Grupo sanguíneo: *</label>
-                                    <div class="input-group" id="div_selectGrupo">
-                                        <span class="input-group-addon"><i class="fa fa-plus-square fa-fw"></i></span>
-                                        <?php 
-                                            $tipos_sangre = array(
-                                                    'A' => 'A',
-                                                    'B' => 'B',
-                                                    'AB' => 'AB',
-                                                    'O' => 'O',
-                                            );
-
-                                            $data_input = array(
-                                                    'id' => 'selectGrupo',
-                                                    'class' => 'form-control',
-                                            );
-                                            echo form_dropdown('selectGrupo', $tipos_sangre, $persona_info->tipo_sangre_cliente, $data_input);
-                                        ?>                          	
-                                    </div>
-                                </div>
-                                <div class="col-lg-4 form-group">
-                                    <label  class=" control-label">RH: *</label>
-                                    <div class="input-group" id="div_selectRH">
-                                        <span class="input-group-addon"><i class="fa  fa-plus-square fa-fw"></i></span>
-                                        <?php 
-                                            $tipos_rh = array(
-                                                    '+' => '+',
-                                                    '-' => '-',
-                                            );
-
-                                            $data_input = array(
-                                                    'id' => 'selectRH',
-                                                    'class' => 'form-control select2 select2-hidden-accessible',
-                                                    'tabindex' => "-1",
-                                            );
-                                            echo form_dropdown('selectRH', $tipos_rh, $persona_info->rh_cliente, $data_input);
-                                        ?>                         	
-                                    </div>
-                                </div>
+					</div>      	                                              
+             	</div> 
+               	<?php
+                    if($persona_info->tipo_persona != 'ADM'){
+                    	$valueADM = '';
+                    } else{ 
+                		$valueADM = 'hidden';
+                    }
+                ?>
+                <div class="row" <?php echo $valueADM?> >    
+					<div class="col-lg-4 form-group">
+                    	<label class=" control-label">Grupo sanguíneo: *</label>
+                        <div class="input-group" id="div_selectGrupo">
+                        	<span class="input-group-addon"><i class="fa fa-plus-square fa-fw"></i></span>
+                            	<?php 
+                                $tipos_sangre = array(
+	                                	'A' => 'A',
+	                                    'B' => 'B',
+	                                    'AB' => 'AB',
+	                                    'O' => 'O',
+								);
+                                $data_input = array(
+                                        'id' => 'selectGrupo',
+                                		'class' => 'form-control',
+                                );
+                                echo form_dropdown('selectGrupo', $tipos_sangre, $persona_info->tipo_sangre_cliente, $data_input);
+                                ?>                          	
+						</div>
+					</div>
+                    <div class="col-lg-4 form-group">
+                    	<label  class=" control-label">RH: *</label>
+                        <div class="input-group" id="div_selectRH">
+                        	<span class="input-group-addon"><i class="fa  fa-plus-square fa-fw"></i></span>
+                            <?php 
+                            	$tipos_rh = array(
+                                        '+' => '+',
+                                		'-' => '-',
+                                );
+                                $data_input = array(
+                                        'id' => 'selectRH',
+										'class' => 'form-control',                                		
+                                );
+								echo form_dropdown('selectRH', $tipos_rh, $persona_info->rh_cliente, $data_input);
+							?>                         	
+                     	</div>
+                	</div>
                                 <?php
                                     if($persona_info->tipo_persona != 'ODO' && $persona_info->tipo_persona != 'EMP'){
                                           $valueODO = '';
@@ -318,13 +319,22 @@
                         
                                 <div class=" form-group" <?php echo $valueODO ?> >  
                                     <label  class="control-label">Estudios: *</label>
-                                    <div class="input-group" id="div_estudiosOdontologo">
-                                        <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span> 
-                                        <input type="text" class="form-control" id="inputTitulosOdontologo" placeholder="Titulos Obtenidos" name="inputTitulosOdontologo" value="<?php echo $persona_info->estudios_odont;?>">
+                                    <div class=" col-xs-12 input-group" id="div_estudiosOdontologo">
+					                	<?php 
+					                	$data_input = array(
+					                			'type' => "text",
+					                			'class' => "form-control",
+					                			'id' => "inputTitulosOdontologo",
+					                			'name' => "inputTitulosOdontologo",
+					                			'rows' => "5",
+					                			'placeholder' => "Titulos Obtenidos",
+					                			"maxlength" => "1000",
+					                			'value' => $persona_info->estudios_odont,
+					                	);
+					                	echo form_textarea($data_input);	                	
+					                	?>                                           
                                     </div>
-                                </div>
-
-                                            
+                                </div>                                            
                     </div>    
                     <div class="box-footer text-center">
                         <?php                 

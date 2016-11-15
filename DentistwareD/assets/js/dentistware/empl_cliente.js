@@ -53,7 +53,6 @@ $(function() {
             	$('#div_waiting_edit_cliente').removeClass("hidden");            	
             },
             success: function (msg) {
-            	console.log(msg);
                 if (isNaN(msg)) {
                 	$('#div_waiting_edit_cliente').addClass("hidden");   
                     $.each(msg, function (i, item) {
@@ -102,7 +101,6 @@ $(function() {
                         type: 'GET',
                         url: js_site_url + 'eliminar_usuario/' + documento,
                         success: function(msg){
-                        	console.log(msg);
                             if(msg == true){
                                 swal({   
                                     title: "Eliminado",
