@@ -13,7 +13,6 @@ $(function() {
             	$('#div_waiting_new_odont').removeClass("hidden");            	
             },
             success: function (msg) {
-                console.log(msg);
                 if (isNaN(msg)) {
                 	$('#div_waiting_new_odont').addClass("hidden");  
                     $.each(msg, function (i, item) {
