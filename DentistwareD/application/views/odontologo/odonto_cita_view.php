@@ -1,7 +1,7 @@
 <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Agendar citas
+        Citas pendientes
       </h1>
     </section>
     <section class="content">
@@ -9,7 +9,7 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                    	<h4>A continuación puede buscar las citas disponibles para agendar:</h4>
+                    	<h4>A continuación se muestran sus citas del día:</h4>
                     </div>
                     <div class="box-body">
                         <?php 
@@ -27,13 +27,7 @@
                         ?>
                         <div class="row">
                         	<div class="col-lg-2"></div>
-							<div class="col-lg-4 form-group">
-                            	<label class="control-label">Filtrar por fecha: </label>
-                                <div class="input-group" id="div_inputFecha">
-                                	<span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                                    <input type="text" class="form-control date-select" id="inputFecha" placeholder="YYYY/MM/DD" name="inputFecha" value="<?php echo $fecha;?>">
-                               	</div>
-                          	</div>
+							
                            	<div class="col-lg-4 form-group">
                             	<div class="bootstrap-timepicker">
 									<label>Filtrar por hora:</label>
@@ -82,7 +76,7 @@
 	                        						<a type="button" cita="' . $cita->id_cita . '" cliente="' . ucwords($cita->cliente) . '" class="no-asistir-btn btn" id="no_asistir" data-toggle="tooltip"  title="No asistió">
 		                    							<i class="fa fa-eye-slash fa-3x"></i>
 	                    							</a>
-                                                    <a type="button" cita="' . $cita->id_cita . '" cliente="' . ucwords($cita->cliente) . '" class="atender-btn btn" id="atender-cita" data-toggle="tooltip"  title="Atender cita">
+                                                    <a type="button" cita="' . $cita->id_cita . '" cliente="' . ucwords($cita->cliente) . '" id="' . $cita->id . '" class="atender-btn btn" id="atender-cita" data-toggle="tooltip"  title="Atender cita">
 		                    							<i class="fa fa-sign-in fa-3x"></i>
 	                    							</a>
                     							</div>';
@@ -135,7 +129,9 @@
 
 <?php 
     $path = "odontologo/Cita/";
+    $path2 = "odontologo/Historia_clinica/";
     echo '<script>
             var js_site_url = "'. site_url($path) . '";
+            var js_site_url2 = "'. site_url($path2) . '";
           </script>';
 ?>

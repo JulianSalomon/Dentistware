@@ -6,11 +6,6 @@ class Historia_clinica extends Odon_Controller {
 	function __construct() {
 		parent::__construct();
         $this->load->model('historia_model');
-		$this->data['page_title_end'] = '| Historia Cliente';
-		$this->data['before_closing_body'] =  plugin_js('p5')
-                                          . plugin_js('teeth-drawer')
-                                          . plugin_js('assets/js/dentistware/odontologo.js', true)
-                                          . plugin_js('assets/js/dentistware/dientes.js', true);
 	}
 	
 	public function index() {

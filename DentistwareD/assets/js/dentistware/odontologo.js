@@ -206,8 +206,8 @@ $(function() {
 				}
 			});
 	});
-
-	$(".timepicker").timepicker({
+    
+    $(".timepicker").timepicker({
 		showInputs: false,
 		minuteStep: 30,
 		defaultTime: false
