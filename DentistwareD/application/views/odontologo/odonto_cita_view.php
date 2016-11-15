@@ -134,4 +134,5 @@
             var js_site_url = "'. site_url($path) . '";
             var js_site_url2 = "'. site_url($path2) . '";
           </script>';
+
 ?>

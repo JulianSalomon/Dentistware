@@ -35,4 +35,16 @@ class Historia_model extends MY_Model {
 		$query = $this->db->get()->result();
 		return $query;
 	}
+    
+    public function nueva_historia($data) {
+		return $this->insertar_nuevo('historia_clinica', $data);
+	}
+      public function get_historia_por_cliente($id_cliente) {
+		$this->db->select('*');
+		$this->db->from('historia_clinica');
+		$this->db->where('id_cliente', $id_cliente);
+		$query = $this->db->get()->row();
+		return $query;
+	}
+    
 }

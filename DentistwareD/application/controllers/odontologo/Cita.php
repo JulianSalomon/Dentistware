@@ -9,6 +9,7 @@ class Cita extends Odon_Controller {
 		$this->load->model('persona_model');
         $this->load->model('cita_model');
         $this->data['before_closing_body'] = plugin_js('assets/js/dentistware/odontologo.js', true);
+         $this->data['before_closing_body'] .= plugin_js('runner');
 		//$id_cliente = '1008648639';
 		//$this->data['cliente_info'] = $this->persona_model->get_persona($id_cliente);
 	}

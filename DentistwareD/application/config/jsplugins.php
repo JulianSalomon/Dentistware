@@ -19,7 +19,8 @@ $_js = array (
 		'datepicker' => 'assets/js/plugins/datepicker/bootstrap-datepicker.js',
         'timepicker' => 'assets/js/plugins/timepicker/bootstrap-timepicker.min.js',
         'teeth-drawer' => 'assets/js/dentistware/teeth-draw.js',
-        'p5' => 'assets/js/p5.js'
+        'p5' => 'assets/js/p5.js',
+        'runner' => 'assets/js/plugins/runner/build/jquery.runner.js'
 );
 
 $_css = array (

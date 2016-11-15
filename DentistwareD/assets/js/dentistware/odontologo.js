@@ -1,4 +1,11 @@
 $(function(){
+    
+    $('#runner').runner({
+    autostart: true,
+    countdown: false
+    
+});
+    
     var lastRegId;
     $('.verRegistro-btn').click(function(e) {
         e.preventDefault();
@@ -89,11 +96,59 @@ $(function(){
         },
         function(isConfirm) {
             if (isConfirm) {
-            	window.location.href = js_site_url2 + "index/" + id + "/" + cliente;
+            	window.location.href = js_site_url2 + "index/" + id ;
                 
             }
         });           
     });    
+    
+    $('.crear-historia-btn').click(function(e) {
+		e.preventDefault();
+     //   var cita = $(this).attr('cita');
+      //  var cliente = $(this).attr('cliente');
+    //    var id = $(this).attr('id');
+        window.location.href = js_site_url + "crear_historia_clinica" ;
+              
+    }); 
+    
+     $('#nueva_historia_form').submit(function (event) {
+        event.preventDefault();
+        $('.ac_p_error').fadeOut('slow').remove();
+        var postData = $(this).serializeArray(); 
+        $.ajax({
+            type: 'POST',
+            url: js_site_url + 'nueva_historia_clinica/',
+            data: postData,
+            beforeSend:function(){
+            	$('#div_waiting_new_story').removeClass("hidden");            	
+            },
+            success: function (msg){
+                console.log(msg);
+                if (isNaN(msg)) {
+                	$('#div_waiting_new_story').addClass("hidden");  
+                    $.each(msg, function (i, item) {
+                        $('#div_' + i).after('<p class="alert alert-danger text-center ac_p_error" role="alert">' + item + '</p>');
+                    });
+                } else {
+                    if (msg == 1) {    
+                    	swal({   
+                    		title: "",   
+                    		text: "Se insertó exitosamente la historia clínica",   
+                    		type: "success"                 
+                    	}, 
+                    	function(){   
+                    		location.reload(); 
+                    	});                    	
+                        $('#modal_add_story').modal('hide');
+                    } else {
+                    	$('#div_waiting_new_story').addClass("hidden"); 
+                    	swal("Error", "Se ha presentado un error al ingresar la historia clínica", "error");
+                    }
+                }
+            }
+        });
+    });
+    
 
 	$(".timepicker").timepicker({
           showInputs: false,

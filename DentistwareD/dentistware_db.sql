@@ -73,6 +73,21 @@ INSERT INTO `cita` (`id_cita`, `fecha_cita`, `hora_cita`, `estado_cita`, `id_cli
 (38, '2016-11-13', '21:00:00',  NULL, NULL, 6, '311'),
 (39, '2016-11-13', '18:30:00',  NULL, NULL, 6, '306');
 
+INSERT INTO `cita` (`id_cita`, `fecha_cita`, `hora_cita`, `estado_cita`, `id_cliente`, `id_odonto`, `consultorio`) VALUES
+(40, '2016-11-14', '16:00:00',  NULL, NULL, 6, '311'),
+(41, '2016-11-14', '17:00:00',  NULL, NULL, 6, '306'),
+(42, '2016-11-14', '17:30:00',  NULL, NULL, 6, '311'),
+(43, '2016-11-14', '18:00:00',  NULL, NULL, 6, '306'),
+(44, '2016-11-14', '18:30:00',  NULL, NULL, 6, '311'),
+(45, '2016-11-14', '19:00:00',  NULL, NULL, 6, '306'),
+(46, '2016-11-14', '19:30:00',  NULL, NULL, 6, '311'),
+(47, '2016-11-14', '20:00:00',  NULL, NULL, 6, '306'),
+(48, '2016-11-14', '20:30:00',  NULL, NULL, 6, '311'),
+(49, '2016-11-14', '21:00:00',  NULL, NULL, 6, '306'),
+(50, '2016-11-14', '21:30:00',  NULL, NULL, 6, '311'),
+(51, '2016-11-14', '22:00:00',  NULL, NULL, 6, '306');
+
+
 /*==============================================================*/
 /* Table: ciudad                                                */
 /*==============================================================*/
@@ -1398,7 +1413,7 @@ create table pregunta
 );
 
 INSERT INTO `pregunta` (`id_pregunta`, `desc_pregunta`) VALUES
-( 1, '¿Está usted bajo tratamiendo médico?'),
+( 1, '¿Está usted bajo tratamiento médico?'),
 ( 2, '¿Toma actualmente algún medicamento?'),
 ( 3, '¿Le han practicado alguna intervención quirúrgica?'),
 ( 4, '¿Ha recibido alguna transfusión sanguínea?'),
@@ -1464,3 +1479,20 @@ alter table registro add constraint fk_historia_odontologo foreign key (id_histo
 
 alter table registro add constraint fk_historia_odontologo2 foreign key (id_odon)
       references persona (id_persona) on delete restrict on update restrict;
+      
+
+drop trigger if exists multa_automatica;
+
+delimiter &&
+create trigger multa_automatica after update on cita for each row
+ begin
+		if(new.estado_cita = 0) then 
+        INSERT INTO `multa` (`id_cliente`, `concepto_multa`, `valor_multa`, `estado_multa`) VALUES
+(new.id_cliente, 'No asistio a la cita', 10.000, 0);
+        
+end if;
+end &&
+delimiter ;
+
+select * from historia_clinica;
+delete from historia_clinica where id_cliente = 5;

@@ -8,8 +8,8 @@ class Historia_clinica extends Odon_Controller {
 		$this->data['page_title_end'] = '| Historia Cliente';
 	}
 	
-	public function index($id = '', $nombre = '') {
-        $nombre = urldecode($nombre);
+	public function index($id = '') {
+        $this->session->set_userdata(array('id_cliente_cita' => $id));
         $this->load->model('persona_model');
 		$this->load->model('historia_model');
         $persona = $this->persona_model->get_persona('', $id);
@@ -17,22 +17,56 @@ class Historia_clinica extends Odon_Controller {
         $registros = null;
         if($historia_clinica != null)
             $registros = $this->historia_model->get_registros($historia_clinica->id_historia);
-        $data = array('nombre' => $nombre,
-                     'historia_clinica' => $historia_clinica,
+        $data = array('historia_clinica' => $historia_clinica,
                      'registros' => $registros,
                      'persona' => $persona);
-
-        
-        /* $this->data['cliente'] = array(
-            'id' => $id,
-            'nombre' => '',
-        );
-        $this->data['cliente']['nombre'] = $this->persona_model->get_persona('', $this->data['cliente']['id'])->nombre_persona;
-        
-        $this->data['historia_clinica'] = $this->historia_model->get_historia_clinica($this->data['cliente']['id']);
-		$this->data['registros'] = $this->historia_model->get_registros($this->data['historia_clinica']->id_historia);*/
 		$this->get_user_menu('Historia_Cliente');
 		$this->load->view('odontologo/historia_clinica_view', $data);
 	}
+    
+    public function crear_historia_clinica(){
+        $this->load->model('persona_model');
+		$this->load->model('historia_model');
+        $this->load->model('pregunta_model');
+        $preguntas = $this->pregunta_model->get_preguntas();
+        $cliente_info = $this->persona_model->get_persona('', $this->session->userdata['id_cliente_cita']);
+        $historia_clinica = $this->historia_model->get_historia_clinica($this->session->userdata['id_cliente_cita']);
+        $registros = null;
+        if($historia_clinica != null)
+            $registros = $this->historia_model->get_registros($historia_clinica->id_historia);
+        $data = array('historia_clinica' => $historia_clinica,
+                     'registros' => $registros,
+                     'cliente_info' => $cliente_info,
+                     'preguntas' => $preguntas);
+        $this->load->view('odontologo/crear_historia_clinica_view', $data);
+    }
+    
+    
+      public function nueva_historia_clinica(){
+          $this->load->model('historia_model'); 
+          $this->load->model('pregunta_model');
+          $input = array (
+                'id_cliente' => $this->session->userdata['id_cliente_cita'],
+                'fecha_apertura' => date('Y-m-d H:i:s'),
+                'antecedentes_fam' => $this->input->post ( 'input_antecedentes' ),
+                'enfermedad_actual' => $this->input->post ( 'input_enfermedad' ),
+                'observaciones' => $this->input->post ( 'input_observaciones' )
+
+			); 
+          
+     $this->historia_model->nueva_historia($input);
+          $historia_clinica = $this->historia_model->get_historia_por_cliente($this->session->userdata['id_cliente_cita'])->id_historia;
+            $input = array (
+                'id_pregunta' => 1,
+                'id_historia' => $historia_clinica,
+                    'estado_pregunta' => $this->input->post ( 'p1' )
+    				
+			);
+           $result = $this->pregunta_model->insertar_preguntas($input); 
+           // header ( 'Content-Type: application/json' );
+			echo 1;
+      
+    }
+    
     
 }
