@@ -93,7 +93,7 @@ class Cita_model extends MY_Model {
 		$fechaActual = date("Y-m-d");
 		$horaActual = date('H:i:s');
 		
-		$this->db->select('id_cita, fecha_cita as fecha, hora_cita as hora, estado_cita as estado, cliente.nombre_persona  as cliente, consultorio');
+		$this->db->select('id_cita, fecha_cita as fecha, hora_cita as hora, estado_cita as estado, cliente.nombre_persona  as cliente, consultorio, cliente.id_persona as id');
 		$this->db->from('cita');
 		$this->db->join('persona as cliente', 'cliente.id_persona = cita.id_cliente');
 		$this->db->where('cita.id_cliente is not NULL', NULL, FALSE);		
@@ -172,18 +172,40 @@ class Cita_model extends MY_Model {
 		));
 	}
     
-    public function no_asistir_cita($id_cita, $data = '') {
+    public function marcar_cita($id_cita, $data = '') {
 		return $this->actualizar_datos('cita', $data, array(
 			'id_cita' => $id_cita
 		));
 	}
-	
-    public function count_citas($idPersona, $estadoCita) {
-		$this->db->select('id_cita, fecha_cita as fecha, hora_cita as hora, estado_cita as estado, odonto.nombre_persona  as odontologo, consultorio');
-		$this->db->from('cita');
-        $this->db->where('id_odonto', $idPersona);
+
+
+    public function count_citas($idPersona, $estadoCita ='', $day = '') {
+		$this->db->select('*');
+        $this->db->from('cita');
+		$this->db->where('id_odonto', $idPersona);
+		$this->db->where('estado_cita', $estadoCita);
+        if($day == ''){
+            $firstday = date('Y-m-d', strtotime('sunday -1 weeks'));
+            $this->db->where('fecha_cita >', $firstday);
+        }else{
+            $firstday = date('Y-m-d', strtotime($day));
+            $this->db->where('fecha_cita', $firstday);
+        }
+        
         $query = $this->db->get();
-		return count($query->result());
+		return count($query->result());        
+	}
+    
+    public function count_allCitas_byWeek($day = '') {
+		$this->db->select('*');
+        $this->db->from('cita');
+		$this->db->where('id_cliente', null);
+        $firstday = date('Y-m-d', strtotime($day));
+        $this->db->where('fecha_cita', $firstday);
+        
+        
+        $query = $this->db->get();
+		return count($query->result());        
 	}
 	
 	public function delete_cita($id_cita) {
@@ -216,5 +238,4 @@ class Cita_model extends MY_Model {
 		
 		return count($this->db->get()->result());
 	}
-
 }
