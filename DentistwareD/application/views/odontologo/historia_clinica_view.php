@@ -187,7 +187,7 @@
                               <div class="modal-footer">
                                  <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg pull-left cancel-btn">Terminar cita</button>
                                  <?php if($historia_clinica != null){ ?>
-                                 <button type="button" class="btn btn-info btn-lg pull-right" data-toggle="modal" data-target="#modal_anadir_registro">Nuevo registro</button>
+                                 <button type="button" class="btn btn-primary pull-right agregarRegistro-btn" data-toggle="modal" data-target="#agregarRegistro" title="Agregar registro">Nuevo registro</button>
                                  <?php } ?>
                               </div>
                            </div>
@@ -199,28 +199,220 @@
          </section>
          <!-- /.content -->
       </div>
-      <!-- Modal -->
-      <div id="verRegistro" class="modal fade modal-add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-         <div id="verRegistroModal" class="modal-dialog modal-lg">
-            <div class="modal-content">
-               <div id="verRegistro_html"></div>
-            </div>
-         </div>
-      </div>
-      <?php
-         $path = "odontologo/Historia_clinica/";
-         echo '<script>
-                 var js_site_url = "'. site_url($path) . '";
-               </script>';
-                  echo plugin_js();
-              echo plugin_js('bootstrap');
-              echo plugin_js('app');
-              echo plugin_js('pace');
-             echo plugin_js('timepicker');
-             echo plugin_js('runner');
-            
-             echo plugin_js('assets/js/dentistware/odontologo.js', true);
-         ?>
+      
+       <!-- Modal ver registro -->
+		<div id="verRegistro" class="modal fade modal-add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+			<div id="verRegistroModal" class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div id="verRegistro_html"></div>
+				</div>
+			</div>
+		</div>
+        
+		<!-- Modal agregar registro -->
+		<div id="agregarRegistro" class="modal fade modal-add" role="dialog" aria-labelledby="agregarRegistroLabel">
+			<div id="agregarRegistroModal" class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<form id="nuevoRegistro_form">
+						<div class="box box-primary">
+							<div class="box-header">
+								<button type="button" class="close salir-btn" data-dismiss="modal">&times;</button>
+								<h2>Agregar un nuevo registro </h2>
+								<hr>
+							</div>
+							<div class="box-body">
+								<div class="text-align:center">
+									<table style="width:100%" align="left">
+										<tr>
+											<th class="text-left" style="width:10%" >
+												Motivo:
+											</th>
+											<td style="width:5%"></td>
+											<td style="width:70%">
+												<input type="text" class="form-control" id="inputMotivo" placeholder="Motivo de consulta" name="inputMotivo">
+											</td>
+										</tr>
+										<tr>
+											<th class="text-left" style="width:10%" >
+												Descripción:
+											</th>
+											<td style="width:5%"></td>
+											<td style="width:70%">                                  
+												<input type="text" class="form-control" id="inputDescripcion" placeholder="Descripción del procedimiento" name="inputDescripcion">
+											</td>
+										</tr>
+										<tr>
+											<th class="text-left" style="width:10%" >
+												Enfermedad:
+											</th>
+											<td style="width:5%"></td>
+											<td style="width:70%">
+												<input type="text" class="form-control" id="inputEnfermedad" placeholder="Enfermedad actual del paciente" name="inputEnfermedad">
+											</td>
+										</tr>
+									</table>
+									<input type="hidden" id="inputHistoria" name="inputHistoria" value=<?php echo $historia_clinica->id_historia; ?> >
+								</div>
+							</div>
+							<div class="box-header">
+								<hr>
+								<h3 class="modal-title">Odontodiagrama</h3>
+								<hr style="margin-top:10px;margin-bottom:10px;">
+							</div>
+							<div class="box-body">
+								<div class="text-center">
+									<div id="" class="col-xs-3 table-responsive">
+										<h4>Convenciones</h4>
+										<hr>
+										<table style="width:80%" align="center">
+											<tr>
+												<td>
+													<input type="radio" name="state" value="A" checked>
+												</td>
+												<th class="text-left">
+													Ausente
+												</th>
+												<td style="width:20%"></td>
+												<td class="text-right">
+													<i class="fa fa-times" id="i_refresh" ></i>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<input type="radio" name="state" value="E">
+												</td>
+												<th class="text-left">
+													Extraer
+												</th>
+												<td style="width:20%"></td>
+												<td class="text-right">
+													<b style="font-size=20">=</b>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<input type="radio" name="state" value="D">
+												</td>
+												<th class="text-left">
+													Caries
+												</th>
+												<td style="width:20%"></td>
+												<td class="text-right">
+													<i class="fa fa-circle" style="color:blue" id="i_refresh"></i>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<input type="radio" name="state" value="O">
+												</td>
+												<th class="text-left">
+													Obturación
+												</th>
+												<td style="width:20%"></td>
+												<td class="text-right">
+													<i class="fa fa-circle" style="color:red" id="i_refresh"></i>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<input type="radio" name="state" value="C">
+												</td>
+												<th class="text-left">
+													Corona
+												</th>
+												<td style="width:20%"></td>
+												<td class="text-right">
+													<i class="fa fa-circle-o" id="i_refresh"></i>
+												</td>
+											</tr>
+											<tr>
+												<td>
+													<input type="radio" name="state" value="T">
+												</td>
+												<th class="text-left">
+													Tramo
+												</th>
+												<td style="width:20%"></td>
+												<td class="text-right">
+													<i class="fa fa-minus" id="i_refresh"></i>
+												</td>
+											</tr>
+										</table>
+									</div>
+									<div class="col-xs-9" id="teeth-editor"></div>
+								</div>
+							</div>
+							<div class="box-footer">
+								<button type="button" data-dismiss="modal" class="btn btn-danger pull-left salir-btn">Salir</button>
+								<input type="submit" name="submit_reg" class="btn btn-info pull-right" value="Guardar">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+  
+		<script>
+			<?php
+				echo 'var teethOriginal = [';
+				if($dientes != NULL){
+				    foreach($dientes as $diente){
+				    echo "[". $diente->aus . "," 
+				            . $diente->ext . "," 
+				            . $diente->car . "," 
+				            . $diente->obt . "," 
+				            . $diente->cor . "," 
+				            . $diente->tra . "]," ;
+				    }
+				}
+				echo '];';
+				      echo 'var teeth = [';
+				if($dientes != NULL){
+				    foreach($dientes as $diente){
+				    echo "[". $diente->aus . "," 
+				            . $diente->ext . "," 
+				            . $diente->car . "," 
+				            . $diente->obt . "," 
+				            . $diente->cor . "," 
+				            . $diente->tra . "]," ;
+				    }
+				}
+				echo '];';
+				      echo 'var teethAux = [';
+				if($dientes != NULL){
+				    foreach($dientes as $diente){
+				    echo "[". $diente->aus . "," 
+				            . $diente->ext . "," 
+				            . $diente->car . "," 
+				            . $diente->obt . "," 
+				            . $diente->cor . "," 
+				            . $diente->tra . "]," ;
+				    }
+				}
+				echo '];';
+				  ?>
+		</script>
+      
+           <?php
+			$path = "odontologo/";
+			echo '<script>
+			        var js_site_url = "'. site_url($path) . '";
+			      </script>';
+                    echo plugin_js();
+                 echo plugin_js('bootstrap');
+                 echo plugin_js('app');
+                 echo plugin_js('pace');
+                    echo plugin_js('timepicker');
+                    echo plugin_js('assets/js/dentistware/odontologo.js', true);
+                    echo plugin_js('runner');
+                    echo plugin_js('teeth-drawer');
+                    echo plugin_js('p5');
+                    echo plugin_js('assets/js/dentistware/dientes.js', true);
+			?>
+       
    </body>
 </html>
-            
+		
+
+ 
+		

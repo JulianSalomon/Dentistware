@@ -168,4 +168,13 @@ class Persona_model extends MY_Model {
 			'id_persona' => $id_persona
 		));
 	}
+    
+     public function count_personas_byTypeAndState($type, $state) {
+		$this->db->select('*');
+        $this->db->from('persona');
+		$this->db->where('tipo_persona', $type);
+		$this->db->where('estado_persona', $state);
+        $query = $this->db->get();
+		return count($query->result());        
+	}
 }

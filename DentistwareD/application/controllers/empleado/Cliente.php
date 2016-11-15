@@ -43,7 +43,6 @@ class Cliente extends Empl_Controller {
 			$this->pagination->initialize($config);
 			
 			$this->data['clientes'] = $clientes;
-// 			$this->data['num_multas'] = count($this->multa_model->get_active_multas($clientes->id_persona));
 			$this->data["links"] = $this->pagination->create_links();
 		}
 		$this->render('empleado/empl_cliente_view');
@@ -155,7 +154,6 @@ class Cliente extends Empl_Controller {
 				'id_ciudad' => $this->input->post('select_ciudades'),
 				'direccion_persona' => $this->input->post('inputDireccion'),
 				'telefono_persona' => $this->input->post('inputTelefono'),
-                'estado_persona' => $this->input->post ( 'selectEstado' ),
 				'tipo_sangre_cliente' => $this->input->post('selectGrupo'),
 				'rh_cliente' => $this->input->post('selectRH'),
 				'eps_persona' => $this->input->post('inputEps'),

@@ -1,114 +1,121 @@
-$(function(){
-    
-    $('#runner').runner({
-    autostart: true,
-    countdown: false
-    
-});
-    
-    var lastRegId;
-    $('.verRegistro-btn').click(function(e) {
-        e.preventDefault();
-        $('.ac_p_error').fadeOut('slow').remove();
-        var id = $(this).val();
-        if( id != lastRegId ){
-            var postData = { 'reg'   : id, };
-            var htmlWrapper;
-            $.ajax({
+$(function() {
+
+	editable = 1;
+
+	$('#agregarRegistro').on('shown.bs.modal', function() {
+		modalWidth = $("#agregarRegistroModal").width();
+		modalHeight = $("#agregarRegistroModal").height();
+		stateAux = $('input[name="state"]:checked').val();
+		setup();
+		mouseClicked();
+		draw();
+
+		$("input[name=state]").click(function() {
+			stateAux = $(this).val();
+		});
+
+		$('#nuevoRegistro_form').submit(function(event) {
+			event.preventDefault();
+			$('.ac_p_error').fadeOut('slow').remove();
+            var postData = new FormData(this);
+			$.ajax({
                 type: 'POST',
-                url: js_site_url + 'Registro/',
+				url: js_site_url + 'Registro/nuevo_registro', 
                 data: postData,
-                success: function(html) {
-                    htmlWrapper = html;
-                },
-                error: function(msg){
-                }
-            });
-            $.ajax({
-                type: 'POST',
-                url: js_site_url + 'Diente/',
-                data: postData,
-                success: function(html) {
-                    htmlWrapper += html;
-                    $('#verRegistro_html').html(htmlWrapper);
-                    $('#verRegistro').modal('show');
-                },
-                error: function(msg){
+                processData: false,
+                contentType: false,
+				success: function(result) {
+					var regId = result;
+                    $.each(myTeeth.teeth,
+						function(index, value) {
+							$.post(
+								js_site_url + 'Diente/nuevoDiente',
+                                {   reg: regId,
+									num: value["n"],
+									aus: value["state"][0],
+									ext: value["state"][1],
+									car: value["state"][2],
+									obt: value["state"][3],
+									cor: value["state"][4],
+									tra: value["state"][5]
+								},
+								function(result) {
+                                    
+                                }
+							);
+						}
+					);
+				},
+                error: function(msg) {
                     console.log(msg);
                 }
-            });
-        }
-    });    
-    
- 
-    
-    $('.no-asistir-btn').click(function(e) {
+            })
+		})
+
+	});
+
+	$('.salir-btn').click(function(e) {
 		e.preventDefault();
-        var cita = $(this).attr('cita');
-        var cliente = $(this).attr('cliente');
-        swal({
-            title: 'Marcar cita',
-            text: '¿' + cliente + ' no ha asistido a la cita?',
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Sí, marcar como no asistida',
-            cancelButtonText: 'No, no confirmar',
-            showLoaderOnConfirm: true,
-        },
-        function(isConfirm) {
-            if (isConfirm) {
-            	$.ajax({
-                    type: 'GET',
-                    url: js_site_url + 'marcar_no_asistir/' + cita,
-                    success: function(msg){
-                        console.log(msg);
-                        if(msg){                            
-                            swal({   
-                                title: "Cita marcada",
-                                text: "La cita con " + cliente + " ha sido marcada como no asistida por el cliente.",
-                                type: "success",
-                            }, 
-                            function(){   
-                                location.reload(); 
-                            });
-                        } else {
-                            swal("Error", "La cita con " + odonto + " no puede ser marcada, vuelva a intentarlo.", "error");
-                        }
-                    }
-                });
-            }
-        });           
-    });
-    
-    $('.atender-btn').click(function(e) {
+		$('.ac_p_error').fadeOut('slow').remove();
+		teethAux = teethOriginal;
+	})
+
+	$('.agregarRegistro-btn').click(function(e) {
 		e.preventDefault();
-        var cita = $(this).attr('cita');
-        var cliente = $(this).attr('cliente');
-        var id = $(this).attr('id');
-        swal({
-            title: 'Atender',
-            text: '¿Desea atender su cita con ' + cliente + '?',
-            type: 'warning',
-            showCancelButton: true,
-            confirmButtonText: 'Sí, atender cita',
-            cancelButtonText: 'No atender la cita',
-            showLoaderOnConfirm: true,
-        },
-        function(isConfirm) {
-            if (isConfirm) {
-            	window.location.href = js_site_url2 + "index/" + id ;
-                
-            }
-        });           
-    });    
+		$('.ac_p_error').fadeOut('slow').remove();
+		editable = 1;
+		teeth = teethAux;
+	})
+
+	var lastRegId;
+	$('.verRegistro-btn').click(function(e) {
+		e.preventDefault();
+		$('.ac_p_error').fadeOut('slow').remove();
+		var id = $(this).val();
+		if (editable == 1) {
+			lastRegId = undefined;
+			teethAux = teeth;
+			editable = 0;
+		}
+		if (id !== lastRegId) {
+
+			lastRegId = id;
+			try {
+				remove();
+			} catch (err) {}
+			var htmlWrapper = '';
+			var postData = {
+				'reg': id,
+			};
+			$.ajax({
+				type: 'POST',
+				url: js_site_url + 'Registro/',
+				data: postData,
+				success: function(html) {
+					htmlWrapper = html;
+					$.ajax({
+						type: 'POST',
+						url: js_site_url + 'Diente/',
+						data: postData,
+						success: function(html) {
+							htmlWrapper += html;
+							$('#verRegistro_html').html(htmlWrapper);
+							$('#verRegistro').modal('show');
+						},
+						error: function(msg) {}
+					});
+				},
+				error: function(msg) {}
+			});
+		} else {
+			$('#verRegistro').modal('show');
+		}
+	});
+    
     
     $('.crear-historia-btn').click(function(e) {
 		e.preventDefault();
-     //   var cita = $(this).attr('cita');
-      //  var cliente = $(this).attr('cliente');
-    //    var id = $(this).attr('id');
-        window.location.href = js_site_url + "crear_historia_clinica" ;
-              
+        window.location.href = js_site_url + "crear_historia_clinica" ;              
     }); 
     
      $('#nueva_historia_form').submit(function (event) {
@@ -148,11 +155,82 @@ $(function(){
             }
         });
     });
-    
+		
 
-	$(".timepicker").timepicker({
-          showInputs: false,
-          minuteStep: 30,
-          defaultTime: false              
-    });          
+
+
+
+$('#runner').runner({
+    autostart: true,
+    countdown: false
+    
+});
+
+
+	$('.no-asistir-btn').click(function(e) {
+		e.preventDefault();
+		var cita = $(this).attr('cita');
+		var cliente = $(this).attr('cliente');
+		swal({
+				title: 'Marcar cita',
+				text: '¿Desea marcar como no asistida la cita con ' + cliente + '?',
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonText: 'Sí, marcar',
+				cancelButtonText: 'No, no confirmar',
+				showLoaderOnConfirm: true,
+			},
+			function(isConfirm) {
+				if (isConfirm) {
+					$.ajax({
+						type: 'GET',
+						url: js_site_url + 'Historia_Clinica/marcar_no_asistir/' + cita,
+						success: function(msg) {
+							console.log(msg);
+							if (msg) {
+								swal({
+										title: "Cita marcada",
+										text: "La cita con " + cliente + " ha sido marcada como no asistida por el cliente.",
+										type: "success",
+									},
+									function() {
+										location.reload();
+									});
+							} else {
+								swal("Error", "La cita con " + odonto + " no puede ser marcada, vuelva a intentarlo.", "error");
+							}
+						}
+					});
+				}
+			});
+	});
+
+	$('.atender-btn').click(function(e) {
+		e.preventDefault();
+		var cita = $(this).attr('cita');
+        var cliente = $(this).attr('cliente');
+        var id = $(this).attr('id');
+        swal({
+            title: 'Atender',
+            text: '¿Desea atender su cita con ' + cliente + '?',
+            type: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Sí, atender cita',
+            cancelButtonText: 'No atender la cita',
+            showLoaderOnConfirm: true,
+        },
+        function(isConfirm) {
+            if (isConfirm) {
+            	window.location.href = js_site_url2 + "index/" + id ;
+                
+            }
+        });           
+    });    
+
+
+    $(".timepicker").timepicker({
+		showInputs: false,
+		minuteStep: 30,
+		defaultTime: false
+	});
 });

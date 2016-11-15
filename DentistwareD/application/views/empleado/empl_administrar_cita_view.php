@@ -22,8 +22,7 @@
                             $fecha = str_replace("-", "/", $fecha);
                             
                             $hora = $this->session->userdata('hora');
-                            $odontologo = $this->session->userdata('odontologo');
-                            
+                            $odontologo = $this->session->userdata('odontologo');                            
                         ?>
                         <div class="row">
                         	<div class="col-lg-2"></div>
@@ -46,7 +45,7 @@
                         </div>                        
                         <div class="row"> 
                         	<div class="col-lg-2"></div>
-                        	<div class="col-lg-6 form-group">
+                        	<div class="col-lg-8 form-group">
                     			<label  class="control-label">Seleccione un Odontólogo:</label>
                         		<div class="input-group" id="div_selectOdontologo">
                         			<span class="input-group-addon"><i class="fa fa-user-md"></i></span>
@@ -79,7 +78,7 @@
                     	?>
                     	<h4>Citas encontradas:</h4>
                         <div class="table-responsive">
-                            <table id="tabla_cita" type='tabla' class="table table-bordered table-hover tabla-citas">
+                            <table id="tabla_cita" class="table table-bordered table-hover tabla-citas">
                                 <thead>
                                     <tr>                                    	
                                         <th>Fecha</th>
@@ -122,9 +121,9 @@
                                             		'data-target' => "#modal_edit_cita",
                                             		'content' => '<i class="fa fa-pencil"></i>',
                                             		'data-id' => $cita->id_cita,
-                                            		'data-hora' => $cita->hora,
-                                            		'data-fecha' => $cita->fecha,
-                                            		'data-odonto' => $cita->odontologo,
+                                            		'data-hora' => strtoupper($hora_cita),
+                                            		'data-fecha' => str_replace("-", "/", $cita->fecha),
+                                            		'data-odonto' => $cita->id_odonto,
                                             		'data-cliente' => $value,
                                             		'data-consultorio' => $cita->consultorio,
                                             );                                           
@@ -174,7 +173,7 @@
             $data_input = array(
                 'id' => "edit_cita_form",
             );
-            echo form_open_multipart('',$data_input);
+            echo form_open('',$data_input);
         ?>
         <div class="modal-content box">
             <div class="overlay hidden" id="div_waiting_edit_cita">
@@ -184,44 +183,57 @@
                 <button type="button" class="close cancel-btn" data-dismiss="modal">&times;</button>
                 <h3 class="modal-title">Editar Cita</h3>
             </div>
-            <div class="modal-body">           
+            <div class="modal-body">
+				<?php 
+				$data_input = array(
+						'id' => "idCita",
+						'name' => "idCita",
+						'type' => "hidden",
+						'value' => ''
+				);
+				echo form_input($data_input);
+				?>                       
                 <div class="row">
                     <div class="col-lg-6 form-group" id="fecha">
                         <label class="control-label">Fecha cita: *</label>
-                        <div class="input-group" id="div_inputFecha">
+                        <div class="input-group" id="div_inputEditFecha">
                             <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                            <input type="text" class="form-control date-select" id="inputEditFecha" placeholder="YYYY/MM/DD" name="inputFecha">
+                            <input type="hidden" id="inputHideFecha"name="inputHideFecha">
+                            <input type="text" class="form-control date-select" id="inputEditFecha" placeholder="YYYY/MM/DD" name="inputEditFecha">
                         </div>
                     </div>
                     <div class="col-lg-6 form-group" id="hora">
-                        <label  class="control-label">Hora cita: *</label>
-                        <div class="input-group" id="div_inputHora">
-                            <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
-                            <input type="text" class="form-control" id="inputEditFecha" placeholder="HH:MM AM" name="inputFecha">
-                        </div>
+                     	<div class="bootstrap-timepicker">
+							<label>Hora cita: *</label>
+                          	<div class="input-group" id="div_inputEditHora">
+                                <span class="input-group-addon"><i class="fa fa-clock-o fa-fw"></i></span>
+                                <input type="hidden" id="inputHideHora"name="inputHideHora">
+                            	<input type="text" class="form-control timepicker" id="inputEditHora" placeholder="HH:MM AM" name= "inputEditHora" value="<?php echo $hora;?>">
+                        	</div>
+						</div>                    
+
                     </div>
                 </div>
                 <div class="row">
 	                <div class="col-lg-6 form-group">
 	                	<label class="control-label">Odontólogo: *</label>
-	                    <div class="input-group" id="div_selectOdonto">
+	                    <div class="input-group" id="div_selectEditOdonto">
 	                    	<span class="input-group-addon"><i class="fa fa-user-md fa-fw"></i></span>
 	                        <?php 
 				                $data_input = array(
 				                		'id' => 'selectEditOdontologo',
 				                		'class' => 'form-control',
-				                		'tabindex' => "-1",
 				                );
-				                echo form_dropdown('selectEditOdontologo', $odontologos, '', $data_input);                   
+				                echo form_dropdown('selectEditOdontologo', $odontologos, '-1', $data_input);                   
 	                        
 	                        ?>
 						</div>
 					</div>   
                     <div class="col-lg-6 form-group">
-                        <label class="control-label">Consultorio: *</label>
+                        <label class="control-label">Consultorio:</label>
                         <div class="input-group" id="div_inputConsultorio">
-                            <span class="input-group-addon"><i class="fa fa-calendar fa-fw"></i></span>
-                            <input type="text" class="form-control date-select" id="inputConsultorio" placeholder="Consultorio" name="inputConsultorio">
+                            <span class="input-group-addon"><i class="fa fa-hospital-o fa-fw"></i></span>
+                            <input type="text" class="form-control" id="inputConsultorio" placeholder="Consultorio" name="inputConsultorio">
                         </div>
                     </div>					                              
                 </div>               

@@ -4,22 +4,29 @@ if (!defined('BASEPATH'))
 class Historia_clinica extends Odon_Controller {
     
 	function __construct() {
-		parent::__construct();		
-		$this->data['page_title_end'] = '| Historia Cliente';
+		parent::__construct();
+        $this->load->model('historia_model');
 	}
 	
+
 	public function index($id = '') {
         $this->session->set_userdata(array('id_cliente_cita' => $id));
         $this->load->model('persona_model');
 		$this->load->model('historia_model');
+        $this->load->model('registro_model');
         $persona = $this->persona_model->get_persona('', $id);
         $historia_clinica = $this->historia_model->get_historia_clinica($id);
         $registros = null;
-        if($historia_clinica != null)
-            $registros = $this->historia_model->get_registros($historia_clinica->id_historia);
+        $dientes= null;
+        if($historia_clinica != null){
+            $registros = $this->registro_model->get_registros($historia_clinica->id_historia);
+            $this->load->model('diente_model');
+         //  $dientes = $this->diente_model->get_dientes($registros[0]->id_registro);
+        }
         $data = array('historia_clinica' => $historia_clinica,
                      'registros' => $registros,
-                     'persona' => $persona);
+                     'persona' => $persona,
+                     'dientes' => $dientes);
 		$this->get_user_menu('Historia_Cliente');
 		$this->load->view('odontologo/historia_clinica_view', $data);
 	}
@@ -28,12 +35,13 @@ class Historia_clinica extends Odon_Controller {
         $this->load->model('persona_model');
 		$this->load->model('historia_model');
         $this->load->model('pregunta_model');
+        $this->load->model('registro_model');
         $preguntas = $this->pregunta_model->get_preguntas();
         $cliente_info = $this->persona_model->get_persona('', $this->session->userdata['id_cliente_cita']);
         $historia_clinica = $this->historia_model->get_historia_clinica($this->session->userdata['id_cliente_cita']);
         $registros = null;
         if($historia_clinica != null)
-            $registros = $this->historia_model->get_registros($historia_clinica->id_historia);
+            $registros = $this->registro_model->get_registros($historia_clinica->id_historia);
         $data = array('historia_clinica' => $historia_clinica,
                      'registros' => $registros,
                      'cliente_info' => $cliente_info,
@@ -67,6 +75,4 @@ class Historia_clinica extends Odon_Controller {
 			echo 1;
       
     }
-    
-    
 }

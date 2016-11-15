@@ -48,4 +48,12 @@ class Multa_model extends MY_Model {
 		));
 	}
 
+    public function count_multas($estadoMulta) {
+		$this->db->select('*');
+        $this->db->from('multa');
+        $this->db->where('estado_multa', $estadoMulta);
+        
+        $query = $this->db->get();
+		return count($query->result());        
+	}
 }

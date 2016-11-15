@@ -11,6 +11,7 @@ preload = function() {
 
 setup = function() {
     var canvas = createCanvas(modalWidth * 0.583333333, modalWidth   * 0.858229166);
+    console.log(editable);
     if(editable){
         canvas.parent('teeth-editor');
     } else {
@@ -23,14 +24,16 @@ setup = function() {
 draw = function() {
     background(bg);
     myTeeth.draw();
-    if(!editable){
-        noLoop();
-    }
 }
 
 windowResized = function() {
-    modalWidth = $("#verDientesModal").width();
-    modalHeight = $("#verDientesModal").height();
+    if(editable){
+        modalWidth = $("#agregarRegistroModal").width();
+        modalHeight = $("#agregarRegistroModal").height();
+    } else {
+        modalWidth = $("#verDientesModal").width();
+        modalHeight = $("#verDientesModal").height();
+    }
     resizeCanvas(modalWidth * 0.583333333, modalWidth * 0.858229166);
     myTeeth = new Teeth();
     ratio = width / 40;
@@ -39,28 +42,33 @@ windowResized = function() {
 mouseClicked = function() {
     if(editable){
         var distance;
-
         for (var i = 0; i < myTeeth.teeth.length; i++) {
             distance = Math.sqrt(pow((myTeeth.teeth[i].x - mouseX), 2) + pow((myTeeth.teeth[i].y - mouseY), 2));
             if (distance < ratio) {
                 switch (stateAux) {
                     case 'A':
                         myTeeth.teeth[i].state[0] = (myTeeth.teeth[i].state[0] === 1) ? 0 : 1;
+                        teeth[i][0] = myTeeth.teeth[i].state[0];
                         break;
                     case 'E':
                         myTeeth.teeth[i].state[1] = (myTeeth.teeth[i].state[1] === 1) ? 0 : 1;
+                        teeth[i][1] = myTeeth.teeth[i].state[1];
                         break;
                     case 'D':
                         myTeeth.teeth[i].state[2] = (myTeeth.teeth[i].state[2] === 1) ? 0 : 1;
-                        break;
+                        teeth[i][2] = myTeeth.teeth[i].state[2];
+                        break;  
                     case 'O':
                         myTeeth.teeth[i].state[3] = (myTeeth.teeth[i].state[3] === 1) ? 0 : 1;
+                        teeth[i][3] = myTeeth.teeth[i].state[3];
                         break;
                     case 'C':
                         myTeeth.teeth[i].state[4] = (myTeeth.teeth[i].state[4] === 1) ? 0 : 1;
+                        teeth[i][3] = myTeeth.teeth[i].state[4];
                         break;
                     case 'T':
                         myTeeth.teeth[i].state[5] = (myTeeth.teeth[i].state[5] === 1) ? 0 : 1;
+                        teeth[i][5] = myTeeth.teeth[i].state[5];
                         break;
                 }
             }
@@ -77,16 +85,16 @@ Teeth = function() {
     }
     this.teeth = [
         //Top teeths
-        new Tooth(1 , width * 0.166, height * 0.468, teeth[0 ]),
-        new Tooth(2 , width * 0.183, height * 0.393, teeth[1 ]),
-        new Tooth(3 , width * 0.200, height * 0.325, teeth[2 ]),
-        new Tooth(4 , width * 0.233, height * 0.257, teeth[3 ]),
-        new Tooth(5 , width * 0.275, height * 0.206, teeth[4 ]),
-        new Tooth(6 , width * 0.300, height * 0.157, teeth[5 ]),
-        new Tooth(7 , width * 0.371, height * 0.125, teeth[6 ]),
-        new Tooth(8 , width * 0.450, height * 0.105, teeth[7 ]),
-        new Tooth(9 , width * 0.550, height * 0.105, teeth[8 ]),
-        new Tooth(10, width * 0.628, height * 0.125, teeth[9 ]),
+        new Tooth( 1, width * 0.166, height * 0.468, teeth[ 0]),
+        new Tooth( 2, width * 0.183, height * 0.393, teeth[ 1]),
+        new Tooth( 3, width * 0.200, height * 0.325, teeth[ 2]),
+        new Tooth( 4, width * 0.233, height * 0.257, teeth[ 3]),
+        new Tooth( 5, width * 0.275, height * 0.206, teeth[ 4]),
+        new Tooth( 6, width * 0.300, height * 0.157, teeth[ 5]),
+        new Tooth( 7, width * 0.371, height * 0.125, teeth[ 6]),
+        new Tooth( 8, width * 0.450, height * 0.105, teeth[ 7]),
+        new Tooth( 9, width * 0.550, height * 0.105, teeth[ 8]),
+        new Tooth(10, width * 0.628, height * 0.125, teeth[ 9]),
         new Tooth(11, width * 0.700, height * 0.157, teeth[10]),
         new Tooth(12, width * 0.725, height * 0.206, teeth[11]),
         new Tooth(13, width * 0.766, height * 0.257, teeth[12]),
