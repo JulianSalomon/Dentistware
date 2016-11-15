@@ -54,7 +54,7 @@
                     	if($odontologos != NULL){
                     ?>
                         <div class="table-responsive">
-                            <table id="tabla_odontologo" type='tabla' class="table table-bordered table-hover tabla-usuario">
+                            <table id="tabla_odontologo" class="table table-bordered table-hover tabla-usuario">
                                 <thead>
                                     <tr>
                                         <th>Documento</th>

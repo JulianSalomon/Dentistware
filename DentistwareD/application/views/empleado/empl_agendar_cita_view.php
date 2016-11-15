@@ -46,7 +46,7 @@
                         </div>                        
                         <div class="row"> 
                         	<div class="col-lg-2"></div>
-                        	<div class="col-lg-6 form-group">
+                        	<div class="col-lg-8 form-group">
                     			<label  class="control-label">Seleccione un Odontólogo:</label>
                         		<div class="input-group" id="div_selectOdontologo">
                         			<span class="input-group-addon"><i class="fa fa-user-md"></i></span>
@@ -54,7 +54,6 @@
 						                $data_input = array(
 						                		'id' => 'inputOdontologo',
 						                		'class' => 'form-control',
-						                		'tabindex' => "-1",
 						                );
 						                echo form_dropdown('inputOdontologo', $odontologos, $odontologo, $data_input);
 	                        		?>
@@ -79,7 +78,7 @@
                     	?>
                     	<h4>Citas disponibles:</h4>
                         <div class="table-responsive">
-                            <table id="tabla_cita" type='tabla' class="table table-bordered table-hover tabla-citas">
+                            <table id="tabla_cita" class="table table-bordered table-hover tabla-citas">
                                 <thead>
                                     <tr>
                                     	<th>Opción</th>

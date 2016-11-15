@@ -240,8 +240,19 @@
                 <div class=" form-group">  
                     <label  class="control-label">Estudios: *</label>
                     <div class="input-group" id="div_estudiosOdontologo">
-                        <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span> 
-                        <input type="text" class="form-control" id="inputTitulosOdontologo" placeholder="Titulos Obtenidos" name="inputTitulosOdontologo" value="<?php echo $odontologo_info->estudios_odont;?>">
+	                	<?php 
+	                	$data_input = array(
+	                			'type' => "text",
+	                			'class' => "form-control",
+	                			'id' => "inputTitulosOdontologo",
+	                			'name' => "inputTitulosOdontologo",
+	                			'rows' => "5",
+	                			'placeholder' => "Titulos Obtenidos",
+	                			"maxlength" => "1000",
+	                			'value' => $odontologo_info->estudios_odont,
+	                	);
+	                	echo form_textarea($data_input);	                	
+	                	?>                                                 
                     </div>
                 </div>		          					                 	
      		</div>

@@ -111,7 +111,6 @@ $(function() {
             	$('#div_waiting_edit_cita').removeClass("hidden");            	
             },
             success: function (msg) {  
-            	console.log(msg);
                 if (isNaN(msg)) {    
                 	$('#div_waiting_edit_cita').addClass("hidden");   
                     $.each(msg, function (i, item) {

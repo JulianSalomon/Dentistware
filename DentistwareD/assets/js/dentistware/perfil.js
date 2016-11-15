@@ -1,5 +1,4 @@
-$(function() {
-    
+$(function() {    
 	$('#edit_perfil_form').submit(function (event) {
         event.preventDefault();
         $('.ac_p_error').fadeOut('slow').remove();
@@ -14,7 +13,6 @@ $(function() {
             	$('#div_waiting_edit_perfil').removeClass("hidden");            	
             },
             success: function (msg) {
-                console.log(msg);
                 if (isNaN(msg)) {
                 	$('#div_waiting_edit_perfil').addClass("hidden");   
                     $.each(msg, function (i, item) {
@@ -32,12 +30,9 @@ $(function() {
                     	});              
                     } else {
                     	$('#div_waiting_edit_perfil').addClass("hidden");
-                    	swal("Error", "Se ha presentado un error al editar éste perfil!", "error");
+                    	swal("Error", "Se ha presentado un error al editar su perfil!", "error");
                     }
                 }
-            },
-            error: function(){
-                console.log("AASDA")
             }
         });
     });
@@ -107,8 +102,46 @@ $(function() {
             $('#select_ciudades').prop('disabled', true);
             return false;
         }
-     });
-	
+    });
+    
+    $('#edit_password_form').submit(function (event) {
+        event.preventDefault();
+        $('.ac_p_error').fadeOut('slow').remove();
+        var postData = $(this).serializeArray(); 
+        $.ajax({
+            type: 'POST',
+            url: js_site_url + 'edit_password/',
+            data: postData,
+            beforeSend:function(){
+            	$('#div_waiting_edit_pass').removeClass("hidden");            	
+            },
+            success: function (msg) {
+                if (isNaN(msg)) {
+                	$('#div_waiting_edit_pass').addClass("hidden");   
+                    $.each(msg, function (i, item) {
+                        $('#div_' + i).after('<p class="alert alert-danger text-center ac_p_error">' + item + '</p>');
+                    });
+                } else {
+                    if (msg == 1) {    
+                    	swal({   
+                    		title: "Editado",   
+                    		text: "Se actualizó correctamente la contraseña!",   
+                    		type: "success"                 
+                    	}, 
+                    	function(){
+                    		location.href = js_site_url;
+                    	});              
+                    } else if (msg == 0) {
+                    	$('#div_waiting_edit_pass').addClass("hidden");
+                    	swal("Error", "Se ha presentado un error al cambiar la contraseña!", "error");
+                    } else {
+                        $('#div_waiting_edit_pass').addClass("hidden");
+                    	swal("Error", "La contraseña actual no coincide, por favor vuelva a ingresar la contraseña actual!", "error");
+                    }
+                }
+            }
+        });
+    });
 	
 	
     $("#chkEliminarFoto").iCheck({
@@ -124,51 +157,6 @@ $(function() {
 		monthsShort: ["Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"],
 		today: "Hoy"
 	};
-	
-    $('#edit_contrasena_form').submit(function (event) {
-        event.preventDefault();
-        $('.ac_p_error').fadeOut('slow').remove();
-        var postData = new FormData(this); 
-        $.ajax({
-            type: 'POST',
-            url: js_site_url + 'edit_contrasena/',
-            data: postData,
-            processData: false,
-            contentType: false,
-            beforeSend:function(){
-            	$('#div_waiting_edit_contrasena').removeClass("hidden");            	
-            },
-            success: function (msg) {
-                console.log(msg);
-                if (isNaN(msg)) {
-                	$('#div_waiting_edit_contrasena').addClass("hidden");   
-                    $.each(msg, function (i, item) {
-                        $('#div_' + i).after('<p class="alert alert-danger text-center ac_p_error">' + item + '</p>');
-                    });
-                } else {
-                    if (msg == 1) {    
-                    	swal({   
-                    		title: "Editado",   
-                    		text: "Se actualizó correctamente el la contraseña!",   
-                    		type: "success"                 
-                    	}, 
-                    	function(){
-                    		location.href = js_site_url2;
-                    	});              
-                    } else if (msg == 0) {
-                    	$('#div_waiting_edit_contrasena').addClass("hidden");
-                    	swal("Error", "Se ha presentado un error al editar la contraseña!", "error");
-                    } else {
-                        $('#div_waiting_edit_contrasena').addClass("hidden");
-                    	swal("Error", "Su contraseña anterior no coincide!", "error");
-                    }
-                }
-            },
-            error: function(){
-                console.log("AASDA")
-            }
-        });
-    });
     
     $(".date-select").datepicker({
         language: "es",
