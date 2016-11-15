@@ -12,12 +12,16 @@ class Diente extends Odon_Controller {
 	}
     
     public function index() {
-        $this->data['id_registro'] = $_POST['reg'];
-        $this->data['dientes'] = $this->diente_model->get_dientes($this->data['id_registro']);
+        $id_registro = $_POST['reg'];
+        $this->data['dientes'] = $this->diente_model->get_dientes($id_registro);
         $this->load->view('odontologo/dientes_view', $this->data);
     }
     
-    public function nuevoDiente(){
+    public function agregar_dientes() {
+        $this->load->view('odontologo/nuevo_dientes_view');
+    }
+    
+    public function nuevoDiente() {
         $input = array(
             'id_registro'=> $_POST['reg'],
             'num_diente' => $_POST['num'],
