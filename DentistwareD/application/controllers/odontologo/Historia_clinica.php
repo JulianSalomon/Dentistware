@@ -8,9 +8,8 @@ class Historia_clinica extends Odon_Controller {
         $this->load->model('historia_model');
 	}
 	
-
-	public function index($id = '') {
-        $this->session->set_userdata(array('id_cliente_cita' => $id));
+	public function index() {
+        $id = $this->session->userdata['id_cliente'];
         $this->load->model('persona_model');
 		$this->load->model('historia_model');
         $this->load->model('registro_model');
@@ -30,6 +29,10 @@ class Historia_clinica extends Odon_Controller {
 		$this->get_user_menu('Historia_Cliente');
 		$this->load->view('odontologo/historia_clinica_view', $data);
 	}
+    
+    public function atender_cita(){
+        $this->session->set_userdata(array('id_cliente' => $_POST('id')));
+    }
     
     public function crear_historia_clinica(){
         $this->load->model('persona_model');

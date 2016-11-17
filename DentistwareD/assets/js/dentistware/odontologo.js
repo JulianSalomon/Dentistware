@@ -167,7 +167,6 @@ $(function() {
             	$('#div_waiting_new_story').removeClass("hidden");            	
             },
             success: function (msg){
-                console.log(msg);
                 if (isNaN(msg)) {
                 	$('#div_waiting_new_story').addClass("hidden");  
                     $.each(msg, function (i, item) {
@@ -219,7 +218,6 @@ $(function() {
 						type: 'GET',
 						url: js_site_url + 'Historia_Clinica/marcar_no_asistir/' + cita,
 						success: function(msg) {
-							console.log(msg);
 							if (msg) {
 								swal({
 									title: "Cita marcada",
@@ -245,7 +243,6 @@ $(function() {
 
 	$('.atender-btn').click(function(e) {
 		e.preventDefault();
-		var cita = $(this).attr('cita');
         var cliente = $(this).attr('cliente');
         var id = $(this).attr('id');
         swal({
@@ -259,8 +256,16 @@ $(function() {
         },
         function(isConfirm) {
             if (isConfirm) {
-            	window.location.href = js_site_url + "Historia_Clinica/index/" + id ;
-                
+                $.ajax({
+					type: 'POST',
+					url: js_site_url + 'Historia_Clinica/Atender_Cita/',
+                    data: {
+                        id: id
+                    },
+					success: function() {
+            	       window.location.href = js_site_url + "Historia_Clinica/";
+					}
+				});
             }
         });           
     });    
