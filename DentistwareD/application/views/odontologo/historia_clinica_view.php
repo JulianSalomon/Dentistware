@@ -27,7 +27,6 @@
       <b>DENTIST</b>WARE
       </button>
       <div>
-         <!-- Content Header (Page header) -->
          <section class="content-header">
             <h1>
                Historia Clinica
@@ -55,7 +54,7 @@
                                  ?>
                            </div>
                            <div class="text-align:center;">
-                              <table class="table-bordered" style="width:60" align="center">
+                              <table style="width:60" align="center">
                                   <tr>
                                       <th class= text-right style= width:45% >Edad:</th>
                                       <td style= width:10% > </td>
@@ -124,7 +123,7 @@
                                  <td style="width:80%">
                                     <?php
                                        echo $historia_clinica->antecedentes_fam;
-                                       ?>
+                                    ?>
                                  </td>
                               </tr>
                               <tr>
@@ -196,7 +195,13 @@
                         </div>
                         <div class="box-footer">
                             <button type="button" class="btn btn-danger btn-lg pull-left cancel-btn">Terminar cita</button>
-                            <button type="button" class="btn btn-primary btn-lg pull-right agregarRegistro-btn" data-toggle="modal" data-target="#agregarRegistro" title="Agregar registro">Nuevo registro</button>                        
+                            <?php
+                                if($historia_clinica != null){
+                            ?>
+                                <button type="button" class="btn btn-primary btn-lg pull-right agregarRegistro-btn" data-toggle="modal" data-target="#agregarRegistro" title="Agregar registro">Nuevo registro</button>
+                            <?php
+                                }
+                            ?>
                         </div>                        
                      </form>
                   </div>

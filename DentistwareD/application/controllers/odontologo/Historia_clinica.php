@@ -9,6 +9,9 @@ class Historia_clinica extends Odon_Controller {
 	}
 	
 	public function index() {
+        if($this->session->userdata['id_cliente'] == null){
+            redirect('Odontologo/Cita');
+        }
         $id = $this->session->userdata['id_cliente'];
         $this->load->model('persona_model');
 		$this->load->model('historia_model');
@@ -30,18 +33,28 @@ class Historia_clinica extends Odon_Controller {
 		$this->load->view('odontologo/historia_clinica_view', $data);
 	}
     
-    public function atender_cita(){
-        $this->session->set_userdata(array('id_cliente' => $_POST('id')));
+    public function seleccionar_cita(){
+        $this->session->set_userdata(array('id_cliente' => $_POST['id']));
+    }
+    
+    public function eliminar_seleccion(){
+        $this->session->set_userdata(array('id_cliente' => null));
+        if($this->session->userdata['id_cliente'] == null){
+            redirect('Odontologo/Cita');
+        }
     }
     
     public function crear_historia_clinica(){
+        if($this->session->userdata['id_cliente'] == null){
+            redirect('Odontologo/Cita');
+        }
         $this->load->model('persona_model');
 		$this->load->model('historia_model');
         $this->load->model('pregunta_model');
         $this->load->model('registro_model');
         $preguntas = $this->pregunta_model->get_preguntas();
-        $cliente_info = $this->persona_model->get_persona('', $this->session->userdata['id_cliente_cita']);
-        $historia_clinica = $this->historia_model->get_historia_clinica($this->session->userdata['id_cliente_cita']);
+        $cliente_info = $this->persona_model->get_persona('', $this->session->userdata['id_cliente']);
+        $historia_clinica = $this->historia_model->get_historia_clinica($this->session->userdata['id_cliente']);
         $registros = null;
         if($historia_clinica != null)
             $registros = $this->registro_model->get_registros($historia_clinica->id_historia);
@@ -54,28 +67,27 @@ class Historia_clinica extends Odon_Controller {
     
     
       public function nueva_historia_clinica(){
+          if($this->session->userdata['id_cliente'] == null){
+                redirect('Odontologo/Cita');
+          }
           $this->load->model('historia_model'); 
           $this->load->model('pregunta_model');
           $input = array (
-                'id_cliente' => $this->session->userdata['id_cliente_cita'],
+                'id_cliente' => $this->session->userdata['id_cliente'],
                 'fecha_apertura' => date('Y-m-d H:i:s'),
                 'antecedentes_fam' => $this->input->post ( 'input_antecedentes' ),
                 'enfermedad_actual' => $this->input->post ( 'input_enfermedad' ),
                 'observaciones' => $this->input->post ( 'input_observaciones' )
-
-			); 
+          );
           
-     $this->historia_model->nueva_historia($input);
-          $historia_clinica = $this->historia_model->get_historia_por_cliente($this->session->userdata['id_cliente_cita'])->id_historia;
-            $input = array (
-                'id_pregunta' => 1,
-                'id_historia' => $historia_clinica,
-                    'estado_pregunta' => $this->input->post ( 'p1' )
-    				
-			);
-           $result = $this->pregunta_model->insertar_preguntas($input); 
-           // header ( 'Content-Type: application/json' );
-			echo 1;
-      
+          $this->historia_model->nueva_historia($input);
+          $historia_clinica = $this->historia_model->get_historia_por_cliente($this->session->userdata['id_cliente'])->id_historia;
+          $input = array (
+              'id_pregunta' => 1,
+              'id_historia' => $historia_clinica,
+              'estado_pregunta' => $this->input->post ( 'p1' )
+          );
+          $result = $this->pregunta_model->insertar_preguntas($input);
+          echo result;      
     }
 }

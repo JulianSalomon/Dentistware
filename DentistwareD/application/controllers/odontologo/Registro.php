@@ -6,7 +6,7 @@ class Registro extends Odon_Controller {
 	function __construct() {
 		parent::__construct();
         if(!$_POST){
-            redirect('Odontologo/Historia_Clinica', 'refresh');
+            redirect('Odontologo/Historia_Clinica');
         }
         $this->load->model('registro_model');
 	}
@@ -18,19 +18,19 @@ class Registro extends Odon_Controller {
 	}
     
     public function nuevo_registro() {
-			$input = array(
-				'id_historia' => $this->input->post('inputHistoria'),
-				'fecha_reg' => date('Y-m-d H:i:s'),
-				'id_odon' => $this->session->userdata('id_persona'),
-				'motivo_consulta' => $this->input->post('inputMotivo'),
-				'desc_procedimiento' => $this->input->post('inputDescripcion'),
-                'enfermedad_actual' => $this->input->post('inputEnfermedad'),
-			);
-			$result = $this->registro_model->nuevo_registro($input);
-            if($result){
-			     echo $this->registro_model->get_registro('',$input['id_historia'])->id_registro;
-            } else {
-                 echo $result;
-            }
+        $input = array(
+            'id_historia' => $this->input->post('inputHistoria'),
+            'fecha_reg' => date('Y-m-d H:i:s'),
+            'id_odon' => $this->session->userdata('id_persona'),
+            'motivo_consulta' => $this->input->post('inputMotivo'),
+            'desc_procedimiento' => $this->input->post('inputDescripcion'),
+            'enfermedad_actual' => $this->input->post('inputEnfermedad')
+        );
+        $result = $this->registro_model->nuevo_registro($input);
+        if($result){
+            echo $this->registro_model->get_registro('',$input['id_historia'])->id_registro;
+        } else {
+            echo $result;
+        }
 	}
 }
