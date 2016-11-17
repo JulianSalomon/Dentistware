@@ -123,7 +123,7 @@
                      		'name' => "cancelar_edit",
                      		'content' => "Cancelar"
                      );
-                     $redirigir = 'odontologo/Historia_clinica/index/' . $cliente_info->id_persona;
+                     $redirigir = 'Odontologo/Historia_clinica/index/' . $cliente_info->id_persona;
                      echo anchor(base_url() . $redirigir, 'Cancelar', $data_input);
                      $data_input = array(
                      		'class' => "btn btn-primary btn-lg",
@@ -139,10 +139,10 @@
          </section>
       </div>
       <script>
-         var js_site_url = '<?php echo site_url("administrador/Cliente/");?>';
+         var js_site_url = '<?php echo site_url("Administrador/Cliente/");?>';
       </script> 
       <?php
-         $path = "odontologo/Historia_clinica/";
+         $path = "Odontologo/";
          echo '<script>
                  var js_site_url = "'. site_url($path) . '";
                </script>';

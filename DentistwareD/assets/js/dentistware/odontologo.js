@@ -17,41 +17,78 @@ $(function() {
 		$('#nuevoRegistro_form').submit(function(event) {
 			event.preventDefault();
 			$('.ac_p_error').fadeOut('slow').remove();
-            var postData = new FormData(this);
-			$.ajax({
-                type: 'POST',
-				url: js_site_url + 'Registro/nuevo_registro', 
-                data: postData,
-                processData: false,
-                contentType: false,
-				success: function(result) {
-					var regId = result;
-                    $.each(myTeeth.teeth,
-						function(index, value) {
-							$.post(
-								js_site_url + 'Diente/nuevoDiente',
-                                {   reg: regId,
-									num: value["n"],
-									aus: value["state"][0],
-									ext: value["state"][1],
-									car: value["state"][2],
-									obt: value["state"][3],
-									cor: value["state"][4],
-									tra: value["state"][5]
-								},
-								function(result) {
-                                    
-                                }
-							);
-						}
-					);
-				},
-                error: function(msg) {
-                    console.log(msg);
+            swal({
+				title: 'Guardar registro',
+				text: '¿Desea guardar este registro?',
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonText: 'Sí',
+				cancelButtonText: 'No',
+				showLoaderOnConfirm: true,
+                },
+                function(isConfirm) {
+                    if (isConfirm) {
+                        var postData = new FormData(this);
+                        $.ajax({
+                            type: 'POST',
+                            url: js_site_url + 'Registro/nuevo_registro', 
+                            data: postData,
+                            processData: false,
+                            contentType: false,
+                            success: function(result) {
+                                var regId = result;
+                                $.each(myTeeth.teeth,
+                                    function(index, value) {
+                                        postData = {    
+                                            reg: regId,
+                                            num: value["n"],
+                                            aus: value["state"][0],
+                                            ext: value["state"][1],
+                                            car: value["state"][2],
+                                            obt: value["state"][3],
+                                            cor: value["state"][4],
+                                            tra: value["state"][5]
+                                        }
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: js_site_url + 'Diente/nuevoDiente',
+                                            data: postData,
+                                            processData: false,
+                                            contentType: false,
+                                            success: function(result) {
+                                                swal({
+                                                    title:  'Ingreso satisfactorio',
+                                                    text:   'El registro y los dientes fueron generados satisfactoriamente',
+                                                    type:   'success',
+                                                    }
+                                                )
+                                                $('#agregarRegistro').modal('hide');
+                                            },
+                                            error: function(msg) {
+                                                swal({
+                                                    title:  'Error',
+                                                    text:   'Los dientes no se han podido insertar',
+                                                    type:   'error',
+                                                    }
+                                                )
+                                            }
+                                        });
+                                    }
+                                );
+                            },
+                            error: function(msg) {
+                                swal({
+                                    title:  'Error',
+                                    text:   'El registro no se ha podido insertar',
+                                    type:   'error',
+                                    }
+                                )
+                            }
+                        })
+                    }
                 }
-            })
+            );
 		})
-
 	});
 
 	$('.salir-btn').click(function(e) {
@@ -115,16 +152,16 @@ $(function() {
     
     $('.crear-historia-btn').click(function(e) {
 		e.preventDefault();
-        window.location.href = js_site_url + "crear_historia_clinica" ;              
+        window.location.href = js_site_url + "Historia_Clinica/Crear_Historia_Clinica" ;              
     }); 
     
-     $('#nueva_historia_form').submit(function (event) {
+    $('#nueva_historia_form').submit(function (event) {
         event.preventDefault();
         $('.ac_p_error').fadeOut('slow').remove();
         var postData = $(this).serializeArray(); 
         $.ajax({
             type: 'POST',
-            url: js_site_url + 'nueva_historia_clinica/',
+            url: js_site_url + 'historia_clinica/nueva_historia_clinica/',
             data: postData,
             beforeSend:function(){
             	$('#div_waiting_new_story').removeClass("hidden");            	
@@ -139,7 +176,7 @@ $(function() {
                 } else {
                     if (msg == 1) {    
                     	swal({   
-                    		title: "",   
+                    		title: "Historia clínica generada",   
                     		text: "Se insertó exitosamente la historia clínica",   
                     		type: "success"                 
                     	}, 
@@ -155,16 +192,12 @@ $(function() {
             }
         });
     });
-		
-
-
-
-
-$('#runner').runner({
-    autostart: true,
-    countdown: false
     
-});
+    $('#runner').runner({
+        autostart: true,
+        countdown: false
+
+    });
 
 
 	$('.no-asistir-btn').click(function(e) {
@@ -189,20 +222,25 @@ $('#runner').runner({
 							console.log(msg);
 							if (msg) {
 								swal({
-										title: "Cita marcada",
-										text: "La cita con " + cliente + " ha sido marcada como no asistida por el cliente.",
-										type: "success",
+									title: "Cita marcada",
+									text: "La cita con " + cliente + " ha sido marcada como no asistida por el cliente.",
+									type: "success",
 									},
 									function() {
 										location.reload();
 									});
 							} else {
-								swal("Error", "La cita con " + odonto + " no puede ser marcada, vuelva a intentarlo.", "error");
+								swal({
+                                    title: "Error",
+                                    text: "La cita con " + odonto + " no puede ser marcada, vuelva a intentarlo.",
+                                    type: "error"
+                                });
 							}
 						}
 					});
 				}
-			});
+			}
+        );
 	});
 
 	$('.atender-btn').click(function(e) {
@@ -221,13 +259,24 @@ $('#runner').runner({
         },
         function(isConfirm) {
             if (isConfirm) {
-            	window.location.href = js_site_url2 + "index/" + id ;
+            	window.location.href = js_site_url + "Historia_Clinica/index/" + id ;
                 
             }
         });           
     });    
 
-
+    $("#tablaRegistro").DataTable({
+	    "language":{
+		    "info": "Mostrando un total de _TOTAL_ registros",
+		    "infoThousands": ",",
+		},
+		"paging": false,
+		"info": true,
+		"searching": false,
+        "ordering": true,
+        "autoWidth": false,
+    });
+    
     $(".timepicker").timepicker({
 		showInputs: false,
 		minuteStep: 30,
