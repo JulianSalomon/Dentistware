@@ -17,9 +17,9 @@ class Pregunta_model extends MY_Model {
 		return false;
 	}
     
-       public function insertar_preguntas($data) {
-		return $this->insertar_nuevo('historia_pregunta', $data);
-	}
+    public function insertar_preguntas($data) {
+        return $this->insertar_nuevo('historia_pregunta', $data);
+    }
     
     
 }

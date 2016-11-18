@@ -45,7 +45,8 @@
                <!-- /.box-header -->
                <div class="box-body">
                   <div class="col-xs-12 form-group" >
-                     <label  class="control-label">Antecedentes: *</label>
+                     <input id="input_cliente" name="input_cliente" class="hidden" value="<?php echo $cliente_info->id_persona; ?>">
+                     <label  class="control-label">Antecedentes familiares: *</label>
                      <div class="col-xs-12 input-group" id="div_input_antecedentes"> 
                         <?php 
                            $data_input = array(
@@ -59,8 +60,7 @@
                            echo form_textarea($data_input);	                	
                            ?>  
                      </div>
-                  </div>
-                     <div class="col-xs-12 form-group" >
+                      <br>
                      <label  class="control-label">Enfermedad actual: *</label>
                      <div class="col-xs-12 input-group" id="div_input_enfermedad"> 
                         <?php 
@@ -75,8 +75,7 @@
                            echo form_textarea($data_input);	                	
                            ?>  
                      </div>
-                  </div>
-                     <div class="col-xs-12 form-group" >
+                      <br>
                      <label  class="control-label">Observaciones: *</label>
                      <div class="col-xs-12 input-group" id="div_input_observaciones"> 
                         <?php 
@@ -94,7 +93,7 @@
                   </div>
                    
                    <hr>
-                  <h3 class="box-title">Preguntas</h3>
+                  <h3 class="box-title">Preguntas*</h3>
                   <table class="table table-bordered">
                      <tr>
                         <th style="width: 10px">#</th>
@@ -105,16 +104,16 @@
                      <?php 
                           $i = 1;
                           foreach($preguntas as $pregunta){
-                            echo '<tr>';
-                            echo '<td>' .$i . '.</td>';
-                            echo  '<td>' .$pregunta->desc_pregunta . '</td>';
-                            echo '<td> <input type="radio" name="p' . $i .'"  value="1"> </td>'; 
-                            echo '<td> <input type="radio" name="p' . $i .'"  value="0"> </td>'; 
-                            echo '</tr>';
-                            $i++;
+                              echo '<tr>';
+                              echo '<td>' .$i . '.</td>';
+                              echo  '<td>' .$pregunta->desc_pregunta . '</td>';
+                              echo '<td style="width:2%"> <input type="radio" name="p' . $i .'"  value="1"> </td>';
+                              echo '<td style="width:2%"> <input type="radio" name="p' . $i .'"  value="0"> </td>';
+                              echo '</tr>';
+                              $i++;
                           }
                       ?>
-                  </table>
+                   </table>
                </div>
                <div class="box-footer text-center">
                   <?php                 

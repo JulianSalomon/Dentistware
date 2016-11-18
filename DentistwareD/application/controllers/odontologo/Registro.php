@@ -5,9 +5,9 @@ class Registro extends Odon_Controller {
         
 	function __construct() {
 		parent::__construct();
-        if(!$_POST){
+        /*if(!$_POST && !$this->input->post()){
             redirect('Odontologo/Historia_Clinica');
-        }
+        }*/
         $this->load->model('registro_model');
 	}
     
