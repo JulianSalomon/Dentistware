@@ -22,12 +22,10 @@
                             $fecha = str_replace("-", "/", $fecha);
                             
                            	$hora = $this->session->userdata('hora');
-                            $odontologo = $this->session->userdata('odontologo');
-                            
+                            $odontologo = $this->session->userdata('odontologo');                            
                         ?>
                         <div class="row">
-                        	<div class="col-lg-2"></div>
-							
+                        	<div class="col-lg-4"></div>							
                            	<div class="col-lg-4 form-group">
                             	<div class="bootstrap-timepicker">
 									<label>Filtrar por hora:</label>

@@ -3,7 +3,7 @@ var myTeeth;
 var ratio;
 var modalWidth;
 var modalHeight;
-var editable;
+var editable = 1;
 
 preload = function() {
     bg = loadImage(js_site_url + "../assets/img/Teeth.png");
@@ -16,7 +16,7 @@ setup = function() {
     } else {
         canvas.parent('teeth-viewer');
     }
-    ratio = width / 40;    
+    ratio = width / 40;
     myTeeth = new Teeth();
 }
 
@@ -77,6 +77,12 @@ mouseClicked = function() {
 
 
 Teeth = function() {
+    if(teeth == null){
+        for(var i = 0; i<32; i++){
+            teeth[i] = [0,0,0,0,0,0];
+        }
+    }
+    
     for(var i = 0; i<32; i++){
         if(teeth[i] == null){
             teeth[i] = [0,0,0,0,0,0];
