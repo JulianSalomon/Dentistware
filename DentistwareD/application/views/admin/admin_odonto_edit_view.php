@@ -83,7 +83,7 @@
 						<label  class="control-label">N. de Documento: *</label>
                         <div class="input-group" id="div_inputDocumento">
                         	<span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input type="text" class="form-control" id="inputDocumento" placeholder="Número de documento" name="inputDocumento" value="<?php echo $odontologo_info->documento_persona;?>">
+                            <input type="number" class="form-control" id="inputDocumento" placeholder="Número de documento" name="inputDocumento" value="<?php echo $odontologo_info->documento_persona;?>">
                       	</div>
                  	</div>                                                                                                  
                	</div>  

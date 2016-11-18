@@ -3,7 +3,7 @@ $(function() {
         e.preventDefault();
         var documento = $(this).attr('doc');
         if(documento == "null"){
-            swal("Error", "Usted no puede eliminar a este usuario", "error");
+            swal("Error", "Este usuario no puede ser eliminado!", "error");
         } else {
             swal({
                 title: 'Eliminar',

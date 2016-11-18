@@ -18,7 +18,7 @@
                     <table class="table table-bordered table-hover datatable tabla-usuario">
                         <thead>
                             <tr>
-                                <th>Concepto</th>
+                                <th>Concepto Multa</th>
                                 <th>Valor multa</th>
                                 <th>Estado</th>
                             </tr>
@@ -69,8 +69,7 @@
                             		'class' => 'btn btn-primary btn-lg',
                             );
                             echo anchor(base_url() . 'empleado/Cliente/search/', 'Volver', $data_input);                            
-                            echo '</div>';
-                           
+                            echo '</div>';                           
                         }              
                     ?>
                 </div>
@@ -79,5 +78,5 @@
     </section>
 </div>
 <script>
-var js_site_url = '<?php echo site_url("empleado/Cliente/");?>';
+	var js_site_url = '<?php echo site_url("empleado/Cliente/");?>';
 </script>

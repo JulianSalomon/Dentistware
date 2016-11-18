@@ -136,7 +136,7 @@
 		                    	echo br(1);
 			                	echo '<div class="form-group text-center">
 										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
-			                   	echo heading('No se encontraron resultados.<br>Intente con otra opción.', 3, 'class="text-muted"');
+			                   	echo heading('No se encontraron resultados.<br>Por favor intente buscar con otra opción.', 3, 'class="text-muted"');
 			                   	echo '</div>';
 	                    	}
 	                    }                    	
@@ -210,7 +210,7 @@
                     <label for="inputNombre" class=" control-label ">Nombre Completo: *</label>
                     <div class="input-group" id="div_inputNombre">
                         <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                        <input type="text" class="form-control" id="inputNombre" placeholder="Nombres y apellidos" name="inputNombre">
+                        <input type="number" class="form-control" id="inputNombre" placeholder="Nombres y apellidos" name="inputNombre">
                     </div>
                 </div>
                 <div class="form-group">

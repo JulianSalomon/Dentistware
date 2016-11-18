@@ -8,10 +8,14 @@ class Multa_model extends MY_Model {
 		parent::__construct();
 	}
 	
-	public function get_multas_cliente($id_cliente) {
+	public function get_multas_cliente($id_cliente = '', $order_by = 'id_multa', $order = 'asc', $limit = 0, $offset = 0) {
 		$this->db->select('*');
 		$this->db->from('multa');
 		$this->db->where('id_cliente', $id_cliente);
+		$this->db->order_by($order_by, $order);
+		if ($limit) {
+			$this->db->limit($limit, $offset);
+		}
         $query = $this->db->get();
 		if ($query->num_rows())
 			return $query->result();
@@ -30,24 +34,21 @@ class Multa_model extends MY_Model {
 		return false;
 	}
 
-/*
-	
- 	public function get_multa($id){
- 		$this->db->select('*');
- 		$this->db->from('multa');
-		$this->db->where('id_multa', $id);
-		$query = $this->db->get();
-		if ($query->num_rows())
-			return $query->row();
-	return false;
-	}*/
-	
 	public function update_multa($id_multa, $data = ''){
 		return $this->actualizar_datos('multa', $data, array(
 				'id_multa' => $id_multa,
 		));
 	}
-
+	
+	public function count_multas_by_cliente($id_cliente){
+		$this->db->select('*');
+		$this->db->from('multa');
+		$this->db->where('id_cliente', $id_cliente);
+		
+		$query = $this->db->get();
+		return count($query->result());
+	}
+	
     public function count_multas($estadoMulta) {
 		$this->db->select('*');
         $this->db->from('multa');

@@ -133,7 +133,7 @@
 		                    	echo br(1);
 			                	echo '<div class="form-group text-center">
 										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
-			                   	echo heading('No se encontraron resultados.<br>Intente con otra opción.', 3, 'class="text-muted"');
+			                   	echo heading('No se encontraron resultados.<br>Por favor intente buscar con otra opción.', 3, 'class="text-muted"');
 			                   	echo '</div>';
 			                   	echo '</div>';
 	                    	}
@@ -146,7 +146,6 @@
     </section>
 </div>
 
-<!-- Modal -->
 <div class="modal fade modal-add" id="modal_add_admin" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <?php
@@ -201,7 +200,7 @@
                         <label  class="control-label">N. de Documento: *</label>
                         <div class="input-group" id="div_inputDocumento">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input type="text" class="form-control" id="inputDocumento" placeholder="Número de documento" name="inputDocumento">
+                            <input type="number" class="form-control" id="inputDocumento" placeholder="Número de documento" name="inputDocumento">
                         </div>
                     </div>
                 </div>

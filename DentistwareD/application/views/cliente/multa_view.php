@@ -8,7 +8,7 @@
         <div class="box box-primary">
 			<div class="box-header with-border">
 				<div class="col-xs-6">
-					<h4>En la siguiente tabla encuentra el historia de sus multas.</h4>
+					<h4>A continuación, encuentra su historial de multas.</h4>
 				</div>
 			</div>        
             <div class="box-body"> 
@@ -17,7 +17,7 @@
                     <table id="multasCliente" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Concepto</th>
+                                <th>Concepto Multa</th>
                                 <th>Valor</th>
                                 <th>Estado</th>
                             </tr>
@@ -30,13 +30,13 @@
                                     echo $multa->concepto_multa;
                                     echo '</td>';
                                     echo '<td>';
-                                   	echo $multa->valor_multa;
+                                   	echo '$' . $multa->valor_multa;
                                     echo '</td>';
                                     echo '<td align="center">';                                                                   
 									if($multa->estado_multa){
-                                    	echo '<i class="fa fa-check-square-o"></i>';
+                                    	echo 'Multa pagada';
 									} else {
-                                    	echo '<i class="fa fa-square-o"></i>';
+                                    	echo 'Multa sin pagar';
                                   	}
                                     echo '</td>';
                            			echo '</tr>';
@@ -51,12 +51,15 @@
                             </tr>
                         </tfoot>                    
                     </table>
+                    	<div class="text-center"> 
+                    		<?php echo $links;?>
+                    	</div>                    
                     <?php 
                         } else {
                           	echo br(1);
                             echo '<div class="form-group text-center">
                             	<i id="logo_i" class="fa fa-smile-o fa-5x"></i>';
-                            echo heading('No tiene un registro de multas', 3, 'class="text-muted"');
+                            echo heading('Usted aún no tiene un historial de multas.', 3, 'class="text-muted"');
                             echo '</div>';
                         }              
                     ?>

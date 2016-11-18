@@ -1493,6 +1493,3 @@ create trigger multa_automatica after update on cita for each row
 end if;
 end &&
 delimiter ;
-
-select * from historia_clinica;
-delete from historia_clinica where id_cliente = 5;

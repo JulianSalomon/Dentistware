@@ -22,7 +22,7 @@ $(function() {
                     if (msg == 1) {    
                     	swal({   
                     		title: "Editado",   
-                    		text: "Se actualizó correctamente el perfil!",   
+                    		text: "Se han actualizado correctamente sus datos!",   
                     		type: "success"                 
                     	}, 
                     	function(){
@@ -30,7 +30,7 @@ $(function() {
                     	});              
                     } else {
                     	$('#div_waiting_edit_perfil').addClass("hidden");
-                    	swal("Error", "Se ha presentado un error al editar su perfil!", "error");
+                    	swal("Error", "Se ha presentado un error al editar el perfil, por favor vuelva a verificar los datos!", "error");
                     }
                 }
             }

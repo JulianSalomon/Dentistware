@@ -32,7 +32,7 @@ $(function() {
                         $('#modal_add_client').modal('hide');
                     } else {
                     	$('#div_waiting_new_cliente').addClass("hidden"); 
-                    	swal("Error", "Se ha presentado un error al ingresar el cliente", "error");
+                    	swal("Error", "Se ha presentado un error al ingresar el cliente, por favor verifique los datos", "error");
                     }
                 }
             }
@@ -71,7 +71,7 @@ $(function() {
                     	});              
                     } else {
                     	$('#div_waiting_edit_cliente').addClass("hidden");
-                    	swal("Error", "Se ha presentado un error al editar éste cliente!", "error");
+                    	swal("Error", "Se ha presentado un error al editar éste cliente, por favor verifique los datos!", "error");
                     }
                 }
             }

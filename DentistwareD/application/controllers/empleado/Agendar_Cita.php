@@ -98,9 +98,9 @@ class Agendar_Cita extends Empl_Controller {
 			} else if ($numCitas >= 3){
 				echo "Este cliente ya tiene agendadas más de tres citas.";
 			} else if($count){
-				echo "Este cliente ya tiene asignada en el mismo horario, por favor elija otra opción.";
+				echo "Este cliente ya tiene asignada una cita en el mismo horario, por favor elija otra opción.";
 			} else {
-				$result = $this->cita_model->agendar_cita($id_cita, $data);
+				echo $result = $this->cita_model->agendar_cita($id_cita, $data);
 			}
 		} else {
 			echo "El cliente no se encuentra registrado, por favor verifique el documento.";
