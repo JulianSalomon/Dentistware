@@ -17,7 +17,8 @@
          echo plugin_css('adminLTE');
          echo plugin_css('skin');
          echo plugin_css('pace');
-                 echo plugin_css('sweetalert');
+         echo plugin_css('sweetalert');
+         echo plugin_css('datatables');
          
          ?>
    </head>
@@ -103,31 +104,30 @@
                         <th>No</th>
                      </tr>
                      <?php 
-                      $i = 1;
-                      foreach($preguntas as $pregunta){
-                        echo '<tr>';
-                         echo '<td>' .$i . '.</td>';
-                           echo  '<td>' .$pregunta->desc_pregunta . '</td>';
-                              echo '<td> <input type="radio" name="p' . $i .'"  value="1"> </td>'; 
-                        echo           '<td> <input type="radio" name="p' . $i .'"  value="0"> </td>'; 
-                        
-                        echo '</tr>';
-                        $i++;
-                        } ?>
+                          $i = 1;
+                          foreach($preguntas as $pregunta){
+                            echo '<tr>';
+                            echo '<td>' .$i . '.</td>';
+                            echo  '<td>' .$pregunta->desc_pregunta . '</td>';
+                            echo '<td> <input type="radio" name="p' . $i .'"  value="1"> </td>'; 
+                            echo '<td> <input type="radio" name="p' . $i .'"  value="0"> </td>'; 
+                            echo '</tr>';
+                            $i++;
+                          }
+                      ?>
                   </table>
                </div>
                <div class="box-footer text-center">
                   <?php                 
                      $data_input = array(
-                     		'class' => "btn btn-danger btn-lg",
+                     		'class' => "btn btn-danger btn-lg pull-left",
                      		'id' => "edit_cancel_btn",
-                     		'name' => "cancelar_edit",
-                     		'content' => "Cancelar"
+                     		'name' => "cancelar_edit"
                      );
-                     $redirigir = 'odontologo/Historia_clinica/index/' . $cliente_info->id_persona;
+                     $redirigir = 'Odontologo/Historia_clinica/';
                      echo anchor(base_url() . $redirigir, 'Cancelar', $data_input);
                      $data_input = array(
-                     		'class' => "btn btn-primary btn-lg",
+                     		'class' => "btn btn-primary btn-lg pull-right",
                      		'id' => "guardar_edit",
                      		'name' => "guardar_edit",
                      		'value' => "Guardar",
@@ -141,19 +141,19 @@
       </div>
 
       <?php
-         $path = "odontologo/Historia_clinica/";
+         $path = "Odontologo/";
          echo '<script>
                  var js_site_url = "'. site_url($path) . '";
                </script>';
-                  echo plugin_js();
-              echo plugin_js('bootstrap');
-              echo plugin_js('app');
-              echo plugin_js('pace');
-             echo plugin_js('timepicker');
-             echo plugin_js('runner');
-             echo plugin_js('sweetalert');
-            
-             echo plugin_js('assets/js/dentistware/odontologo.js', true);
-         ?>
+         echo plugin_js();
+         echo plugin_js('bootstrap');
+         echo plugin_js('app');
+         echo plugin_js('pace');
+         echo plugin_js('timepicker');
+         echo plugin_js('runner');
+         echo plugin_js('datatable');
+         echo plugin_js('sweetalert');
+         echo plugin_js('assets/js/dentistware/odontologo.js', true);
+      ?>
    </body>
 </html>

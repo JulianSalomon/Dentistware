@@ -6,7 +6,7 @@ class Diente extends Odon_Controller {
 	function __construct() {
 		parent::__construct();
         if(!$_POST){
-            redirect('Odontologo/Historia_Clinica', 'refresh');
+            redirect('Odontologo/Historia_Clinica');
         }
         $this->load->model('diente_model');
 	}
@@ -28,7 +28,6 @@ class Diente extends Odon_Controller {
             'corona'     => $_POST['cor'],
             'tramo'      => $_POST['tra']
         );
-        console.log($input);
         $result = $this->diente_model->nuevo_diente($input);            
     }
 }

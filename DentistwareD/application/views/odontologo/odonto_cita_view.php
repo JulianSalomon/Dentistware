@@ -128,11 +128,9 @@
 </div>
 
 <?php 
-    $path = "odontologo/Cita/";
-    $path2 = "odontologo/Historia_clinica/";
+    $path = "Odontologo/";
     echo '<script>
             var js_site_url = "'. site_url($path) . '";
-            var js_site_url2 = "'. site_url($path2) . '";
           </script>';
 
 ?>
