@@ -101,7 +101,6 @@ class Cita_model extends MY_Model {
 		$this->db->where('fecha_cita', $fechaActual);
         $this->db->group_start();
         $this->db->where('estado_cita ', NULL);
-        $this->db->or_where('estado_cita ', '1');
         $this->db->group_end();
 		
 		if ($horaSolicitada != '') {

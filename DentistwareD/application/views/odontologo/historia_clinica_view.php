@@ -17,6 +17,7 @@
          echo plugin_css('adminLTE');
          echo plugin_css('skin');
          echo plugin_css('pace');
+            echo plugin_css('sweetalert');
          
          ?>
    </head>
@@ -103,7 +104,7 @@
                                  ?>
                            </div>
                            <div class="form-group text-center" >
-                              <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal_add_client">Editar historia clínica</button>
+                             <button type="button" class="editar-historia-btn btn btn btn-info btn-lg" id="editar_historia" data-toggle="modal" data-target="#modal_edit_story" title="Editar historia">Editar historia clínica</button>
                            </div>
                            <table class="table-responsive">
                               <tr>
@@ -185,9 +186,14 @@
                                  <?php }  ?>
                               </table>
                               <div class="modal-footer">
-                                 <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg pull-left cancel-btn">Terminar cita</button>
-                                 <?php if($historia_clinica != null){ ?>
-                                 <button type="button" class="btn btn-primary pull-right agregarRegistro-btn" data-toggle="modal" data-target="#agregarRegistro" title="Agregar registro">Nuevo registro</button>
+                               <?php
+                                  echo '<a type="button" class="terminar-cita-btn btn btn-danger btn-lg pull-left cancel-btn" cita="' . $id_cita . '" cliente="' . ucwords($persona->nombre_persona) . '" id="terminar_cita" data-toggle="tooltip"  title="Terminar cita" >
+		                    							Terminar Cita
+	                    							</a>';
+                                 
+                                   
+                                 if($historia_clinica != null){ ?>
+                                    <button type="button" class="btn btn-primary btn-lg pull-right agregarRegistro-btn" data-toggle="modal" data-target="#agregarRegistro" title="Agregar registro">Nuevo registro</button>
                                  <?php } ?>
                               </div>
                            </div>
@@ -407,6 +413,7 @@
                     echo plugin_js('runner');
                     echo plugin_js('teeth-drawer');
                     echo plugin_js('p5');
+                    echo plugin_js('sweetalert');
                     echo plugin_js('assets/js/dentistware/dientes.js', true);
 			?>
        

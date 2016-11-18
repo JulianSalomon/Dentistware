@@ -23,9 +23,16 @@ class Cita extends Odon_Controller {
 		$this->render('odontologo/odonto_cita_view');
 	}
     
-    	public function marcar_no_asistir($cita) {				
+    	public function marcar_no_asistir($cita) {
 		$data = array(
 			"estado_cita" => 0
+		);
+		echo $this->cita_model->marcar_cita($cita, $data);
+	}
+    
+    public function marcar_asistir($cita) {
+		$data = array(
+			"estado_cita" => 1
 		);
 		echo $this->cita_model->marcar_cita($cita, $data);
 	}

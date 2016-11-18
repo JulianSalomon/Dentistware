@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <title>Dentistware | Creando historia clinica</title>
+      <title>Dentistware | Editando historia clinica</title>
       <link rel="shortcut icon" type="image/png" href="<?php echo base_url('assets/img/logo.png')?>"/>
       <?php
          echo meta('X-UA-Compatible', 'IE=edge', 'equiv');
@@ -27,7 +27,7 @@
       </button>
       <div >
          <section class="content-header">
-            <?php echo heading('Crear historia clínica',1);?>
+            <?php echo heading('Editar historia clínica',1);?>
          </section>
          <section class="content">
             <div class="box box-primary">
@@ -36,7 +36,7 @@
                </div>
                <?php 
                   $data_input = array(
-                  		'id' => "nueva_historia_form",
+                  		'id' => "editar_historia_form",
                       'cliente' => $cliente_info->id_persona,
                   );        
                   echo form_open('', $data_input);	
@@ -55,6 +55,7 @@
                            		'name' => "input_antecedentes",
                            		'rows' => "3",
                            		"maxlength" => "1000",
+                               'value' => $historia_clinica->antecedentes_fam,
                            );
                            echo form_textarea($data_input);	                	
                            ?>  
@@ -71,6 +72,7 @@
                            		'name' => "input_enfermedad",
                            		'rows' => "1",
                            		"maxlength" => "100",
+                               'value' => $historia_clinica->enfermedad_actual,
                            );
                            echo form_textarea($data_input);	                	
                            ?>  
@@ -87,6 +89,7 @@
                            		'name' => "input_observaciones",
                            		'rows' => "3",
                            		"maxlength" => "2000",
+                               'value' => $historia_clinica->observaciones,
                            );
                            echo form_textarea($data_input);	                	
                            ?>  
@@ -103,13 +106,17 @@
                         <th>No</th>
                      </tr>
                      <?php 
-                      $i = 1;
+                       $i = 1;
                       foreach($preguntas as $pregunta){
+                          $checked = 'checked ="checked"';
+                          $si = ''; $no = '';
+                          if(($pregunta->estado_pregunta) == 1 ) $si = $checked;
+                          else $no = $checked;
                         echo '<tr>';
                          echo '<td>' .$i . '.</td>';
                            echo  '<td>' .$pregunta->desc_pregunta . '</td>';
-                              echo '<td> <input type="radio" name="p' . $i .'"  value="1"> </td>'; 
-                        echo           '<td> <input type="radio" name="p' . $i .'"  value="0"> </td>'; 
+                              echo '<td> <input type="radio" name="p' . $i .'"  value="1" ' . $si . '> </td>'; 
+                        echo           '<td> <input type="radio" name="p' . $i .'"  value="0" ' . $no . '> </td>'; 
                         
                         echo '</tr>';
                         $i++;

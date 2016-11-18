@@ -115,12 +115,18 @@ $(function() {
     
     $('.crear-historia-btn').click(function(e) {
 		e.preventDefault();
-        window.location.href = js_site_url + "crear_historia_clinica" ;              
+        window.location.href = js_site_url + "/Historia_clinica/crear_historia_clinica" ;              
+    }); 
+      $('.editar-historia-btn').click(function(e) {
+		e.preventDefault();
+        window.location.href = js_site_url + "/Historia_clinica/editar_historia_clinica" ;              
     }); 
     
      $('#nueva_historia_form').submit(function (event) {
         event.preventDefault();
+         
         $('.ac_p_error').fadeOut('slow').remove();
+         var cliente = $(this).attr('cliente');
         var postData = $(this).serializeArray(); 
         $.ajax({
             type: 'POST',
@@ -143,20 +149,59 @@ $(function() {
                     		text: "Se insertó exitosamente la historia clínica",   
                     		type: "success"                 
                     	}, 
-                    	function(){   
-                    		location.reload(); 
+                    	function(){ 
+                         
+                    		window.location.href = js_site_url + '/index/' + cliente ; 
                     	});                    	
                         $('#modal_add_story').modal('hide');
                     } else {
                     	$('#div_waiting_new_story').addClass("hidden"); 
-                    	swal("Error", "Se ha presentado un error al ingresar la historia clínica", "error");
+                    	swal("Error", "Se ha presentado un error al ingresar la historia clínica, ya hay una en existencia.", "error");
                     }
                 }
             }
         });
     });
 		
-
+     $('#editar_historia_form').submit(function (event) {
+        event.preventDefault();
+         
+        $('.ac_p_error').fadeOut('slow').remove();
+         var cliente = $(this).attr('cliente');
+        var postData = $(this).serializeArray(); 
+        $.ajax({
+            type: 'POST',
+            url: js_site_url + 'historia_clinica_editada/',
+            data: postData,
+            beforeSend:function(){
+            	$('#div_waiting_edit_story').removeClass("hidden");            	
+            },
+            success: function (msg){
+                console.log(msg);
+                if (isNaN(msg)) {
+                	$('#div_waiting_edit_story').addClass("hidden");  
+                    $.each(msg, function (i, item) {
+                        $('#div_' + i).after('<p class="alert alert-danger text-center ac_p_error" role="alert">' + item + '</p>');
+                    });
+                } else {
+                    if (msg == 1) {    
+                    	swal({   
+                    		title: "",   
+                    		text: "Se editó exitosamente la historia clínica",   
+                    		type: "success"                 
+                    	}, 
+                    	function(){ 
+                            window.location.href = js_site_url + '/index/' + cliente ; 
+                    	});                    	
+                        $('#modal_edit_story').modal('hide');
+                    } else {
+                    	$('#div_waiting_edit_story').addClass("hidden"); 
+                    	swal("Error", "Se ha presentado un error al editar la historia clínica.", "error");
+                    }
+                }
+            }
+        });
+    });
 
 
 
@@ -184,7 +229,7 @@ $('#runner').runner({
 				if (isConfirm) {
 					$.ajax({
 						type: 'GET',
-						url: js_site_url + 'Historia_Clinica/marcar_no_asistir/' + cita,
+						url: js_site_url + 'marcar_no_asistir/' + cita,
 						success: function(msg) {
 							console.log(msg);
 							if (msg) {
@@ -221,11 +266,49 @@ $('#runner').runner({
         },
         function(isConfirm) {
             if (isConfirm) {
-            	window.location.href = js_site_url2 + "index/" + id ;
+            	window.location.href = js_site_url2 + "index/" + id + "/" + cita ;
                 
             }
         });           
-    });    
+    });
+    
+    	$('.terminar-cita-btn').click(function(e) {
+		e.preventDefault();
+		var cliente = $(this).attr('cliente');
+        var cita = $(this).attr('cita');
+		swal({
+				title: 'Terminar cita',
+				text: '¿Desea terminar su cita con ' + cliente + '?',
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonText: 'Sí, terminar',
+				cancelButtonText: 'No, no confirmar',
+				showLoaderOnConfirm: true,
+			},
+			function(isConfirm) {
+				if (isConfirm) {
+					$.ajax({
+						type: 'GET',
+						url: js_site_url + 'Cita/marcar_asistir/' + cita,
+						success: function(msg) {
+							console.log(msg);
+							if (msg) {
+								swal({
+										title: "Cita finalizada",
+										text: "La cita con " + cliente + " ha terminado.",
+										type: "success",
+									},
+									function() {
+										window.location.href = js_site_url + '/Cita' ;
+									});
+							} else {
+								swal("Error", "La cita con " + cliente + " no puede ser terminada, vuelva a intentarlo.", "error");
+							}
+						}
+					});
+				}
+			});
+	});
 
 
     $(".timepicker").timepicker({
