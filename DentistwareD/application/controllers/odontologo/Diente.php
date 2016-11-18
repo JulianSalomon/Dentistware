@@ -28,6 +28,7 @@ class Diente extends Odon_Controller {
             'corona'     => $_POST['cor'],
             'tramo'      => $_POST['tra']
         );
-        $result = $this->diente_model->nuevo_diente($input);            
+        $result = $this->diente_model->nuevo_diente($input);
+        echo $result;
     }
 }
