@@ -1,67 +1,71 @@
 <div class="content-wrapper">
     <div class="container">
         <section class="content-header">
-            <h1>Bienvenido a Dentistware</h1>
+            <font size= 6>Bienvenido a Dentistware</font>
+            <?php
+            echo "El dia es ".date('l', strtotime('2016-11-15'));
+            ?>
         </section>
         <section class="content">
-            <?php
-            /*
-                $firstday = date('Y-m-d', strtotime('sunday -1 mounths'));
-                echo $firstday;
-                $número = 1000000000000;
-                $english_format_number = number_format($número, 0, ',', '.');
-                echo $english_format_number;
-            */
-            
-            ?>
-            <!-- Apply any bg-* class to to the info-box to color it -->
-            <div class="info-box bg-green">
-              <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
-              <div class="info-box-content">
-                <div class="col-xs-10 ">
-                    <?php    
-                        echo "<span class=info-box-text>Multas pagadas </span>";
-                        echo "<span class=info-box-number>" . $multasPagadas . "</span>"; 
-                        echo "<div class=progress>";
-                            echo "<div class=progress-bar style='width:" . $porcentajeMultasPagadas . "%'></div>";
+            <div class="col-xs-12">
+               <div class="callout callout-info">
+                    <font size= 3>
+                    <p >En la primera parte te mostramos el dinero recibido por pago de multas, el dinero que los clientes le deben a Dentistware y el porcentaje de de cada una</p>
+                    <p>Luego tendrás información del progreso de las citas libres de cada durante la semana</p>
+                    </font>
+                </div>
+            </div>
+                <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="info-box bg-green">
+                  <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
+                  <div class="info-box-content">
+                    <div class="col-xs-7 ">
+                        <?php    
+                            echo "<span class=info-box-text>Multas pagadas </span>";
+                            echo "<span class=info-box-number>" . $multasPagadas . "</span>"; 
+                            echo "<div class=progress>";
+                                echo "<div class=progress-bar style='width:" . $porcentajeMultasPagadas . "%'></div>";
+                            echo "</div>";
+                            echo "<span class=progress-description>" . $porcentajeMultasPagadas . "% del total de las multas </span>";
                         echo "</div>";
-                        echo "<span class=progress-description>" . $porcentajeMultasPagadas . "% del total de las multas </span>";
-                    echo "</div>";
-                    echo "<div class=col-xs-2 >";
-                        echo "<span class=info-box-text>Valor </span>";
-                        $número = $multasPagadas * 10000;
-                        $valor = number_format($número, 0, ',', '.');
-                        echo "<span class=info-box-number>$" . $valor . "</span>";
-                    ?>
-                    </div>
-              </div><!-- /.info-box-content -->
-            </div><!-- /.info-box                         <span class="info-box-text">Likes <span style="display:inline-block; width: 25em;"></span> likes</span>    -->
-            <div class="info-box bg-red">
-              <span class="info-box-icon" ><i class="fa fa-thumbs-o-down" ></i></span>
-              <div class="info-box-content">                
-                    <div class="col-xs-10 ">
-                    <?php    
-                        echo "<span class=info-box-text>Multas sin pagar </span>";
-                        echo "<span class=info-box-number>" . $multasSinPagar . "</span>"; 
-                        echo "<div class=progress>";
-                            echo "<div class=progress-bar style='width:" . $porcentajeMultasSinPagar . "%'></div>";
+                        echo "<div class=col-xs-5 >";
+                            echo "<span class=info-box-text>Valor </span>";
+                            $número = $multasPagadas * 10000;
+                            $valor = number_format($número, 0, ',', '.');
+                            echo "<span class=info-box-number>$" . $valor . "</span>";
+                        ?>
+                        </div>
+                  </div><!-- /.info-box-content -->
+                </div>
+            </div>
+            <!-- /.info-box                         <span class="info-box-text">Likes <span style="display:inline-block; width: 25em;"></span> likes</span>    -->
+            <div class="col-md-6 col-sm-6 col-xs-12">
+                <div class="info-box bg-red ">
+                  <span class="info-box-icon" ><i class="fa fa-thumbs-o-down" ></i></span>
+                  <div class="info-box-content">                
+                        <div class="col-xs-7 ">
+                        <?php    
+                            echo "<span class=info-box-text>Multas sin pagar </span>";
+                            echo "<span class=info-box-number>" . $multasSinPagar . "</span>"; 
+                            echo "<div class=progress>";
+                                echo "<div class=progress-bar style='width:" . $porcentajeMultasSinPagar . "%'></div>";
+                            echo "</div>";
+                            echo "<span class=progress-description>" . $porcentajeMultasSinPagar . "% del total de las multas </span>";
                         echo "</div>";
-                        echo "<span class=progress-description>" . $porcentajeMultasSinPagar . "% del total de las multas </span>";
-                    echo "</div>";
-                    echo "<div class=col-xs-2 >";
-                        echo "<span class=info-box-text>Valor </span>";
-                        $número = $multasSinPagar * 10000;
-                        $valor = number_format($número, 0, ',', '.');
-                        echo "<span class=info-box-number>$" . $valor . "</span>";
-                    ?>
-                    </div>
-                
-                <!-- The progress section is optional -->
-                
-              </div><!-- /.info-box-content -->
-            </div><!-- /.info-box -->
-            
-            <div class="col-md-6">
+                        echo "<div class=col-xs-5 >";
+                            echo "<span class=info-box-text>Valor </span>";
+                            $número = $multasSinPagar * 10000;
+                            $valor = number_format($número, 0, ',', '.');
+                            echo "<span class=info-box-number>$" . $valor . "</span>";
+                        ?>                            
+                        </div>
+
+                    <!-- The progress section is optional -->
+
+                  </div><!-- /.info-box-content -->
+                </div><!-- /.info-box -->
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-12">
               <div class="box box-solid">
                 <div class="box-header with-border">
                   <h3 class="box-title">Numero de citas disponibles por dia para la semana</h3>

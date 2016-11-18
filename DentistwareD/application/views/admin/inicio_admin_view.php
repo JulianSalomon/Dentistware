@@ -1,7 +1,7 @@
 <div class="content-wrapper">
     <div class="container">
         <section class="content-header">
-            <h1>Bienvenido a Dentistware</h1>
+            <font size= 6>Bienvenido a Dentistware</font>
         </section>
         <section class="content">
             <div class="col-md-6">

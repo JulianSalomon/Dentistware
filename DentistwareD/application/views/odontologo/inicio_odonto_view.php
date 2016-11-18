@@ -1,10 +1,18 @@
 <div class="content-wrapper">
     <div class="container">
         <section class="content-header">
-            <h1>Bienvenido a Dentistware</h1>
+            <!-- <h1>Bienvenido a Dentistware</h1>-->
+            <font size= 6>Bienvenido a Dentistware</font>
         </section>
         <section class="content">
-            <div class="col-md-6">
+            <div class="callout callout-info">
+                <font size= 3>
+                <p>Estas graficas te mostraran un progreso de tu trabajo:</p>
+                <p style="text-indent: 1cm;">•  La primera te mostrara cuantas citas asignadas te faltan por atender en el trascurso de cada día de la semana</p>
+                <p style="text-indent: 1cm;">•	La segunda tendrá información del progreso en tu trabajo durante la semana</p>
+                </font>
+            </div>
+            <div class="col-md-6 col-sm-6">
               <div class="box box-solid">
                 <div class="box-header with-border">
                   <h3 class="box-title">Numero de citas pendientes por dia</h3>
@@ -58,7 +66,7 @@
               </div>
             </div>
             
-            <div class="col-md-6">
+            <div class="col-md-6 col-sm-6">
               <div class="box box-solid">
                 <div class="box-header with-border">
                   <h3 class="box-title">Progreso de las citas asignadas en la semana</h3>
