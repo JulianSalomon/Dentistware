@@ -32,7 +32,6 @@ $(function() {
 			});
 	});
 
-
 	var force = false;
 	//Sale de la historia clínica del cliente    
 	//Marcar cita como Asistió
@@ -200,7 +199,7 @@ $(function() {
 					confirmButtonText: 'Sí',
 					cancelButtonText: 'No',
 					showLoaderOnConfirm: true,
-				    closeOnConfirm: false
+					closeOnConfirm: false
 				},
 				function(isConfirm) {
 					if (isConfirm) {
@@ -231,17 +230,17 @@ $(function() {
 												function(result) {
 													if (result != 0) {
 														swal({
-															title: 'Ingreso satisfactorio',
-															text: 'El registro y los dientes fueron generados satisfactoriamente',
-															type: 'success',
-                                                            closeOnConfirm: true
-														},
-                                                            function(isConfirm){
-                                                                if(isConfirm){
-                                                                    force = true;
-                                                                    $('.asistir-btn').click();
-                                                                }
-                                                        });
+																title: 'Ingreso satisfactorio',
+																text: 'El registro y los dientes fueron generados satisfactoriamente',
+																type: 'success',
+																closeOnConfirm: true
+															},
+															function(isConfirm) {
+																if (isConfirm) {
+																	force = true;
+																	$('.asistir-btn').click();
+																}
+															});
 													} else {
 														swal({
 															title: 'Error',
@@ -329,7 +328,53 @@ $(function() {
 		window.location.href = js_site_url + "Historia_Clinica/Crear_Historia_Clinica";
 	});
 
+	$('.editar-historia-btn').click(function(e) {
+		e.preventDefault();
+		window.location.href = js_site_url + "Historia_Clinica/Editar_Historia_Clinica";
+	});
+
 	//Inserta historia en la base de datos
+	$('#nueva_historia_form').submit(function(event) {
+		event.preventDefault();
+
+		$('.ac_p_error').fadeOut('slow').remove();
+		var cliente = $(this).attr('cliente');
+		var postData = $(this).serializeArray();
+		$.ajax({
+			type: 'POST',
+			url: js_site_url + 'historia_clinica/nueva_historia_clinica/',
+			data: postData,
+			beforeSend: function() {
+				$('#div_waiting_new_story').removeClass("hidden");
+			},
+			success: function(msg) {
+				if (isNaN(msg)) {
+					$('#div_waiting_new_story').addClass("hidden");
+					$.each(msg, function(i, item) {
+						$('#div_' + i).after('<p class="alert alert-danger text-center ac_p_error" role="alert">' + item + '</p>');
+					});
+				} else {
+					if (msg == 1) {
+						swal({
+								title: "Historia clínica generada",
+								text: "Se insertó exitosamente la historia clínica",
+								type: "success"
+							},
+							function() {
+
+								window.location.href = js_site_url + '/index/' + cliente;
+							});
+						$('#modal_add_story').modal('hide');
+					} else {
+						$('#div_waiting_new_story').addClass("hidden");
+						swal("Error", "Se ha presentado un error al ingresar la historia clínica, ya hay una en existencia.", "error");
+					}
+				}
+			}
+		});
+	});
+
+    //Inserta historia en la base de datos
 	$('#nueva_historia_form').submit(function(event) {
 		event.preventDefault();
 		$('.ac_p_error').fadeOut('slow').remove();
@@ -390,6 +435,71 @@ $(function() {
 		);
 	});
 
+	//Formulario para editar historia
+	$('#editar_historia_form').submit(function(event) {
+		event.preventDefault();
+		$('.ac_p_error').fadeOut('slow').remove();
+		var cliente = $(this).attr('cliente');
+		var postData = $(this).serializeArray();
+		$.ajax({
+			type: 'POST',
+			url: js_site_url + 'historia_clinica_editada/',
+			data: postData,
+			beforeSend: function() {
+				$('#div_waiting_edit_story').removeClass("hidden");
+			},
+			success: function(msg) {
+				console.log(msg);
+				if (isNaN(msg)) {
+					$('#div_waiting_edit_story').addClass("hidden");
+					$.each(msg, function(i, item) {
+						$('#div_' + i).after('<p class="alert alert-danger text-center ac_p_error" role="alert">' + item + '</p>');
+					});
+				} else {
+					if (msg == 1) {
+						swal({
+								title: "",
+								text: "Se editó exitosamente la historia clínica",
+								type: "success"
+							},
+							function() {
+								window.location.href = js_site_url + '/index/' + cliente;
+							});
+						$('#modal_edit_story').modal('hide');
+					} else {
+						$('#div_waiting_edit_story').addClass("hidden");
+						swal("Error", "Se ha presentado un error al editar la historia clínica.", "error");
+					}
+				}
+			}
+		});
+	});
+
+	//Sale de la historia clínica del cliente
+	$('.cancel-btn').click(function(e) {
+		e.preventDefault();
+		$('.ac_p_error').fadeOut('slow').remove();
+		var cita = $(this).attr('cita');
+		var cliente = $(this).attr('cliente');
+		var id = $(this).attr('id');
+		swal({
+				title: 'Atender',
+				text: '¿Desea atender su cita con ' + cliente + '?',
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonText: 'Sí, atender cita',
+				cancelButtonText: 'No atender la cita',
+				showLoaderOnConfirm: true,
+			},
+			function(isConfirm) {
+				if (isConfirm) {
+					window.location.href = js_site_url + "Historia_Clinica/Eliminar_Seleccion";
+					//window.location.href = js_site_url2 + "index/" + id + "/" + cita ;
+
+				}
+			});
+	});
+
 	$("#tablaRegistro").DataTable({
 		"language": {
 			"info": "Mostrando un total de _TOTAL_ registros",
@@ -410,6 +520,6 @@ $(function() {
 	$(".timepicker").timepicker({
 		showInputs: false,
 		minuteStep: 30,
-		defaultTime: false
+		defaultTime: '12:00 PM'
 	});
 });

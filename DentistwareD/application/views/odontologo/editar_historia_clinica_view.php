@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <title>Dentistware | Creando historia clinica</title>
+      <title>Dentistware | Editando historia clinica</title>
       <link rel="shortcut icon" type="image/png" href="<?php echo base_url('assets/img/logo.png')?>"/>
       <?php
          echo meta('X-UA-Compatible', 'IE=edge', 'equiv');
@@ -28,7 +28,7 @@
       </button>
       <div >
          <section class="content-header">
-            <?php echo heading('Crear historia clínica',1);?>
+            <?php echo heading('Editar historia clínica',1);?>
          </section>
          <section class="content">
             <div class="box box-primary">
@@ -37,7 +37,7 @@
                </div>
                <?php 
                   $data_input = array(
-                  		'id' => "nueva_historia_form",
+                  		'id' => "editar_historia_form",
                       'cliente' => $cliente_info->id_persona,
                   );        
                   echo form_open('', $data_input);	
@@ -46,8 +46,7 @@
                <!-- /.box-header -->
                <div class="box-body">
                   <div class="col-xs-12 form-group" >
-                     <input id="input_cliente" name="input_cliente" class="hidden" value="<?php echo $cliente_info->id_persona; ?>">
-                     <label  class="control-label">Antecedentes familiares: *</label>
+                     <label  class="control-label">Antecedentes: *</label>
                      <div class="col-xs-12 input-group" id="div_input_antecedentes"> 
                         <?php 
                            $data_input = array(
@@ -57,11 +56,13 @@
                            		'name' => "input_antecedentes",
                            		'rows' => "3",
                            		"maxlength" => "1000",
+                               'value' => $historia_clinica->antecedentes_fam,
                            );
                            echo form_textarea($data_input);	                	
                            ?>  
                      </div>
-                      <br>
+                  </div>
+                     <div class="col-xs-12 form-group" >
                      <label  class="control-label">Enfermedad actual: *</label>
                      <div class="col-xs-12 input-group" id="div_input_enfermedad"> 
                         <?php 
@@ -72,11 +73,13 @@
                            		'name' => "input_enfermedad",
                            		'rows' => "1",
                            		"maxlength" => "100",
+                               'value' => $historia_clinica->enfermedad_actual,
                            );
                            echo form_textarea($data_input);	                	
                            ?>  
                      </div>
-                      <br>
+                  </div>
+                     <div class="col-xs-12 form-group" >
                      <label  class="control-label">Observaciones: *</label>
                      <div class="col-xs-12 input-group" id="div_input_observaciones"> 
                         <?php 
@@ -87,6 +90,7 @@
                            		'name' => "input_observaciones",
                            		'rows' => "3",
                            		"maxlength" => "2000",
+                               'value' => $historia_clinica->observaciones,
                            );
                            echo form_textarea($data_input);	                	
                            ?>  
@@ -94,7 +98,7 @@
                   </div>
                    
                    <hr>
-                  <h3 class="box-title">Preguntas*</h3>
+                  <h3 class="box-title">Preguntas</h3>
                   <table class="table table-bordered">
                      <tr>
                         <th style="width: 10px">#</th>
@@ -103,27 +107,32 @@
                         <th>No</th>
                      </tr>
                      <?php 
-                          $i = 1;
-                          foreach($preguntas as $pregunta){
-                              echo '<tr>';
-                              echo '<td>' .$i . '.</td>';
-                              echo  '<td>' .$pregunta->desc_pregunta . '</td>';
-                              echo '<td style="width:2%"> <input type="radio" name="p' . $i .'"  value="1"> </td>';
-                              echo '<td style="width:2%"> <input type="radio" name="p' . $i .'"  value="0"> </td>';
-                              echo '</tr>';
-                              $i++;
-                          }
-                      ?>
-                   </table>
+                       $i = 1;
+                      foreach($preguntas as $pregunta){
+                          $checked = 'checked ="checked"';
+                          $si = ''; $no = '';
+                          if(($pregunta->estado_pregunta) == 1 ) $si = $checked;
+                          else $no = $checked;
+                        echo '<tr>';
+                         echo '<td>' .$i . '.</td>';
+                           echo  '<td>' .$pregunta->desc_pregunta . '</td>';
+                              echo '<td> <input type="radio" name="p' . $i .'"  value="1" ' . $si . '> </td>'; 
+                        echo           '<td> <input type="radio" name="p' . $i .'"  value="0" ' . $no . '> </td>'; 
+                        
+                        echo '</tr>';
+                        $i++;
+                        } ?>
+                  </table>
                </div>
                <div class="box-footer text-center">
                   <?php                 
                      $data_input = array(
                      		'class' => "btn btn-danger btn-lg pull-left",
                      		'id' => "edit_cancel_btn",
-                     		'name' => "cancelar_edit"
+                     		'name' => "cancelar_edit",
+                     		'content' => "Cancelar"
                      );
-                     $redirigir = 'Odontologo/Historia_clinica/';
+                     $redirigir = 'odontologo/Historia_clinica/index/' . $cliente_info->id_persona;
                      echo anchor(base_url() . $redirigir, 'Cancelar', $data_input);
                      $data_input = array(
                      		'class' => "btn btn-primary btn-lg pull-right",
@@ -140,19 +149,19 @@
       </div>
 
       <?php
-         $path = "Odontologo/";
+         $path = "odontologo/Historia_clinica/";
          echo '<script>
                  var js_site_url = "'. site_url($path) . '";
                </script>';
-         echo plugin_js();
-         echo plugin_js('bootstrap');
-         echo plugin_js('app');
-         echo plugin_js('pace');
-         echo plugin_js('timepicker');
-         echo plugin_js('runner');
-         echo plugin_js('datatable');
-         echo plugin_js('sweetalert');
-         echo plugin_js('assets/js/dentistware/odontologo.js', true);
-      ?>
+                  echo plugin_js();
+             echo plugin_js('bootstrap');
+             echo plugin_js('app');
+             echo plugin_js('pace');
+             echo plugin_js('timepicker');
+             echo plugin_js('runner');
+             echo plugin_js('sweetalert');
+             echo plugin_js('datatable');            
+             echo plugin_js('assets/js/dentistware/odontologo.js', true);
+         ?>
    </body>
 </html>

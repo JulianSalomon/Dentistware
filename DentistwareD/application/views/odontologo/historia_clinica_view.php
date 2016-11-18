@@ -19,7 +19,7 @@
 			echo plugin_css('adminLTE');
 			echo plugin_css('skin');
 			echo plugin_css('pace');
-			
+			echo plugin_css('sweetalert');         
 			?>
 	</head>
 	<body class="hold-transition skin-blue-light sidebar-mini">
@@ -112,7 +112,7 @@
 											?>
 									</div>
 									<div class="form-group text-center" >
-										<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal_add_client">Editar historia clínica</button>
+										<button type="button" class="editar-historia-btn btn btn btn-info btn-lg" id="editar_historia" data-toggle="modal" data-target="#modal_edit_story" title="Editar historia">Editar historia clínica</button>
 									</div>
 									<table class="table-responsive">
 										<tr>
@@ -158,19 +158,19 @@
 												<?php
 													if($registros != NULL){
 													    foreach ($registros as $registro){
-													            echo '<tr>';
-													                echo '<td style="width:10%">';
-													                 echo substr($registro->fecha_reg, 0, 10);
-													                echo '</td>';
-													                echo '<td class="text-left">';
-													                 echo $registro->desc_procedimiento;
-													                echo '<td style="width:5%">';
-													                 echo '<button class="btn verRegistro-btn" type="button" name="verRegistro" value="'. $registro->id_registro . '" >';
-													                     echo '<i class="fa fa-file-text-o"></i>';
-													                 echo '</button>';
-													                echo '</td>';
-													            echo '</tr>';
-													     }
+													echo '<tr>';
+													echo '<td style="width:10%">';
+													echo substr($registro->fecha_reg, 0, 10);
+													echo '</td>';
+													echo '<td class="text-left">';
+													echo $registro->desc_procedimiento;
+													echo '<td style="width:5%">';
+													echo '<button class="btn verRegistro-btn" type="button" name="verRegistro" value="'. $registro->id_registro . '" >';
+													echo '<i class="fa fa-file-text-o"></i>';
+													echo '</button>';
+													echo '</td>';
+													echo '</tr>';
+													}
 													}
 													?>
 											</tbody>
@@ -186,11 +186,11 @@
 											} else {
 											?>
 										<div class="form-group text-center" >
-											<button type="button" class="crear-historia-btn btn btn btn-info btn-lg" id="crear_historia" data-toggle="modal" data-target="#modal_add_client" title="Crear historia">Crear historia clínica</button>
+											<button type="button" class="btn btn-info btn-lg crear-historia-btn" id="crear_historia" title="Crear historia">Crear historia clínica</button>
 										</div>
 										<?php
 											}
-								        ?>
+											     ?>
 									</div>
 								</div>
 								<div class="box-footer">
@@ -201,7 +201,7 @@
 									<button type="button" class="btn btn-primary btn-lg pull-right agregarRegistro-btn" data-toggle="modal" data-target="#agregarRegistro" title="Agregar registro">Nuevo registro</button>
 									<?php
 										}
-								    ?>
+										  ?>
 								</div>
 							</form>
 						</div>
@@ -209,6 +209,7 @@
 				</div>
 			</section>
 		</div>
+        
 		<!-- Modal ver registro -->
 		<div id="verRegistro" class="modal fade modal-add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 			<div id="verRegistroModal" class="modal-dialog modal-lg">
@@ -217,6 +218,7 @@
 				</div>
 			</div>
 		</div>
+        
 		<!-- Modal agregar registro -->
 		<div id="agregarRegistro" class="modal fade modal-add" role="dialog" aria-labelledby="agregarRegistroLabel">
 			<div id="agregarRegistroModal" class="modal-dialog modal-lg">
@@ -370,11 +372,11 @@
 				            . $diente->obt . "," 
 				            . $diente->cor . "," 
 				            . $diente->tra . "]," ;
-				    }
-				}
+                    }
+                }
 				echo '];';
                 echo 'var teeth = teethOriginal;';
-				echo 'var teethAux = teethOriginal;';
+                echo 'var teethAux = teethOriginal;';
             ?>
 		</script>
 		<?php
@@ -396,6 +398,6 @@
                 echo plugin_js('p5');
                 echo plugin_js('assets/js/dentistware/dientes.js', true);
             }
-        ?>       
+        ?>
 	</body>
 </html>
