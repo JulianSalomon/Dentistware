@@ -92,8 +92,8 @@ $(function() {
   		"paging": false,
   		"info": true,
   		"searching": false,
-          "ordering": true,
-          "autoWidth": false,
+  		"ordering": true,
+        "autoWidth": false,
     });
       
 });

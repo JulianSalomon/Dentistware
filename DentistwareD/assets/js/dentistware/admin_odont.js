@@ -31,7 +31,7 @@ $(function() {
                         $('#modal_add_odont').modal('hide');
                     } else {
                     	$('#div_waiting_new_odont').addClass("hidden"); 
-                    	swal("Error", "Se ha presentado un error al ingresar el odontólogo", "error");
+                    	swal("Error", "Se ha presentado un error al ingresar el odontólogo, por favor verifique los datos.", "error");
                     }
                 }
             }
@@ -70,7 +70,7 @@ $(function() {
                     	});              
                     } else {
                     	$('#div_waiting_edit_odontologo').addClass("hidden");
-                    	swal("Error", "Se ha presentado un error al editar éste odontologo!", "error");
+                    	swal("Error", "Se ha presentado un error al editar éste odontologo, por favor verique los datos!", "error");
                     }
                 }
             }

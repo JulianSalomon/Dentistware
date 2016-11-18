@@ -3,6 +3,7 @@
         <div class="user-panel">
             <div class="pull-left image">
             <?php
+            
             if($user_info['foto_persona'] != NULL){
                 $url = 'uploads/' . $user_info['foto_persona'];
             } else {

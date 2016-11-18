@@ -12,8 +12,10 @@
          echo meta('viewport', 'width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no');
          
          echo plugin_css('font-awesome');
+         echo plugin_css('datatables');
          echo plugin_css('icons');
          echo plugin_css('bootstrap');
+         echo plugin_css('sweetalert');
          echo plugin_css('adminLTE');
          echo plugin_css('skin');
          echo plugin_css('pace');
@@ -25,7 +27,6 @@
       <b>DENTIST</b>WARE
       </button>
       <div>
-         <!-- Content Header (Page header) -->
          <section class="content-header">
             <h1>
                Historia Clinica
@@ -54,49 +55,57 @@
                            </div>
                            <div class="text-align:center;">
                               <table style="width:60" align="center">
-                                 <?php
-                                    echo "<tr>";
-                                    echo "<th class= text-right style= width:45% >Edad:</td>";
-                                    echo "<td style= width:10% > </td>";
-                                    echo "<td style= width:45% > " . $persona->edad_persona .' '. 'Años' . "</td>";
-                                    echo "</tr>";
-                                    echo "<tr>";
-                                    echo "<th class= text-right style= width:45% >Genero:</th>";
-                                    echo "<td style= width:10% > </td>";
-                                    if ($persona->genero_persona == 'M'){
-                                    		echo "<td style= width:45% > Masculino</td>";
-                                    }else{
-                                    		echo "<td style= width:45% > Femenino</td>";
-                                    }
-                                    echo "</tr>";
-                                      	echo "<tr>";
-                                      	echo "<th class= text-right style= width:45% >Tipo de Sangre y RH:</th>";
-                                      	echo "<td style= width:10% > </td>";
-                                      	echo "<td style= width:45% > " . $persona->tipo_sangre_cliente . ' ' . $persona->rh_cliente . "</td>";
-                                      	echo "</tr>";
-                                      	echo "<tr>";
-                                      	echo "<th class= text-right style= width:45% >Eps:</th>";
-                                      	echo "<td style= width:10% > </td>";
-                                      	echo "<td style= width:45% > " . $persona->eps_persona . "</td>";
-                                      	echo "</tr>";
-                                         echo "<tr>";                                   
-                                          echo "<th class= text-right style= width:45% >Nombre del Contacto:</th>";
-                                            echo "<td style= width:10% > </td>";
-                                            echo "<td style= width:45% > " . ucwords($persona->contacto_cliente) . "</td>";
-                                        echo "</tr>";
-                                    
-                                          echo "<tr>";
-                                          echo "<th class= text-right style= width:45% >Telefono del Contacto:</th>";
-                                            echo "<td style= width:10% > </td>";
-                                          echo "<td style= width:45% > " . $persona->telefono_contacto_cliente . "</td>";
-                                        echo "</tr>";
+                                  <tr>
+                                      <th class= text-right style= width:45% >Edad:</th>
+                                      <td style= width:10% > </td>
+                                      <?php
+                                        echo "<td style= width:45% > " . $persona->edad_persona .' '. 'Años' . "</td>";
                                      ?>
+                                  </tr>
+                                  <tr>
+                                      <th class= text-right style= width:45% >Genero:</th>
+                                      <td style= width:10% > </td>
+                                      <?php
+                                        if ($persona->genero_persona == 'M'){
+                                                echo "<td style= width:45% > Masculino</td>";
+                                        }else{
+                                                echo "<td style= width:45% > Femenino</td>";
+                                        }
+                                      ?>
+                                  </tr>
+                                  <tr>
+                                      <th class= text-right style= width:45% >Tipo de Sangre y RH:</th>
+                                      <td style= width:10% > </td>
+                                      <?php
+                                      	echo "<td style= width:45% > " . $persona->tipo_sangre_cliente . ' ' . $persona->rh_cliente . "</td>";
+                                      ?>
+                                  </tr>
+                                  <tr>
+                                      <th class= text-right style= width:45% >Eps:</th>
+                                      <td style= width:10% > </td>
+                                      <?php
+                                      	echo "<td style= width:45% > " . $persona->eps_persona . "</td>";
+                                      ?>
+                                  </tr>
+                                  <tr>
+                                      <th class= text-right style= width:45% >Nombre del Contacto:</th>
+                                      <td style= width:10% > </td>
+                                      <?php
+                                        echo "<td style= width:45% > " . ucwords($persona->contacto_cliente) . "</td>";
+                                      ?>
+                                  </tr>
+                                  <tr>
+                                      <th class= text-right style= width:45% >Telefono del Contacto:</th>
+                                      <td style= width:10% > </td>
+                                      <?php
+                                        echo "<td style= width:45% > " . $persona->telefono_contacto_cliente . "</td>";
+                                      ?>
+                                  </tr>
                               </table>
                            </div>
-                           <!-- hasta aca -->
                            <div class="col-xs-12 text-center ">
                               <?php
-                                 echo br();    echo br();
+                                 echo br(2);
                                  if($historia_clinica != null){
                                  echo '<h4> Fecha de apertura ' . ' &nbsp &nbsp' . substr($historia_clinica->fecha_apertura, 0, 10) . '</h4>';
                                  echo br();
@@ -114,7 +123,7 @@
                                  <td style="width:80%">
                                     <?php
                                        echo $historia_clinica->antecedentes_fam;
-                                       ?>
+                                    ?>
                                  </td>
                               </tr>
                               <tr>
@@ -137,67 +146,68 @@
                               </tr>
                            </table>
                            <div class="table-responsive">
-                              <table id="tablaRegistro" type='tabla' class="table table-bordered table-hover tabla-usuario " style="width:100%">
+                              <table id="tablaRegistro" class="table table-bordered table-hover tablaRegistro">
                                  <thead>
-                                    <tr>
-                                       <th style="width:20%">Fecha</th>
-                                       <th style="width:60%">Descripcion</th>
-                                       <th style="width:20%">Seleccionar</th>
-                                    </tr>
-                                 </thead>
-                                 <tbody class="text-center">
-                                    <?php 
-                                       } else { ?>
-                                    <div class="form-group text-center" >
-                                       <button type="button" class="crear-historia-btn btn btn btn-info btn-lg" id="crear_historia" data-toggle="modal" data-target="#modal_add_client" title="Crear historia">Crear historia clínica</button>
-                                    </div>
-                                    <!-- <a type="button" cita="' . $cita->id_cita . '" cliente="'  ucwords($cita->cliente) '" class="no-asistir-btn btn"  data-toggle="tooltip"  >
-                                       </a> -->
-                                    <?php 
-                                       }
-                                       if($registros != NULL){
-                                           foreach ($registros as $registro){
-                                                   echo '<tr>';
-                                                   echo '<td>';
-                                                   echo substr($registro->fecha_reg, 0, 10);
-                                                   echo '</td>';
-                                                   echo '<td>';
-                                                   echo $registro->desc_procedimiento;
-                                                   echo '<td class="text-center">
-                                                       <button class="btn verRegistro-btn" type="button" name="verRegistro" value="'. $registro->id_registro . '" >
-                                                           <i class="fa fa-file-text-o"></i>
-                                                       </button>                                                
-                                                       </td>';
-                                                   echo '</td>';
-                                       echo '</tr>';   
-                                       }
-                                       }
-                                       ?>
-                                 </tbody>
-                                 <?php if($historia_clinica != null){ ?>
-                                 <tfoot>
                                     <tr>
                                        <th>Fecha</th>
                                        <th>Descripcion</th>
-                                       <th>Seleccionar</th>
+                                       <th>Ver</th>
                                     </tr>
-                                 </tfoot>
-                                 <?php }  ?>
-                              </table>
-                              <div class="modal-footer">
-                                 <button type="button" data-dismiss="modal" class="btn btn-danger btn-lg pull-left cancel-btn">Terminar cita</button>
-                                 <?php if($historia_clinica != null){ ?>
-                                 <button type="button" class="btn btn-primary pull-right agregarRegistro-btn" data-toggle="modal" data-target="#agregarRegistro" title="Agregar registro">Nuevo registro</button>
-                                 <?php } ?>
-                              </div>
+                                 </thead>
+                                 <tbody class="text-center">
+                                    <?php
+                                       if($registros != NULL){
+                                           foreach ($registros as $registro){
+                                                   echo '<tr>';
+                                                       echo '<td>';
+                                                        echo substr($registro->fecha_reg, 0, 10);
+                                                       echo '</td>';
+                                                       echo '<td class="text-left">';
+                                                        echo $registro->desc_procedimiento;
+                                                       echo '<td>';
+                                                        echo '<button class="btn verRegistro-btn" type="button" name="verRegistro" value="'. $registro->id_registro . '" >';
+                                                            echo '<i class="fa fa-file-text-o"></i>';
+                                                        echo '</button>';
+                                                       echo '</td>';
+                                                   echo '</tr>';
+                                            }
+                                       }
+                                    ?>
+                                  </tbody>
+                                  <tfoot>
+                                      <tr>
+                                          <th>Fecha</th>
+                                          <th>Descripcion</th>
+                                          <th>Ver</th>
+                                      </tr>
+                                  </tfoot>
+                               </table>
+                               <?php
+                                 } else {
+                               ?>
+                                    <div class="form-group text-center" >
+                                       <button type="button" class="crear-historia-btn btn btn btn-info btn-lg" id="crear_historia" data-toggle="modal" data-target="#modal_add_client" title="Crear historia">Crear historia clínica</button>
+                                    </div>
+                               <?php
+                                 }
+                               ?>
                            </div>
                         </div>
+                        <div class="box-footer">
+                            <button type="button" class="btn btn-danger btn-lg pull-left cancel-btn">Terminar cita</button>
+                            <?php
+                                if($historia_clinica != null){
+                            ?>
+                                <button type="button" class="btn btn-primary btn-lg pull-right agregarRegistro-btn" data-toggle="modal" data-target="#agregarRegistro" title="Agregar registro">Nuevo registro</button>
+                            <?php
+                                }
+                            ?>
+                        </div>                        
                      </form>
                   </div>
                </div>
             </div>
          </section>
-         <!-- /.content -->
       </div>
       
        <!-- Modal ver registro -->
@@ -366,50 +376,31 @@
 				    }
 				}
 				echo '];';
-				      echo 'var teeth = [';
-				if($dientes != NULL){
-				    foreach($dientes as $diente){
-				    echo "[". $diente->aus . "," 
-				            . $diente->ext . "," 
-				            . $diente->car . "," 
-				            . $diente->obt . "," 
-				            . $diente->cor . "," 
-				            . $diente->tra . "]," ;
-				    }
-				}
-				echo '];';
-				      echo 'var teethAux = [';
-				if($dientes != NULL){
-				    foreach($dientes as $diente){
-				    echo "[". $diente->aus . "," 
-				            . $diente->ext . "," 
-				            . $diente->car . "," 
-				            . $diente->obt . "," 
-				            . $diente->cor . "," 
-				            . $diente->tra . "]," ;
-				    }
-				}
-				echo '];';
+				      echo 'var teeth = teethOriginal;';
+				      echo 'var teethAux = teethOriginal;';
 				  ?>
 		</script>
       
            <?php
 			$path = "odontologo/";
-			echo '<script>
-			        var js_site_url = "'. site_url($path) . '";
-			      </script>';
-                    echo plugin_js();
-                 echo plugin_js('bootstrap');
-                 echo plugin_js('app');
-                 echo plugin_js('pace');
-                    echo plugin_js('timepicker');
-                    echo plugin_js('assets/js/dentistware/odontologo.js', true);
-                    echo plugin_js('runner');
+                echo '<script>';
+                     echo 'var js_site_url = "' . site_url($path) . '";';
+                echo '</script>';
+                echo plugin_js();
+                echo plugin_js('bootstrap');
+                echo plugin_js('app');
+                echo plugin_js('pace');
+                echo plugin_js('timepicker');
+                echo plugin_js('sweetalert');
+                echo plugin_js('datatable');
+                echo plugin_js('assets/js/dentistware/odontologo.js', true);
+                echo plugin_js('runner');
+                if($historia_clinica != null){
                     echo plugin_js('teeth-drawer');
                     echo plugin_js('p5');
                     echo plugin_js('assets/js/dentistware/dientes.js', true);
-			?>
-       
+                }
+			?>       
    </body>
 </html>
 		

@@ -9,7 +9,7 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                    	<h4>A continuación puede buscar las citas disponibles para agendar:</h4>
+                    	<h4>A continuación puede buscar las citas disponibles que podrá agendar:</h4>
                     </div>
                     <div class="box-body">
                         <?php 
@@ -75,13 +75,11 @@
 		                  	echo form_close();
 		             		echo '<hr>';
 	                        if($cantidadDeMultas > 0){
-	                            echo br(1);
 				                echo '<div class="form-group text-center">
 										<i id="logo_i" class="fa fa-warning fa-5x"></i>';
-								echo heading('Usted tiene multas pendientes.<br>Por favor paguelas antes de poder solicitar citas.', 3, 'class="text-muted"');
+								echo heading('Usted tiene multas pendientes.<br>Por favor paguelas para poder agendar una cita.', 3, 'class="text-muted"');
 				                echo '</div>';	
 	                        } else if($cantidadDeCitas >= 3) { 	                        	
-                            	echo br(1);
 			                	echo '<div class="form-group text-center">
 										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
 			                   	echo heading('Usted ya tiene tres citas asignadas.<br>Podrá agendar más citas cuando tenga menos de tres citas activas.', 3, 'class="text-muted"');
@@ -144,10 +142,9 @@
                         </div>
 	                    <?php 
 		                    } else {		                    	
-		                    	echo br(1);
 			                	echo '<div class="form-group text-center">
 										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
-			                   	echo heading('No hay citas disponibles.<br>Por favor intente con otras opciones.', 3, 'class="text-muted"');
+			                   	echo heading('No hay citas disponibles.<br>Por favor intente con otras opciones de busqueda.', 3, 'class="text-muted"');
 			                   	echo '</div>';		                    	
 		                    }                    	
 	                    ?>

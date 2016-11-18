@@ -31,7 +31,7 @@ $(function() {
                         $('#modal_add_empl').modal('hide');
                     } else {
                     	$('#div_waiting_new_empl').addClass("hidden"); 
-                    	swal("Error", "Se ha presentado un error al ingresar el empleado", "error");
+                    	swal("Error", "Se ha presentado un error al ingresar el empleado, por favor verifique los datos.", "error");
                     }
                 }
             }
@@ -70,7 +70,7 @@ $(function() {
                     	});              
                     } else {
                     	$('#div_waiting_edit_empleado').addClass("hidden");
-                    	swal("Error", "Se ha presentado un error al editar éste empleado!", "error");
+                    	swal("Error", "Se ha presentado un error al editar éste empleado, por favor verifique los datos!", "error");
                     }
                 }
             }

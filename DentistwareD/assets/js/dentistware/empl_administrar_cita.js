@@ -28,7 +28,7 @@ $(function() {
                                 location.reload(); 
                             });
                         } else {
-                            swal("Error", "La cita con " + odonto + " no puede ser agendada, vuelva a intentarlo.", "error");
+                            swal("Error", "La cita con " + odonto + " no puede ser agendada, por favor vuelva a intentarlo.", "error");
                         }
                     }
                 });
@@ -128,7 +128,7 @@ $(function() {
                     	});                    	
                         $('#modal_edit_cita').modal('hide');
                     } else if (msg == 2){
-                    	swal("Error", "No puede editar la cita con este horario, ya que el odontólogo tiene una cita en el mismo horario", "error");
+                    	swal("Error", "No puede editar la cita con este horario, ya que el odontólogo seleccionado, tiene una cita en el mismo horario", "error");
                     	$('#div_waiting_edit_cita').addClass("hidden");  
                     } else {
                     	swal("Error", "Se ha presentado un error al editar los datos de la cita, por favor verifique los datos", "error");

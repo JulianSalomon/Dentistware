@@ -14,18 +14,38 @@ class Perfil extends MY_Controller {
 		$this->data['before_closing_head'] .= plugin_css('icheck');
 		$this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/perfil.js', true);
 		$this->data['before_closing_body'] .= plugin_js('icheck');
+		
+		if ($this->session->userdata('foto_persona') != NULL) {
+			$tipo = $this->session->userdata('tipo_persona');
+			$route = '';
+			switch ($tipo) {
+				case "ADM":
+					$route = 'admin/';
+					break;
+				case "CLT":
+					$route = 'cliente/';
+					break;
+				case "ODO":
+					$route = 'odonto/';
+					break;
+				case "EMP":
+					$route = 'empleado/';
+					break;
+			}
+			$this->data['user_info']['foto_persona'] = $route . $this->session->userdata('foto_persona');
+		}
+		
+		$this->get_user_menu('main-perfil');
 	}
 	
 	public function index() {
-		$this->get_user_menu('main-perfil');
 		$this->render('perfil_view');
 	}
 	
 	public function edit_view() {		
 		$query = $this->data['persona_info'] = $this->persona_model->get_persona($this->session->userdata('doc_persona'));
 		$this->data['departamentos'] = $this->lugar_model->get_departamentos();
-		$this->data['ciudades'] = $this->lugar_model->get_ciudades($query->id_departamento);
-		$this->get_user_menu('main-perfil');
+		$this->data['ciudades'] = $this->lugar_model->get_ciudades($query->id_departamento);	
 		$this->render('perfil_edit_view');
 	}
 	
@@ -72,9 +92,11 @@ class Perfil extends MY_Controller {
             if ($nombre_foto == NULL) {
 				if ($this->input->post('chkEliminarFoto')) {
 					$input['foto_persona'] = NULL;
+					$this->session->set_userdata('foto_persona', '');
 				}
 			} else {
 				$input['foto_persona'] = $nombre_foto;
+				$this->session->set_userdata('foto_persona', $nombre_foto);			
 			}
 			
 			$input['edad_persona'] = $this->calculate_age($input['fecha_nacimiento']);
