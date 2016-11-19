@@ -22,7 +22,7 @@ $(function() {
                         if(msg == 1){                        	
                             swal({   
                                 title: "Cita agendada",
-                                text: "La cita con " + odonto + ", ha sido agendada.",
+                                text: "La cita con " + odonto + ", ha sido agendada. Un correo de confirmación ha sido enviado.",
                                 type: "success",
                             }, 
                             function(){   
@@ -30,7 +30,9 @@ $(function() {
                             });
                         } else if (msg == 2){
                             swal("Error", "Usted ya tiene una cita agendada en el mismo horario, por favor elija otra opción.", "error");
-                        } else {
+                        } else if (msg == 3){
+                            swal("Error", "No se puede enviar el correo", "error");
+                        }else {
                         	swal("Error", "La cita con " + odonto + " no se ha podido agendar, por favor vuelva a intentarlo.", "error");
                         }
                     }
