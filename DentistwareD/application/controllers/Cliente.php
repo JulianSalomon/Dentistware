@@ -59,6 +59,9 @@ class Cliente extends Cliente_Controller {
         }
         
         $this->data['citasTotal'] = $citasTotal;
+        if($citasTotal == 0){
+            $citasTotal = 1;
+        }
         for($i = 0; $i < 6; $i++){
             $percent = ($DateDay[$i] * 100)/$citasTotal;
             $this->data[$days[$i]] = $DateDay[$i];
