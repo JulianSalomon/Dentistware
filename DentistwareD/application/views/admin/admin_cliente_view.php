@@ -127,7 +127,7 @@
 		                    	echo br(1);
 			                	echo '<div class="form-group text-center">
 										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
-			                   	echo heading('No se encontraron resultados.<br>Por favor intente buscarn con otra opción.', 3, 'class="text-muted"');
+			                   	echo heading('No se encontraron resultados.<br>Por favor intente buscar con otra opción.', 3, 'class="text-muted"');
 			                   	echo '</div>';
 	                    	}
 	                    }                    	

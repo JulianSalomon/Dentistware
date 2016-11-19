@@ -36,7 +36,7 @@ class Historia_clinica extends Odon_Controller {
 			'dientes' => $dientes,
 			'id_cita' => $id_cita
 		);
-		$this->get_user_menu('Historia_Cliente');
+		
 		$this->load->view('odontologo/historia_clinica_view', $data);
 	}
     
