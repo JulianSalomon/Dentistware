@@ -16,25 +16,25 @@ class Admin extends Admin_Controller{
     }
     
     public function index(){
-        $_SESSION['word_search'] = '';        
-        $post = $this->input->post('input_buscar_administrador');
-        $_SESSION['word_search'] = mb_strtolower($post);
+        $_SESSION['word_search'] = '';
+        if($this->input->post()){
+            $post = $this->input->post('input_buscar_administrador');
+            $_SESSION['word_search'] = mb_strtolower($post);   
+        }
         $config = array();
         $config = $this->config->item('config_paginator');
         $config["total_rows"] = $this->persona_model->count_personas($_SESSION['word_search'], 'ADM');
-        $config["base_url"] = base_url() . "administrador/Admin/index/";
+        $config["base_url"] = base_url() . "administrador/Admin/";
         $config["per_page"] = 25;
         $config["uri_segment"] = 4;
         $page =  $this->uri->segment(4);
         if($_SESSION['word_search'] != ''){
             $admins = $this->persona_model->get_administradores('nombre_persona', 'asc', $config["per_page"], $page, $_SESSION['word_search']);
-        }
-        else{
+        } else {
             $admins = $this->persona_model->get_administradores('nombre_persona', 'asc', $config["per_page"], $page);
         }
         if($admins){
             $this->pagination->initialize($config);
-
             $this->data['admins'] = $admins;
             $this->data["links"] = $this->pagination->create_links();
         }
