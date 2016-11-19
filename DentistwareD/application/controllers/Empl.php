@@ -13,8 +13,8 @@ class Empl extends Empl_Controller {
         $multasTotal = 0;
         $multasPagadas = 0;
         $multasSinPagar= 0;
-        $multasPagadas = $this->multa_model->count_multas(1);
-        $multasSinPagar= $this->multa_model->count_multas(0);
+        $multasPagadas = $this->multa_model->count_multas('',1);
+        $multasSinPagar= $this->multa_model->count_multas('',0);
         $multasTotal = $multasPagadas + $multasSinPagar;
         if($multasTotal == 0){
             $multasTotal = 1;
