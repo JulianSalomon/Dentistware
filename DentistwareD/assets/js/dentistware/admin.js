@@ -45,12 +45,13 @@ $(function() {
         e.preventDefault();
         var documento = $(this).attr('doc');
         var tipo = $(this).attr('tipo');
+        tipo_usuario = tipo_usuario.replace(/[ó]/g,"o");
         if(documento == "null"){
             swal("Error", "Este usuario no puede ser editado!", "error");
         } else {
             $.ajax({
                 type: 'POST',
-                url: js_site_url + 'seleccionar_' + tipo_usuario + '/' + documento,
+                url: js_site_url + 'seleccionar_' + tipo_usuario + '/',
                 data: {
                     id: documento
                 },
