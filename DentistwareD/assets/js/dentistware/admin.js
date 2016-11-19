@@ -41,6 +41,26 @@ $(function() {
         }
     });
     
+    $('.editar-btn').click(function(e) {
+        e.preventDefault();
+        var documento = $(this).attr('doc');
+        var tipo = $(this).attr('tipo');
+        if(documento == "null"){
+            swal("Error", "Este usuario no puede ser editado!", "error");
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: js_site_url + 'seleccionar_' + tipo_usuario + '/' + documento,
+                data: {
+                    id: documento
+                },
+                success: function(){
+                    window.location.href = js_site_url + 'Edit_View/';
+                }
+            });
+        }
+    });
+    
 	$(".cancel-btn").click(function (e) {
 		$("#foto_img").removeAttr('src');
 		$("#foto_img").addClass("hidden");
@@ -50,6 +70,10 @@ $(function() {
         $(".alert").remove();
         $(".form-group").removeClass('has-error');        
 	});
+    
+    $(".cancelar_edit").click(function (e){
+        window.location.href = js_site_url + "liberar_" + tipo_usuario + "/"; 
+    })
     
 	$("#inputFoto").change(function () {
 		var photoFile = document.getElementById("inputFoto").files[0];

@@ -408,7 +408,6 @@ $(function() {
 				$('#div_waiting_edit_story').removeClass("hidden");
 			},
 			success: function(msg) {
-				console.log(msg);
 				if (isNaN(msg)) {
 					$('#div_waiting_edit_story').addClass("hidden");
 					$.each(msg, function(i, item) {
@@ -453,8 +452,6 @@ $(function() {
 			function(isConfirm) {
 				if (isConfirm) {
 					window.location.href = js_site_url + "Historia_Clinica/Eliminar_Seleccion";
-					//window.location.href = js_site_url2 + "index/" + id + "/" + cita ;
-
 				}
 			});
 	});
