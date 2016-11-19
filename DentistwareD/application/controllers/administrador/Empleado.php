@@ -24,7 +24,7 @@ class Empleado extends Admin_Controller {
         $config = array();
         $config = $this->config->item('config_paginator');
         $config["total_rows"] = $this->persona_model->count_personas($_SESSION['word_search'], 'EMP');
-        $config["base_url"] = base_url() . "administrador/Empleado/";
+        $config["base_url"] = base_url() . "administrador/Empleado/index/";
         $config["per_page"] = 25;
         $config["uri_segment"] = 4;
         $page =  $this->uri->segment(4);
