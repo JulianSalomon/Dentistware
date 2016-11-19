@@ -16,13 +16,8 @@
                             $data_input = array(
                                     'id' => "edit_cliente_form",
                             );        
-                            echo form_open('odontologo/Cita/filtrar', $data_input);
-                            
-                            $fecha = $this->session->userdata('fecha');                            
-                            $fecha = str_replace("-", "/", $fecha);
-                            
+                            echo form_open('odontologo/Cita', $data_input);
                            	$hora = $this->session->userdata('hora');
-                            $odontologo = $this->session->userdata('odontologo');                            
                         ?>
                         <div class="row">
                         	<div class="col-lg-4"></div>							

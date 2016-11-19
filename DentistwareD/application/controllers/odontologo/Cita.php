@@ -10,15 +10,25 @@ class Cita extends Odon_Controller {
 		$this->load->model('persona_model');
 		$this->load->model('cita_model');
 		$this->data['before_closing_body'] = plugin_js('assets/js/dentistware/odontologo.js', true) . plugin_js('runner');
+        $_SESSION['hora'] = '';
 	}
     
 	public function index() {
-		$_SESSION['fecha']      = date("Y-m-d");
-		$_SESSION['hora']       = '';
-		$_SESSION['odontologo'] = $this->session->userdata['id_persona'];
-		$this->data['citas']    = $this->cita_model->get_citas_para_odontologo('', $this->session->userdata['id_persona']);
-		$this->get_user_menu('Citas');
-		$this->render('odontologo/odonto_cita_view');
+        $hora = '';
+        if($_SESSION['hora']){
+            $hora = $_SESSION['hora'];
+        } 
+        if($this->input->post()){
+            $hora = $this->input->post('inputHora');            
+        }
+        $_SESSION['hora'] = $hora;
+        if ($hora != '') {
+            $hora = strtotime($hora);
+            $hora = date("H:i:s", $hora);
+        }
+        $this->data['citas'] = $this->cita_model->get_citas_para_odontologo($hora, $this->session->userdata['id_persona']);
+        $this->get_user_menu('Citas');
+        $this->render('odontologo/odonto_cita_view');
 	}
     
 	public function marcar_asiste() {
@@ -33,19 +43,5 @@ class Cita extends Odon_Controller {
 			"estado_cita" => 0
 		);
 		echo $this->cita_model->marcar_cita($_POST['cita'], $data);
-	}
-    
-	public function filtrar() {
-		$hora             = $this->input->post('inputHora');
-		$_SESSION['hora'] = $hora;
-		$fecha            = date("Y-m-d");
-		if ($hora != '') {
-			$hora = strtotime($hora);
-			$hora = date("H:i:s", $hora);
-		}
-		$_SESSION['fecha']   = date("Y-m-d");
-		$this->data['citas'] = $this->cita_model->get_citas_para_odontologo($hora, $this->session->userdata['id_persona']);
-		$this->get_user_menu('Citas');
-		$this->render('odontologo/odonto_cita_view');
 	}
 }

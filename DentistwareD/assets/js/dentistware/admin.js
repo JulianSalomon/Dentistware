@@ -44,7 +44,6 @@ $(function() {
     $('.editar-btn').click(function(e) {
         e.preventDefault();
         var documento = $(this).attr('doc');
-        var tipo = $(this).attr('tipo');
         tipo_usuario = tipo_usuario.replace(/[ó]/g,"o");
         if(documento == "null"){
             swal("Error", "Este usuario no puede ser editado!", "error");
