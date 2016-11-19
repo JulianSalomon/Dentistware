@@ -193,6 +193,9 @@ class Cita_model extends MY_Model {
             $this->db->where('fecha_cita <', $lastday);
         }else{
             $firstday = date('Y-m-d', strtotime($day));
+            if ($firstday > date('Y-m-d')){
+                $firstday = date('Y-m-d', strtotime($day . ' -1 weeks'));
+            }
             $this->db->where('fecha_cita', $firstday);
         }
         
@@ -205,9 +208,10 @@ class Cita_model extends MY_Model {
         $this->db->from('cita');
 		$this->db->where('id_cliente', null);
         $firstday = date('Y-m-d', strtotime($day));
-        $this->db->where('fecha_cita', $firstday);
-        
-        
+        if ($firstday > date('Y-m-d')){
+            $firstday = date('Y-m-d', strtotime($day . ' -1 weeks'));
+        }
+        $this->db->where('fecha_cita', $firstday);        
         $query = $this->db->get();
 		return count($query->result());        
 	}

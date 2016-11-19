@@ -29,7 +29,7 @@ class Cliente extends Empl_Controller {
 		$config = array();
 		$config = $this->config->item('config_paginator');
 		$config["total_rows"] = $this->persona_model->count_personas($_SESSION['word_search'], 'CLT');
-		$config["base_url"] = base_url() . "empleado/Empl_Cliente/search/";
+		$config["base_url"] = base_url() . "empleado/Cliente/search/";
 		$config["per_page"] = 25;
 		$config["uri_segment"] = 4;
 		$page = $this->uri->segment(4);
@@ -100,7 +100,7 @@ class Cliente extends Empl_Controller {
 				'tipo_sangre_cliente' => $this->input->post('selectGrupo'),
 				'rh_cliente' => $this->input->post('selectRH'),
 				'eps_persona' => $this->input->post('inputEps'),
-				'contacto_cliente' => $this->input->post('inputNombreContacto'),
+				'contacto_cliente' => mb_strtolower($this->input->post('inputNombreContacto')),
 				'telefono_contacto_cliente' => $this->input->post('inputTelContacto'),
 				'tipo_persona' => 'CLT',
 				'estado_persona' => 'ACT',
