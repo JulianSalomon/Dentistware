@@ -36,8 +36,7 @@ $(function() {
                 }
             }
         });
-    });
-    
+    });    
     
     $('#edit_administrador_form').submit(function (event) {
         event.preventDefault();
@@ -67,7 +66,7 @@ $(function() {
                     		type: "success"                 
                     	}, 
                     	function(){
-                    		location.href = js_site_url; 
+                    		window.location.href = js_site_url + "liberar_administrador/"; 
                     	});              
                     } else {
                     	$('#div_waiting_edit_administrador').addClass("hidden");

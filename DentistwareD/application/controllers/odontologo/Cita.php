@@ -25,7 +25,7 @@ class Cita extends Odon_Controller {
 		$data = array(
 			"estado_cita" => 1
 		);
-		echo $this->cita_model->marcar_cita($_POST['cita'], $data);
+		echo $this->cita_model->marcar_cita($this->input->post('cita'), $data);
 	}
     
 	public function marcar_no_asiste() {

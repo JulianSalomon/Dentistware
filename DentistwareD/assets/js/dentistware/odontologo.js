@@ -37,6 +37,7 @@ $(function() {
 	//Marcar cita como Asistió
 	$('.asistir-btn').click(function(e) {
 		if (force) {
+			var id_cita = $(this).attr('cita');
 			$.ajax({
 				type: 'POST',
 				url: js_site_url + 'Cita/marcar_asiste/',
@@ -44,7 +45,7 @@ $(function() {
 					cita: id_cita
 				},
 				success: function(msg) {
-					if (msg) {
+					if (msg == 1) {
 						swal({
 								title: "Cita marcada",
 								text: "La cita ha sido marcada como asistida por el cliente.",
@@ -86,6 +87,7 @@ $(function() {
 								cita: id_cita
 							},
 							success: function(msg) {
+                                console.log(msg);
 								if (msg) {
 									swal({
 											title: "Cita marcada",
@@ -402,7 +404,6 @@ $(function() {
 				$('#div_waiting_edit_story').removeClass("hidden");
 			},
 			success: function(msg) {
-				console.log(msg);
 				if (isNaN(msg)) {
 					$('#div_waiting_edit_story').addClass("hidden");
 					$.each(msg, function(i, item) {
@@ -447,8 +448,6 @@ $(function() {
 			function(isConfirm) {
 				if (isConfirm) {
 					window.location.href = js_site_url + "Historia_Clinica/Eliminar_Seleccion";
-					//window.location.href = js_site_url2 + "index/" + id + "/" + cita ;
-
 				}
 			});
 	});

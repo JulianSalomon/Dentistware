@@ -66,7 +66,7 @@ $(function() {
                     		type: "success"                 
                     	}, 
                     	function(){
-                    		location.href = js_site_url; 
+                    		window.location.href = js_site_url + "liberar_odontologo/";
                     	});              
                     } else {
                     	$('#div_waiting_edit_odontologo').addClass("hidden");

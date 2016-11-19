@@ -237,18 +237,11 @@
 				</div>                			          					                 	
      		</div>
 			<div class="box-footer text-center">
-				<?php                 
-	                $data_input = array(
-	                		'class' => "btn btn-danger btn-lg",
-	                		'id' => "edit_cancel_btn",
-	                		'name' => "cancelar_edit",
-	                		'content' => "Cancelar"
-	                );
-	                echo anchor(base_url() . 'administrador/Empleado/', 'Cancelar', $data_input);
+				<?php
+	                echo '<button type="button" class="btn btn-danger btn-lg cancelar_edit">Cancelar</button>';
                 	$data_input = array(
-                			'class' => "btn btn-primary btn-lg",
+                			'class' => "btn btn-primary btn-lg guardar_edit",
                 			'id' => "guardar_edit",
-                			'name' => "guardar_edit",
                 			'value' => "Guardar",
                 	);
                 	echo form_submit($data_input);
@@ -260,4 +253,5 @@
 </div>
 <script>
 	var js_site_url = '<?php echo site_url("administrador/Empleado/");?>';
+    var tipo_usuario = "empleado";
 </script> 

@@ -66,7 +66,7 @@ $(function() {
                     		type: "success"                 
                     	}, 
                     	function(){
-                    		location.href = js_site_url; 
+                    		window.location.href = js_site_url + "liberar_empleado/";
                     	});              
                     } else {
                     	$('#div_waiting_edit_empleado').addClass("hidden");
