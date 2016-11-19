@@ -116,12 +116,8 @@ class Historia_clinica extends Odon_Controller {
 						$input['estado_pregunta'] = 0;
 					}
 					$result = $this->pregunta_model->insertar_preguntas($input);
-					if (!$result) {
-						return 0;
-					}
 				}
 			}
-			header('Content-Type: application/json');
 			echo $result;
 		} else {
 			header('Content-Type: application/json');
@@ -150,11 +146,13 @@ class Historia_clinica extends Odon_Controller {
 	public function historia_clinica_editada() {
 		$this->load->model('historia_model');
 		$this->load->model('pregunta_model');
+        
 		$input = array(
 			'antecedentes_fam' => $this->input->post('input_antecedentes'),
 			'enfermedad_actual' => $this->input->post('input_enfermedad'),
 			'observaciones' => $this->input->post('input_observaciones')
 		);
+        
 		$this->historia_model->actualizar_historia($this->session->userdata['id_cliente'], $input);
 		$historia_clinica     = $this->historia_model->get_historia_por_cliente($this->session->userdata['id_cliente'])->id_historia;
 		$num_preguntas        = $this->pregunta_model->contar_preguntas();
