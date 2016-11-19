@@ -7,7 +7,9 @@ class Admin extends Admin_Controller{
         $this->data ['page_title_end'] = '| Administradores';
         $this->load->model ( 'lugar_model' );
         $this->load->library("pagination");
-        $this->data['departamentos'] = $this->lugar_model->get_departamentos();  
+        $this->data['departamentos'] = $this->lugar_model->get_departamentos();
+        $this->data['before_closing_head'] .= plugin_css('icheck');
+        $this->data['before_closing_body'] .= plugin_js('icheck');
         $this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/admin_admin.js', true);
         $this->get_user_menu('main-administrador');
         $this->data['admins'] = '';
@@ -84,13 +86,31 @@ class Admin extends Admin_Controller{
             echo json_encode ( $this->form_validation->error_array () );
         }
     }
-    public function edit_view($id){
-    	$query = $this->persona_model->get_persona('', $id);
-    	$this->data['administrador_info'] = $query;
-    	$this->data['departamentos'] = $this->lugar_model->get_departamentos();
-    	$this->data['ciudades'] = $this->lugar_model->get_ciudades($query->id_departamento);
+    
+    public function seleccionar_administrador(){
+        $this->session->set_userdata(array(
+            'id_admin' => $this->input->post('id')
+        ));
+    }
+    
+    public function liberar_administrador(){
+        $this->session->set_userdata(array(
+            'id_admin' => null
+        ));
+        redirect('Administrador/Admin');
+    }
+    
+    public function edit_view(){
+        $id = $this->session->userdata('id_admin');
+        if($id){
+            $this->data['administrador_info'] = $this->persona_model->get_persona($id);
+            $this->data['departamentos'] = $this->lugar_model->get_departamentos();
+            $this->data['ciudades'] = $this->lugar_model->get_ciudades($this->data['administrador_info']->id_departamento);    	
+            $this->render('admin/admin_admin_edit_view');
+        } else {
+            redirect('Administrador/Admin');
+        }        
     	
-    	$this->render('admin/admin_admin_edit_view');
     }
     
     public function edit_administrador(){

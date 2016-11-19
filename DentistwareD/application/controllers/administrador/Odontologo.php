@@ -8,6 +8,8 @@ class Odontologo extends Admin_Controller {
         $this->load->model ( 'lugar_model' );
         $this->load->library("pagination");
         $this->data['departamentos'] = $this->lugar_model->get_departamentos();   
+        $this->data['before_closing_head'] .= plugin_css('icheck');
+        $this->data['before_closing_body'] .= plugin_js('icheck');
         $this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/admin_odont.js', true);
         $this->get_user_menu('main-odontologo');        
         $this->data['odontologos'] = '';
@@ -89,13 +91,30 @@ class Odontologo extends Admin_Controller {
 		}
     }
     
-    public function edit_view($id){
-    	$query = $this->persona_model->get_persona('', $id);
-    	$this->data['odontologo_info'] = $query;
-    	$this->data['departamentos'] = $this->lugar_model->get_departamentos();
-    	$this->data['ciudades'] = $this->lugar_model->get_ciudades($query->id_departamento);
-    	
-    	$this->render('admin/admin_odonto_edit_view');
+    public function seleccionar_odontologo(){
+        $this->session->set_userdata(array(
+            'id_odonto' => $this->input->post('id')
+        ));
+    }
+    
+    public function liberar_odontologo(){
+        $this->session->set_userdata(array(
+            'id_odonto' => null
+        ));
+        redirect('Administrador/Odontologo');
+    }
+	
+	public function edit_view() {
+        $id = $this->session->userdata('id_odonto');
+        if($id){
+            $this->data['odontologo_info'] = $this->persona_model->get_persona($id);
+            $this->data['departamentos'] = $this->lugar_model->get_departamentos();
+            $this->data['ciudades'] = $this->lugar_model->get_ciudades($this->data['odontologo_info']->id_departamento);
+
+            $this->render('admin/admin_odonto_edit_view');
+        } else {
+            redirect('Administrador/Odontologo');
+        }
     }
     
     public function edit_odontologo(){

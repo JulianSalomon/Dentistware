@@ -97,13 +97,8 @@
                                                 }
                                                 echo '</td>';
                                                 echo '<td class="text-center">';
-                                                        $data_input = array(
-                                                		'type' => 'button',
-                                                        'class' => 'btn btn-default',
-                                                		'data-toggle' => 'tooltip',
-                                                		'title' => 'Editar',
-                                                );
-                                                echo anchor(base_url() . 'administrador/Admin/edit_view/' . $admin->id_persona, '<i class="fa fa-pencil"></i>', $data_input);
+                                                echo '<button class="editar-btn btn btn-default" doc="' . $documento . '" type="button" id="edit_persona" data-toggle="tooltip" title="Editar">
+                                                            <i class="fa fa-pencil"></i>';
                                                 echo '<button class="borrar-btn btn btn-default" doc="' . $documento . '" type=button id="delete_persona" data-toggle="tooltip" title="Borrar">
                                                             <i class="fa fa-trash"></i>
                                                         </button>
@@ -165,12 +160,11 @@
             <div class="modal-body">
                     <div class="form-group text-center">
 		                <i id="i_foto" class="fa fa-image fa-5x"></i>
-		                <?php 
+		                <?php
 		                $data_input = array(
 		                		'id' => 'foto_img',
 		                		'class' => 'center-block hidden',
-		                		'height ' => '200',
-		                		'width' => '200',		                		 
+		                		'height' => '200',
 		                );
 		                echo img($data_input);		
 		                echo br(1);

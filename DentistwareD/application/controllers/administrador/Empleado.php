@@ -9,8 +9,8 @@ class Empleado extends Admin_Controller {
         $this->load->library("pagination");
         $this->data['departamentos'] = $this->lugar_model->get_departamentos();
         $this->data['before_closing_head'] .= plugin_css('icheck');
-        $this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/admin_empl.js', true);
         $this->data['before_closing_body'] .= plugin_js('icheck');
+        $this->data['before_closing_body'] .= plugin_js('assets/js/dentistware/admin_empl.js', true);
         $this->get_user_menu('main-empleado');
         $this->data['empleados'] = '';
 	}
@@ -89,13 +89,30 @@ class Empleado extends Admin_Controller {
 		}
     }
     
-    public function edit_view($id){
-    	$query = $this->persona_model->get_persona('', $id);
-    	$this->data['empleado_info'] = $query;
-    	$this->data['departamentos'] = $this->lugar_model->get_departamentos();
-    	$this->data['ciudades'] = $this->lugar_model->get_ciudades($query->id_departamento);
-    	
-    	$this->render('admin/admin_empl_edit_view');
+    public function seleccionar_empleado(){
+        $this->session->set_userdata(array(
+            'id_empl' => $this->input->post('id')
+        ));
+    }
+    
+    public function liberar_empleado(){
+        $this->session->set_userdata(array(
+            'id_empl' => null
+        ));
+        redirect('Administrador/Empleado');
+    }
+	
+	public function edit_view() {
+        $id = $this->session->userdata('id_empl');
+        if($id){
+            $this->data['empleado_info'] = $this->persona_model->get_persona($id);
+            $this->data['departamentos'] = $this->lugar_model->get_departamentos();
+            $this->data['ciudades'] = $this->lugar_model->get_ciudades($this->data['empleado_info']->id_departamento);
+
+            $this->render('admin/admin_empl_edit_view');
+        } else {
+            redirect('Administrador/Empleado');
+        }
     }
     
     public function edit_empleado(){
