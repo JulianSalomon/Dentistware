@@ -10,6 +10,7 @@ class Cita extends Odon_Controller {
 		$this->load->model('persona_model');
 		$this->load->model('cita_model');
 		$this->data['before_closing_body'] = plugin_js('assets/js/dentistware/odontologo.js', true) . plugin_js('runner');
+		$this->get_user_menu('main-citas');
 	}
     
 	public function index() {
@@ -17,7 +18,6 @@ class Cita extends Odon_Controller {
 		$_SESSION['hora']       = '';
 		$_SESSION['odontologo'] = $this->session->userdata['id_persona'];
 		$this->data['citas']    = $this->cita_model->get_citas_para_odontologo('', $this->session->userdata['id_persona']);
-		$this->get_user_menu('Citas');
 		$this->render('odontologo/odonto_cita_view');
 	}
     

@@ -9,7 +9,7 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                    	<h4>A continuación se muestran sus citas del día:</h4>
+                    	<h4>A continuación se muestran sus citas a atender en el transcurso del día:</h4>
                     </div>
                     <div class="box-body">
                         <?php 
@@ -22,7 +22,8 @@
                             $fecha = str_replace("-", "/", $fecha);
                             
                            	$hora = $this->session->userdata('hora');
-                            $odontologo = $this->session->userdata('odontologo');                            
+                            $odontologo = $this->session->userdata('odontologo');   
+                            if($citas != NULL){
                         ?>
                         <div class="row">
                         	<div class="col-lg-4"></div>							
@@ -51,30 +52,35 @@
 						<?php
 		                  	echo form_close();
 		             		echo '<hr>';
-                        if($citas != NULL){
+                        
                     	?>
                     	<h4>Citas disponibles:</h4>
                         <div class="table-responsive">
                             <table id="tabla_cita" type='tabla' class="table table-bordered table-hover tabla-citas">
                                 <thead>
                                     <tr>
-                                    	<th>Acción</th>
+                                    	<th>Opciones</th>
                                         <th>Cliente</th>
                                         <th>Fecha</th>
                                         <th>Hora</th>
                                         <th>Consultorio</th>                                        
                                     </tr>
                                 </thead>
-                                <tbody>
+                    	       <tbody>
                                     <?php 
 										foreach ($citas as  $cita){
+											$dif = intval(strtotime(date('Y-m-d H:i:s')) - strtotime(date('Y-m-d') . $cita->hora));
+											$habilitar = "";
+											if($dif < 300 ) {
+												$habilitar = 'disabled= "true" style="pointer-events: none; cursor: default;"';
+											}
                                             echo '<tr>';
                                             echo '<td class="text-center">';
                                             echo '<div align="center">
-	                        						<a type="button" cita="' . $cita->id_cita . '" cliente="' . ucwords($cita->cliente) . '" class="no-asistir-btn btn" id="no_asistir" data-toggle="tooltip"  title="No asistió">
-		                    							<i class="fa fa-eye-slash fa-3x"></i>
+	                        						<a type="button"  ' . $habilitar . 'cita="' . $cita->id_cita . '" cliente="' . ucwords($cita->cliente) . '" class="no-asistir-btn btn" id="no_asistir" data-toggle="tooltip"  title="No asistió">
+		                    							<i class="fa fa-times fa-3x"></i>
 	                    							</a>
-                                                    <a type="button" cita="' . $cita->id_cita . '" cliente="' . ucwords($cita->cliente) . '" id="' . $cita->id . '" class="atender-btn btn" id="atender-cita" data-toggle="tooltip"  title="Atender cita">
+                                                    <a type="button" cita="' . $cita->id_cita . '" cliente="' . ucwords($cita->cliente) . '" id="' . $cita->id . '" class="atender-btn btn" id="atender-cita" data-toggle="tooltip"  title="Atender cliente">
 		                    							<i class="fa fa-sign-in fa-3x"></i>
 	                    							</a>
                     							</div>';
@@ -100,7 +106,7 @@
                                 </tbody>
                                 <tfoot>
                                     <tr>
-                                    	<th>Acción</th>
+                                    	<th>Opciones</th>
                                         <th>Cliente</th>
                                      	<th>Fecha</th>
                                         <th>Hora</th>
@@ -113,8 +119,8 @@
 		                    } else {		                    	
 		                    	echo br(1);
 			                	echo '<div class="form-group text-center">
-										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
-			                   	echo heading('No hay citas disponibles.<br>Por favor intente con otras opciones.', 3, 'class="text-muted"');
+										<i id="logo_i" class="fa fa-warning fa-5x"></i>';
+			                   	echo heading('No tiene citas pendientes por atender.', 3, 'class="text-muted"');
 			                   	echo '</div>';		                    	
 		                    }                    	
 	                    ?>

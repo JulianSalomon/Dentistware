@@ -103,7 +103,7 @@ $config['menu_ODO'] = array(
 				'icon' => 'fa fa-user',
 		),
 		'citas' => array(
-				'id' => 'main-cliente',
+				'id' => 'main-citas',
 				'title' => '<span>Citas</span>',
 				'link' => base_url('odontologo/Cita'),
 				'icon' => 'fa fa-calendar'
