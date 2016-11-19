@@ -17,29 +17,27 @@ class Odontologo extends Admin_Controller {
     
     public function index(){
         $_SESSION['word_search'] = '';
-		$post = $this->input->post('input_buscar_odontologo');
-        $_SESSION['word_search'] = mb_strtolower($post);
+        if($this->input->post()){
+            $post = $this->input->post('input_buscar_odontologo');
+            $_SESSION['word_search'] = mb_strtolower($post);
+        }
         $config = array();
         $config = $this->config->item('config_paginator');
         $config["total_rows"] = $this->persona_model->count_personas($_SESSION['word_search'], 'ODO');
-        $config["base_url"] = base_url() . "administrador/Odontologo/index/";
+        $config["base_url"] = base_url() . "administrador/Odontologo/";
         $config["per_page"] = 25;
         $config["uri_segment"] = 4;
         $page =  $this->uri->segment(4);
         if($_SESSION['word_search'] != ''){
             $odontologos = $this->persona_model->get_odontologos('nombre_persona', 'asc', $config["per_page"], $page, $_SESSION['word_search']);
-        }
-        else{
+        } else {
             $odontologos = $this->persona_model->get_odontologos('nombre_persona', 'asc', $config["per_page"], $page);
         }
         if($odontologos){
             $this->pagination->initialize($config);
-
             $this->data['odontologos'] = $odontologos;
             $this->data["links"] = $this->pagination->create_links();
-        }
-    	
-    	
+        }    	    	
     	$this->render ( 'admin/admin_odonto_view' );
     }
 

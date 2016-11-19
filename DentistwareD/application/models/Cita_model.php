@@ -151,7 +151,7 @@ class Cita_model extends MY_Model {
 	}
 
 
-    public function count_citas($idPersona, $estadoCita ='', $day = '') {
+    public function count_citas($idPersona = '', $estadoCita ='', $day = '') {
 		$this->db->select('*');
         $this->db->from('cita');
 		$this->db->where('id_odonto', $idPersona);
