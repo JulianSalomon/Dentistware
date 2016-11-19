@@ -18,31 +18,29 @@ class Cliente extends Admin_Controller {
 	}
 	
 	public function index() {
-		$_SESSION['word_search'] = '';
-		$this->render('admin/admin_cliente_view');
-	}
-    
-	public function search() {
-		$post = $this->input->post('input_buscar_cliente');
-		$_SESSION['word_search'] = mb_strtolower($post);
-		$config = array();
-		$config = $this->config->item('config_paginator');
-		$config["total_rows"] = $this->persona_model->count_personas($_SESSION['word_search'], 'CLT');
-		$config["base_url"] = base_url() . "administrador/Cliente/search/";
-		$config["per_page"] = 25;
-		$config["uri_segment"] = 4;
-		$page = $this->uri->segment(4);
-		if ($_SESSION['word_search'] != '') {
-			$clientes = $this->persona_model->get_clientes('nombre_persona', 'asc', $config["per_page"], $page, $_SESSION['word_search']);
-		} else {
-			$clientes = $this->persona_model->get_clientes('nombre_persona', 'asc', $config["per_page"], $page);
-		}
-		
-		if ($clientes) {
-			$this->pagination->initialize($config);			
-			$this->data['clientes'] = $clientes;
-			$this->data["links"] = $this->pagination->create_links();
-		}
+        if($this->input->post()){
+            $_SESSION['word_search'] = mb_strtolower($post);
+            $config = array();
+            $config = $this->config->item('config_paginator');
+            $config["total_rows"] = $this->persona_model->count_personas($_SESSION['word_search'], 'CLT');
+            $config["base_url"] = base_url() . "administrador/Cliente/";
+            $config["per_page"] = 25;
+            $config["uri_segment"] = 4;
+            $page = $this->uri->segment(4);
+            if ($_SESSION['word_search'] != '') {
+                $clientes = $this->persona_model->get_clientes('nombre_persona', 'asc', $config["per_page"], $page, $_SESSION['word_search']);
+            } else {
+                $clientes = $this->persona_model->get_clientes('nombre_persona', 'asc', $config["per_page"], $page);
+            }
+
+            if ($clientes) {
+                $this->pagination->initialize($config);			
+                $this->data['clientes'] = $clientes;
+                $this->data["links"] = $this->pagination->create_links();
+            }
+        } else {
+		  $_SESSION['word_search'] = '';
+        }
 		$this->render('admin/admin_cliente_view');
 	}
 	

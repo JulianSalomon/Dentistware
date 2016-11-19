@@ -19,33 +19,30 @@ class Cliente extends Empl_Controller {
 	}
 	
 	public function index() {
-		$_SESSION['word_search'] = '';
-		$this->render('empleado/empl_cliente_view');
-	}
-    
-	public function search() {
-		$post = $this->input->post('input_buscar_cliente');
-		$_SESSION['word_search'] = mb_strtolower($post);
-		$config = array();
-		$config = $this->config->item('config_paginator');
-		$config["total_rows"] = $this->persona_model->count_personas($_SESSION['word_search'], 'CLT');
-		$config["base_url"] = base_url() . "empleado/Empl_Cliente/search/";
-		$config["per_page"] = 25;
-		$config["uri_segment"] = 4;
-		$page = $this->uri->segment(4);
-		if ($_SESSION['word_search'] != '') {
-			$clientes = $this->persona_model->get_clientes('nombre_persona', 'asc', $config["per_page"], $page, $_SESSION['word_search']);
-		} else {
-			$clientes = $this->persona_model->get_clientes('nombre_persona', 'asc', $config["per_page"], $page);
-		}
-		
-		if ($clientes) {
-			$this->pagination->initialize($config);
-			
-			$this->data['clientes'] = $clientes;
-			$this->data["links"] = $this->pagination->create_links();
-		}
-		$this->render('empleado/empl_cliente_view');
+        if($this->input->post()){
+            $post = $this->input->post('input_buscar_cliente');
+            $_SESSION['word_search'] = mb_strtolower($post);
+        } else {
+            $_SESSION['word_search'] = '';
+        }
+        $config = array();
+        $config = $this->config->item('config_paginator');
+        $config["total_rows"] = $this->persona_model->count_personas($_SESSION['word_search'], 'CLT');
+        $config["base_url"] = base_url() . "empleado/Cliente/index/";
+        $config["per_page"] = 25;
+        $config["uri_segment"] = 4;
+        $page = $this->uri->segment(4);
+        if ($_SESSION['word_search'] != '') {
+            $clientes = $this->persona_model->get_clientes('nombre_persona', 'asc', $config["per_page"], $page, $_SESSION['word_search']);
+        } else {
+            $clientes = $this->persona_model->get_clientes('nombre_persona', 'asc', $config["per_page"], $page);
+        }
+        if ($clientes) {
+            $this->pagination->initialize($config);
+            $this->data['clientes'] = $clientes;
+            $this->data["links"] = $this->pagination->create_links();
+        }
+        $this->render('empleado/empl_cliente_view');
 	}
 	
 	public function nuevo_cliente() {
@@ -100,7 +97,7 @@ class Cliente extends Empl_Controller {
 				'tipo_sangre_cliente' => $this->input->post('selectGrupo'),
 				'rh_cliente' => $this->input->post('selectRH'),
 				'eps_persona' => $this->input->post('inputEps'),
-				'contacto_cliente' => $this->input->post('inputNombreContacto'),
+				'contacto_cliente' => mb_strtolower($this->input->post('inputNombreContacto')),
 				'telefono_contacto_cliente' => $this->input->post('inputTelContacto'),
 				'tipo_persona' => 'CLT',
 				'estado_persona' => 'ACT',
@@ -118,13 +115,30 @@ class Cliente extends Empl_Controller {
 		}
 	}
 	
-	public function edit_view($id) {
-		$query = $this->persona_model->get_persona('', $id);
-		$this->data['cliente_info'] = $query;
-		$this->data['departamentos'] = $this->lugar_model->get_departamentos();
-		$this->data['ciudades'] = $this->lugar_model->get_ciudades($query->id_departamento);
+    public function seleccionar_cliente(){
+        $this->session->set_userdata(array(
+            'id_cliente' => $this->input->post('id')
+        ));
+    }
+    
+    public function liberar_cliente(){
+        $this->session->set_userdata(array(
+            'id_cliente' => null
+        ));
+        redirect('Empleado/Cliente/');
+    }
+	
+	public function edit_view() {
+        $id = $this->session->userdata('id_cliente');
+        if($id){
+            $this->data['cliente_info'] = $this->persona_model->get_persona($id);
+            $this->data['departamentos'] = $this->lugar_model->get_departamentos();
+            $this->data['ciudades'] = $this->lugar_model->get_ciudades($this->data['cliente_info']->id_departamento);
 		
-		$this->render('empleado/empl_cliente_edit_view');
+            $this->render('empleado/empl_cliente_edit_view');
+        } else {
+            redirect('Empleado/Cliente');
+        }
 	}
 	
 	public function edit_cliente() {
@@ -182,12 +196,16 @@ class Cliente extends Empl_Controller {
 		}
 	}
 	
-	public function multas_view($id) {
-		$query = $this->multa_model->get_multas_no_pagadas($id);
-		$this->data['multas'] = $query;
-		$this->data['persona'] = $this->persona_model->get_persona('', $id);
+	public function multas_view() {        
+        $id = $this->session->userdata('id_cliente');
+        if($id){
+            $this->data['persona'] = $this->persona_model->get_persona($id);
+            $this->data['multas'] = $this->multa_model->get_multas_no_pagadas($this->data['persona']->id_persona);
 
-		$this->render('empleado/empl_multa_view');
+            $this->render('empleado/empl_multa_view');
+        } else {
+            redirect('Empleado/Cliente');
+        }
 	}
 	
 	public function update_estado_multa($id_multa){

@@ -36,8 +36,10 @@ $(function() {
 	//Sale de la historia clínica del cliente    
 	//Marcar cita como Asistió
 	$('.asistir-btn').click(function(e) {
-		if (force) {
-			var id_cita = $(this).attr('cita');
+		e.preventDefault();
+		var id_cita = $(this).attr('cita');
+        var id_cliente = $(this).attr('cliente');
+        if (force) {
 			$.ajax({
 				type: 'POST',
 				url: js_site_url + 'Cita/marcar_asiste/',
@@ -65,10 +67,6 @@ $(function() {
 				}
 			});
 		} else {
-			e.preventDefault();
-			$('.ac_p_error').fadeOut('slow').remove();
-			var id_cita = $(this).attr('cita');
-			var id_cliente = $(this).attr('cliente');
 			swal({
 					title: 'Terminar cita',
 					text: '¿Desea terminar la cita?, recuerde que no podrá volver a acceder a la historia clínica.',
@@ -77,6 +75,7 @@ $(function() {
 					confirmButtonText: 'Sí, terminar',
 					cancelButtonText: 'No, cancelar',
 					showLoaderOnConfirm: true,
+                    closeOnConfirm: false,
 				},
 				function(isConfirm) {
 					if (isConfirm) {
@@ -449,6 +448,5 @@ $(function() {
 	$(".timepicker").timepicker({
 		showInputs: false,
 		minuteStep: 30,
-		defaultTime: '12:00 PM'
 	});
 });

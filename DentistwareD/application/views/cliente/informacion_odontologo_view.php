@@ -41,11 +41,15 @@
 								
                                 echo heading('Información Académica', 3);
 							?>
-							</div>                 
+							</div>
+                            <hr>
                             <div class="text-align:center;">								
 								<p><?php echo $persona->estudios_odont; ?></p>
-                            </div>	                                                                                                                                                                  
-	                    </div>                                     
+                            </div>
+                        </div>
+                        <div class="box-footer">
+                            <button type="button" class="btn btn-danger btn-lg cancelar_edit">Cancelar</button>
+                        </div>
 	                </div>						   
 	            </div>
 	        </div>

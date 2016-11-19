@@ -12,11 +12,26 @@
                     	<h4>A continuación puede buscar las citas disponibles que podrá agendar:</h4>
                     </div>
                     <div class="box-body">
+						<?php
+		                  	echo form_close();
+		             		echo '<hr>';
+	                        if($cantidadDeMultas > 0){
+				                echo '<div class="form-group text-center">
+										<i id="logo_i" class="fa fa-warning fa-5x"></i>';
+								echo heading('Usted tiene multas pendientes.<br>Por favor paguelas para poder agendar una cita.', 3, 'class="text-muted"');
+				                echo '</div>';	
+	                        } else if($cantidadDeCitas >= 3) { 	                        	
+			                	echo '<div class="form-group text-center">
+										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
+			                   	echo heading('Usted ya tiene tres citas asignadas.<br>Podrá agendar más citas cuando tenga menos de tres citas activas.', 3, 'class="text-muted"');
+			                   	echo '</div>';	
+                        	} else {
+                    	?>
                         <?php 
                             $data_input = array(
-                                    'id' => "edit_cliente_form",
+                                'id' => "edit_cliente_form",
                             );        
-                            echo form_open('paciente/AgendarCita/filtrar', $data_input);
+                            echo form_open('paciente/AgendarCita/', $data_input);
                             
                             $fecha = $this->session->userdata('fecha');                            
                             $fecha = str_replace("-", "/", $fecha);
@@ -71,21 +86,9 @@
 							echo form_submit($data_input);
 						?>
 						</div>
-						<?php
-		                  	echo form_close();
-		             		echo '<hr>';
-	                        if($cantidadDeMultas > 0){
-				                echo '<div class="form-group text-center">
-										<i id="logo_i" class="fa fa-warning fa-5x"></i>';
-								echo heading('Usted tiene multas pendientes.<br>Por favor paguelas para poder agendar una cita.', 3, 'class="text-muted"');
-				                echo '</div>';	
-	                        } else if($cantidadDeCitas >= 3) { 	                        	
-			                	echo '<div class="form-group text-center">
-										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
-			                   	echo heading('Usted ya tiene tres citas asignadas.<br>Podrá agendar más citas cuando tenga menos de tres citas activas.', 3, 'class="text-muted"');
-			                   	echo '</div>';	
-                        	} else if($citas != NULL) {
-                    	?>
+                        <?php 
+                            if($citas != NULL) {
+                        ?>
                     	<h4>Citas disponibles:</h4>
                         <div class="table-responsive">
                             <table id="tabla_cita" class="table table-bordered table-hover tabla-citas">
@@ -141,12 +144,14 @@
                             </table>                         
                         </div>
 	                    <?php 
-		                    } else {		                    	
+		                    } else {
+                                echo br(2);
 			                	echo '<div class="form-group text-center">
 										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
 			                   	echo heading('No hay citas disponibles.<br>Por favor intente con otras opciones de busqueda.', 3, 'class="text-muted"');
 			                   	echo '</div>';		                    	
-		                    }                    	
+		                    }
+                        }                    	
 	                    ?>
                     </div>
                 </div>

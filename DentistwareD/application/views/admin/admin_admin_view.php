@@ -98,7 +98,8 @@
                                                 echo '</td>';
                                                 echo '<td class="text-center">';
                                                 echo '<button class="editar-btn btn btn-default" doc="' . $documento . '" type="button" id="edit_persona" data-toggle="tooltip" title="Editar">
-                                                            <i class="fa fa-pencil"></i>';
+                                                            <i class="fa fa-pencil"></i>
+                                                        </button>';
                                                 echo '<button class="borrar-btn btn btn-default" doc="' . $documento . '" type=button id="delete_persona" data-toggle="tooltip" title="Borrar">
                                                             <i class="fa fa-trash"></i>
                                                         </button>
