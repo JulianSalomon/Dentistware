@@ -98,7 +98,7 @@ class Cita_model extends MY_Model {
 		$this->db->group_start();
 		$this->db->where('fecha_cita', $fechaActual);
 		if ($horaSolicitada != '') {
-			$this->db->where('hora_cita', $horaSolicitada);
+			$this->db->where('hora_cita >=', $horaSolicitada);
 		}
 		if ($odontologoActual != '' && $odontologoActual != '-1') {
 			$this->db->where('id_odonto', $odontologoActual);

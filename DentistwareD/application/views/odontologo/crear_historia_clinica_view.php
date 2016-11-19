@@ -42,13 +42,11 @@
                   );        
                   echo form_open('', $data_input);	
                   ?>
-               
+               <input id="input_cliente" name="input_cliente" class="hidden" value="<?php echo $cliente_info->id_persona; ?>">
                <!-- /.box-header -->
                <div class="box-body">
-                  <div class="col-xs-12 form-group" >
-                     <input id="input_cliente" name="input_cliente" class="hidden" value="<?php echo $cliente_info->id_persona; ?>">
+                  <div class="col-xs-12 input-group"  id="div_input_antecedentes">                     
                      <label  class="control-label">Antecedentes familiares: *</label>
-                     <div class="col-xs-12 input-group" id="div_input_antecedentes"> 
                         <?php 
                            $data_input = array(
                            		'type' => "text",
@@ -60,10 +58,10 @@
                            );
                            echo form_textarea($data_input);	                	
                            ?>  
-                     </div>
-                      <br>
-                     <label  class="control-label">Enfermedad actual: *</label>
+              		</div>
+                      <br>                     
                      <div class="col-xs-12 input-group" id="div_input_enfermedad"> 
+                     	<label  class="control-label">Enfermedad actual: *</label>
                         <?php 
                            $data_input = array(
                            		'type' => "text",
@@ -90,31 +88,54 @@
                            );
                            echo form_textarea($data_input);	                	
                            ?>  
-                     </div>
-                  </div>
-                   
+                     </div>                   
                    <hr>
-                  <h3 class="box-title">Preguntas*</h3>
-                  <table class="table table-bordered">
-                     <tr>
-                        <th style="width: 10px">#</th>
-                        <th>Pregunta</th>
-                        <th>Sí</th>
-                        <th>No</th>
-                     </tr>
-                     <?php 
-                          $i = 1;
-                          foreach($preguntas as $pregunta){
-                              echo '<tr>';
-                              echo '<td>' .$i . '.</td>';
-                              echo  '<td>' .$pregunta->desc_pregunta . '</td>';
-                              echo '<td style="width:2%"> <input type="radio" name="p' . $i .'"  value="1"> </td>';
-                              echo '<td style="width:2%"> <input type="radio" name="p' . $i .'"  value="0"> </td>';
-                              echo '</tr>';
-                              $i++;
-                          }
-                      ?>
-                   </table>
+                  <h3 class="box-title">Información medica *</h3>
+                  <small><i class="fa fa-warning"></i> Si no selecciona un pregunta, esta quedara marcada como no.</small>
+                  <div class="row">
+                  <?php $num_preguntas = count($preguntas);?>
+                  	<div class="col-lg-6">
+	                  <table class="table table-bordered">
+	                     <tr>
+	                        <th style="width: 10px">#</th>
+	                        <th>Pregunta</th>
+	                        <th>Sí</th>
+	                        <th>No</th>
+	                     </tr>
+	                     <?php 
+		                     for($i = 1; $i <= $num_preguntas / 2; $i++){
+		                     	echo '<tr>';
+		                     	echo '<td>' .$i . '.</td>';
+		                     	echo  '<td>' .$pregunta->desc_pregunta . '</td>';
+		                     	echo '<td style="width:2%"> <input type="radio" name="p' . $i .'"  value="1"> </td>';
+		                     	echo '<td style="width:2%"> <input type="radio" name="p' . $i .'"  value="0"> </td>';
+		                     	echo '</tr>';
+		                     }
+	                      ?>
+	                   </table>                  	
+                  	</div>
+                  	<div class="col-lg-6">
+	                  <table class="table table-bordered">
+	                     <tr>
+	                        <th style="width: 10px">#</th>
+	                        <th>Pregunta</th>
+	                        <th>Sí</th>
+	                        <th>No</th>
+	                     </tr>
+	                     <?php 
+		                     for($i = $num_preguntas / 2 + 1; $i <= $num_preguntas; $i++){
+		                     	echo '<tr>';
+		                     	echo '<td>' .$i . '.</td>';
+		                     	echo  '<td>' .$pregunta->desc_pregunta . '</td>';
+		                     	echo '<td style="width:2%"> <input type="radio" name="p' . $i .'"  value="1"> </td>';
+		                     	echo '<td style="width:2%"> <input type="radio" name="p' . $i .'"  value="0"> </td>';
+		                     	echo '</tr>';
+		                     }
+	                      ?>
+	                   </table>                  	
+                  	</div>                  
+                  </div>
+
                </div>
                <div class="box-footer text-center">
                   <?php                 

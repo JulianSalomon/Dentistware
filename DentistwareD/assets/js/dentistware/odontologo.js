@@ -360,16 +360,10 @@ $(function() {
 						success: function(msg) {
 							if (isNaN(msg)) {
 								$('#div_waiting_new_story').addClass("hidden");
-								var j = 0;
 								$.each(msg, function(i, item) {
-									if (j < 3) {
-										$('#div_' + i).after('<p class="alert alert-danger text-center ac_p_error" role="alert">' + item + '</p>');
-										j++;
-									} else {
-										return false;
-									}
-								});
-								swal("Error", "Algunos campos no han sido rellenados.", "error");
+									$('#div_' + i).after('<p class="alert alert-danger text-center ac_p_error" role="alert">' + item + '</p>');
+									swal("Error", "Algunos campos no han sido llenados.", "error");
+								});								
 							} else {
 								if (msg == 1) {
 									$('#div_waiting_new_story').addClass("hidden");
