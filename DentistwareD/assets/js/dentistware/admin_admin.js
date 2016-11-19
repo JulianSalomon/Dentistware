@@ -31,7 +31,7 @@ $(function() {
                         $('#modal_add_admin').modal('hide');
                     } else {
                     	$('#div_waiting_new_admin').addClass("hidden"); 
-                    	swal("Error", "Se ha presentado un error al ingresar el administrador", "error");
+                    	swal("Error", "Se ha presentado un error al ingresar el administrador, por favor revise los datos.", "error");
                     }
                 }
             }
@@ -71,7 +71,7 @@ $(function() {
                     	});              
                     } else {
                     	$('#div_waiting_edit_administrador').addClass("hidden");
-                    	swal("Error", "Se ha presentado un error al editar éste administrador!", "error");
+                    	swal("Error", "Se ha presentado un error al editar éste administrador, por favor verifique los datos!", "error");
                     }
                 }
             }

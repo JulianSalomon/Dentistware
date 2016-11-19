@@ -71,7 +71,7 @@ $(function() {
                     	});              
                     } else {
                     	$('#div_waiting_edit_cliente').addClass("hidden");
-                    	swal("Error", "Se ha presentado un error al editar éste cliente!", "error");
+                    	swal("Error", "Se ha presentado un error al editar éste cliente, por favor verifique los datos!", "error");
                     }
                 }
             }
@@ -86,7 +86,7 @@ $(function() {
         } else {
             swal({
                 title: 'Eliminar',
-                text: '¿Desea eliminar este ' + tipo_usuario + '?',
+                text: '¿Desea eliminar a este cliente?',
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonClass: "btn-primary",
@@ -104,14 +104,14 @@ $(function() {
                             if(msg == true){
                                 swal({   
                                     title: "Eliminado",
-                                    text: "El " + tipo_usuario + " ha sido eliminado",
+                                    text: "El cliente ha sido eliminado",
                                     type: "success",
                                 }, 
                                 function(){   
                                     location.reload(); 
                                 });
                             } else {
-                                swal("Error", "El " + tipo_usuario + " no puede ser eliminado", "error");
+                                swal("Error", "Éste cliente no puede ser eliminado", "error");
                             }
                         }
                     });
@@ -218,7 +218,7 @@ $(function() {
 	            	}
 	            	);                    	
 	            } else {
-	            	swal("Error", "Se ha presentado un error cambiar el estado de la multa!", "error");
+	            	swal("Error", "Se ha presentado un error al intentar pagar la multa<br>Por favor vuelva a intentarlo!", "error");
 	            }            
             }
         });

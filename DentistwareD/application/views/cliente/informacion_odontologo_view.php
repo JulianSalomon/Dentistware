@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-		<title>Dentistware | Información del odontólogo</title>
+		<title>Dentistware | Información odontólogo</title>
         <link rel="shortcut icon" type="image/png" href="<?php echo base_url('assets/img/logo.png')?>"/>
         <?php
 	    	echo meta('X-UA-Compatible', 'IE=edge', 'equiv');

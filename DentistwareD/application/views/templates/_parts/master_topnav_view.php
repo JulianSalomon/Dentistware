@@ -19,7 +19,8 @@
                     </li>
               		<li class="dropdown user user-menu">
                 		<a href="" class="dropdown-toggle" data-toggle="dropdown">
-                		<?php                 		
+                		<?php  
+                		
                             if($user_info['foto_persona'] != NULL){
                                 $url = 'uploads/' . $user_info['foto_persona'];
                             } else {

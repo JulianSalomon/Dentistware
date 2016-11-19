@@ -65,7 +65,6 @@
                                         <th>Ubicación</th>
                                         <th>EPS</th>
                                         <th>Contacto</th>
-                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </thead>
@@ -93,14 +92,7 @@
                                                 echo '</td>';
                                                 echo '<td>';
                                                 echo ucwords($cliente->contacto) . '<br>' ."<small> Tel: " . $cliente->contacto_tel . "</small>" ;
-                                                echo '</td>';
-                                                echo '<td class="text-center">';
-                                                if($cliente->estado == 'ACT'){
-                                                    echo '<i class="fa fa-check-square-o"></i>';
-                                                } else {
-                                                    echo '<i class="fa fa-square-o"></i>';
-                                                }
-                                                echo '</td>';                                                                                                                                                                                                
+                                                echo '</td>';                                                                                                                                                                                               
                                                 echo '<td class="text-center">';
                                                         $data_input = array(
                                                 		'type' => 'button',
@@ -126,7 +118,6 @@
                                         <th>Ubicación</th>
                                         <th>EPS</th>
                                         <th>Contacto</th>
-                                        <th>Estado</th>
                                         <th>Opciones</th>
                                     </tr>
                                 </tfoot>                                
@@ -141,7 +132,7 @@
 		                    	echo br(1);
 			                	echo '<div class="form-group text-center">
 										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
-			                   	echo heading('No se encontraron resultados.<br>Intente con otra opción.', 3, 'class="text-muted"');
+			                   	echo heading('No se encontraron resultados.<br>Por favor intente buscarn con otra opción.', 3, 'class="text-muted"');
 			                   	echo '</div>';
 	                    	}
 	                    }                    	
@@ -207,7 +198,7 @@
                               <label  class="control-label">N. de Documento: *</label>
                             <div class="input-group" id="div_inputDocumento">
                                 <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                                <input type="text" class="form-control" id="inputDocumento" placeholder="Número de documento" name="inputDocumento">
+                                <input type="number" class="form-control" id="inputDocumento" placeholder="Número de documento" name="inputDocumento">
                             </div>
                         </div>                                                                                                  
                       </div>

@@ -7,8 +7,8 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                         <h4>A continación puede ver una lista de sus listas agendadas:</h4>
-                         <small>*Podrá cancelar sus citas con una anterioridad mayor a 5 horas.</small>
+                         <h4>A continación puede ver sus citas que se encuentran activas:</h4>
+                         <small>*Recuerde que solo podrá cancelar sus citas con una anterioridad mayor a 5 horas.</small>
                     </div>
                     <div class="box-body">                        
 						<?php  
@@ -73,7 +73,7 @@
 		                    	echo br(1);
 			                	echo '<div class="form-group text-center">
 										<i id="logo_i" class="fa fa-warning fa-5x"></i>';
-			                   	echo heading('Hasta el momento no tiene citas agendadas.', 3, 'class="text-muted"');
+			                   	echo heading('Hasta el momento no tiene citas activas.<br>Para agendar una cita, dirijase a la opción "Agendar cita" .', 3, 'class="text-muted"');
 			                   	echo '</div>';	                    	
 		                    }                    	
 	                    ?>

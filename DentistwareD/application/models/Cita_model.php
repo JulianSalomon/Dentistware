@@ -120,7 +120,7 @@ class Cita_model extends MY_Model {
             
     }
 	
-	public function get_all_citas($fechaActual = '', $horaSolicitada = '', $odontologoActual = '') {
+	public function get_all_citas($fechaActual = '', $horaSolicitada = '', $odontologoActual = '', $limit = 0, $offset = 0) {
 	
 		$this->db->select('id_cita, fecha_cita as fecha, hora_cita as hora, estado_cita as estado, odonto.nombre_persona  as odontologo, consultorio, id_cliente, id_odonto');
 		$this->db->from('cita');
@@ -136,7 +136,10 @@ class Cita_model extends MY_Model {
 
 		$this->db->group_end();
 		$this->db->order_by('hora_cita', 'asc');
-	
+		if ($limit) {
+			$this->db->limit($limit, $offset);
+		}
+		
 		$query = $this->db->get();
 		if ($query)
 			return $query->result();

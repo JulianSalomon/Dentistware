@@ -9,7 +9,7 @@
             <div class="col-xs-12">
                 <div class="box box-primary">
                     <div class="box-header with-border">
-                    	<h4>A continuación puede buscar las citas:</h4>
+                    	<h4>A continuación puede buscar todas las citas:</h4>
                     </div>
                     <div class="box-body">
                         <?php 
@@ -155,7 +155,7 @@
 		                    	echo br(1);
 			                	echo '<div class="form-group text-center">
 										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
-			                   	echo heading('No hay citas disponibles.<br>Por favor intente con otras opciones.', 3, 'class="text-muted"');
+			                   	echo heading('No hay citas disponibles.<br>Por favor intente con otras opciones de busqueda.', 3, 'class="text-muted"');
 			                   	echo '</div>';		                    	
 		                    }                    	
 	                    ?>
