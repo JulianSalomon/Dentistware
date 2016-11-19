@@ -39,21 +39,23 @@ class Multa_model extends MY_Model {
 				'id_multa' => $id_multa,
 		));
 	}
-	
+    
 	public function count_multas_by_cliente($id_cliente){
 		$this->db->select('*');
 		$this->db->from('multa');
 		$this->db->where('id_cliente', $id_cliente);
-		
 		$query = $this->db->get();
 		return count($query->result());
 	}
 	
-    public function count_multas($estadoMulta) {
+        public function count_multas($id_cliente='', $estadoMulta='') {
+        //$month = date('Y-m');
+        //$firstday = $month ."-02";
 		$this->db->select('*');
         $this->db->from('multa');
         $this->db->where('estado_multa', $estadoMulta);
-        
+        if($id_cliente !='')
+            $this->db->where('id_cliente', $id_cliente);
         $query = $this->db->get();
 		return count($query->result());        
 	}

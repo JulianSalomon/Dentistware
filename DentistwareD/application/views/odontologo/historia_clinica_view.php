@@ -45,7 +45,7 @@
 										<?php							
 											echo heading(ucwords($persona->nombre_persona), 2);
 												if($persona->foto_persona){
-													echo '<img id="foto_img" class="center-block" height="200" width="200" src="'.base_url() . "uploads/" . $route . '/'  . $persona->foto_persona . '">';										
+													echo '<img id="foto_img" class="center-block" height="200" src="'.base_url() . "uploads/cliente/"  . $persona->foto_persona . '">';										
 												} else {
 													echo '<img id="foto_img" class="center-block" height="200" width="200" src="' . base_url("assets/img/foto-default.png") . '">';
 												}

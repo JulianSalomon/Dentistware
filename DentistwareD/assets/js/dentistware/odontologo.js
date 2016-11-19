@@ -333,47 +333,6 @@ $(function() {
 		window.location.href = js_site_url + "Historia_Clinica/Editar_Historia_Clinica";
 	});
 
-	//Inserta historia en la base de datos
-	$('#nueva_historia_form').submit(function(event) {
-		event.preventDefault();
-
-		$('.ac_p_error').fadeOut('slow').remove();
-		var cliente = $(this).attr('cliente');
-		var postData = $(this).serializeArray();
-		$.ajax({
-			type: 'POST',
-			url: js_site_url + 'historia_clinica/nueva_historia_clinica/',
-			data: postData,
-			beforeSend: function() {
-				$('#div_waiting_new_story').removeClass("hidden");
-			},
-			success: function(msg) {
-				if (isNaN(msg)) {
-					$('#div_waiting_new_story').addClass("hidden");
-					$.each(msg, function(i, item) {
-						$('#div_' + i).after('<p class="alert alert-danger text-center ac_p_error" role="alert">' + item + '</p>');
-					});
-				} else {
-					if (msg == 1) {
-						swal({
-								title: "Historia clínica generada",
-								text: "Se insertó exitosamente la historia clínica",
-								type: "success"
-							},
-							function() {
-
-								window.location.href = js_site_url + '/index/' + cliente;
-							});
-						$('#modal_add_story').modal('hide');
-					} else {
-						$('#div_waiting_new_story').addClass("hidden");
-						swal("Error", "Se ha presentado un error al ingresar la historia clínica, ya hay una en existencia.", "error");
-					}
-				}
-			}
-		});
-	});
-
     //Inserta historia en la base de datos
 	$('#nueva_historia_form').submit(function(event) {
 		event.preventDefault();

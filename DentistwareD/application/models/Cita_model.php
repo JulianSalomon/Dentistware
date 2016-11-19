@@ -187,7 +187,9 @@ class Cita_model extends MY_Model {
 		$this->db->where('estado_cita', $estadoCita);
         if($day == ''){
             $firstday = date('Y-m-d', strtotime('sunday -1 weeks'));
+            $lastday = date('Y-m-d', strtotime('sunday '));
             $this->db->where('fecha_cita >', $firstday);
+            $this->db->where('fecha_cita <', $lastday);
         }else{
             $firstday = date('Y-m-d', strtotime($day));
             $this->db->where('fecha_cita', $firstday);
@@ -239,4 +241,21 @@ class Cita_model extends MY_Model {
 		
 		return count($this->db->get()->result());
 	}
+    
+    public function get_and_count_citas_by_assistance($idPersona, $estadoCita ='') {
+		$this->db->select('*');
+        $this->db->from('cita');
+		$this->db->where('id_cliente', $idPersona);
+        if($estadoCita != ''){
+			$this->db->where('estado_cita', $estadoCita);
+            $query = $this->db->get();
+            if ($query)
+                return $query->result();
+            return false;
+        } else {		
+            $query = $this->db->get();
+            return count($query->result());        
+        }
+	}
+    
 }
