@@ -32,7 +32,7 @@
          </section>
          <section class="content">
             <div class="box box-primary">
-               <div class="overlay hidden" id="div_waiting_new_story">
+               <div class="overlay hidden" id="div_waiting_edit_story">
                   <i class="fa fa-refresh fa-spin" id="i_refresh"></i>  
                </div>
                <?php 
@@ -95,34 +95,69 @@
                            echo form_textarea($data_input);	                	
                            ?>  
                      </div>
-                  </div>
-                   
+                  </div>                   
                    <hr>
-                  <h3 class="box-title">Preguntas</h3>
-                  <table class="table table-bordered">
-                     <tr>
-                        <th style="width: 10px">#</th>
-                        <th>Pregunta</th>
-                        <th>Sí</th>
-                        <th>No</th>
-                     </tr>
-                     <?php 
-                       $i = 1;
-                      foreach($preguntas as $pregunta){
-                          $checked = 'checked ="checked"';
-                          $si = ''; $no = '';
-                          if(($pregunta->estado_pregunta) == 1 ) $si = $checked;
-                          else $no = $checked;
-                        echo '<tr>';
-                         echo '<td>' .$i . '.</td>';
-                           echo  '<td>' .$pregunta->desc_pregunta . '</td>';
-                              echo '<td> <input type="radio" name="p' . $i .'"  value="1" ' . $si . '> </td>'; 
-                        echo           '<td> <input type="radio" name="p' . $i .'"  value="0" ' . $no . '> </td>'; 
-                        
-                        echo '</tr>';
-                        $i++;
-                        } ?>
-                  </table>
+                  <h3 class="box-title">Información medica *</h3>
+                  <small><i class="fa fa-warning"></i> Si no selecciona un pregunta, esta quedara marcada como no.</small>
+                  <div class="row">
+                  <?php $num_preguntas = count($preguntas);?>
+                  	<div class="col-lg-6">
+	                  <table class="table table-bordered">
+	                     <tr>
+	                        <th style="width: 10px">#</th>
+	                        <th>Pregunta</th>
+	                        <th>Sí</th>
+	                        <th>No</th>
+	                     </tr>
+	                     <?php 
+		                     for($i = 1; $i <= $num_preguntas / 2; $i++){
+		                     	$pregunta = $preguntas[$i -1];
+		                     	$checked = 'checked ="checked"';
+		                     	$si = ''; $no = '';
+		                     	if(($pregunta->estado_pregunta) == 1 )
+		                     		$si = $checked;
+		                     	else
+		                     		$no = $checked;
+		                     
+                     			echo '<tr>';
+                     			echo '<td>' . $i . '.</td>';
+                     			echo '<td>' . $pregunta->desc_pregunta . '</td>';
+                     			echo '<td><input type="radio" name="p' . $i .'"  value="1" ' . $si . '> </td>';
+                     			echo '<td> <input type="radio" name="p' . $i .'"  value="0" ' . $no . '> </td>';                     			 
+                     			echo '</tr>';
+		                     }
+	                      ?>
+	                   </table>                  	
+                  	</div>
+                  	<div class="col-lg-6">
+	                  <table class="table table-bordered">
+	                     <tr>
+	                        <th style="width: 10px">#</th>
+	                        <th>Pregunta</th>
+	                        <th>Sí</th>
+	                        <th>No</th>
+	                     </tr>
+	                     <?php 
+		                     for($i = $num_preguntas / 2 + 1; $i <= $num_preguntas; $i++){
+		                     	$pregunta = $preguntas[$i -1];
+		                     	$checked = 'checked ="checked"';
+		                     	$si = ''; $no = '';
+		                     	if(($pregunta->estado_pregunta) == 1 )
+		                     		$si = $checked;
+								else
+		                     		$no = $checked;
+		                     			 
+                     			echo '<tr>';
+                     			echo '<td>' . $i . '.</td>';
+                     			echo '<td>' . $pregunta->desc_pregunta . '</td>';
+                     			echo '<td><input type="radio" name="p' . $i .'"  value="1" ' . $si . '> </td>';
+                     			echo '<td> <input type="radio" name="p' . $i .'"  value="0" ' . $no . '> </td>';
+                     			echo '</tr>';
+		                     }
+	                      ?>
+	                   </table>                  	
+                  	</div>                  
+                  </div>                   
                </div>
                <div class="box-footer text-center">
                   <?php                 

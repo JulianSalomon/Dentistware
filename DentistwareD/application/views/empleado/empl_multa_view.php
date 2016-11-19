@@ -14,64 +14,65 @@
             <div class="box-body"> 
                 <?php if ($multas) { ?> 
                 <small>*Para cancelar una multa debe seleccionar la multa deseada, y esta será cancelada automaticamente.</small>
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover datatable tabla-usuario">
-                        <thead>
-                            <tr>
-                                <th>Concepto Multa</th>
-                                <th>Valor multa</th>
-                                <th>Estado</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                                echo '<tr>';
-                                foreach ($multas as $multa) {
-                                    echo '<td>';
-                                    echo $multa->concepto_multa;
-                                    echo '</td>';
-                                    echo '<td align="center">';
-                                   	echo "$ " . $multa->valor_multa;
-                                    echo '</td>';
-                                    echo '<td align="center">';
-                                    echo '<div class="checkbox icheck"><label>';
-                                    $data = array(
-                                    		'name'          => 'estado_multa',
-                                    		'id'            => 'estado_multa',
-                                    		'value'         => '',
-                                    		'checked'       => FALSE,
-                                    		'data-id' =>  $multa->id_multa,
-                                    		'class' => 'check',
-                                    );
-                                    echo form_checkbox($data);
-                                    echo '</label></div>';
-                                    echo '</td>';                                    
-                                }
-                            ?>                        
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Concepto</th>
-                                <th>Valor multa</th>
-                                <th>Estado</th>
-                            </tr>
-                        </tfoot>                    
-                    </table>
-                    <?php 
-                        } else {
-                          	echo br(1);
-                            echo '<div class="form-group text-center">
-                            	<i id="logo_i" class="fa fa-smile-o fa-5x"></i>';
-                            echo heading(ucwords($persona->nombre_persona) . ", no tiene multas por pagar.", 3, 'class="text-muted"');
-                            echo '<hr>';
-                            $data_input = array(
-                            		'type' => 'button',
-                            		'class' => 'btn btn-primary btn-lg',
-                            );
-                            echo anchor(base_url() . 'empleado/Cliente/search/', 'Volver', $data_input);                            
-                            echo '</div>';                           
-                        }              
-                    ?>
+                <div class="row">
+                    <div class="col-lg-3"></div>
+                    <div class="table-responsive col-lg-6">
+                        <table class="table table-bordered table-hover datatable tabla-usuario">
+                            <thead>
+                                <tr>
+                                    <th>Concepto Multa</th>
+                                    <th style="width:80px">Valor multa</th>
+                                    <th style="width:20px">Estado</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                    foreach ($multas as $multa) {
+                                    echo '<tr>';
+                                        echo '<td>';
+                                        echo $multa->concepto_multa;
+                                        echo '</td>';
+                                        echo '<td align="left">';
+                                        echo "$ " . $multa->valor_multa;
+                                        echo '</td>';
+                                        echo '<td align="center">';
+                                        echo '<div class="checkbox icheck estado_multa"><label>';
+                                        $data = array(
+                                                'id'            => 'estado_multa',
+                                                'name'          => 'estado_multa',
+                                                'value'         => $multa->id_multa,
+                                                'checked'       => FALSE,
+                                                'class' => 'estado_multa',
+                                        );
+                                        echo form_checkbox($data);
+                                        echo '</label></div>';
+                                        echo '</td>';  
+                                    echo '</    tr>';                                  
+                                    }
+                                ?>                        
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Concepto</th>
+                                    <th>Valor multa</th>
+                                    <th>Estado</th>
+                                </tr>
+                            </tfoot>                    
+                        </table>
+                        <?php 
+                            } else {
+                                echo br(1);
+                                echo '<div class="form-group text-center">
+                                    <i id="logo_i" class="fa fa-smile-o fa-5x"></i>';
+                                echo heading(ucwords($persona->nombre_persona) . ", no tiene multas por pagar.", 3, 'class="text-muted"');
+                                echo '<hr>';
+                                echo '</div>';                                     
+                            }    
+                            echo '<div class="form-group text-center">';
+                            echo '<button type="button" class="volver-btn btn btn-primary btn-lg">Volver</button>';
+                            echo '</div>';
+                        ?>
+                    </div>
                 </div>
             </div>
         </div>

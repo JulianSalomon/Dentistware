@@ -27,7 +27,7 @@ class Cita_model extends MY_Model {
 		$this->db->where('hora_cita >=', $horaActual);
 		$this->db->where('fecha_cita', $fechaActual);
 		if ($horaSolicitada != '') {
-			$this->db->where('hora_cita =', $horaSolicitada);
+			$this->db->where('hora_cita >=', $horaSolicitada);
 		}
 		if ($odontologoActual != '' && $odontologoActual != '-1') {
 			$this->db->where('id_odonto', $odontologoActual);
@@ -51,31 +51,7 @@ class Cita_model extends MY_Model {
 
 		$this->db->where('fecha_cita', $fechaActual);
 		if ($horaSolicitada != '') {
-			$this->db->where('hora_cita =', $horaSolicitada);
-		}
-		if ($odontologoActual != '' && $odontologoActual != '-1') {
-			$this->db->where('id_odonto', $odontologoActual);
-		}
-		$this->db->group_end();
-		$this->db->order_by('hora_cita', 'asc');
-		
-		$query = $this->db->get();
-		if ($query)
-			return $query->result();
-		return false;
-	}       
-    
-    public function get_citas_odontologo($fechaActual = '', $horaSolicitada = '', $odontologoActual = '') {
-    
-		$this->db->select('id_cita, fecha_cita as fecha, hora_cita as hora, estado_cita as estado, cliente.nombre_persona  as cliente, consultorio');
-		$this->db->from('cita');
-		$this->db->join('persona as cliente', 'odonto.id_persona = cita.id_odonto');
-		$this->db->where('cita.id_cliente is NULL', NULL, FALSE);
-		$this->db->group_start();
-
-		$this->db->where('fecha_cita', $fechaActual);
-		if ($horaSolicitada != '') {
-			$this->db->where('hora_cita =', $horaSolicitada);
+			$this->db->where('hora_cita >=', $horaSolicitada);
 		}
 		if ($odontologoActual != '' && $odontologoActual != '-1') {
 			$this->db->where('id_odonto', $odontologoActual);
@@ -99,25 +75,19 @@ class Cita_model extends MY_Model {
 		$this->db->where('cita.id_cliente is not NULL', NULL, FALSE);		
 		$this->db->where('hora_cita >=', $horaActual);
 		$this->db->where('fecha_cita', $fechaActual);
-        $this->db->group_start();
         $this->db->where('estado_cita ', NULL);
-        $this->db->group_end();
-		
 		if ($horaSolicitada != '') {
-			$this->db->where('hora_cita =', $horaSolicitada);          
-        }
-        
+			$this->db->where('hora_cita >=', $horaSolicitada);          
+        }        
         if ($odontologoActual != '' && $odontologoActual != '-1') {
 			$this->db->where('id_odonto', $odontologoActual);
-		}
-		
+		}		
 		$this->db->order_by('hora_cita', 'asc');
 		
 		$query = $this->db->get();
 		if ($query)
 			return $query->result();
-		return false;
-            
+		return false;           
     }
 	
 	public function get_all_citas($fechaActual = '', $horaSolicitada = '', $odontologoActual = '', $limit = 0, $offset = 0) {
@@ -128,7 +98,7 @@ class Cita_model extends MY_Model {
 		$this->db->group_start();
 		$this->db->where('fecha_cita', $fechaActual);
 		if ($horaSolicitada != '') {
-			$this->db->where('hora_cita', $horaSolicitada);
+			$this->db->where('hora_cita >=', $horaSolicitada);
 		}
 		if ($odontologoActual != '' && $odontologoActual != '-1') {
 			$this->db->where('id_odonto', $odontologoActual);
@@ -193,6 +163,9 @@ class Cita_model extends MY_Model {
             $this->db->where('fecha_cita <', $lastday);
         }else{
             $firstday = date('Y-m-d', strtotime($day));
+            if ($firstday > date('Y-m-d')){
+                $firstday = date('Y-m-d', strtotime($day . ' -1 weeks'));
+            }
             $this->db->where('fecha_cita', $firstday);
         }
         
@@ -205,9 +178,10 @@ class Cita_model extends MY_Model {
         $this->db->from('cita');
 		$this->db->where('id_cliente', null);
         $firstday = date('Y-m-d', strtotime($day));
-        $this->db->where('fecha_cita', $firstday);
-        
-        
+        if ($firstday > date('Y-m-d')){
+            $firstday = date('Y-m-d', strtotime($day . ' -1 weeks'));
+        }
+        $this->db->where('fecha_cita', $firstday);        
         $query = $this->db->get();
 		return count($query->result());        
 	}

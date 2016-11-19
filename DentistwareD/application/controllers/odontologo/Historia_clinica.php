@@ -36,7 +36,7 @@ class Historia_clinica extends Odon_Controller {
 			'dientes' => $dientes,
 			'id_cita' => $id_cita
 		);
-		$this->get_user_menu('Historia_Cliente');
+		
 		$this->load->view('odontologo/historia_clinica_view', $data);
 	}
     
@@ -130,11 +130,11 @@ class Historia_clinica extends Odon_Controller {
 		$this->load->model('historia_model');
 		$this->load->model('pregunta_model');
 		$this->load->model('registro_model');
-		$cliente_info     = $this->persona_model->get_persona('', $this->session->userdata['id_cliente']);
-		$historia_clinica = $this->historia_model->get_historia('', $this->session->userdata['id_cliente']);
-		$registros        = $this->registro_model->get_registros($historia_clinica->id_historia);
-		$preguntas        = $this->historia_model->obtener_preguntas_por_historia($historia_clinica->id_historia);
-		$data             = array(
+		$cliente_info = $this->persona_model->get_persona('', $this->session->userdata('id_cliente'));
+		$historia_clinica = $this->historia_model->get_historia('', $this->session->userdata('id_cliente'));
+		$registros = $this->registro_model->get_registros($historia_clinica->id_historia);
+		$preguntas = $this->historia_model->obtener_preguntas_por_historia($historia_clinica->id_historia);
+		$data = array(
 			'historia_clinica' => $historia_clinica,
 			'registros' => $registros,
 			'cliente_info' => $cliente_info,
@@ -151,11 +151,10 @@ class Historia_clinica extends Odon_Controller {
 			'antecedentes_fam' => $this->input->post('input_antecedentes'),
 			'enfermedad_actual' => $this->input->post('input_enfermedad'),
 			'observaciones' => $this->input->post('input_observaciones')
-		);
-        
-		$this->historia_model->actualizar_historia($this->session->userdata['id_cliente'], $input);
-		$historia_clinica     = $this->historia_model->get_historia_por_cliente($this->session->userdata['id_cliente'])->id_historia;
-		$num_preguntas        = $this->pregunta_model->contar_preguntas();
+		);      
+		$this->historia_model->actualizar_historia($this->session->userdata('id_cliente'), $input);
+		$historia_clinica = $this->historia_model->get_historia('', $this->session->userdata('id_cliente'))->id_historia;
+		$num_preguntas = $this->pregunta_model->contar_preguntas();
 		$preguntas_ingresadas = 1;
 		for ($i = 1; $i <= $num_preguntas; $i++) {
 			$entrada = 'p' . $i;
@@ -163,10 +162,10 @@ class Historia_clinica extends Odon_Controller {
 				'estado_pregunta' => $this->input->post($entrada)
 			);
 			$result  = $this->pregunta_model->actualizar_preguntas($historia_clinica, $i, $input);
-			if ($result == false) {
-				$preguntas_ingresadas = 0;
-				break;
-			}
+// 			if ($result == false) {
+// 				$preguntas_ingresadas = 0;
+// 				break;
+// 			}
 		}
 		echo $preguntas_ingresadas;
 	}

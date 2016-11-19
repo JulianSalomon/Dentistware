@@ -8,11 +8,11 @@ $(function() {
 		var cita = $(this).attr('cita');
 		swal({
 				title: 'Atender',
-				text: '¿Desea atender su cita con ' + cliente + '?',
+				text: '¿Desea atender a ' + cliente + '?',
 				type: 'warning',
 				showCancelButton: true,
-				confirmButtonText: 'Sí, atender cita',
-				cancelButtonText: 'No atender la cita',
+				confirmButtonText: 'Sí, Atender',
+				cancelButtonText: 'No, Cancelar',
 				showLoaderOnConfirm: true,
 			},
 			function(isConfirm) {
@@ -36,7 +36,10 @@ $(function() {
 	//Sale de la historia clínica del cliente    
 	//Marcar cita como Asistió
 	$('.asistir-btn').click(function(e) {
-		if (force) {
+		e.preventDefault();
+		var id_cita = $(this).attr('cita');
+        var id_cliente = $(this).attr('cliente');
+        if (force) {
 			$.ajax({
 				type: 'POST',
 				url: js_site_url + 'Cita/marcar_asiste/',
@@ -44,10 +47,10 @@ $(function() {
 					cita: id_cita
 				},
 				success: function(msg) {
-					if (msg) {
+					if (msg == 1) {
 						swal({
-								title: "Cita marcada",
-								text: "La cita ha sido marcada como asistida por el cliente.",
+								title: "Cita finalizada.",
+								text: "La cita ha finalizado.",
 								type: "success",
 							},
 							function() {
@@ -57,25 +60,22 @@ $(function() {
 					} else {
 						swal({
 							title: "Error",
-							text: "La cita no puede ser marcada, vuelva a intentarlo.",
+							text: "La cita no ha podido finalizar, por favor vuelva a intentarlo",
 							type: "error"
 						});
 					}
 				}
 			});
 		} else {
-			e.preventDefault();
-			$('.ac_p_error').fadeOut('slow').remove();
-			var id_cita = $(this).attr('cita');
-			var id_cliente = $(this).attr('cliente');
 			swal({
-					title: 'Marcar cita',
-					text: '¿Desea marcar como asistida la cita?, no podrá volver a acceder a la historia clínica.',
+					title: 'Terminar cita',
+					text: '¿Desea terminar la cita?, recuerde que no podrá volver a acceder a la historia clínica.',
 					type: 'warning',
 					showCancelButton: true,
-					confirmButtonText: 'Sí, marcar',
-					cancelButtonText: 'No',
+					confirmButtonText: 'Sí, terminar',
+					cancelButtonText: 'No, cancelar',
 					showLoaderOnConfirm: true,
+                    closeOnConfirm: false,
 				},
 				function(isConfirm) {
 					if (isConfirm) {
@@ -86,10 +86,11 @@ $(function() {
 								cita: id_cita
 							},
 							success: function(msg) {
+                                console.log(msg);
 								if (msg) {
 									swal({
-											title: "Cita marcada",
-											text: "La cita ha sido marcada como asistida por el cliente.",
+											title: "Cita terminada",
+											text: "La cita ha finalizado.",
 											type: "success",
 										},
 										function() {
@@ -99,7 +100,7 @@ $(function() {
 								} else {
 									swal({
 										title: "Error",
-										text: "La cita no puede ser marcada, vuelva a intentarlo.",
+										text: "La cita no ha podido finalizar, por favor vuelva a intentarlo",
 										type: "error"
 									});
 								}
@@ -118,11 +119,11 @@ $(function() {
 		var cliente = $(this).attr('cliente');
 		swal({
 				title: 'Marcar cita',
-				text: '¿Desea marcar como no asistida la cita con ' + cliente + '?',
+				text: '¿Desea marcar la cita con ' + cliente + ' como no asistió?',
 				type: 'warning',
 				showCancelButton: true,
-				confirmButtonText: 'Sí, marcar',
-				cancelButtonText: 'No, no confirmar',
+				confirmButtonText: 'Sí, confirmar',
+				cancelButtonText: 'No, cancelar',
 				showLoaderOnConfirm: true,
 			},
 			function(isConfirm) {
@@ -136,7 +137,7 @@ $(function() {
 						success: function(msg) {
 							if (msg) {
 								swal({
-										title: "Cita marcada",
+										title: "Cita",
 										text: "La cita con " + cliente + " ha sido marcada como no asistida por el cliente.",
 										type: "success",
 									},
@@ -146,7 +147,7 @@ $(function() {
 							} else {
 								swal({
 									title: "Error",
-									text: "La cita con " + cliente + " no puede ser marcada, vuelva a intentarlo.",
+									text: "La cita con " + cliente + " no la puede marcar, por favor vuelva a intentarlo.",
 									type: "error"
 								});
 							}
@@ -193,11 +194,11 @@ $(function() {
 			var postData = new FormData(this);
 			swal({
 					title: 'Guardar registro',
-					text: '¿Desea guardar este registro?, al aceptar la cita se terminará.',
+					text: '¿Desea guardar este registro?, al aceptar la cita se finalizará y no podrá volver a ver la historia clínica.',
 					type: 'warning',
 					showCancelButton: true,
-					confirmButtonText: 'Sí',
-					cancelButtonText: 'No',
+					confirmButtonText: 'Sí, confirmar',
+					cancelButtonText: 'No, cancelar',
 					showLoaderOnConfirm: true,
 					closeOnConfirm: false
 				},
@@ -231,7 +232,7 @@ $(function() {
 													if (result != 0) {
 														swal({
 																title: 'Ingreso satisfactorio',
-																text: 'El registro y los dientes fueron generados satisfactoriamente',
+																text: 'El nuevo registro de la historia clínica ha sido generado satisfactoriamente.',
 																type: 'success',
 																closeOnConfirm: true
 															},
@@ -244,7 +245,7 @@ $(function() {
 													} else {
 														swal({
 															title: 'Error',
-															text: 'El registro no se ha podido insertar correctamente',
+															text: 'El registro de la historia clínica no se ha podido insertar',
 															type: 'error',
 														})
 													}
@@ -255,7 +256,7 @@ $(function() {
 								} else {
 									swal({
 										title: 'Error',
-										text: 'El registro no se ha podido insertar',
+										text: 'El registro de la historia clínica no se ha podido insertar',
 										type: 'error',
 									})
 								}
@@ -263,7 +264,7 @@ $(function() {
 							error: function(msg) {
 								swal({
 									title: 'Error',
-									text: 'El registro no se ha podido insertar',
+									text: 'El registro de la historia clínica no se ha podido insertar',
 									type: 'error',
 								})
 							}
@@ -360,16 +361,10 @@ $(function() {
 						success: function(msg) {
 							if (isNaN(msg)) {
 								$('#div_waiting_new_story').addClass("hidden");
-								var j = 0;
 								$.each(msg, function(i, item) {
-									if (j < 3) {
-										$('#div_' + i).after('<p class="alert alert-danger text-center ac_p_error" role="alert">' + item + '</p>');
-										j++;
-									} else {
-										return false;
-									}
-								});
-								swal("Error", "Algunos campos no han sido rellenados.", "error");
+									$('#div_' + i).after('<p class="alert alert-danger text-center ac_p_error" role="alert">' + item + '</p>');
+									swal("Error", "Algunos campos no han sido llenados.", "error");
+								});								
 							} else {
 								if (msg == 1) {
 									$('#div_waiting_new_story').addClass("hidden");
@@ -433,29 +428,6 @@ $(function() {
 		});
 	});
 
-	//Sale de la historia clínica del cliente
-	$('.cancel-btn').click(function(e) {
-		e.preventDefault();
-		$('.ac_p_error').fadeOut('slow').remove();
-		var cita = $(this).attr('cita');
-		var cliente = $(this).attr('cliente');
-		var id = $(this).attr('id');
-		swal({
-				title: 'Atender',
-				text: '¿Desea atender su cita con ' + cliente + '?',
-				type: 'warning',
-				showCancelButton: true,
-				confirmButtonText: 'Sí, atender cita',
-				cancelButtonText: 'No atender la cita',
-				showLoaderOnConfirm: true,
-			},
-			function(isConfirm) {
-				if (isConfirm) {
-					window.location.href = js_site_url + "Historia_Clinica/Eliminar_Seleccion";
-				}
-			});
-	});
-
 	$("#tablaRegistro").DataTable({
 		"language": {
 			"info": "Mostrando un total de _TOTAL_ registros",
@@ -476,6 +448,5 @@ $(function() {
 	$(".timepicker").timepicker({
 		showInputs: false,
 		minuteStep: 30,
-		defaultTime: '12:00 PM'
 	});
 });

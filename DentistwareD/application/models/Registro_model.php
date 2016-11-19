@@ -12,7 +12,7 @@ class Registro_model extends MY_Model {
 		$this->db->select('*');
 		$this->db->from('registro');
 		$this->db->where('id_historia', $id_historia);
-        $this->db->order_by('fecha_reg', 'desc');
+        $this->db->order_by('fecha_reg', 'asc');
 		$query = $this->db->get();
         if($query)
             return $query->result();        
@@ -32,7 +32,7 @@ class Registro_model extends MY_Model {
 		  $this->db->where('fecha_reg', $fecha_reg);
         }
         $this->db->join('persona', 'persona.id_persona = registro.id_odon');
-        $this->db->order_by('fecha_reg', 'desc');
+        $this->db->order_by('fecha_reg', 'asc');
 		$query = $this->db->get();
         if($query)
             return $query->row();

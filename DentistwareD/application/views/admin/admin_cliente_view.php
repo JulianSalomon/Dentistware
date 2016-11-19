@@ -19,7 +19,7 @@
 		            		'id' => "cliente_search_form",
 		            		'name' => "cliente_search_form",
 		            );            
-		            echo form_open('administrador/Cliente/search', $data_input);
+		            echo form_open('administrador/Cliente/', $data_input);
 		            ?>            	
 	                <div class="form-group col-xs-12">
 	                	<?php 
@@ -94,14 +94,9 @@
                                                 echo ucwords($cliente->contacto) . '<br>' ."<small> Tel: " . $cliente->contacto_tel . "</small>" ;
                                                 echo '</td>';                                                                                                                                                                                               
                                                 echo '<td class="text-center">';
-                                                        $data_input = array(
-                                                		'type' => 'button',
-                                                        'class' => 'btn btn-default',
-                                                		'data-toggle' => 'tooltip',
-                                                		'title' => 'Editar',
-                                                );
-                                                echo anchor(base_url() . 'administrador/Cliente/edit_view/' . $cliente->id_persona, '<i class="fa fa-pencil"></i>', $data_input);
-                                                
+                                                echo '<button class="editar-btn btn btn-default" doc="' . $cliente->documento . '" type="button" id="edit_persona" data-toggle="tooltip" title="Editar">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </button>';
                                                 echo '<button class="borrar-btn btn btn-default" doc="' . $cliente->documento . '" type=button id="delete_persona" data-toggle="tooltip" title="Borrar">
                                                             <i class="fa fa-trash"></i>
                                                         </button>
@@ -132,7 +127,7 @@
 		                    	echo br(1);
 			                	echo '<div class="form-group text-center">
 										<i id="logo_i" class="fa fa-frown-o fa-5x"></i>';
-			                   	echo heading('No se encontraron resultados.<br>Por favor intente buscarn con otra opción.', 3, 'class="text-muted"');
+			                   	echo heading('No se encontraron resultados.<br>Por favor intente buscar con otra opción.', 3, 'class="text-muted"');
 			                   	echo '</div>';
 	                    	}
 	                    }                    	
@@ -359,7 +354,7 @@
     </div>
 
 <?php 
-    $path = "administrador/Cliente/";
+    $path = "Administrador/Cliente/";
     echo '<script>
             var js_site_url = "'. site_url($path) . '";
             var tipo_usuario = "cliente";

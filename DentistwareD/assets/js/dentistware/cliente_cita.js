@@ -17,7 +17,7 @@ $(function() {
               if (isConfirm) {
                   $.ajax({
                 	type: 'GET',
-                    url: js_site_url + '/agendar_cita/' + cita,
+                    url: js_site_url + 'agendar_cita/' + cita,
                     success: function(msg){
                         if(msg == 1){                        	
                             swal({   
@@ -45,9 +45,8 @@ $(function() {
    $('.informacion-btn').click(function(e) {
 		e.preventDefault();
         var odonto = $(this).attr('odonto');
-      
         var opciones = "width=500,height=500,scrollbars=NO";
-    	var url = js_site_url + "/informacion_odontologo/" + odonto;
+    	var url = js_site_url + "informacion_odontologo/" + odonto;
     	window.open(url, "Información Odontólogo", opciones);     
     });
     

@@ -33,7 +33,7 @@ class Pregunta_model extends MY_Model {
         
     }
     
-    	public function actualizar_preguntas($id_historia, $id_pregunta, $data = '') {
+    public function actualizar_preguntas($id_historia, $id_pregunta, $data = '') {
 		return $this->actualizar_datos('historia_pregunta', $data, array(
 			'id_historia' => $id_historia,
             'id_pregunta' => $id_pregunta

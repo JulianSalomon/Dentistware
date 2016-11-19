@@ -165,7 +165,7 @@
 													echo '<td class="text-left">';
 													echo $registro->desc_procedimiento;
 													echo '<td style="width:5%">';
-													echo '<button class="btn verRegistro-btn" type="button" name="verRegistro" value="'. $registro->id_registro . '" >';
+													echo '<button class="btn btn-primary verRegistro-btn" data-toggle="tooltip" type="button" title="Ver registro" name="verRegistro" value="'. $registro->id_registro . '" >';
 													echo '<i class="fa fa-file-text-o"></i>';
 													echo '</button>';
 													echo '</td>';

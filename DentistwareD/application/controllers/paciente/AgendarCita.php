@@ -39,44 +39,28 @@ class AgendarCita extends Cliente_Controller {
     }
 	
 	public function index() {
- 
-        $fecha = $this->input->post('inputFecha');
-		$hora = $this->input->post('inputHora');
-		$odontologo = $this->input->post('inputOdontologo');
-        
-        $_SESSION['fecha'] = date("Y-m-d");
-		$_SESSION['hora'] = '';
-		$_SESSION['odontologo'] = -1;
-        
-	$this->data['citas'] = $this->cita_model->get_citas_today();
-		
-		$this->render('cliente/agendar_cita_view');
-	}
-	
-	public function filtrar() {
-		$fecha = $this->input->post('inputFecha');
-		$hora = $this->input->post('inputHora');
-		$odontologo = $this->input->post('inputOdontologo');		
-		
-		$_SESSION['fecha'] = $fecha;
-		$_SESSION['hora'] = $hora;
-		$_SESSION['odontologo'] = $odontologo;		
-		
-		$fecha = str_replace("/", "-", $fecha);
-		
-		if($hora != ''){
+        $fecha = date("Y-m-d");
+        $hora = '';
+        $odontologo = -1;
+        if($this->input->post()){
+            $fecha = $this->input->post('inputFecha');
+            $hora = $this->input->post('inputHora');
+            $odontologo = $this->input->post('inputOdontologo');
+        }
+        $fecha = str_replace("/", "-", $fecha);
+        if($hora != ''){
 			$hora = strtotime($hora);
 			$hora = date("H:i:s", $hora);
-		}		
-		
-		if($fecha == date("Y-m-d")){
-			$_SESSION['fecha'] = date("Y-m-d");
+		}
+        $_SESSION['fecha'] = $fecha;
+        $_SESSION['hora'] = $hora;
+        $_SESSION['odontologo'] = $odontologo;
+        if($fecha == date("Y-m-d")){
 			$this->data['citas'] = $this->cita_model->get_citas_today($hora, $odontologo);
 		} else {
 			$this->data['citas'] = $this->cita_model->get_citas($fecha, $hora, $odontologo);
-		}
-						
-		$this->render('cliente/agendar_cita_view');		
+		}		
+		$this->render('cliente/agendar_cita_view');
 	}
 	
 	public function agendar_cita($id_cita) {
