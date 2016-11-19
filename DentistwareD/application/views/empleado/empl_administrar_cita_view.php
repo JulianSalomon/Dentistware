@@ -16,7 +16,7 @@
                             $data_input = array(
                                     'id' => "edit_cliente_form",
                             );        
-                            echo form_open('empleado/Administrar_Cita/filtrar', $data_input);
+                            echo form_open('empleado/Administrar_Cita/', $data_input);
                             
                             $fecha = $this->session->userdata('fecha');                            
                             $fecha = str_replace("-", "/", $fecha);

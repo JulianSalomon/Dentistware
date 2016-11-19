@@ -23,38 +23,33 @@ class Administrar_Cita extends Empl_Controller {
 	}
 	
 	public function index(){
-		$fecha = date("Y-m-d");
-		$_SESSION['fecha'] = $fecha;
-		$_SESSION['hora'] = '';
-		$_SESSION['odontologo'] = -1;
-		
-		$this->data['citas'] = $this->cita_model->get_all_citas($fecha);
-		
+        $fecha = date("Y-m-d");
+        $hora = '';
+        $odontologo = -1;
+        $_SESSION['fecha'] = $fecha;
+        $_SESSION['hora'] = $hora;
+        $_SESSION['odontologo'] = $odontologo;
+        if($this->input->post()){
+            $fecha = $this->input->post('inputFecha');
+            $hora = $this->input->post('inputHora');
+            $odontologo = $this->input->post('inputOdontologo');		
+
+            if($fecha == ''){
+                $fecha = date("Y/m/d");
+            }
+            $_SESSION['fecha'] = $fecha;
+            $_SESSION['hora'] = $hora;
+            $_SESSION['odontologo'] = $odontologo;		
+
+            $fecha = str_replace("/", "-", $fecha);
+
+            if($hora != ''){
+                $hora = strtotime($hora);
+                $hora = date("H:i:s", $hora);
+            }
+		}        
+        $this->data['citas'] = $this->cita_model->get_all_citas($fecha, $hora, $odontologo);
 		$this->render('empleado/empl_administrar_cita_view');
-	}
-	
-	public function filtrar() {
-		$fecha = $this->input->post('inputFecha');
-		$hora = $this->input->post('inputHora');
-		$odontologo = $this->input->post('inputOdontologo');		
-		
-		if($fecha == ''){
-			$fecha = date("Y/m/d");
-		}
-		$_SESSION['fecha'] = $fecha;
-		$_SESSION['hora'] = $hora;
-		$_SESSION['odontologo'] = $odontologo;		
-		
-		$fecha = str_replace("/", "-", $fecha);
-		
-		if($hora != ''){
-			$hora = strtotime($hora);
-			$hora = date("H:i:s", $hora);
-		}
-			
-		$this->data['citas'] = $this->cita_model->get_all_citas($fecha, $hora, $odontologo);
-						
-		$this->render('empleado/empl_administrar_cita_view');		
 	}
 	
 	public function borrar_cita($id_cita) {

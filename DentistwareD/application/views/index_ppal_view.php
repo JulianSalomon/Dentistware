@@ -63,8 +63,24 @@
                                             <li class="dropdown user user-menu">
                                                 <a href="" class="dropdown-toggle" data-toggle="dropdown">
                                                     <?php
-                                                    if($this->session->userdata['foto_persona'] != NULL){
-                                                        $url = 'uploads/' . $this->session->userdata['foto_persona'];
+                                                    $route = '';
+                                                    switch($this->session->userdata('tipo_persona')){
+                                                    	case 'ADM':
+                                                    		$route = 'admin/';
+                                                    		break;
+                                                    	case 'CLT':
+                                                    		$route = 'cliente/';
+                                                    		break;
+                                                    	case 'EMP':
+                                                    		$route = 'empleado/';
+                                                    		break;
+                                                    	case 'ODO':
+                                                    		$route = 'odonto/';
+                                                    		break;
+                                                    }
+                                                    
+                                                    if($this->session->userdata('foto_persona') != NULL){
+                                                        $url = 'uploads/' . $route . $this->session->userdata('foto_persona');
                                                     } else {
                                                         $url = 'assets/img/foto-default.png';
                                                     }
@@ -81,7 +97,7 @@
                                                     <li class="user-header">
                                                         <?php
                                                         if($this->session->userdata['foto_persona'] != NULL){
-                                                            $url = 'uploads/' . $this->session->userdata['foto_persona'];
+                                                            $url = 'uploads/' . $route . $this->session->userdata['foto_persona'];
                                                         } else {
                                                             $url = 'assets/img/foto-default.png';
                                                         }

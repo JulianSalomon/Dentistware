@@ -120,6 +120,45 @@ $(function() {
         }
     });
     
+    $('.multa-btn').click(function(e) {
+        e.preventDefault();
+        var documento = $(this).attr('doc');
+        $.ajax({
+            type: 'POST',
+            url: js_site_url + 'seleccionar_cliente/',
+            data: {
+                id: documento
+            },
+            success: function(){
+                window.location.href = js_site_url + 'Multas_View/';
+            }
+        });
+    });
+    
+    $('.volver-btn').click(function(e) {
+        e.preventDefault();
+        window.location.href = js_site_url + "liberar_cliente";
+    });
+    
+    $('.editar-btn').click(function(e) {
+        e.preventDefault();
+        var documento = $(this).attr('doc');
+        if(documento == "null"){
+            swal("Error", "Este cliente no puede ser editado!", "error");
+        } else {
+            $.ajax({
+                type: 'POST',
+                url: js_site_url + 'seleccionar_cliente/',
+                data: {
+                    id: documento
+                },
+                success: function(){
+                    window.location.href = js_site_url + 'Edit_View/';
+                }
+            });
+        }
+    });
+    
 	$(".cancel-btn").click(function (e) {
 		$("#foto_img").removeAttr('src');
 		$("#foto_img").addClass("hidden");
@@ -197,15 +236,13 @@ $(function() {
         }
      });
     
-    $('#estado_multa').on('ifChecked', function(event){
-    	var id_multa = $(this).attr("data-id");
+    $('.estado_multa').on('ifChecked', function(event){
+    	var id_multa = $(this).attr("value");
         event.preventDefault();
         $('.ac_p_error').fadeOut('slow').remove();
-        var postData = $(this).serializeArray();
         $.ajax({
             type: 'GET',
-            url: js_site_url + '/update_estado_multa/' + id_multa,
-            data: postData,
+            url: js_site_url + 'update_estado_multa/' + id_multa,
             success: function (msg) { 
 	            if (msg == 1) {    
 	            	swal({   
@@ -264,7 +301,7 @@ $(function() {
 		"checkboxClass": "icheckbox_square-blue",
     });
     
-    $("#estado_multa").iCheck({
+    $(".estado_multa").iCheck({
 		"checkboxClass": "icheckbox_square-blue",
     });
 });

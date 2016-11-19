@@ -36,7 +36,10 @@ $(function() {
 	//Sale de la historia clínica del cliente    
 	//Marcar cita como Asistió
 	$('.asistir-btn').click(function(e) {
-		if (force) {
+		e.preventDefault();
+		var id_cita = $(this).attr('cita');
+        var id_cliente = $(this).attr('cliente');
+        if (force) {
 			$.ajax({
 				type: 'POST',
 				url: js_site_url + 'Cita/marcar_asiste/',
@@ -44,7 +47,7 @@ $(function() {
 					cita: id_cita
 				},
 				success: function(msg) {
-					if (msg) {
+					if (msg == 1) {
 						swal({
 								title: "Cita marcada",
 								text: "La cita ha sido marcada como asistida por el cliente.",
@@ -64,10 +67,6 @@ $(function() {
 				}
 			});
 		} else {
-			e.preventDefault();
-			$('.ac_p_error').fadeOut('slow').remove();
-			var id_cita = $(this).attr('cita');
-			var id_cliente = $(this).attr('cliente');
 			swal({
 					title: 'Marcar cita',
 					text: '¿Desea marcar como asistida la cita?, no podrá volver a acceder a la historia clínica.',
@@ -76,35 +75,36 @@ $(function() {
 					confirmButtonText: 'Sí, marcar',
 					cancelButtonText: 'No',
 					showLoaderOnConfirm: true,
+                    closeOnConfirm: false,
 				},
 				function(isConfirm) {
 					if (isConfirm) {
 						$.ajax({
-							type: 'POST',
-							url: js_site_url + 'Cita/marcar_asiste/',
-							data: {
-								cita: id_cita
-							},
-							success: function(msg) {
-								if (msg) {
-									swal({
-											title: "Cita marcada",
-											text: "La cita ha sido marcada como asistida por el cliente.",
-											type: "success",
-										},
-										function() {
-											window.location.href = js_site_url + "Historia_Clinica/Eliminar_Seleccion";
-										}
-									);
-								} else {
-									swal({
-										title: "Error",
-										text: "La cita no puede ser marcada, vuelva a intentarlo.",
-										type: "error"
-									});
-								}
-							}
-						});
+                            type: 'POST',
+                            url: js_site_url + 'Cita/marcar_asiste/',
+                            data: {
+                                cita: id_cita
+                            },
+                            success: function(msg) {
+                                if (msg == 1) {
+                                    swal({
+                                            title: "Cita marcada",
+                                            text: "La cita ha sido marcada como asistida por el cliente.",
+                                            type: "success",
+                                        },
+                                        function() {
+                                            window.location.href = js_site_url + "Historia_Clinica/Eliminar_Seleccion";
+                                        }
+                                    );
+                                } else {
+                                    swal({
+                                        title: "Error",
+                                        text: "La cita no puede ser marcada, vuelva a intentarlo.",
+                                        type: "error"
+                                    });
+                                }
+                            }
+                        });
 					}
 				}
 			);
@@ -476,6 +476,5 @@ $(function() {
 	$(".timepicker").timepicker({
 		showInputs: false,
 		minuteStep: 30,
-		defaultTime: '12:00 PM'
 	});
 });

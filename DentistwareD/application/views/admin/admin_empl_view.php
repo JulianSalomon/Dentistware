@@ -94,14 +94,9 @@
                                                     }
                                                     echo '</td>';
                                                     echo '<td class="text-center">';
-                                                    $data_input = array(
-                                                    		'type' => 'button',
-                                                    		'class' => 'btn btn-default',
-                                                    		'data-toggle' => 'tooltip',
-                                                    		'title' => 'Editar',
-                                                    );
-                                                    echo anchor(base_url() . 'administrador/Empleado/edit_view/' . $empleado->id_persona, '<i class="fa fa-pencil"></i>', $data_input);
-                                                
+                                                    echo '<button class="editar-btn btn btn-default" doc="' . $empleado->documento . '" type="button" id="edit_persona" data-toggle="tooltip" title="Editar">
+                                                            <i class="fa fa-pencil"></i>
+                                                        </button>';
                                                     echo '<button class="borrar-btn btn btn-default" doc="' . $empleado->documento . '" type=button id="delete_persona" data-toggle="tooltip" title="Borrar">
                                                             <i class="fa fa-trash"></i>
                                                         </button>
@@ -302,7 +297,7 @@
 </div>
 
 <?php 
-    $path = "administrador/Empleado/";
+    $path = "Administrador/Empleado/";
     echo '<script>
                 var js_site_url = "'. site_url($path) . '";
                 var tipo_usuario = "empleado";

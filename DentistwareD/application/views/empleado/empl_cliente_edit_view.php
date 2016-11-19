@@ -261,5 +261,5 @@
    	</section> 
 </div>
 <script>
-	var js_site_url = '<?php echo site_url("empleado/Cliente/");?>';
+	var js_site_url = '<?php echo site_url("Empleado/Cliente/");?>';
 </script> 
