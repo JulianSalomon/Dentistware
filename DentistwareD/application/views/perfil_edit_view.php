@@ -45,7 +45,7 @@
                                     break;
                             }
                             
-                            echo '<img id="foto_img" class="center-block" height="240" width="240" src="'.base_url() . "uploads/" . $route . '/'  . $persona_info->foto_persona . '">';
+                            echo '<img id="foto_img" class="center-block" height="240" src="'.base_url() . "uploads/" . $route . '/'  . $persona_info->foto_persona . '">';
 							echo '<i id="i_foto" class="fa fa-image fa-5x hidden"></i>';
 							
 						} else {

@@ -34,9 +34,7 @@ class Cliente extends Cliente_Controller {
         $DateDay = array(0,0,0,0,0,0);
         $percentDays = array("percentMonday" , "percentTuesday", "percentWednesday", "percentThursday", "percentFriday", "percentSaturday");
         
-        $i = 0;
-        $percent = 0;
-        while($i < $citasTotal){            
+        for($i = 0; $i < sizeof($citasAsistidas); $i++){
             $diaSemana = date('l', strtotime($citasAsistidas[$i]->fecha_cita));            
             switch ($diaSemana) {
                 case "Monday":
@@ -58,16 +56,13 @@ class Cliente extends Cliente_Controller {
                     $DateDay[5] = $DateDay[5] + 1;
                     break;
             }
-            $i++;
         }
         
         $this->data['citasTotal'] = $citasTotal;
-        $i = 0;
-        while($i < 6){
+        for($i = 0; $i < 6; $i++){
             $percent = ($DateDay[$i] * 100)/$citasTotal;
             $this->data[$days[$i]] = $DateDay[$i];
             $this->data[$percentDays[$i]] = $percent;
-            $i++;
         }
         
 	}
