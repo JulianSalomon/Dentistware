@@ -4,6 +4,14 @@
             <font size= 6>Bienvenido a Dentistware</font>
         </section>
         <section class="content">
+            <div class="col-xs-12">
+               <div class="callout callout-info">
+                    <font size= 3>
+                    <p>En las siguientes graficas encontraras el número de personas activas e inactivas dentro del sistema separadas por cada rol</p>
+                    </font>
+                </div>
+            </div>
+            
             <div class="col-md-6">
               <div class="box box-solid">
                 <div class="box-header with-border">
