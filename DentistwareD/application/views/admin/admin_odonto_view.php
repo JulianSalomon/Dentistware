@@ -167,12 +167,11 @@
             <div class="modal-body">
                     <div class="form-group text-center">
 		                <i id="i_foto" class="fa fa-image fa-5x"></i>
-		                <?php 
+		                <?php
 		                $data_input = array(
 		                		'id' => 'foto_img',
 		                		'class' => 'center-block hidden',
-		                		'height ' => '200',
-		                		'width' => '200',		                		 
+		                		'height' => '200',
 		                );
 		                echo img($data_input);		
 		                echo br(1);

@@ -98,8 +98,7 @@ class Administrar_Cita extends Empl_Controller {
 						'fecha_cita' => $fecha,
 						'hora_cita' => $hora,
 						'consultorio' => $this->input->post('inputConsultorio'),
-				);
-				
+				);				
 				$result = $this->cita_model->update_cita($id_cita, $input);
 				header('Content-Type: application/json');
 				echo $result;
