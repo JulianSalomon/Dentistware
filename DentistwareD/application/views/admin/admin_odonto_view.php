@@ -197,7 +197,7 @@
                         <label  class="control-label">N. de Documento: *</label>
                         <div class="input-group" id="div_inputDocumento">
                             <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                            <input type="text" class="form-control" id="inputDocumento" placeholder="Número de documento" name="inputDocumento">
+                            <input type="number" class="form-control" id="inputDocumento" placeholder="Número de documento" name="inputDocumento">
                         </div>
                     </div>
                 </div>
@@ -205,7 +205,7 @@
                     <label for="inputNombre" class=" control-label ">Nombre Completo: *</label>
                     <div class="input-group" id="div_inputNombre">
                         <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                        <input type="number" class="form-control" id="inputNombre" placeholder="Nombres y apellidos" name="inputNombre">
+                        <input type="text" class="form-control" id="inputNombre" placeholder="Nombres y apellidos" name="inputNombre">
                     </div>
                 </div>
                 <div class="form-group">
