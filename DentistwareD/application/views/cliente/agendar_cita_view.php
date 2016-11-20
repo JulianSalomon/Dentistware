@@ -122,8 +122,7 @@
                                             echo strtoupper($hora_cita);
                                             echo '</td>';
                                             echo '<td>';
-                                            
-                                            echo '<a type="button"  odonto="' . ucwords($cita->odontologo) . '"  class="informacion-btn btn" id="informacion_odonto"  title="Informacion odontologo" >' . ucwords($cita->odontologo) .  '</a>';
+                                            echo '<a type="button"  odonto="' . ($cita->odontologo) . '"  class="informacion-btn btn" id="informacion_odonto"  title="Informacion odontologo" >' . ucwords($cita->odontologo) .  '</a>';
                                             echo '</td>';
                                             echo '<td>';
                                             echo ucwords($cita->consultorio);
