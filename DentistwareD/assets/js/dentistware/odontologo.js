@@ -162,7 +162,7 @@ $(function() {
 	$('.agregarRegistro-btn').click(function(e) {
 		e.preventDefault();
 		$('.ac_p_error').fadeOut('slow').remove();
-		editable = 1;
+		editable = true;
 		teeth = teethAux;
 	})
 
@@ -277,23 +277,18 @@ $(function() {
 
 	//Guarda el último registro visto
 	var lastRegId;
-
 	//Abrir modal para ver registro
 	$('.verRegistro-btn').click(function(e) {
 		e.preventDefault();
 		$('.ac_p_error').fadeOut('slow').remove();
 		var id = $(this).val();
-		if (editable == 1) {
+		if (editable) {
 			lastRegId = undefined;
 			teethAux = teeth;
-			editable = 0;
+			editable = false;
 		}
 		if (id !== lastRegId) {
-
 			lastRegId = id;
-			try {
-				remove();
-			} catch (err) {}
 			var htmlWrapper = '';
 			var postData = {
 				'reg': id,
@@ -321,6 +316,13 @@ $(function() {
 		} else {
 			$('#verRegistro').modal('show');
 		}
+        $('#verRegistro').on('shown.bs.modal', function() {
+            modalWidth = $("#verRegistroModal").width();
+            modalHeight = $("#verRegistroModal").height();
+            stateAux = $('input[name="state"]:checked').val();
+            setup();
+            draw();
+        });
 	});
 
 	//Abrir ventana de crear historia

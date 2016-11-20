@@ -19,7 +19,7 @@
 			echo plugin_css('adminLTE');
 			echo plugin_css('skin');
 			echo plugin_css('pace');
-			echo plugin_css('sweetalert');         
+			echo plugin_css('sweetalert');
 			?>
 	</head>
 	<body class="hold-transition skin-blue-light sidebar-mini">
@@ -394,9 +394,8 @@
             echo plugin_js('assets/js/dentistware/odontologo.js', true);
             echo plugin_js('runner');
             if($historia_clinica != null){
-                echo plugin_js('teeth-drawer');
                 echo plugin_js('p5');
-                echo plugin_js('assets/js/dentistware/dientes.js', true);
+                echo plugin_js('teeth-drawer');
             }
         ?>
 	</body>
