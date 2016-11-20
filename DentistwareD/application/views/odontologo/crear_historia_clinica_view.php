@@ -105,6 +105,7 @@
 	                     </tr>
 	                     <?php 
 		                     for($i = 1; $i <= $num_preguntas / 2; $i++){
+		                     	$pregunta = $preguntas[$i - 1];
 		                     	echo '<tr>';
 		                     	echo '<td>' .$i . '.</td>';
 		                     	echo  '<td>' .$pregunta->desc_pregunta . '</td>';
@@ -125,6 +126,7 @@
 	                     </tr>
 	                     <?php 
 		                     for($i = $num_preguntas / 2 + 1; $i <= $num_preguntas; $i++){
+		                     	$pregunta = $preguntas[$i - 1];
 		                     	echo '<tr>';
 		                     	echo '<td>' .$i . '.</td>';
 		                     	echo  '<td>' .$pregunta->desc_pregunta . '</td>';

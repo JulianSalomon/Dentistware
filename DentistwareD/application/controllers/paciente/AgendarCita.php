@@ -149,7 +149,7 @@ class AgendarCita extends Cliente_Controller {
 	}
 
     public function informacion_odontologo($id = ''){
-		$id = strtolower(str_replace("%20", " ", $id));
+		$id = rawurldecode($id);
         $this->load->model('persona_model');
         $this->data['persona'] = $this->persona_model->get_odontologo($id);
         $this->load->view('cliente/informacion_odontologo_view', $this->data); 
