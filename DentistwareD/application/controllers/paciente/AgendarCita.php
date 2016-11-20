@@ -79,9 +79,7 @@ class AgendarCita extends Cliente_Controller {
 		
 		if($value >= 1){
 			echo 2;
-		} else {
-			
-            
+		} else { 
         $odontologo = $this->persona_model->get_persona('', $cita->id_odonto);
         $odontologo = $odontologo->nombre_persona;
         $cliente = $this->persona_model->get_persona('', $id_cliente);

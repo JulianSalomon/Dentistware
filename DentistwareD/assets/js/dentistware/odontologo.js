@@ -327,15 +327,20 @@ $(function() {
 	$('.crear-historia-btn').click(function(e) {
 		e.preventDefault();
 		window.location.href = js_site_url + "Historia_Clinica/Crear_Historia_Clinica";
+        //var id = $('#runner').val();
+      //swal(id, id, "error");
 	});
 
 	$('.editar-historia-btn').click(function(e) {
 		e.preventDefault();
+        // var id = $('#runner').val();
+        //console.log($('#runner'));
 		window.location.href = js_site_url + "Historia_Clinica/Editar_Historia_Clinica";
 	});
 
     //Inserta historia en la base de datos
 	$('#nueva_historia_form').submit(function(event) {
+        
 		event.preventDefault();
 		$('.ac_p_error').fadeOut('slow').remove();
 		var postData = $(this).serializeArray();

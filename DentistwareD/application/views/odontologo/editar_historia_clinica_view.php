@@ -35,6 +35,7 @@
                <div class="overlay hidden" id="div_waiting_edit_story">
                   <i class="fa fa-refresh fa-spin" id="i_refresh"></i>  
                </div>
+                <span  class="pull-right" id="runner"> </span>
                <?php 
                   $data_input = array(
                   		'id' => "editar_historia_form",
