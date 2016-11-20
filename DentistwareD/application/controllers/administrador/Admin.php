@@ -24,7 +24,7 @@ class Admin extends Admin_Controller{
         $config = array();
         $config = $this->config->item('config_paginator');
         $config["total_rows"] = $this->persona_model->count_personas($_SESSION['word_search'], 'ADM');
-        $config["base_url"] = base_url() . "administrador/Admin/";
+        $config["base_url"] = base_url() . "administrador/Admin/index/";
         $config["per_page"] = 25;
         $config["uri_segment"] = 4;
         $page =  $this->uri->segment(4);

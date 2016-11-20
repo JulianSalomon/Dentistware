@@ -11,6 +11,7 @@ class Cita extends Odon_Controller {
 		$this->load->model('cita_model');
 		$this->data['before_closing_body'] = plugin_js('assets/js/dentistware/odontologo.js', true) . plugin_js('runner');
 		$this->get_user_menu('main-citas');
+        $_SESSION['hora'] = '';
 	}
     
 	public function index() {
