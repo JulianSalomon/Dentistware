@@ -362,6 +362,9 @@
 			</div>
 		</div>
 		<script>
+            
+            
+
 			<?php
 				echo 'var teethOriginal = [';
 				if($dientes != NULL){
@@ -377,12 +380,15 @@
 				echo '];';
                 echo 'var teeth = teethOriginal;';
                 echo 'var teethAux = teethOriginal;';
+            
+
             ?>
 		</script>
 		<?php
 			$path = "odontologo/";
             echo '<script>';
                 echo 'var js_site_url = "' . site_url($path) . '";';
+                echo 'var timed = "' . $this->session->userdata('time') . '";';
             echo '</script>';
             echo plugin_js();
             echo plugin_js('bootstrap');

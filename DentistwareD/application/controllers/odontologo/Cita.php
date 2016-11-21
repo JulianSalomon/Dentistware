@@ -30,6 +30,7 @@ class Cita extends Odon_Controller {
         $this->data['citas'] = $this->cita_model->get_citas_para_odontologo($hora, $this->session->userdata['id_persona']);
         $this->get_user_menu('Citas');
         $this->render('odontologo/odonto_cita_view');
+        $this->session->userdata['time'] = null;
 	}
     
 	public function marcar_asiste() {

@@ -35,7 +35,7 @@
                <div class="overlay hidden" id="div_waiting_edit_story">
                   <i class="fa fa-refresh fa-spin" id="i_refresh"></i>  
                </div>
-                <span  class="pull-right" id="runner"> </span>
+                <h3 class="pull-right">Tiempo transcurrido en esta cita: <br><span  class="pull-right" id="runner2"> </span></h3>
                <?php 
                   $data_input = array(
                   		'id' => "editar_historia_form",
@@ -161,15 +161,16 @@
                   </div>                   
                </div>
                <div class="box-footer text-center">
-                  <?php                 
-                     $data_input = array(
+                 <button type="button" class="btn btn-danger btn-lg pull-left cancelar-edit2-btn" id = "cancelar_edit" name = "cancelar_edit">Cancelar</button>
+                   <?php                 
+                   /*  $data_input = array(
                      		'class' => "btn btn-danger btn-lg pull-left",
                      		'id' => "edit_cancel_btn",
                      		'name' => "cancelar_edit",
                      		'content' => "Cancelar"
-                     );
-                     $redirigir = 'odontologo/Historia_clinica/index/' . $cliente_info->id_persona;
-                     echo anchor(base_url() . $redirigir, 'Cancelar', $data_input);
+                     );*/
+                    /* $redirigir = 'odontologo/Historia_clinica/index/' . $cliente_info->id_persona;
+                     echo anchor(base_url() . $redirigir, 'Cancelar', $data_input);*/
                      $data_input = array(
                      		'class' => "btn btn-primary btn-lg pull-right",
                      		'id' => "guardar_edit",
@@ -186,9 +187,11 @@
 
       <?php
          $path = "odontologo/Historia_clinica/";
-         echo '<script>
+          echo '<script>
                  var js_site_url = "'. site_url($path) . '";
-               </script>';
+               ';
+             echo 'var timed = "' . $this->session->userdata('time') . '";';
+            echo  '</script>';
                   echo plugin_js();
              echo plugin_js('bootstrap');
              echo plugin_js('app');

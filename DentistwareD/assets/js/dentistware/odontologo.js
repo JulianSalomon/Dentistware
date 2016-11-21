@@ -328,21 +328,58 @@ $(function() {
 	//Abrir ventana de crear historia
 	$('.crear-historia-btn').click(function(e) {
 		e.preventDefault();
-		window.location.href = js_site_url + "Historia_Clinica/Crear_Historia_Clinica";
-        //var id = $('#runner').val();
-      //swal(id, id, "error");
+        var time = $( "#runner" ).text();
+        time = time.replace('.','');
+        time = time.replace(':','');
+        time = time.replace(':','');
+        time = parseInt(time);
+        console.log(time);
+		window.location.href = js_site_url + "Historia_Clinica/Crear_Historia_Clinica/" + time ;
+   
+	});
+	$('.cancelar-edit-btn').click(function(e) {
+		e.preventDefault();
+        var time = $( "#runner2" ).text();
+        time = time.replace('.','');
+        time = time.replace(':','');
+        time = time.replace(':','');
+        time = parseInt(time);
+        console.log(time);
+		window.location.href = js_site_url + "Historia_Clinica/index/" + time ;
+   
+	});
+    
+    	$('.cancelar-edit2-btn').click(function(e) {
+		e.preventDefault();
+        var time = $( "#runner2" ).text();
+        time = time.replace('.','');
+        time = time.replace(':','');
+        time = time.replace(':','');
+        time = parseInt(time);
+        console.log(time);
+		window.location.href = js_site_url + "index/" + time ;
+   
 	});
 
 	$('.editar-historia-btn').click(function(e) {
 		e.preventDefault();
-        // var id = $('#runner').val();
-        //console.log($('#runner'));
-		window.location.href = js_site_url + "Historia_Clinica/Editar_Historia_Clinica";
+          var time = $( "#runner" ).text();
+        time = time.replace('.','');
+        time = time.replace(':','');
+        time = time.replace(':','');
+        time = parseInt(time);
+        console.log(time);
+		window.location.href = js_site_url + "Historia_Clinica/Editar_Historia_Clinica/" + time ;
 	});
 
     //Inserta historia en la base de datos
 	$('#nueva_historia_form').submit(function(event) {
-        
+            var time = $( "#runner2" ).text();
+        time = time.replace('.','');
+        time = time.replace(':','');
+        time = time.replace(':','');
+        time = parseInt(time);
+        console.log(time);
 		event.preventDefault();
 		$('.ac_p_error').fadeOut('slow').remove();
 		var postData = $(this).serializeArray();
@@ -360,7 +397,7 @@ $(function() {
 				if (isConfirm) {
 					$.ajax({
 						type: 'POST',
-						url: js_site_url + 'historia_clinica/nueva_historia_clinica/',
+						url: js_site_url + 'historia_clinica/nueva_historia_clinica/' + time,
 						data: postData,
 						beforeSend: function() {
 							$('#div_waiting_new_story').removeClass("hidden");
@@ -381,7 +418,7 @@ $(function() {
 											type: "success"
 										},
 										function() {
-											window.location.href = js_site_url + "Historia_Clinica/";
+											window.location.href = js_site_url + "Historia_Clinica/index/" + time;
 										}
 									)
 								} else {
@@ -399,6 +436,12 @@ $(function() {
 	//Formulario para editar historia
 	$('#editar_historia_form').submit(function(event) {
 		event.preventDefault();
+             var time = $( "#runner2" ).text();
+        time = time.replace('.','');
+        time = time.replace(':','');
+        time = time.replace(':','');
+        time = parseInt(time);
+        console.log(time);
 		$('.ac_p_error').fadeOut('slow').remove();
 		var cliente = $(this).attr('cliente');
 		var postData = $(this).serializeArray();
@@ -423,7 +466,7 @@ $(function() {
 								type: "success"
 							},
 							function() {
-								window.location.href = js_site_url + '/index/' + cliente;
+								window.location.href = js_site_url + '/index/'  + time;
 							});
 						$('#modal_edit_story').modal('hide');
 					} else {
@@ -447,9 +490,57 @@ $(function() {
 		"autoWidth": false,
 	});
 
+     if(isNaN(timed)){
+        timed = 0
+    } 
+    var segundos = 0;
+    var minutos = 0;
+    timed = timed.replace('.','');
+        timed = timed.replace(':','');
+        timed = timed.replace(':','');
+    if(timed.length <= 2){
+       segundos = timed;
+    }else if(timed.length == 3){
+        segundos = timed.substring(1,3);
+        minutos = timed.substring(0,1);
+    }else if(timed.length >3){
+        segundos = timed.substring(2,4);
+        minutos = timed.substring(0,3);
+    }
+  
+    segundos = segundos * 1000;
+    minutos = minutos * 60 * 1000;
+        timed = parseInt((segundos + minutos));
+   /*  //timed =
+          // 1- Convert to seconds:
+    var seconds = timed / 1000;
+    // 2- Extract hours:
+    var hours = parseInt( seconds / 3600 ); // 3,600 seconds in 1 hour
+    seconds = seconds % 3600; // seconds remaining after extracting hours
+    // 3- Extract minutes:
+    var minutes = parseInt( seconds / 60 ); // 60 seconds in 1 minute
+    // 4- Keep only seconds not extracted to minutes:
+    seconds = seconds % 60;
+    timed = parseInt(hours + minutes + seconds); */
+   // console.log(segundos);
+   // console.log(minutos);
+  //  console.log(timed);
+   
+    
+   // alert(timed);
 	$('#runner').runner({
 		autostart: true,
-		countdown: false
+		countdown: false,
+        startAt : timed,
+        milliseconds: false
+	});
+
+   
+    $('#runner2').runner({
+		autostart: true,
+		countdown: false,
+        startAt: timed,
+        milliseconds: false
 	});
 
 	$(".timepicker").timepicker({

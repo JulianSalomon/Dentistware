@@ -9,7 +9,13 @@ class Historia_clinica extends Odon_Controller {
 		$this->load->model('historia_model');
 	}
     
-	public function index() {
+	public function index($time =  '') {
+        if ($this->session->userdata['time'] == null) {
+			$this->session->userdata['time'] = 0;
+		}else{
+            $this->session->userdata['time'] = $time;
+        }
+       // echo $this->session->userdata['time'];
 		if ($this->session->userdata['id_cliente'] == null) {
 			redirect('Odontologo/Cita');
 		}
@@ -57,10 +63,12 @@ class Historia_clinica extends Odon_Controller {
 		}
 	}
     
-	public function crear_historia_clinica() {
+	public function crear_historia_clinica($time = '') {
 		if ($this->session->userdata['id_cliente'] == null) {
 			redirect('Odontologo/Cita');
 		}
+			$this->session->userdata['time'] = $time;
+        // echo $this->session->userdata['time'];
 		$this->load->model('persona_model');
 		$this->load->model('historia_model');
 		$this->load->model('pregunta_model');
@@ -125,11 +133,13 @@ class Historia_clinica extends Odon_Controller {
 		}
 	}
     
-	public function editar_historia_clinica() {
+	public function editar_historia_clinica($time = '') {
 		$this->load->model('persona_model');
 		$this->load->model('historia_model');
 		$this->load->model('pregunta_model');
 		$this->load->model('registro_model');
+        $this->session->userdata['time'] = $time;
+       // echo $this->session->userdata['time'];
 		$cliente_info = $this->persona_model->get_persona('', $this->session->userdata('id_cliente'));
 		$historia_clinica = $this->historia_model->get_historia('', $this->session->userdata('id_cliente'));
 		$registros = $this->registro_model->get_registros($historia_clinica->id_historia);

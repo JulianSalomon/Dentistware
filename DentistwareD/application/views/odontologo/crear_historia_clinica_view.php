@@ -35,7 +35,8 @@
                <div class="overlay hidden" id="div_waiting_new_story">
                   <i class="fa fa-refresh fa-spin" id="i_refresh"></i>  
                </div>
-                <span  class="pull-right" id="runner"> </span>
+                <h3 class="pull-right">Tiempo transcurrido en esta cita: <br><span  class="pull-right" id="runner2"> </span></h3>
+                
                <?php 
                   $data_input = array(
                   		'id' => "nueva_historia_form",
@@ -141,14 +142,35 @@
 
                </div>
                <div class="box-footer text-center">
+                   <button type="button" class="btn btn-danger btn-lg pull-left cancelar-edit-btn" id = "cancelar_edit" name = "cancelar_edit">Cancelar</button>
                   <?php                 
-                     $data_input = array(
+                   /*  $data_input = array(
                      		'class' => "btn btn-danger btn-lg pull-left",
                      		'id' => "edit_cancel_btn",
                      		'name' => "cancelar_edit"
-                     );
-                     $redirigir = 'Odontologo/Historia_clinica/';
-                     echo anchor(base_url() . $redirigir, 'Cancelar', $data_input);
+                     ); */
+                /*  $str = '<span  class="pull-right" id="runner2"> </span>';
+
+$DOM = new DOMDocument;
+$DOM->loadHTML($str);
+
+// all span elements
+                   echo "sifhsiod";
+echo $DOM->getElementById('runner2')->nodeValue;
+$span_list = array();
+
+for($i = 0; $i < $items->length; $i++) {
+    $item = $items->item($i);
+    $span_list[$item->getAttribute('id')] = $item->nodeValue;
+}
+extract($span_list);
+echo "sd";
+echo $runner2; // 239 House
+echo "sd";*/
+   
+                    
+                  //  $redirigir = 'Odontologo/Historia_clinica'  ;
+                  //   echo anchor(base_url() . $redirigir, 'Cancelar', $data_input);
                      $data_input = array(
                      		'class' => "btn btn-primary btn-lg pull-right",
                      		'id' => "guardar_edit",
@@ -167,7 +189,9 @@
          $path = "Odontologo/";
          echo '<script>
                  var js_site_url = "'. site_url($path) . '";
-               </script>';
+               ';
+             echo 'var timed = "' . $this->session->userdata('time') . '";';
+            echo  '</script>';
          echo plugin_js();
          echo plugin_js('bootstrap');
          echo plugin_js('app');
