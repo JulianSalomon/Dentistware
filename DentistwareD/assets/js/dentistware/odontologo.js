@@ -490,14 +490,18 @@ $(function() {
 		"autoWidth": false,
 	});
 
+    if (typeof timed === 'undefined') {
+    timed = NaN;
+}
      if(isNaN(timed)){
         timed = 0
-    } 
+    } else{
     var segundos = 0;
     var minutos = 0;
     timed = timed.replace('.','');
         timed = timed.replace(':','');
         timed = timed.replace(':','');
+    }
     if(timed.length <= 2){
        segundos = timed;
     }else if(timed.length == 3){
