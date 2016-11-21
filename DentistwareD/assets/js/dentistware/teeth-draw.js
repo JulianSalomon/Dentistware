@@ -1,9 +1,8 @@
 var bg;
 var myTeeth;
-var ratio;
 var modalWidth;
 var modalHeight;
-var editable = 1;
+var editable = true;
 
 preload = function() {
     bg = loadImage(js_site_url + "../assets/img/Teeth.png");
@@ -16,7 +15,6 @@ setup = function() {
     } else {
         canvas.parent('teeth-viewer');
     }
-    ratio = width / 40;
     myTeeth = new Teeth();
 }
 
@@ -30,12 +28,11 @@ windowResized = function() {
         modalWidth = $("#agregarRegistroModal").width();
         modalHeight = $("#agregarRegistroModal").height();
     } else {
-        modalWidth = $("#verDientesModal").width();
-        modalHeight = $("#verDientesModal").height();
+        modalWidth = $("#verRegistroModal").width();
+        modalHeight = $("#verRegistroModal").height();
     }
     resizeCanvas(modalWidth * 0.583333333, modalWidth * 0.858229166);
     myTeeth = new Teeth();
-    ratio = width / 40;
 }
 
 mouseClicked = function() {
@@ -43,6 +40,7 @@ mouseClicked = function() {
         var distance;
         for (var i = 0; i < myTeeth.teeth.length; i++) {
             distance = Math.sqrt(pow((myTeeth.teeth[i].x - mouseX), 2) + pow((myTeeth.teeth[i].y - mouseY), 2));
+            ratio = myTeeth.teeth[i].ratio;
             if (distance < ratio) {
                 switch (stateAux) {
                     case 'A':
@@ -70,6 +68,7 @@ mouseClicked = function() {
                         teeth[i][5] = myTeeth.teeth[i].state[5];
                         break;
                 }
+                break;
             }
         }
     }
@@ -81,49 +80,49 @@ Teeth = function() {
         for(var i = 0; i<32; i++){
             teeth[i] = [0,0,0,0,0,0];
         }
-    }
-    
-    for(var i = 0; i<32; i++){
-        if(teeth[i] == null){
-            teeth[i] = [0,0,0,0,0,0];
+    } else {
+        for(var i = 0; i<32; i++){
+            if(teeth[i] == null){
+                teeth[i] = [0,0,0,0,0,0];
+            }
         }
     }
     this.teeth = [
         //Top teeths
-        new Tooth( 1, width * 0.166, height * 0.468, teeth[ 0]),
-        new Tooth( 2, width * 0.183, height * 0.393, teeth[ 1]),
-        new Tooth( 3, width * 0.200, height * 0.325, teeth[ 2]),
-        new Tooth( 4, width * 0.233, height * 0.257, teeth[ 3]),
-        new Tooth( 5, width * 0.275, height * 0.206, teeth[ 4]),
-        new Tooth( 6, width * 0.300, height * 0.157, teeth[ 5]),
-        new Tooth( 7, width * 0.371, height * 0.125, teeth[ 6]),
-        new Tooth( 8, width * 0.450, height * 0.105, teeth[ 7]),
-        new Tooth( 9, width * 0.550, height * 0.105, teeth[ 8]),
-        new Tooth(10, width * 0.628, height * 0.125, teeth[ 9]),
-        new Tooth(11, width * 0.700, height * 0.157, teeth[10]),
-        new Tooth(12, width * 0.725, height * 0.206, teeth[11]),
-        new Tooth(13, width * 0.766, height * 0.257, teeth[12]),
-        new Tooth(14, width * 0.800, height * 0.325, teeth[13]),
-        new Tooth(15, width * 0.816, height * 0.393, teeth[14]),
-        new Tooth(16, width * 0.833, height * 0.468, teeth[15]),
+        new Tooth( 1, width * 0.171, height * 0.466, width / 20, teeth[ 0]),
+        new Tooth( 2, width * 0.183, height * 0.395, width / 19, teeth[ 1]),
+        new Tooth( 3, width * 0.205, height * 0.318, width / 19, teeth[ 2]),
+        new Tooth( 4, width * 0.233, height * 0.256, width / 28, teeth[ 3]),
+        new Tooth( 5, width * 0.268, height * 0.206, width / 26, teeth[ 4]),
+        new Tooth( 6, width * 0.300, height * 0.158, width / 27, teeth[ 5]),
+        new Tooth( 7, width * 0.365, height * 0.125, width / 28, teeth[ 6]),
+        new Tooth( 8, width * 0.448, height * 0.105, width / 23, teeth[ 7]),
+        new Tooth( 9, width * 0.551, height * 0.105, width / 23, teeth[ 8]),
+        new Tooth(10, width * 0.633, height * 0.125, width / 28, teeth[ 9]),
+        new Tooth(11, width * 0.701, height * 0.157, width / 27, teeth[10]),
+        new Tooth(12, width * 0.735, height * 0.206, width / 25, teeth[11]),
+        new Tooth(13, width * 0.766, height * 0.257, width / 26, teeth[12]),
+        new Tooth(14, width * 0.795, height * 0.320, width / 19, teeth[13]),
+        new Tooth(15, width * 0.816, height * 0.395, width / 19, teeth[14]),
+        new Tooth(16, width * 0.830, height * 0.466, width / 20, teeth[15]),
 
         //Bottom teeths	
-        new Tooth(17, width * 0.816, height * 0.562, teeth[16]),
-        new Tooth(18, width * 0.808, height * 0.637, teeth[17]),
-        new Tooth(19, width * 0.783, height * 0.720, teeth[18]),
-        new Tooth(20, width * 0.750, height * 0.790, teeth[19]),
-        new Tooth(21, width * 0.700, height * 0.835, teeth[20]),
-        new Tooth(22, width * 0.658, height * 0.875, teeth[21]),
-        new Tooth(23, width * 0.596, height * 0.893, teeth[22]),
-        new Tooth(24, width * 0.533, height * 0.903, teeth[23]),
-        new Tooth(25, width * 0.463, height * 0.903, teeth[24]),
-        new Tooth(26, width * 0.400, height * 0.893, teeth[25]),
-        new Tooth(27, width * 0.341, height * 0.871, teeth[26]),
-        new Tooth(28, width * 0.291, height * 0.830, teeth[27]),
-        new Tooth(29, width * 0.241, height * 0.787, teeth[28]),
-        new Tooth(30, width * 0.216, height * 0.720, teeth[29]),
-        new Tooth(31, width * 0.191, height * 0.637, teeth[30]),
-        new Tooth(32, width * 0.183, height * 0.562, teeth[31])
+        new Tooth(17, width * 0.821, height * 0.562, width / 20, teeth[16]),
+        new Tooth(18, width * 0.820, height * 0.639, width / 18, teeth[17]),
+        new Tooth(19, width * 0.795, height * 0.722, width / 17, teeth[18]),
+        new Tooth(20, width * 0.756, height * 0.787, width / 26, teeth[19]),
+        new Tooth(21, width * 0.710, height * 0.835, width / 26, teeth[20]),
+        new Tooth(22, width * 0.658, height * 0.874, width / 30, teeth[21]),
+        new Tooth(23, width * 0.596, height * 0.893, width / 34, teeth[22]),
+        new Tooth(24, width * 0.533, height * 0.903, width / 35, teeth[23]),
+        new Tooth(25, width * 0.463, height * 0.903, width / 35, teeth[24]),
+        new Tooth(26, width * 0.403, height * 0.893, width / 34, teeth[25]),
+        new Tooth(27, width * 0.342, height * 0.874, width / 30, teeth[26]),
+        new Tooth(28, width * 0.291, height * 0.833, width / 26, teeth[27]),
+        new Tooth(29, width * 0.243, height * 0.787, width / 26, teeth[28]),
+        new Tooth(30, width * 0.205, height * 0.721, width / 17, teeth[29]),
+        new Tooth(31, width * 0.180, height * 0.639, width / 18, teeth[30]),
+        new Tooth(32, width * 0.176, height * 0.562, width / 20, teeth[31])
     ];
 }
 
@@ -135,10 +134,11 @@ Teeth.prototype = {
     },
 }
 
-Tooth = function(_num, _xPos, _yPos, _st) {
+Tooth = function(_num, _xPos, _yPos, _r, _st) {
     this.n = _num;
     this.x = _xPos;
     this.y = _yPos;
+    this.ratio = _r;
     this.state = _st;
 }
 
@@ -161,13 +161,12 @@ Tooth.prototype = {
         var xAux, yAux;
         var charAux = 'A';
         while (count < sum) {
-
             if (sum == 1) {
                 xAux = this.x;
                 yAux = this.y;
             } else {
-                xAux = this.x + ratio * cos(count * PI / sum * 2);
-                yAux = this.y + ratio * sin(count * PI / sum * 2);
+                xAux = this.x + this.ratio * cos(count * PI / sum * 2);
+                yAux = this.y + this.ratio * sin(count * PI / sum * 2);
             }
             switch (charAux) {
                 case 'A':

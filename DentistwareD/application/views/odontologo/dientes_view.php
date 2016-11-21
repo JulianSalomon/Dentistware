@@ -73,12 +73,6 @@
 	</div>
 </div>
 
-
-<?php
-	echo plugin_js('p5');
-	echo plugin_js('assets/js/dentistware/dientes.js', true);
-?>
-
 <script>
 	<?php
 		echo 'var teeth = [';
