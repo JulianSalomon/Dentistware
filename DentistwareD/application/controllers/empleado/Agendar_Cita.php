@@ -142,14 +142,15 @@ class Agendar_Cita extends Empl_Controller {
                             $this->email->message($mensaje);
                                 if($this->email->send())
                                     {
-                                //echo "Correo enviado!";   
+                                //echo "Correo enviado!"; 
+                                    echo $result = $this->cita_model->agendar_cita($id_cita, $data);
                                     }
                                 else
                                     {
                                 echo 3;
                                // echo $this->email->print_debugger();    
                                     }
-				echo $result = $this->cita_model->agendar_cita($id_cita, $data);
+				
 			}
 		} else {
 			echo "El cliente no se encuentra registrado, por favor verifique el documento.";

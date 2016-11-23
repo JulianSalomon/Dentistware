@@ -137,14 +137,15 @@ class AgendarCita extends Cliente_Controller {
         $this->email->message($mensaje);
             if($this->email->send())
                 {
-            //echo "Correo enviado!";   
+            //echo "Correo enviado!"; 
+                echo $this->cita_model->agendar_cita($id_cita, $data);
                 }
             else
                 {
             echo 3;
-           // echo $this->email->print_debugger();    
+        //echo $this->email->print_debugger();    
                 }
-        echo $this->cita_model->agendar_cita($id_cita, $data);
+        
 		}		
 	}
 

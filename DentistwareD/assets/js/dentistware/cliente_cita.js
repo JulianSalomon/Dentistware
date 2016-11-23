@@ -19,6 +19,7 @@ $(function() {
                 	type: 'GET',
                     url: js_site_url + 'agendar_cita/' + cita,
                     success: function(msg){
+                        console.log(msg);
                         if(msg == 1){                        	
                             swal({   
                                 title: "Cita agendada",
