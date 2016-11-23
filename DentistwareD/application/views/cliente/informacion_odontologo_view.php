@@ -34,7 +34,7 @@
 	                 		<div class="col-xs-12 text-center">
 							<?php																	
 								if($persona->foto_persona){
-									echo '<img id="foto_img" class="center-block" height="200" src="'.base_url() . "uploads/" . $route . '/'  . $persona->foto_persona . '">';										
+									echo '<img id="foto_img" class="center-block" height="200" src="'.base_url() . "uploads/odonto/" . $persona->foto_persona . '">';										
 								} else {
 									echo '<img id="foto_img" class="center-block" height="200" src="' . base_url("assets/img/foto-default.png") . '">';
 								}

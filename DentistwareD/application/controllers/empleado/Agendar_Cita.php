@@ -116,9 +116,10 @@ class Agendar_Cita extends Empl_Controller {
                                 </style>
                                 </head>
                                 <body>
-                                <img src= '" . $url . "'>
-                                <p>Apreciado ". ucwords($cliente) .": <br> <br> Su cita se ha asignado para el día <b> " . $fecha .", </b> con el odontólogo <b>". ucwords($odontologo) .   ", </b> a las <b>" . $hora . " </b>,en el consultorio <b>".$consultorio." </b>. <br> Recuerde que para cancelar la cita puede hacerlo con cinco horas de antelación, si no asiste a la cita tendrá una multa de $10.000 COP. Para el día de su cita deberá llegar con una anterioridad de quince minutos.
-                                <br> <br> <br> <br> <br>
+                                <img src= '" . $url . "' width='100%'>
+                                <p>Apreciado ". ucwords($cliente) .": <br> <br> Su cita se ha asignado para el día <b> " . $fecha ."</b>, con el odontólogo <b>". ucwords($odontologo) . "</b>, a las <b>" . $hora . "</b>, en el consultorio <b>".$consultorio."</b>.
+                                " . br(2) . " Recuerde que para cancelar la cita puede hacerlo con cinco horas de antelación, si no asiste a la cita tendrá una multa de <b>$10.000 COP</b>. El día de su cita deberá llegar quince minutos antes de la hora asignada. 
+                                " . br(5) . "
                                 Enviado desde Dentistware.  </p>
                                 </body>
                                 </html>
