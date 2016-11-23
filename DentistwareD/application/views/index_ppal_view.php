@@ -206,9 +206,6 @@
             </div>
             <footer class="main-footer">
                 <div class="form-group">
-                    <div class="pull-right hidden-xs">
-                        <small>Version</small> 0.1
-                    </div>
                     <div class="text-center">
                         <strong>&COPY;
                             <?php

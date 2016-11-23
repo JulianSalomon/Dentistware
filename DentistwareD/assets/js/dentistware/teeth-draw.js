@@ -74,7 +74,6 @@ mouseClicked = function() {
     }
 }
 
-
 Teeth = function() {
     if(teeth == null){
         for(var i = 0; i<32; i++){
@@ -155,7 +154,6 @@ Tooth.prototype = {
         for (var i = 0; i < this.state.length; i++) {
             sum += this.state[i];
         }
-        var divs = Math.PI / sum;
 
         var count = 0;
         var xAux, yAux;
