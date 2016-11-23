@@ -73,7 +73,7 @@ class Cita_model extends MY_Model {
 		$this->db->from('cita');
 		$this->db->join('persona as cliente', 'cliente.id_persona = cita.id_cliente');
 		$this->db->where('cita.id_cliente is not NULL', NULL, FALSE);		
-		$this->db->where('hora_cita >=', $horaActual);
+		//$this->db->where('hora_cita >=', $horaActual);
 		$this->db->where('fecha_cita', $fechaActual);
         $this->db->where('estado_cita ', NULL);
 		if ($horaSolicitada != '') {

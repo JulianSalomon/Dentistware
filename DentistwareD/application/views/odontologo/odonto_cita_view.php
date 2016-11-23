@@ -70,18 +70,18 @@
 											if($dif < 300 ) {
 												$habilitar = 'disabled= "true" style="pointer-events: none; cursor: default;"';
 											}
-                                            echo '<tr>';
+                                            echo '<tr >';
                                             echo '<td class="text-center">';
-                                            echo '<div align="center">
+                                            echo '<div  align="center">
 	                        						<a type="button"  ' . $habilitar . 'cita="' . $cita->id_cita . '" cliente="' . ucwords($cita->cliente) . '" class="no-asistir-btn btn" id="no_asistir" data-toggle="tooltip"  title="No asistió">
-		                    							<i class="fa fa-times fa-3x"></i>
+		                    							<i style="color:red" class="fa fa-times fa-3x"></i>
 	                    							</a>
-                                                    <a type="button" cita="' . $cita->id_cita . '" cliente="' . ucwords($cita->cliente) . '" id="' . $cita->id . '" class="atender-btn btn" id="atender-cita" data-toggle="tooltip"  title="Atender cliente">
-		                    							<i class="fa fa-sign-in fa-3x"></i>
+                                                    <a  type="button" cita="' . $cita->id_cita . '" cliente="' . ucwords($cita->cliente) . '" id="' . $cita->id . '" class="atender-btn btn" id="atender-cita" data-toggle="tooltip"  title="Atender cliente">
+		                    							<i  class="fa fa-sign-in fa-3x"></i>
 	                    							</a>
                     							</div>';
                                             echo '</td>';
-                                             echo '<td>';
+                                             echo '<td >';
                                             echo ucwords($cita->cliente);
                                              echo '</td>';
                                             echo '<td>';
